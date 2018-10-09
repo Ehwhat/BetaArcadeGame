@@ -70,10 +70,10 @@ public class TankMovement : MonoBehaviour {
 
     IEnumerator BoostRoutine(float multiplier, float length)
     {
-        float originalSpeed = speedModifer;
-        speedModifer *= multiplier;
+        float originalSpeed = sideDragFactor;
+        sideDragFactor = multiplier;
         yield return new WaitForSeconds(length);
-        speedModifer = originalSpeed;
+        sideDragFactor = originalSpeed;
         boosting = false;
     }
 

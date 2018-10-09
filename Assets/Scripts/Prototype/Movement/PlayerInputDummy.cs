@@ -18,7 +18,7 @@ public class PlayerInputDummy : MonoBehaviour {
 
         if (Input.GetButtonDown("Fire1"))
         {
-            move.ApplyOneTimeBoost(3, 0.3f);
+            move.ApplyOneTimeBoost(4, 1.0f);
         }
 	}
 }
