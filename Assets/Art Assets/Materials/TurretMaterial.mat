@@ -6,10 +6,10 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: TrailMaterial
+  m_Name: TurretMaterial
   m_Shader: {fileID: 4800000, guid: 069032f5bd5666541afcfeb10ac30a51, type: 3}
-  m_ShaderKeywords: _ALPHABLEND_ON
-  m_LightmapFlags: 0
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -18,10 +18,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _AmbientOcclusion:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -51,15 +47,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 09e33dbab48d6554fb577bf333e4e837, type: 3}
-        m_Scale: {x: 0, y: 1}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalDepth:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 3545ee87216217d41b7c0a9a62f06d13, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -75,61 +71,35 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - PixelSnap: 0
     - _AmbientOcclusionStrength: 0
-    - _AmplifyDepth: 0.354
-    - _AttenuationMultiplier: 0.71
-    - _BlendOp: 0
+    - _AmplifyDepth: 0
+    - _AttenuationMultiplier: 1
     - _BumpScale: 1
-    - _CameraFadingEnabled: 0
-    - _CameraFarFadeDistance: 2
-    - _CameraNearFadeDistance: 1
     - _CelShadingLevels: 0
-    - _ColorMode: 0
-    - _Cull: 2
-    - _Cutoff: 0.262
+    - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _DistortionBlend: 0.196
-    - _DistortionEnabled: 0
-    - _DistortionStrength: 1
-    - _DistortionStrengthScaled: 0.1
-    - _DstBlend: 10
-    - _EmissionEnabled: 0
+    - _DstBlend: 0
     - _EmissiveStrength: 0
-    - _EnableExternalAlpha: 0
-    - _FlipbookMode: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _InvFade: 2.7
-    - _LightWrap: 0.022
-    - _LightingEnabled: 0
+    - _LightWrap: 1
     - _Metallic: 0
-    - _Mode: 2
+    - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
-    - _SoftParticlesEnabled: 0
-    - _SoftParticlesFarFadeDistance: 1
-    - _SoftParticlesNearFadeDistance: 0
-    - _SpecExponent: 11.8
-    - _SpecStrength: 0.62
+    - _SpecExponent: 10
+    - _SpecStrength: 1
     - _SpecularHighlights: 1
-    - _SpotlightHardness: 3.63
-    - _SrcBlend: 5
+    - _SpotlightHardness: 2
+    - _SrcBlend: 1
     - _UVSec: 0
-    - _ZWrite: 0
+    - _ZWrite: 1
     m_Colors:
-    - _AboveAmbientColour: {r: 0, g: 0, b: 0, a: 0.309}
-    - _BelowAmbientColour: {r: 0, g: 0, b: 0, a: 0.172}
-    - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 0.378}
-    - _ColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
-    - _EmisColor: {r: 1, g: 1, b: 1, a: 0}
+    - _AboveAmbientColour: {r: 0.3, g: 0.3, b: 0.3, a: 0.3}
+    - _BelowAmbientColour: {r: 0.1, g: 0.1, b: 0.1, a: 0.1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _TextureRes: {r: 256, g: 256, b: 0, a: 0}
-    - _TilingFactor: {r: 0, g: 1, b: 0, a: 0}
-    - _TintColor: {r: 1, g: 1, b: 1, a: 0.391}
+    - _TilingFactor: {r: 1, g: 1, b: 0, a: 0}
