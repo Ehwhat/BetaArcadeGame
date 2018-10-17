@@ -74,8 +74,8 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Time: 1
+  m_SortingOrder: 999
+  m_Time: 1.01
   m_Parameters:
     serializedVersion: 2
     widthMultiplier: 0.1
@@ -91,8 +91,8 @@ TrailRenderer:
       - serializedVersion: 2
         time: 1
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: -1.8674518
+        outSlope: -1.8674518
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2

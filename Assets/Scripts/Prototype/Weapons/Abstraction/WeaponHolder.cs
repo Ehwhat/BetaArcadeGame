@@ -19,7 +19,8 @@ public class WeaponHolder : MonoBehaviour {
 
     public Vector2[] firingPoints;
     public Weapon weapon;
-    public Transform target;
+
+    public float lastFired = 0;
 
     // Use this for initialization
     void Start () {
@@ -27,23 +28,23 @@ public class WeaponHolder : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        if (Input.GetMouseButton(0))
-        {
-            FireWeapon(new TestArgs() { target = target });
-        }
-        UpdateWeapon(Time.deltaTime, null);
+	protected virtual void Update () {
+        UpdateWeapon(Time.deltaTime);
 	}
 
     [ContextMenu("Fire")]
-    public void FireWeapon(object firingData = null)
+    public virtual void FireWeapon()
     {
-        weapon.Fire(GetPoints(), firingData);
+        if(weapon.Fire(GetPoints(), this))
+        {
+            lastFired = Time.time;
+        }
+        
     }
 
-    public void UpdateWeapon(float deltaTime,object firingData = null)
+    public virtual void UpdateWeapon(float deltaTime)
     {
-        weapon.UpdateProjectiles(deltaTime,firingData);
+        weapon.UpdateProjectiles(deltaTime, this);
     }
 
     public WeaponFiringPoint[] GetPoints()
@@ -55,5 +56,15 @@ public class WeaponHolder : MonoBehaviour {
             points[i] = new WeaponFiringPoint(worldPoint, transform.up);
         }
         return points;
+    }
+
+    private void OnDrawGizmos()
+    {
+        WeaponFiringPoint[] points = GetPoints();
+        for (int i = 0; i < points.Length; i++)
+        {
+            Gizmos.DrawWireSphere(points[i].position, 0.1f);
+        }
+        
     }
 }

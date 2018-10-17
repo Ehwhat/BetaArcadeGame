@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TestTarget : MonoBehaviour, IDamageable
 {
-    public void OnHit()
+    public void OnHit(ProjectileHit hit)
     {
         Debug.Log("Damaged!");
     }

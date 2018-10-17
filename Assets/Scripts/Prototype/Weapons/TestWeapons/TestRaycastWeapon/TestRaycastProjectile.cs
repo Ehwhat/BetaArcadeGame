@@ -14,7 +14,13 @@ public class TestRaycastProjectile : IProjectile
             IDamageable hitDamageable = hit.collider.GetComponent<IDamageable>();
             if (hitDamageable != null)
             {
-                hitDamageable.OnHit();
+                ProjectileHit hitData = new ProjectileHit()
+                {
+                    hitData = hit,
+                    projectile = this,
+                    damage = 10,
+                };
+                hitDamageable.OnHit(hitData);
             }
         }
 

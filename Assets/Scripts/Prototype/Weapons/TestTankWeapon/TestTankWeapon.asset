@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Name: TestTankWeapon
   m_EditorClassIdentifier: 
   prefab: {fileID: 1688096402269350, guid: 46af86ac18952ea44af415fe9745a5d2, type: 2}
+  bulletCollisionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295

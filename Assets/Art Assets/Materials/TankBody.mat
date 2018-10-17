@@ -89,8 +89,8 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
-    - _SpecExponent: 10
-    - _SpecStrength: 1
+    - _SpecExponent: 27.5
+    - _SpecStrength: 2.24
     - _SpecularHighlights: 1
     - _SpotlightHardness: 2
     - _SrcBlend: 1
@@ -103,3 +103,4 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _TextureRes: {r: 256, g: 256, b: 0, a: 0}
     - _TilingFactor: {r: 1, g: 1, b: 0, a: 0}
+    - _TintColor: {r: 0, g: 0.751724, b: 1, a: 1}

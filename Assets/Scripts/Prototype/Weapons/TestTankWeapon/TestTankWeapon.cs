@@ -8,32 +8,42 @@ public class TestTankWeapon : Weapon
     public struct TestTankWeaponData
     {
         public GameObject representationPrefab;
+        public LayerMask bulletCollisionMask;
         public System.Action<TestTankProjectile> finishedCallback;
     }
 
     public GameObject prefab;
+    public LayerMask bulletCollisionMask;
+    public float firingDelay = 0.5f;
     private List<TestTankProjectile> projectiles = new List<TestTankProjectile>();
 
-    public override void Fire(WeaponFiringPoint[] firingPoints, object firingData)
+    public override bool Fire(WeaponFiringPoint[] firingPoints, WeaponHolder holder)
     {
-        TestTankWeaponData data = new TestTankWeaponData()
+        if (holder.lastFired < Time.time-firingDelay)
         {
-            representationPrefab = prefab,
-            finishedCallback = OnProjectileFinished
-        };
+            TestTankWeaponData data = new TestTankWeaponData()
+            {
+                representationPrefab = prefab,
+                finishedCallback = OnProjectileFinished,
+                bulletCollisionMask = bulletCollisionMask
+            };
 
+            TestTankProjectile projectile = new TestTankProjectile();
+            projectile.OnFired(firingPoints[0].position, firingPoints[0].direction, data);
+            projectiles.Add(projectile);
+            return true;
+        }
+        return false;
 
-        TestTankProjectile projectile = new TestTankProjectile();
-        projectile.OnFired(firingPoints[0].position, firingPoints[0].direction, data);
-        projectiles.Add(projectile);
     }
 
-    public override void UpdateProjectiles(float deltaTime, object firingData)
+    public override void UpdateProjectiles(float deltaTime, WeaponHolder holder)
     {
         for (int i = 0; i < projectiles.Count; i++)
         {
             projectiles[i].Update(deltaTime);
         }
+        
     }
 
     public void OnProjectileFinished(TestTankProjectile projectile)
