@@ -4,20 +4,24 @@ using UnityEngine;
 
 public abstract class TankManager : MonoBehaviour, IDamageable {
 
+    public System.Action<TankManager, ProjectileHit> onDeath = (tank, weaponHit) => { };
+
     public TankController controller;
     public TankMovement tankMovement;
     public TrailRenderer[] trails;
     public TurretController[] turrets;
+    public ParticleSystem deathParticles;
 
     public float maxHealth = 100;
-
-    private float health;
+    [SerializeField]
+    public float health;
+    public bool isDead = false;
 
     private TankController _internalController;
 
     private void Start()
     {
-        health = maxHealth;
+        Respawn();
     }
 
     private void Update()
@@ -40,7 +44,23 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
 
     public void OnHit(ProjectileHit hit)
     {
-        health -= hit.damage;
+        Debug.Log("wasHit");
+        if (!isDead)
+        {
+            health -= hit.damage;
+            if (health <= 0)
+            {
+                isDead = true;
+                onDeath(this, hit);
+                deathParticles.Play();
+            }
+        }
+    }
+
+    public void Respawn()
+    {
+        health = maxHealth;
+        isDead = false;
     }
 
     public void AimTurrets(Vector2 direction)

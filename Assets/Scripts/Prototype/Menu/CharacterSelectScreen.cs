@@ -46,6 +46,11 @@ public class CharacterSelectScreen : MonoBehaviour {
     private void OnEnable()
     {
         lastState = GamePad.GetState(player);
+
+        for (int i = 0; i < 4; i++)
+        {
+            gameDataDefinition.SetPlayerJoined(i, false);
+        }
         
         if (player != PlayerIndex.One)
         {

@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PlayerTankManager : TankManager {
 
+    public int playerIndex;
     PlayerTankController.PlayerTankControllerState controllerState;
 
     public void OnCreated(CharacterDefinition definition, int playerIndex)
     {
+        this.playerIndex = playerIndex;
         controllerState = new PlayerTankController.PlayerTankControllerState()
         {
             player = (XInputDotNetPure.PlayerIndex)playerIndex

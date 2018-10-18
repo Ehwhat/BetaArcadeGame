@@ -7,17 +7,36 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     public GameDataDefinition gameData;
     public LevelManager levelManager;
+    public GameUIManager uiManager;
 
     public PlayerTankManager[] players = new PlayerTankManager[4];
+
+    private GamemodeDefinition gameMode;
 
 	void Start () {
         CreatePlayers();
         SpawnPlayers();
+        gameMode = gameData.gamemode;
+        gameMode.OnGameStart(this);
 	}
 	
 	void Update () {
-		
-	}
+
+        GamemodeDefinition.WinResult winResult = gameMode.VerifyWin(this, Time.deltaTime);
+        if(winResult != GamemodeDefinition.WinResult.None)
+        {
+            uiManager.ShowWin((int)winResult);
+            Debug.Log(winResult);
+            StartCoroutine(GoBackToMainMenu());
+            
+        }
+    }
+
+    IEnumerator GoBackToMainMenu()
+    {
+        yield return new WaitForSeconds(3);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    }
 
     private void CreatePlayers()
     {
@@ -49,6 +68,7 @@ public class GameManager : MonoBehaviour {
          players[player] = Instantiate(definiton.tankPrefab);
         players[player].gameObject.SetActive(false);
         players[player].OnCreated(definiton, player);
+        uiManager.SetupHealthUIMananger(player, players[player]);
     }
 
     private void SpawnPlayer(int player, Vector3 position)
@@ -59,9 +79,17 @@ public class GameManager : MonoBehaviour {
         manager.ClearTrails();
     }
 
+    public void RespawnPlayer(int player)
+    {
+        List<Transform> playerSpawners = levelManager.GetSpawnPositions();
+        int random = Random.Range(0, playerSpawners.Count);
+        SpawnPlayer(player, playerSpawners[random].position);
+        players[player].Respawn();
+    }
+
     public bool IsPlayerValid(int player)
     {
-        if(player > 0 && player < 4)
+        if(player >= 0 && player < 4)
         {
             return gameData.IsPlayerJoined(player);
         }

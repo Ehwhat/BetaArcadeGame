@@ -132,4 +132,4 @@ Material:
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _TextureRes: {r: 256, g: 256, b: 0, a: 0}
     - _TilingFactor: {r: 0, g: 1, b: 0, a: 0}
-    - _TintColor: {r: 1, g: 1, b: 1, a: 0.184}
+    - _TintColor: {r: 1, g: 1, b: 1, a: 0.453}

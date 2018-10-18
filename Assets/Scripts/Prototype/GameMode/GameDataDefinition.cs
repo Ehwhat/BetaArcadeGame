@@ -6,10 +6,11 @@ using XInputDotNetPure;
 [CreateAssetMenu(menuName = "Tanks/Gamemodes/New Game Data Definition", fileName = "New Game Data Definition")]
 public class GameDataDefinition : ScriptableObject {
 
-    [SerializeField]
-    private CharacterDefinition[] characters = new CharacterDefinition[4];
-    [SerializeField]
-    private bool[] playersJoined = new bool[4];
+    public GamemodeDefinition gamemode;
+
+    public CharacterDefinition[] characters = new CharacterDefinition[4];
+    public bool[] playersJoined = new bool[4];
+    
 
     public void SetCharacter(int index, CharacterDefinition character)
     {

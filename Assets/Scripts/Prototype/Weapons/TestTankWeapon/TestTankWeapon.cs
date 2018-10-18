@@ -9,6 +9,7 @@ public class TestTankWeapon : Weapon
     {
         public GameObject representationPrefab;
         public LayerMask bulletCollisionMask;
+        public WeaponHolder holder;
         public System.Action<TestTankProjectile> finishedCallback;
     }
 
@@ -28,7 +29,8 @@ public class TestTankWeapon : Weapon
             {
                 representationPrefab = prefab,
                 finishedCallback = OnProjectileFinished,
-                bulletCollisionMask = bulletCollisionMask
+                bulletCollisionMask = bulletCollisionMask,
+                holder = holder
             };
 
             TestTankProjectile projectile = new TestTankProjectile();

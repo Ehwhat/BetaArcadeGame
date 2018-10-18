@@ -11,6 +11,7 @@ public class TestTankProjectile : IProjectile
     public TestTankWeapon.TestTankWeaponData data;
     GameObject representation;
     System.Action<TestTankProjectile> finished;
+    bool done = false;
 
     public void OnFired(Vector3 firedPosition, Vector3 firedDirection, object firedData = null)
     {
@@ -24,20 +25,23 @@ public class TestTankProjectile : IProjectile
 
     public void Update(float deltaTime)
     {
+        if (done)
+            return;
         RaycastHit2D hit = Physics2D.Raycast(position, direction, speed * deltaTime, data.bulletCollisionMask);
         if (hit)
         {
             position = hit.point;
             representation.transform.position = position;
 
-            IDamageable hitDamageable = hit.collider.GetComponent<IDamageable>();
+            IDamageable hitDamageable = hit.collider.transform.root.GetComponent<IDamageable>();
             if (hitDamageable != null)
             {
                 ProjectileHit hitData = new ProjectileHit()
                 {
                     hitData = hit,
                     projectile = this,
-                    damage = 10,
+                    holder = data.holder,
+                    damage = 25
                 };
                 hitDamageable.OnHit(hitData);
             }
@@ -46,6 +50,7 @@ public class TestTankProjectile : IProjectile
             representation.GetComponent<ParticleSystem>().Emit(6);
 
             finished(this);
+            done = true;
             GameObject.Destroy(representation, 2);
         }
         else

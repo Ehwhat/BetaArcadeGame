@@ -23,9 +23,12 @@ public class PlayerTankController : TankController {
         Vector2 leftStickInput = new Vector2(currentState.ThumbSticks.Left.X, currentState.ThumbSticks.Left.Y);
         Vector2 rightStickInput = new Vector2(currentState.ThumbSticks.Right.X, currentState.ThumbSticks.Right.Y);
 
-        manager.tankMovement.targetVector = leftStickInput;
-        manager.tankMovement.targetSpeed = leftStickInput.magnitude;
-        manager.AimTurrets(rightStickInput);
+        if (!manager.isDead)
+        {
+            manager.tankMovement.targetVector = leftStickInput;
+            manager.tankMovement.targetSpeed = leftStickInput.magnitude;
+            manager.AimTurrets(rightStickInput);
+        }
 
         if(currentState.Triggers.Right > 0.2f)
         {
