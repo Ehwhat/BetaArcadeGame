@@ -6,6 +6,7 @@ public class TestTankProjectile : IProjectile
 {
     public Vector3 position;
     public Vector3 direction;
+    public float speed = 25;
 
     public TestTankWeapon.TestTankWeaponData data;
     GameObject representation;
@@ -23,7 +24,7 @@ public class TestTankProjectile : IProjectile
 
     public void Update(float deltaTime)
     {
-        RaycastHit2D hit = Physics2D.Raycast(position, direction, 10 * deltaTime, data.bulletCollisionMask);
+        RaycastHit2D hit = Physics2D.Raycast(position, direction, speed * deltaTime, data.bulletCollisionMask);
         if (hit)
         {
             position = hit.point;
@@ -41,12 +42,15 @@ public class TestTankProjectile : IProjectile
                 hitDamageable.OnHit(hitData);
             }
 
+            representation.transform.rotation = Quaternion.FromToRotation(Vector2.up,  direction);
+            representation.GetComponent<ParticleSystem>().Emit(6);
+
             finished(this);
             GameObject.Destroy(representation, 2);
         }
         else
         {
-            position += direction * 10 * deltaTime;
+            position += direction * speed * deltaTime;
             representation.transform.position = position;
         }
         

@@ -19,6 +19,9 @@ public class WeaponHolder : MonoBehaviour {
 
     public Vector2[] firingPoints;
     public Weapon weapon;
+    public Rigidbody2D owningRigidbody;
+    public AudioSource audioSource;
+    public ParticleSystem particleEffect;
 
     public float lastFired = 0;
 
@@ -38,6 +41,10 @@ public class WeaponHolder : MonoBehaviour {
         if(weapon.Fire(GetPoints(), this))
         {
             lastFired = Time.time;
+            if (particleEffect)
+            {
+                particleEffect.Emit(10);
+            }
         }
         
     }

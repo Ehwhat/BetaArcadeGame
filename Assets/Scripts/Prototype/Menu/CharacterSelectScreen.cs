@@ -46,7 +46,8 @@ public class CharacterSelectScreen : MonoBehaviour {
     private void OnEnable()
     {
         lastState = GamePad.GetState(player);
-        if(player != PlayerIndex.One)
+        
+        if (player != PlayerIndex.One)
         {
             joinScreen.SetActive(true);
         }else
@@ -86,7 +87,7 @@ public class CharacterSelectScreen : MonoBehaviour {
 
             if (cancel && isSelected == CharacterSelectStates.Selecting && player == PlayerIndex.One)
             {
-                mainMenu.CloseCharacterSelectScreen();
+                mainMenu.OpenMainMenuScreen();
             }else if(cancel && isSelected == CharacterSelectStates.Selecting)
             {
                 isSelected = CharacterSelectStates.NotJoined;
@@ -95,7 +96,7 @@ public class CharacterSelectScreen : MonoBehaviour {
 
             if(select && isSelected == CharacterSelectStates.Selected && player == PlayerIndex.One)
             {
-                StartGame();
+                mainMenu.StartLevelSelectScreen();
             }
 
             if (select && isSelected == CharacterSelectStates.Selecting)
@@ -125,11 +126,6 @@ public class CharacterSelectScreen : MonoBehaviour {
 
         lastState = state;
 
-    }
-
-    public void StartGame()
-    {
-        mainMenu.StartGame();
     }
 
     public void SelectLeft()

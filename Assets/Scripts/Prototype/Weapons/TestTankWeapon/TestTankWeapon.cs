@@ -15,6 +15,9 @@ public class TestTankWeapon : Weapon
     public GameObject prefab;
     public LayerMask bulletCollisionMask;
     public float firingDelay = 0.5f;
+
+    public AudioClip firingSound;
+
     private List<TestTankProjectile> projectiles = new List<TestTankProjectile>();
 
     public override bool Fire(WeaponFiringPoint[] firingPoints, WeaponHolder holder)
@@ -31,6 +34,11 @@ public class TestTankWeapon : Weapon
             TestTankProjectile projectile = new TestTankProjectile();
             projectile.OnFired(firingPoints[0].position, firingPoints[0].direction, data);
             projectiles.Add(projectile);
+
+            holder.owningRigidbody.AddForce(-firingPoints[0].direction*5, ForceMode2D.Impulse);
+            holder.audioSource.pitch = Random.Range(0.7f, 1.8f);
+            holder.audioSource.PlayOneShot(firingSound);
+
             return true;
         }
         return false;

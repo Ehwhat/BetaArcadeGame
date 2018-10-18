@@ -3,27 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour {
+
+    public Animator animator;
 
     public GameObject baseMenuScreen;
     public GameObject characterSelectScreen;
 
+    private GameObject openScreen;
+
     public void StartCharacterSelectScreen()
     {
-        baseMenuScreen.SetActive(false);
-        characterSelectScreen.SetActive(true);
+        animator.SetTrigger("OpenCharacterMenu");
     }
 
-    public void CloseCharacterSelectScreen()
+    public void OpenMainMenuScreen()
     {
-        baseMenuScreen.SetActive(true);
-        characterSelectScreen.SetActive(false);
+        animator.SetTrigger("CloseMenu");
     }
 
-    public void StartGame()
+    public void StartLevelSelectScreen()
     {
+        animator.SetTrigger("OpenLevelSelectMenu");
+    }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
+    public void StartGame(int level)
+    {
+        SceneManager.LoadScene(level);
     }
 
     public void Start()

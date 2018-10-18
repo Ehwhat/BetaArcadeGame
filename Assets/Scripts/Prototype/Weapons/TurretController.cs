@@ -10,6 +10,11 @@ public class TurretController : MonoBehaviour {
     [SerializeField]
     public Vector2 targetVector = new Vector2();
 
+    public void Start()
+    {
+        weaponHolder.owningRigidbody = movement.GetComponent<Rigidbody2D>();
+    }
+
     private void Update()
     {
         RotateToTargetVector();
