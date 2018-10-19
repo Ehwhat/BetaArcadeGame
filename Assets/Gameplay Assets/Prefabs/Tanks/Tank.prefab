@@ -937,7 +937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firingPoints:
-  - {x: 0, y: 0.6}
+  - {x: 0, y: 0.9}
   weapon: {fileID: 11400000, guid: 6e3447ecec244b947822a84dd27bcef2, type: 2}
   owningRigidbody: {fileID: 0}
   audioSource: {fileID: 82115163247450442}
