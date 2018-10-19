@@ -6,7 +6,7 @@ public struct ProjectileHit
 {
     public RaycastHit2D hitData;
     public IProjectile projectile;
-    public WeaponHolder holder;
+    public TankWeaponHolder holder;
     public float damage;
     public Vector3 force;
 }

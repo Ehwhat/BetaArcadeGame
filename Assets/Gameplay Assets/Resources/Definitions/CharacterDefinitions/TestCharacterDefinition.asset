@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 882ef7ddbf6c4de4cb8eb8633e6cacf5, type: 3}
+  m_Name: TestCharacterDefinition
+  m_EditorClassIdentifier: 
+  name: Test Character 1
+  description: She's a test!
+  tankPrefab: {fileID: 114930509700104020, guid: b1d24a0bfdb4c904d861c40e6020ec0e,
+    type: 2}
+  tankDisplayPrefab: {fileID: 1157243013859998, guid: eebfa5db1e0084346a696cfe7fb5d506,
+    type: 2}
+  portrait: {fileID: 0}
