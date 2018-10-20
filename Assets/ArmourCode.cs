@@ -17,6 +17,11 @@ public class ArmourCode : MonoBehaviour {
                     child.GetComponent<BoxCollider2D>().enabled = false;
                 }
             }
+            else if(child.name[0] == 'W')
+            {
+                child.GetComponent<Renderer>().enabled = false;
+                child.GetComponent<CircleCollider2D>().enabled = false;
+            }
         }
     }
 	

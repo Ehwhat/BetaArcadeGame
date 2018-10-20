@@ -22,15 +22,16 @@ public class ArmourScript : MonoBehaviour {
         {
             transform.parent.Find("Armour2").GetComponent<Collider2D>().enabled = true;
         }
-    }
-
-    /*void OnTriggerEnter(Collider other)
-    {
-        print("collision");
-        if (other.gameObject.CompareTag("Collect"))
+        if (name[6] == '2')
         {
-            print("collision2");
-            other.gameObject.SetActive(false);
+            foreach (Transform child in transform.parent.parent)
+            {
+                if (child.name[0] == 'W')
+                {
+                    child.GetComponent<WeaponPlatformCode>().WeaponCheck();
+                }
+            }
         }
-    }*/
+    }
+    
 }

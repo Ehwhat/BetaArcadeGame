@@ -16,8 +16,6 @@ public class PUC : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        print("collision");
-        //other.gameObject.GetComponent<tileCode>().CollectTile(type, pos);
         if (other.CompareTag("Ave"))
         {
             other.gameObject.GetComponent<ArmourScript>().AddTile();
