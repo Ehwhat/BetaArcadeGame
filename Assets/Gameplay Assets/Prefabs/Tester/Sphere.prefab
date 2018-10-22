@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 135148069246341140}
   - component: {fileID: 23681641996044526}
   - component: {fileID: 114283954016954380}
+  - component: {fileID: 210354961766219260}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -1302,8 +1303,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1086955468267842}
-  m_LocalRotation: {x: -0, y: -0, z: 0.031852685, w: 0.99949265}
-  m_LocalPosition: {x: 0, y: 0, z: 0.62}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_Children:
   - {fileID: 4768559351705302}
@@ -4335,3 +4336,13 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!210 &210354961766219260
+SortingGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1086955468267842}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 5

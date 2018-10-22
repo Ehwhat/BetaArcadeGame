@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerTankManager : TankManager {
 
     public int playerIndex;
-    PlayerTankController.PlayerTankControllerState controllerState;
+    PlayerTankControllerState controllerState;
 
     public void OnCreated(CharacterDefinition definition, int playerIndex)
     {
         this.playerIndex = playerIndex;
-        controllerState = new PlayerTankController.PlayerTankControllerState()
+        controllerState = new PlayerTankControllerState()
         {
             player = (XInputDotNetPure.PlayerIndex)playerIndex
         };
@@ -18,7 +18,7 @@ public class PlayerTankManager : TankManager {
 
     public override void Process()
     {
-        controllerState = (PlayerTankController.PlayerTankControllerState)controller.Process(this, controllerState);
+        controllerState = (PlayerTankControllerState)controller.Process(this, controllerState);
     }
 
 }
