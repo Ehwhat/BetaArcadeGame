@@ -21,6 +21,7 @@ namespace InControl
 		public TwoAxisInputControl RightStick { get; protected set; }
 		public TwoAxisInputControl DPad { get; protected set; }
 
+        public bool active = true;
 
 		public InputDevice( string name )
 		{

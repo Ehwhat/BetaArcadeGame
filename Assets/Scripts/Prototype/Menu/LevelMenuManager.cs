@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using XInputDotNetPure;
+using InControl;
 
 public class LevelMenuManager : MonoBehaviour {
 
@@ -12,22 +12,22 @@ public class LevelMenuManager : MonoBehaviour {
     public LevelDefinitionSet levelSet;
     public Animator animationController;
 
-    private GamePadState lastState;
 
     private float selectionDelay = 0.3f;
     private float lastSelectionTime = 0;
     int currentLevelIndex = 0;
 
     LevelDefinition activeDefinition;
+    InputDevice device;
 
     void Start()
     {
         LoadDefinition(currentLevelIndex);
+        
     }
 
     private void Update()
     {
-        GamePadState state = GamePad.GetState(PlayerIndex.One);
 
         bool pressingLeft = (state.ThumbSticks.Left.X < -0.5f) || state.DPad.Left == ButtonState.Pressed;
         bool pressingRight = (state.ThumbSticks.Left.X > 0.5f) || state.DPad.Right == ButtonState.Pressed;
@@ -56,8 +56,6 @@ public class LevelMenuManager : MonoBehaviour {
             mainMenu.OpenMainMenuScreen();
         }
 
-
-        lastState = state;
     }
 
     public void SelectLeft()

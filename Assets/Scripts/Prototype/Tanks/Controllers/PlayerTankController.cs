@@ -31,7 +31,7 @@ public class PlayerTankController : TankController {
             manager.AimTurrets(rightStickInput);
         }
 
-        if(currentState.Triggers.Right > 0.2f)
+        if(inputDevice.RightTrigger.IsPressed)
         {
             manager.FireTurrets();
         }

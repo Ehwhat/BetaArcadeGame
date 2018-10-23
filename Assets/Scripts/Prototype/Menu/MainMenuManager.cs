@@ -14,6 +14,10 @@ public class MainMenuManager : MonoBehaviour {
 
     private GameObject openScreen;
 
+    private void Update()
+    {
+    }
+
     public void StartCharacterSelectScreen()
     {
         animator.SetTrigger("OpenCharacterMenu");

@@ -56,4 +56,17 @@ public class TankWeaponHolder : MonoBehaviour {
         
     }
 
+    public virtual void FireWeapon(Vector2 direction)
+    {
+        TankProjectileData data = new TankProjectileData();
+        data.ownerWeaponHolder = this;
+        if (weapon.FireProjectile(transform.position, direction, lastFired, data))
+        {
+            activeParticleSystem.Play();
+            audioPlayer.PlayOneShot(weapon.onFiredClip);
+            lastFired = Time.time;
+        }
+
+    }
+
 }

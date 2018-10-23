@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class TurretController : MonoBehaviour {
 
+    public enum AutoAimType
+    {
+        None,
+        TurretDirection,
+        FiringDirection,
+    }
+
     public float degreesPerSecond = 270;
     public TankMovement movement;
     public TankWeaponHolder weaponHolder;
@@ -12,7 +19,7 @@ public class TurretController : MonoBehaviour {
 
     [Space(10)]
     [Header("Auto Aim")]
-    public bool autoAimEnabled = true;
+    public AutoAimType autoAimType = AutoAimType.FiringDirection;
     public float autoAimRange = 10;
     public float autoAimArcAngle = 30;
     public float autoAimDegreesPerSecond = 20;
@@ -24,6 +31,7 @@ public class TurretController : MonoBehaviour {
     public LayerMask autoAimLayer;
 
     private Vector2 currentVector = new Vector2();
+    private Vector2 shootingDirection = Vector2.up;
     private List<Collider2D> lastValidTargets = new List<Collider2D>();
     private Collider2D lastTarget = new Collider2D();
 
@@ -33,19 +41,20 @@ public class TurretController : MonoBehaviour {
 
     private void Update()
     {
-        if (autoAimEnabled)
+        if (autoAimType != AutoAimType.None)
         {
             AutoAimTurretAtTargets(targetVector);
         }
         else
         {
             RotateToVector(targetVector);
+            shootingDirection = targetVector;
         }
     }
 
     public void Fire()
     {
-        weaponHolder.FireWeapon();
+        weaponHolder.FireWeapon(shootingDirection);
     }
 
     private void AutoAimTurretAtTargets(Vector2 vector)
@@ -55,6 +64,7 @@ public class TurretController : MonoBehaviour {
         if(validTargets.Count <= 0)
         {
             lastTarget = null;
+            shootingDirection = vector;
             RotateToVector(vector);
             return;
         }
@@ -65,13 +75,21 @@ public class TurretController : MonoBehaviour {
         Vector2 calculatedVector = Vector3.RotateTowards(currentVector, direction, autoAimDegreesPerSecond * Mathf.Deg2Rad * Time.deltaTime, 1);
         calculatedVector = (calculatedVector + (vector * autoAimOffsetMagnitude)).normalized;
 
-        if (Vector2.Angle(vector, direction) < Vector2.Angle(calculatedVector, direction))
+        if(autoAimType == AutoAimType.FiringDirection)
         {
             RotateToVector(vector);
+            shootingDirection = calculatedVector;
+
+        }
+        else if (Vector2.Angle(vector, direction) < Vector2.Angle(calculatedVector, direction))
+        {
+            RotateToVector(vector);
+            shootingDirection = vector;
         }
         else
         {
             RotateToVector(calculatedVector);
+            shootingDirection = calculatedVector;
         }
     }
 
@@ -141,7 +159,7 @@ public class TurretController : MonoBehaviour {
 
     private void OnDrawGizmos()
     {
-        if (autoAimEnabled)
+        if (autoAimType != AutoAimType.None)
         {
             Vector2 direction = targetVector;
             if(direction.sqrMagnitude <= 0.05f)

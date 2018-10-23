@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using XInputDotNetPure;
+using InControl;
 
 public class CharacterSelectScreen : MonoBehaviour {
 
@@ -23,7 +23,7 @@ public class CharacterSelectScreen : MonoBehaviour {
 
     [Space(10)]
     [Header("Setup")]
-    public PlayerIndex player;
+    public int player;
     public CharacterDefinitionSet characterSet;
     public GameDataDefinition gameDataDefinition;
 
@@ -35,24 +35,25 @@ public class CharacterSelectScreen : MonoBehaviour {
 
     private float selectionDelay = 0.3f;
     private float lastSelectionTime = 0;
-    GamePadState lastState;
+
+    private InputDevice device;
 
     // Use this for initialization
     void Start () {
         LoadDefinition(currentCharacterIndex);
         LoadActiveDefinitionPrefab();
+        device = GameInput.GetPlayerDevice(player);
     }
 
     private void OnEnable()
     {
-        lastState = GamePad.GetState(player);
 
         for (int i = 0; i < 4; i++)
         {
             gameDataDefinition.SetPlayerJoined(i, false);
         }
         
-        if (player != PlayerIndex.One)
+        if (player != 0)
         {
             joinScreen.SetActive(true);
         }else
@@ -63,15 +64,15 @@ public class CharacterSelectScreen : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-
-
-        GamePadState state = GamePad.GetState(player);
-
+        if (device == null || !device.active)
+        {
+            return;
+        }
         
-        bool pressingLeft = (state.ThumbSticks.Left.X < -0.5f) || state.DPad.Left == ButtonState.Pressed;
-        bool pressingRight = (state.ThumbSticks.Left.X > 0.5f) || state.DPad.Right == ButtonState.Pressed;
-        bool select = state.Buttons.A == ButtonState.Pressed && lastState.Buttons.A == ButtonState.Released;
-        bool cancel = state.Buttons.B == ButtonState.Pressed && lastState.Buttons.B == ButtonState.Released;
+        bool pressingLeft = device.LeftStick.Left.IsPressed || device.DPadLeft.IsPressed;
+        bool pressingRight = device.LeftStick.Right.IsPressed || device.DPadRight.IsPressed;
+        bool select = device.Action1.WasPressed;
+        bool cancel = device.Action2.WasPressed;
 
         if (isSelected != CharacterSelectStates.NotJoined)
         {
@@ -90,7 +91,7 @@ public class CharacterSelectScreen : MonoBehaviour {
                 }
             }
 
-            if (cancel && isSelected == CharacterSelectStates.Selecting && player == PlayerIndex.One)
+            if (cancel && isSelected == CharacterSelectStates.Selecting && player == 0)
             {
                 mainMenu.OpenMainMenuScreen();
             }else if(cancel && isSelected == CharacterSelectStates.Selecting)
@@ -99,7 +100,7 @@ public class CharacterSelectScreen : MonoBehaviour {
                 joinScreen.SetActive(true);
             }
 
-            if(select && isSelected == CharacterSelectStates.Selected && player == PlayerIndex.One)
+            if(select && isSelected == CharacterSelectStates.Selected && player == 0)
             {
                 mainMenu.StartLevelSelectScreen();
             }
@@ -126,10 +127,6 @@ public class CharacterSelectScreen : MonoBehaviour {
                 joinScreen.SetActive(false);
             }
         }
-
-       
-
-        lastState = state;
 
     }
 
