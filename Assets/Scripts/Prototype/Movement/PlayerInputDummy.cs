@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
+
 public class PlayerInputDummy : MonoBehaviour {
 
     public PlayerIndex player;

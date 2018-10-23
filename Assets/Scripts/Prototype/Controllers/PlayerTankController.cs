@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
-
+using InControl;
 
 
 [CreateAssetMenu(menuName = "Tanks/Controllers/New Player Tank Controller", fileName = "New Player Tank Controller")]
@@ -17,8 +17,12 @@ public class PlayerTankController : TankController {
         GamePadState lastState = convertedState.lastState;
         GamePadState currentState = GamePad.GetState(convertedState.player);
 
-        Vector2 leftStickInput = new Vector2(currentState.ThumbSticks.Left.X, currentState.ThumbSticks.Left.Y);
-        Vector2 rightStickInput = new Vector2(currentState.ThumbSticks.Right.X, currentState.ThumbSticks.Right.Y);
+        InputDevice inputDevice = InputManager.Devices[(int)convertedState.player];
+
+        Vector2 leftStickInput = inputDevice.LeftStick.Vector;
+        Vector2 rightStickInput = inputDevice.RightStick.Vector;
+
+        Debug.Log(leftStickInput);
 
         if (!manager.isDead)
         {

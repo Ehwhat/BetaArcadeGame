@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XInputDotNetPure;
 using TMPro;
+using XInputDotNetPure;
 
 public class LevelMenuManager : MonoBehaviour {
 

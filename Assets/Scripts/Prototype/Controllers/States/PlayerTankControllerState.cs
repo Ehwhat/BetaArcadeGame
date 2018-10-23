@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
 
+
 public class PlayerTankControllerState
 {
     public GamePadState lastState;

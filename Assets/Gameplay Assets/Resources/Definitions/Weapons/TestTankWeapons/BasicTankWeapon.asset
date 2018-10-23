@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f29b40333a1dd9047a56e530fe040670, type: 3}
   m_Name: BasicTankWeapon
   m_EditorClassIdentifier: 
-  projectile: {fileID: 11400000, guid: a5b42b751fe07174cbc8e21271091770, type: 2}
+  projectile: {fileID: 11400000, guid: 36a40b01c7dd77b47bb00dbe3c3d771e, type: 2}
   weaponFiringOffsets:
   - {x: 0, y: 0.9}
   firingDelay: 0.3
