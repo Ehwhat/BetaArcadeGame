@@ -129,11 +129,7 @@ public class TurretController : MonoBehaviour {
     {
         if(vector.sqrMagnitude <= 0.05f)
         {
-            vector = movement.targetVector;
-            if(vector.sqrMagnitude <= 0.05f)
-            {
-                vector = currentVector;
-            }
+            vector = currentVector;
         }
         currentVector = vector;
         Vector2 actualVector = new Vector2(-vector.x, vector.y);
