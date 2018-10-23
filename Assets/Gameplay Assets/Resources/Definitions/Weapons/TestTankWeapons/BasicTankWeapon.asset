@@ -14,7 +14,7 @@ MonoBehaviour:
   projectile: {fileID: 11400000, guid: 36a40b01c7dd77b47bb00dbe3c3d771e, type: 2}
   weaponFiringOffsets:
   - {x: 0, y: 0.9}
-  firingDelay: 0.3
+  firingDelay: 0.2
   projectileRepresentation: {fileID: 1688096402269350, guid: 46af86ac18952ea44af415fe9745a5d2,
     type: 2}
   projectileLayerMask:

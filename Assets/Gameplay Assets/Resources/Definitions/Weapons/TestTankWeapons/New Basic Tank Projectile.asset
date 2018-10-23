@@ -11,4 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea7b6a525e60d7a418d0b9e1eeef5d19, type: 3}
   m_Name: New Basic Tank Projectile
   m_EditorClassIdentifier: 
-  projectileSpeed: 10
+  startSpeed: 1
+  maxVelocity: 100
+  acceration: 5

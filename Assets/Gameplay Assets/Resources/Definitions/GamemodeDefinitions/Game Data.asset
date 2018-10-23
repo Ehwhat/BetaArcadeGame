@@ -14,7 +14,7 @@ MonoBehaviour:
   gamemode: {fileID: 11400000, guid: 939a86527813f3d4b8d9ae451a591665, type: 2}
   characters:
   - {fileID: 11400000, guid: bb9d48f3d3f14ba4098c077f1b681257, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  playersJoined: 00000000
+  - {fileID: 11400000, guid: bb9d48f3d3f14ba4098c077f1b681257, type: 2}
+  - {fileID: 11400000, guid: bb9d48f3d3f14ba4098c077f1b681257, type: 2}
+  - {fileID: 11400000, guid: bb9d48f3d3f14ba4098c077f1b681257, type: 2}
+  playersJoined: 01010000
