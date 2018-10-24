@@ -11,23 +11,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcb395adf56722642b98d43764a5023f, type: 3}
   m_Name: New Auto Aimed Tank Weapon
   m_EditorClassIdentifier: 
-  projectile: {fileID: 0}
+  projectile: {fileID: 11400000, guid: 36a40b01c7dd77b47bb00dbe3c3d771e, type: 2}
   weaponFiringOffsets:
-  - {x: 0, y: 0}
-  firingDelay: 0
-  projectileRepresentation: {fileID: 0}
+  - {x: 0, y: 0.9}
+  firingDelay: 0.4
+  useDuribility: 1
+  duribility: 0
+  perShotDuribilityCost: 10
+  projectileRepresentation: {fileID: 1688096402269350, guid: 46af86ac18952ea44af415fe9745a5d2,
+    type: 2}
   projectileLayerMask:
     serializedVersion: 2
-    m_Bits: 0
-  onFiredClip: {fileID: 0}
+    m_Bits: 4294967295
+  onFiredClip: {fileID: 8300000, guid: 316aca8698481974d96d3828f80b3273, type: 3}
   onHitClip: {fileID: 0}
-  onFiredParticleSystem: {fileID: 0}
-  autoAimType: 1
-  autoAimRange: 10
-  autoAimArcAngle: 30
-  autoAimDegreesPerSecond: 20
-  autoAimOffsetMagnitude: 0.2
-  autoAimPriorityMix: 0.5
+  onFiredParticleSystem: {fileID: 198171685806453848, guid: 31e8602136db7a34db0e8ac2279e70fe,
+    type: 2}
+  autoAimType: 2
+  autoAimRange: 40
+  autoAimArcAngle: 60
+  autoAimDegreesPerSecond: 1e+14
+  autoAimOffsetMagnitude: 0
+  autoAimPredictedProjectileSpeed: 10
+  autoAimPriorityMix: 0.78
   autoAimLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
+  autoAimBlockingLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295
