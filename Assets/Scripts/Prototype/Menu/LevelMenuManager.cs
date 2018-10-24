@@ -23,16 +23,17 @@ public class LevelMenuManager : MonoBehaviour {
     void Start()
     {
         LoadDefinition(currentLevelIndex);
+        device = GameInput.GetPlayerDevice(0);
         
     }
 
     private void Update()
     {
 
-        bool pressingLeft = (state.ThumbSticks.Left.X < -0.5f) || state.DPad.Left == ButtonState.Pressed;
-        bool pressingRight = (state.ThumbSticks.Left.X > 0.5f) || state.DPad.Right == ButtonState.Pressed;
-        bool select = state.Buttons.A == ButtonState.Pressed && lastState.Buttons.A == ButtonState.Released;
-        bool cancel = state.Buttons.B == ButtonState.Pressed && lastState.Buttons.B == ButtonState.Released;
+        bool pressingLeft = device.LeftStick.Left.IsPressed || device.DPadLeft.IsPressed;
+        bool pressingRight = device.LeftStick.Right.IsPressed || device.DPadRight.IsPressed;
+        bool select = device.Action1.WasPressed;
+        bool cancel = device.Action2.WasPressed;
 
         if (lastSelectionTime + selectionDelay < Time.time)
         {

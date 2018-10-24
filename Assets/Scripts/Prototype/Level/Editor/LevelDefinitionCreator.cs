@@ -31,8 +31,8 @@ public class LevelDefinitionCreator : ScriptableObject {
                 Instantiate(instance.requiredPrefabs[i]);
             }
             EditorSceneManager.SaveScene(scene, instance.levelFolderPath);
-
             LevelDefinition definition = CreateInstance<LevelDefinition>();
+            definition.id = scene.buildIndex;
             string filename = Path.GetFileNameWithoutExtension(path);
             
         }

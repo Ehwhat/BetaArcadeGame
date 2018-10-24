@@ -40,6 +40,7 @@ public class CameraFollow : MonoBehaviour {
         CenterPos centerPos = new CenterPos();
         centerPos.position = (Vector2)gameManager.players[0].transform.position;
         float bestDistance = 0;
+        int playerCount = 1;
         for (int i = 1; i < gameManager.players.Length; i++)
         {
             
@@ -58,10 +59,11 @@ public class CameraFollow : MonoBehaviour {
                     }
                 }
                 centerPos.position += (Vector2)gameManager.players[i].transform.position;
+                playerCount++;
             }
         }
         centerPos.distance = bestDistance;
-        centerPos.position /= 4;
+        centerPos.position /= playerCount;
         return centerPos;
     }
 }

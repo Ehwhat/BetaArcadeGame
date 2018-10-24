@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcb395adf56722642b98d43764a5023f, type: 3}
+  m_Name: New Auto Aimed Tank Weapon
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 0}
+  weaponFiringOffsets:
+  - {x: 0, y: 0}
+  firingDelay: 0
+  projectileRepresentation: {fileID: 0}
+  projectileLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  onFiredClip: {fileID: 0}
+  onHitClip: {fileID: 0}
+  onFiredParticleSystem: {fileID: 0}
+  autoAimType: 1
+  autoAimRange: 10
+  autoAimArcAngle: 30
+  autoAimDegreesPerSecond: 20
+  autoAimOffsetMagnitude: 0.2
+  autoAimPriorityMix: 0.5
+  autoAimLayer:
+    serializedVersion: 2
+    m_Bits: 0

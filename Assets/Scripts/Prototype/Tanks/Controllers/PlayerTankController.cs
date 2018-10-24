@@ -22,8 +22,6 @@ public class PlayerTankController : TankController {
         Vector2 leftStickInput = inputDevice.LeftStick.Vector;
         Vector2 rightStickInput = inputDevice.RightStick.Vector;
 
-        Debug.Log(leftStickInput);
-
         if (!manager.isDead)
         {
             manager.tankMovement.targetVector = leftStickInput;
