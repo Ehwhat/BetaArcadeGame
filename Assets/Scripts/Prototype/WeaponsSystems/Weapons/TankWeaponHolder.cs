@@ -30,6 +30,7 @@ public class TankWeaponHolder : MonoBehaviour {
         if(weapon != null)
         {
             SetWeapon(weapon);
+            weapon.ResetDurability();
         }
     }
 

@@ -287,6 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 995777834, guid: c8d0ad23af520fe46aabe2b1fecf6462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _variables: {fileID: 0}
 --- !u!114 &158985936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1518,6 +1519,11 @@ Prefab:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1210107625}
+    - target: {fileID: 114143773265926480, guid: 575702f1bd81e0840a89a3255d6818aa,
+        type: 2}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 1688763708}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 575702f1bd81e0840a89a3255d6818aa, type: 2}
   m_IsPrefabParent: 0
@@ -2376,6 +2382,11 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!20 &1688763708 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 20809864756766310, guid: 575702f1bd81e0840a89a3255d6818aa,
+    type: 2}
+  m_PrefabInternal: {fileID: 867251417}
 --- !u!1 &1691043098
 GameObject:
   m_ObjectHideFlags: 0
@@ -2650,6 +2661,8 @@ GameObject:
   - component: {fileID: 1832269746}
   - component: {fileID: 1832269744}
   - component: {fileID: 1832269745}
+  - component: {fileID: 1832269749}
+  - component: {fileID: 1832269748}
   m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
@@ -2730,12 +2743,46 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1832269743}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.6, y: 0.9, z: 0}
+  m_LocalPosition: {x: 16.34, y: 10.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1832269748
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1832269743}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &1832269749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1832269743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50d737c34ce5f72468bdda88ab7fb57c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  magnitude: 2
+  vector: {x: 1, y: 0}
 --- !u!1 &1897765544
 GameObject:
   m_ObjectHideFlags: 0
