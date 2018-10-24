@@ -15,8 +15,8 @@ MonoBehaviour:
   weaponFiringOffsets:
   - {x: 0, y: 0.9}
   firingDelay: 0.4
-  useDuribility: 1
-  duribility: 0
+  useDuribility: 0
+  maxDurability: 100
   perShotDuribilityCost: 10
   projectileRepresentation: {fileID: 1688096402269350, guid: 46af86ac18952ea44af415fe9745a5d2,
     type: 2}
@@ -31,7 +31,7 @@ MonoBehaviour:
   autoAimRange: 40
   autoAimArcAngle: 60
   autoAimDegreesPerSecond: 1e+14
-  autoAimOffsetMagnitude: 0
+  autoAimOffsetMagnitude: 0.269
   autoAimPredictedProjectileSpeed: 10
   autoAimPriorityMix: 0.78
   autoAimLayer:

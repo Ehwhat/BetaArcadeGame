@@ -16,7 +16,7 @@ public class TankWeapon : Weapon
 
     public float firingDelay;
     public bool useDuribility = true;
-    public float duribility = 100;
+    public float maxDurability = 100;
     public float perShotDuribilityCost = 10;
 
     public GameObject projectileRepresentation;
@@ -27,9 +27,16 @@ public class TankWeapon : Weapon
 
     public ParticleSystem onFiredParticleSystem;
 
+    private float duribility = 0;
+
+    public void ResetDurability()
+    {
+        duribility = maxDurability;
+    }
+
     public virtual bool FireProjectile(Vector2 position, Vector2 direction, float lastFiredTime, TankProjectileData firingData = null)
     {
-        if (lastFiredTime + firingDelay < Time.time)
+        if (lastFiredTime + firingDelay < Time.time && !CheckIfBroke())
         {
             for (int i = 0; i < weaponFiringOffsets.Length; i++)
             {
