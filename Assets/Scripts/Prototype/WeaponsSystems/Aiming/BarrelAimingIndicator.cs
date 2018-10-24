@@ -6,6 +6,8 @@ public class BarrelAimingIndicator : MonoBehaviour {
 
     public LineRenderer barrelLineRendeer;
     public LayerMask aimLayer;
+    public float solidLength = 0.1f;
+    public float fullLineLength = 4f;
 	
 	// Update is called once per frame
 	void Update () {
@@ -14,7 +16,13 @@ public class BarrelAimingIndicator : MonoBehaviour {
 
         if (hit)
         {
-            barrelLineRendeer.SetPosition(1, transform.InverseTransformPoint(hit.point));
+            barrelLineRendeer.positionCount = 2;
+            barrelLineRendeer.SetPosition(1, Vector2.up * Mathf.Min(hit.distance, solidLength));
+            if (hit.distance > solidLength)
+            {
+                barrelLineRendeer.positionCount = 3;
+                barrelLineRendeer.SetPosition(2, Vector2.up * Mathf.Min(hit.distance, fullLineLength));
+            }
         }
 	}
 }

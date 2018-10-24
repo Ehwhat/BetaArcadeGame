@@ -287,7 +287,6 @@ MonoBehaviour:
   m_Script: {fileID: 995777834, guid: c8d0ad23af520fe46aabe2b1fecf6462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _variables: {fileID: 0}
 --- !u!114 &158985936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,9 +298,6 @@ MonoBehaviour:
   m_Script: {fileID: -1465209106, guid: c8d0ad23af520fe46aabe2b1fecf6462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data:
-    _json: '{"declarations":{"collection":{"$content":[],"$version":"A"},"$version":"A"}}'
-    _objectReferences: []
 --- !u!4 &158985937
 Transform:
   m_ObjectHideFlags: 0

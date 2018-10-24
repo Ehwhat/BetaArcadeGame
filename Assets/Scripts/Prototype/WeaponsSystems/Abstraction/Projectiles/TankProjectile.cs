@@ -61,6 +61,32 @@ public abstract class TankProjectile<ProjectileInstance,ProjectileFiredDataType>
 
 public abstract class TankProjectile : ScriptableObject, IProjectile
 {
+    private static bool alreadyRan = false;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    private static void Init()
+    {
+        if (!alreadyRan)
+        {
+            TankProjectile[] projectileInstances = Resources.LoadAll<TankProjectile>("");
+            for (int i = 0; i < projectileInstances.Length; i++)
+            {
+                CoroutineServer.StartCoroutine(UpdateProjectileEnumerator(projectileInstances[i]));
+            }
+            alreadyRan = true;
+        }
+        
+    }
+
+    private static IEnumerator UpdateProjectileEnumerator(TankProjectile projectile)
+    {
+        while (true)
+        {
+            projectile.UpdateProjectile(Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
     public abstract void OnFired(Vector3 firedPosition, Vector3 firedDirection, object firedData = null);
 
     public abstract void UpdateProjectile(float deltaTime);

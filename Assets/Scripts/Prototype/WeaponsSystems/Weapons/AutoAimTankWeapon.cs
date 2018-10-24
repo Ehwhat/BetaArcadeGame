@@ -29,6 +29,12 @@ public class AutoAimTankWeapon : TankWeapon {
     public LayerMask autoAimLayer;
     public LayerMask autoAimBlockingLayer = Physics2D.AllLayers;
 
+    private Vector2 lastInputDirection = Vector2.up;
+    private Vector2 lastDirection = Vector2.zero;
+    private Vector2 lastPosition = Vector2.up;
+    private List<Collider2D> lastValidTargets = new List<Collider2D>();
+    private Collider2D lastTarget = new Collider2D();
+
     public override bool FireProjectile(Vector2 position, Vector2 direction, float lastFiredTime, TankProjectileData firingData = null)
     {
         Vector2 autoAimedDirection = AutoAimAtTargets(position, direction);
@@ -37,12 +43,6 @@ public class AutoAimTankWeapon : TankWeapon {
         lastDirection = autoAimedDirection;
         return base.FireProjectile(position, autoAimedDirection, lastFiredTime, firingData);
     }
-
-    private Vector2 lastInputDirection = Vector2.up;
-    private Vector2 lastDirection = Vector2.zero;
-    private Vector2 lastPosition = Vector2.up;
-    private List<Collider2D> lastValidTargets = new List<Collider2D>();
-    private Collider2D lastTarget = new Collider2D();
 
     private Vector2 AutoAimAtTargets(Vector2 position,Vector2 vector)
     {
@@ -54,7 +54,6 @@ public class AutoAimTankWeapon : TankWeapon {
         lastValidTargets = validTargets;
         if (validTargets.Count <= 0)
         {
-            Debug.Log("Not Found");
             lastTarget = null;
             return vector;
         }

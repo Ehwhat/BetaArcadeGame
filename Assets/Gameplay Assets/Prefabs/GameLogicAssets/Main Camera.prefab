@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 20809864756766310}
+  moveSpeed: 20
+  zoomSpeed: 20
   sizeMax: 22.5
   sizeMin: 10.4
   sizeOffset: 0.5
