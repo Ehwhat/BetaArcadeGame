@@ -19,9 +19,11 @@ public class TankWeaponHolder : MonoBehaviour {
 
     public TankWeapon weapon;
     public Transform particleSystemHolder;
+    public Transform visualisationHolder;
     public AudioSource audioPlayer;
 
     private ParticleSystem activeParticleSystem;
+    private WeaponVisualisation currentVisualisation;
 
     public float lastFired = 0;
 
@@ -36,12 +38,20 @@ public class TankWeaponHolder : MonoBehaviour {
 
     public void SetWeapon(TankWeapon newWeapon)
     {
+        RemoveCurrentWeapon();
         weapon = newWeapon;
         if (activeParticleSystem)
         {
             Destroy(activeParticleSystem.gameObject);
         }
-        activeParticleSystem = Instantiate(weapon.onFiredParticleSystem, particleSystemHolder);
+        if (weapon.onFiredParticleSystem)
+        {
+            activeParticleSystem = Instantiate(weapon.onFiredParticleSystem, particleSystemHolder);
+        }
+        if (weapon.weaponVisualisation)
+        {
+            currentVisualisation = Instantiate(weapon.weaponVisualisation, visualisationHolder);
+        }
     }
 
     public void RemoveCurrentWeapon()
@@ -50,6 +60,10 @@ public class TankWeaponHolder : MonoBehaviour {
         if (activeParticleSystem)
         {
             Destroy(activeParticleSystem.gameObject);
+        }
+        if (currentVisualisation)
+        {
+            Destroy(currentVisualisation.gameObject);
         }
     }
 
@@ -67,7 +81,10 @@ public class TankWeaponHolder : MonoBehaviour {
             if (weapon.FireProjectile(transform.position, direction, lastFired, data))
             {
                 activeParticleSystem.Play();
-                audioPlayer.PlayOneShot(weapon.onFiredClip);
+                if (weapon.onFiredClip)
+                {
+                    audioPlayer.PlayOneShot(weapon.onFiredClip);
+                }
                 lastFired = Time.time;
             }
             if (weapon.CheckIfBroke())

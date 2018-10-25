@@ -63,6 +63,12 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
         isDead = false;
     }
 
+    public void GiveWeapon(TankWeapon weapon)
+    {
+        TurretController randomTurret = turrets[Random.Range(0, turrets.Length - 1)];
+        randomTurret.GiveWeapon(weapon);
+    }
+
     public void AimTurrets(Vector2 direction)
     {
         for (int i = 0; i < turrets.Length; i++)

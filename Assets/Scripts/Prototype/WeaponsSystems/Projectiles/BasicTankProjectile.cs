@@ -5,11 +5,11 @@ using UnityEngine;
 public class BasicTankProjectileInstance: TankProjectileInstance
 {
     public TankProjectileData data;
-    public GameObject representation;
+    public ProjectileRepresentation representation;
 }
 
 [CreateAssetMenu(menuName = "Tanks/Projectiles/New Basic Tank Projectile", fileName = "New Basic Tank Projectile")]
-public class BasicTankProjectile : TankProjectile<BasicTankProjectileInstance, TankProjectileData> {
+public class BasicTankProjectile : RepresentedTankProjectile<BasicTankProjectileInstance, TankProjectileData> {
 
     public float projectileSpeed = 10;
 
@@ -18,34 +18,22 @@ public class BasicTankProjectile : TankProjectile<BasicTankProjectileInstance, T
         instance.position = firedPosition;
         instance.direction = firedDirection;
         instance.data = data;
-        instance.representation = Instantiate(data.projectileRepresentation, firedPosition, Quaternion.identity);
+        instance.representation = Instantiate(projectileRepresentation, firedPosition, Quaternion.identity);
+        instance.representation.OnSpawn(firedPosition, firedDirection);
     }
 
     public override void UpdateProjectile(float deltaTime, BasicTankProjectileInstance instance)
     {
-        RaycastHit2D hit = Physics2D.Raycast(instance.position, instance.direction, projectileSpeed * deltaTime, instance.data.projectileLayerMask);
+        RaycastHit2D hit = Physics2D.Raycast(instance.position, instance.direction, projectileSpeed * deltaTime, projectileLayerMask);
         if (hit)
         {
             instance.position = hit.point;
             instance.representation.transform.position = instance.position;
 
-            IDamageable hitDamageable = hit.collider.transform.root.GetComponent<IDamageable>();
-            if (hitDamageable != null)
-            {
-                ProjectileHit hitData = new ProjectileHit()
-                {
-                    hitData = hit,
-                    projectile = this,
-                    holder = instance.data.ownerWeaponHolder,
-                    damage = 25
-                };
-                hitDamageable.OnHit(hitData);
-            }
+            AttemptToDamage(hit.collider, hit);
 
             instance.representation.transform.rotation = Quaternion.FromToRotation(Vector2.up, instance.direction);
-            instance.representation.GetComponent<ParticleSystem>().Emit(6);
-
-            GameObject.Destroy(instance.representation, 2);
+            instance.representation.Destroy();
             instance.finishedCallback();
         }
         else

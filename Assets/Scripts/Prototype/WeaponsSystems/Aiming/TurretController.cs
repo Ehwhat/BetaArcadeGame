@@ -33,6 +33,11 @@ public class TurretController : MonoBehaviour {
         weaponHolder.FireWeapon();
     }
 
+    public void GiveWeapon(TankWeapon weapon)
+    {
+        weaponHolder.SetWeapon(weapon);
+    }
+
     private void RotateToVector(Vector2 vector)
     {
         if(vector.sqrMagnitude <= 0.05f)

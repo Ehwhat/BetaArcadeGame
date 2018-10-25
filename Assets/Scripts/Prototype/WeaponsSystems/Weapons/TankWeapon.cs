@@ -18,9 +18,10 @@ public class TankWeapon : Weapon
     public bool useDuribility = true;
     public float maxDurability = 100;
     public float perShotDuribilityCost = 10;
+    [Range(0,1)]
+    public float rarity = 0.5f;
 
-    public GameObject projectileRepresentation;
-    public LayerMask projectileLayerMask;
+    public WeaponVisualisation weaponVisualisation;
 
     public AudioClip onFiredClip;
     public AudioClip onHitClip;
@@ -41,8 +42,6 @@ public class TankWeapon : Weapon
             for (int i = 0; i < weaponFiringOffsets.Length; i++)
             {
                 firingData.ownerWeapon = this;
-                firingData.projectileLayerMask = projectileLayerMask;
-                firingData.projectileRepresentation = projectileRepresentation;
                 Vector2 offset = firingData.ownerWeaponHolder.transform.rotation * weaponFiringOffsets[i];
                 projectile.OnFired(position+ offset, direction, firingData);
                 duribility -= perShotDuribilityCost;
@@ -55,6 +54,16 @@ public class TankWeapon : Weapon
     public virtual bool CheckIfBroke()
     {
         return (duribility <= 0 && useDuribility);
+    }
+
+    public float GetRateOfFire()
+    {
+        return (1f / firingDelay);
+    }
+
+    public float CalculateWeaponCoefficent()
+    {
+        return ((projectile.damage * (GetRateOfFire()*60) * (maxDurability/perShotDuribilityCost)) / ((1-rarity)*100))/100;
     }
 
 }

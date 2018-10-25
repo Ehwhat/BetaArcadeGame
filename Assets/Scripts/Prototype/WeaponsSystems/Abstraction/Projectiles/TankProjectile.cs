@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class TankProjectileData
 {
-    public GameObject projectileRepresentation;
-    public LayerMask projectileLayerMask;
     public Weapon ownerWeapon;
     public TankWeaponHolder ownerWeaponHolder;
 }
@@ -61,6 +59,19 @@ public abstract class TankProjectile<ProjectileInstance,ProjectileFiredDataType>
 
 public abstract class TankProjectile : ScriptableObject, IProjectile
 {
+    public enum DamageType
+    {
+        Singular,
+        Explosive
+    }
+
+    public float damage;
+    public DamageType damageType = DamageType.Singular;
+    public float explosiveRange = 1;
+
+    public LayerMask projectileLayerMask;
+    public LayerMask damageableLayerMask;
+
     private static bool alreadyRan = false;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -90,4 +101,44 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
     public abstract void OnFired(Vector3 firedPosition, Vector3 firedDirection, object firedData = null);
 
     public abstract void UpdateProjectile(float deltaTime);
+
+    public void AttemptToDamage(Collider2D collider, RaycastHit2D hit)
+    {
+        ProjectileHit hitData = new ProjectileHit()
+        {
+            hitData = hit,
+            projectile = this,
+            damage = damage
+        };
+        switch (damageType)
+        {
+            case DamageType.Singular:
+                AttemptToDamageSingular(collider, hit, hitData);
+                break;
+            case DamageType.Explosive:
+                AttemptToDamageExplosive(collider, hit, hitData);
+                break;
+        }
+    }
+
+    private void AttemptToDamageExplosive(Collider2D collider, RaycastHit2D hit, ProjectileHit hitData)
+    {
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(hit.point, explosiveRange, damageableLayerMask);
+        for (int i = 0; i < hitColliders.Length; i++)
+        {
+            AttemptToDamageSingular(hitColliders[i], hit, hitData);
+        }
+    }
+
+    private void AttemptToDamageSingular(Collider2D collider, RaycastHit2D hit, ProjectileHit hitData)
+    {
+        if (damageableLayerMask == (damageableLayerMask | (1 << collider.gameObject.layer)))
+        {
+            IDamageable[] hitDamageables = collider.transform.root.GetComponentsInChildren<IDamageable>();
+            for (int i = 0; i < hitDamageables.Length; i++)
+            {
+                hitDamageables[i].OnHit(hitData);
+            }
+        }
+    }
 }

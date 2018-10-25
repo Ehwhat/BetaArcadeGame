@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Weapon : ScriptableObject {
 
+    public string displayName;
     public virtual void OnWeaponEquipted() { }
     public virtual void OnWeaponUnequipted() { }
 

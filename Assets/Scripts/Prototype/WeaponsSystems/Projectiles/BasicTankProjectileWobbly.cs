@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class BasicTankBuildupProjectileInstance : TankProjectileInstance
+public class BasicTankBuildupProjectileInstance : BasicTankProjectileInstance
 {
-    public TankProjectileData data;
-    public GameObject representation;
     public float velocity = 0;
 }
 
 [CreateAssetMenu(menuName = "Tanks/Projectiles/New Basic Tank Projectile Wobbly", fileName = "New Basic Tank Projectile Wobbly")]
-public class BasicTankProjectileWobbly : TankProjectile<BasicTankBuildupProjectileInstance, TankProjectileData> {
+public class BasicTankProjectileWobbly : RepresentedTankProjectile<BasicTankBuildupProjectileInstance, TankProjectileData> {
 
     public float startSpeed = 10;
     public float maxVelocity = 100;
@@ -23,13 +21,13 @@ public class BasicTankProjectileWobbly : TankProjectile<BasicTankBuildupProjecti
         instance.direction = firedDirection;
         instance.velocity = startSpeed;
         instance.data = data;
-        instance.representation = Instantiate(data.projectileRepresentation, firedPosition, Quaternion.identity);
+        instance.representation = Instantiate(projectileRepresentation, firedPosition, Quaternion.identity);
     }
 
     public override void UpdateProjectile(float deltaTime, BasicTankBuildupProjectileInstance instance)
     {
         float currentSpeed = instance.velocity;
-        RaycastHit2D hit = Physics2D.Raycast(instance.position, instance.direction, currentSpeed * deltaTime, instance.data.projectileLayerMask);
+        RaycastHit2D hit = Physics2D.Raycast(instance.position, instance.direction, currentSpeed * deltaTime, projectileLayerMask);
         if (hit)
         {
             instance.position = hit.point;
@@ -43,15 +41,13 @@ public class BasicTankProjectileWobbly : TankProjectile<BasicTankBuildupProjecti
                     hitData = hit,
                     projectile = this,
                     holder = instance.data.ownerWeaponHolder,
-                    damage = 25
+                    damage = damage
                 };
                 hitDamageable.OnHit(hitData);
             }
 
             instance.representation.transform.rotation = Quaternion.FromToRotation(Vector2.up, instance.direction);
-            instance.representation.GetComponent<ParticleSystem>().Emit(6);
-
-            GameObject.Destroy(instance.representation, 2);
+            instance.representation.Destroy();
             instance.finishedCallback();
         }
         else

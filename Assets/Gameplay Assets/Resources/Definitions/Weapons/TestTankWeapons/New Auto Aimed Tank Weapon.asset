@@ -14,15 +14,18 @@ MonoBehaviour:
   projectile: {fileID: 11400000, guid: 36a40b01c7dd77b47bb00dbe3c3d771e, type: 2}
   weaponFiringOffsets:
   - {x: 0, y: 0.9}
-  firingDelay: 0.4
-  useDuribility: 0
-  maxDurability: 100
-  perShotDuribilityCost: 10
+  firingDelay: 0.5
+  useDuribility: 1
+  maxDurability: 10
+  perShotDuribilityCost: 1
+  rarity: 0.507
   projectileRepresentation: {fileID: 1688096402269350, guid: 46af86ac18952ea44af415fe9745a5d2,
     type: 2}
   projectileLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  weaponVisualisation: {fileID: 114300704509053406, guid: 64821efa7d94f774295428886c6e4c4d,
+    type: 2}
   onFiredClip: {fileID: 8300000, guid: 316aca8698481974d96d3828f80b3273, type: 3}
   onHitClip: {fileID: 0}
   onFiredParticleSystem: {fileID: 198171685806453848, guid: 31e8602136db7a34db0e8ac2279e70fe,
