@@ -1096,7 +1096,6 @@ GameObject:
   - component: {fileID: 4936335839072082}
   - component: {fileID: 114944079339765770}
   - component: {fileID: 114512096117326952}
-  - component: {fileID: 114593258055634184}
   - component: {fileID: 114338887016780558}
   m_Layer: 0
   m_Name: Game Manager
@@ -3287,18 +3286,6 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
---- !u!114 &114593258055634184
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1697105744239922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6302691daf7720e4fbe26720eb6b804d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileSet: {fileID: 11400000, guid: e98e9b95d4c1223439e3e6cf1fce7151, type: 2}
 --- !u!114 &114601370679198232
 MonoBehaviour:
   m_ObjectHideFlags: 1

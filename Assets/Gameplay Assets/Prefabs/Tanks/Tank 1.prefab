@@ -904,11 +904,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48857eb1356830c4fb7f2fec68197532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: ce42d93096b9802479b62974f5df747d, type: 2}
+  defaultWeapon: {fileID: 11400000, guid: c101fa64e6c30374d998f9f9c82dfb03, type: 2}
+  weapon: {fileID: 11400000, guid: c101fa64e6c30374d998f9f9c82dfb03, type: 2}
   particleSystemHolder: {fileID: 4070816338397416}
   visualisationHolder: {fileID: 4671110479026164}
   audioPlayer: {fileID: 82313572546428302}
   lastFired: 0
+  currentDurability: 0
 --- !u!198 &198586872481456896
 ParticleSystem:
   m_ObjectHideFlags: 1

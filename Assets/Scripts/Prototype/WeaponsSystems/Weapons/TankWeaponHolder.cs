@@ -17,6 +17,8 @@ public struct WeaponFiringPoint
 
 public class TankWeaponHolder : MonoBehaviour {
 
+    public TankWeapon defaultWeapon;
+
     public TankWeapon weapon;
     public Transform particleSystemHolder;
     public Transform visualisationHolder;
@@ -26,13 +28,13 @@ public class TankWeaponHolder : MonoBehaviour {
     private WeaponVisualisation currentVisualisation;
 
     public float lastFired = 0;
+    public float currentDurability = 0;
 
     public void Start()
     {
         if(weapon != null)
         {
             SetWeapon(weapon);
-            weapon.ResetDurability();
         }
     }
 
@@ -52,6 +54,8 @@ public class TankWeaponHolder : MonoBehaviour {
         {
             currentVisualisation = Instantiate(weapon.weaponVisualisation, visualisationHolder);
         }
+        lastFired = -weapon.firingDelay;
+        currentDurability = weapon.maxDurability;
     }
 
     public void RemoveCurrentWeapon()
@@ -67,6 +71,11 @@ public class TankWeaponHolder : MonoBehaviour {
         }
     }
 
+    public void EquipDefaultWeapon()
+    {
+        SetWeapon(defaultWeapon);
+    }
+
     public virtual void FireWeapon()
     {
         FireWeapon(transform.up);
@@ -78,21 +87,25 @@ public class TankWeaponHolder : MonoBehaviour {
         {
             TankProjectileData data = new TankProjectileData();
             data.ownerWeaponHolder = this;
-            if (weapon.FireProjectile(transform.position, direction, lastFired, data))
+            if (lastFired + weapon.firingDelay < Time.time)
             {
-                if (activeParticleSystem)
+                if (weapon.FireProjectile(transform.position, direction, data))
                 {
-                    activeParticleSystem.Play();
+                    if (activeParticleSystem)
+                    {
+                        activeParticleSystem.Play();
+                    }
+                    if (weapon.onFiredClip)
+                    {
+                        audioPlayer.PlayOneShot(weapon.onFiredClip);
+                    }
+                    lastFired = Time.time;
+                    currentDurability -= weapon.perShotDuribilityCost;
                 }
-                if (weapon.onFiredClip)
+                if (currentDurability <= 0)
                 {
-                    audioPlayer.PlayOneShot(weapon.onFiredClip);
+                    SetWeapon(defaultWeapon);
                 }
-                lastFired = Time.time;
-            }
-            if (weapon.CheckIfBroke())
-            {
-                RemoveCurrentWeapon();
             }
         }
 

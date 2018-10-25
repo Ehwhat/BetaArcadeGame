@@ -15,11 +15,11 @@ MonoBehaviour:
   projectile: {fileID: 11400000, guid: 7a929eb44430910408dfe12bb3d8fb5e, type: 2}
   weaponFiringOffsets:
   - {x: 0, y: 0.9}
-  firingDelay: 0.2
-  useDuribility: 0
-  maxDurability: 100
-  perShotDuribilityCost: 10
-  rarity: 0.5
+  firingDelay: 0.5
+  useDuribility: 1
+  maxDurability: 10
+  perShotDuribilityCost: 1
+  rarity: 0.6
   weaponVisualisation: {fileID: 114300704509053406, guid: 64821efa7d94f774295428886c6e4c4d,
     type: 2}
   onFiredClip: {fileID: 0}
@@ -29,8 +29,8 @@ MonoBehaviour:
   autoAimRange: 10
   autoAimArcAngle: 60
   autoAimDegreesPerSecond: 720
-  autoAimOffsetMagnitude: 0.675
-  autoAimPredictedProjectileSpeed: 0
+  autoAimOffsetMagnitude: 0.71
+  autoAimPredictedProjectileSpeed: 10
   autoAimPriorityMix: 0.78
   autoAimLayer:
     serializedVersion: 2

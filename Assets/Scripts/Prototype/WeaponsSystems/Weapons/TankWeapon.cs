@@ -28,33 +28,20 @@ public class TankWeapon : Weapon
 
     public ParticleSystem onFiredParticleSystem;
 
-    private float duribility = 0;
 
-    public void ResetDurability()
+    public virtual bool FireProjectile(Vector2 position, Vector2 direction, TankProjectileData firingData = null)
     {
-        duribility = maxDurability;
-    }
-
-    public virtual bool FireProjectile(Vector2 position, Vector2 direction, float lastFiredTime, TankProjectileData firingData = null)
-    {
-        if (lastFiredTime + firingDelay < Time.time && !CheckIfBroke())
+        for (int i = 0; i < weaponFiringOffsets.Length; i++)
         {
-            for (int i = 0; i < weaponFiringOffsets.Length; i++)
-            {
-                firingData.ownerWeapon = this;
-                Vector2 offset = firingData.ownerWeaponHolder.transform.rotation * weaponFiringOffsets[i];
-                projectile.OnFired(position+ offset, direction, firingData);
-                duribility -= perShotDuribilityCost;
-                return true;
-            }
+            firingData.ownerWeapon = this;
+            Vector2 offset = firingData.ownerWeaponHolder.transform.rotation * weaponFiringOffsets[i];
+            projectile.OnFired(position+ offset, direction, firingData);
+            return true;
         }
         return false;
     }
 
-    public virtual bool CheckIfBroke()
-    {
-        return (duribility <= 0 && useDuribility);
-    }
+    
 
     public float GetRateOfFire()
     {

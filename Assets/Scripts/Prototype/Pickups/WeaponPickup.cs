@@ -33,6 +33,6 @@ public class WeaponPickup : Pickup
 
     private TankWeapon PickRandomWeapon()
     {
-        return weapons[Random.Range(0, weapons.Length - 1)];
+        return weapons[Random.Range(0, weapons.Length)];
     }
 }

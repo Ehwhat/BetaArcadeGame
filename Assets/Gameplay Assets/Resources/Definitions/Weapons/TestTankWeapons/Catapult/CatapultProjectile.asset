@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd3c37046a46dc449d4f77c34d30bd9, type: 3}
   m_Name: CatapultProjectile
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 40
   damageType: 1
   explosiveRange: 1
   projectileLayerMask:

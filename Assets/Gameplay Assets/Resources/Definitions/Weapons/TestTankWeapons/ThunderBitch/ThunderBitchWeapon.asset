@@ -15,11 +15,11 @@ MonoBehaviour:
   projectile: {fileID: 11400000, guid: 0d2dc14ef4b07aa4e8a14cc277f16918, type: 2}
   weaponFiringOffsets:
   - {x: 0, y: 0.5}
-  firingDelay: 2
-  useDuribility: 0
-  maxDurability: 100
-  perShotDuribilityCost: 10
-  rarity: 0.5
+  firingDelay: 60
+  useDuribility: 1
+  maxDurability: 1
+  perShotDuribilityCost: 1
+  rarity: 0.1
   weaponVisualisation: {fileID: 114300704509053406, guid: 64821efa7d94f774295428886c6e4c4d,
     type: 2}
   onFiredClip: {fileID: 0}

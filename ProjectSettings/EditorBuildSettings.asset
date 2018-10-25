@@ -9,5 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/TestScenes/TestMenuScene.unity
     guid: 12aa30de5a4c0ab4d8f51f939bf4e304
   - enabled: 1
-    path: Assets/Scenes/TestScenes/TestTankDrivingScene.unity
-    guid: 455b4874e852e894c893a32f3a8fc031
+    path: Assets/Scenes/TestScenes/Levels/Basement.unity
+    guid: e00dd2cd9aeb96443839e5226b3241f9
+  - enabled: 1
+    path: Assets/Scenes/TestScenes/Levels/TonksLevel1.unity
+    guid: b692e7d24958fba4e9f7c1f936833070
+  - enabled: 1
+    path: Assets/Scenes/TestScenes/Levels/TonksLevel2.unity
+    guid: f5edc8a48ab9afe43acf4af5c0ff9b6f

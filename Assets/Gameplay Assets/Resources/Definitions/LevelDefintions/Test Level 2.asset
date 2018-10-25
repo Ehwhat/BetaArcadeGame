@@ -11,5 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6ea4bcc8930364faad80c0cf44f2c4, type: 3}
   m_Name: Test Level 2
   m_EditorClassIdentifier: 
-  levelName: Test Level 2
-  id: 1
+  levelName: Tonks Level 1
+  levelImage: {fileID: 21300000, guid: f5543917acdcdaf47b21be5fd08dc7b3, type: 3}
+  id: 2

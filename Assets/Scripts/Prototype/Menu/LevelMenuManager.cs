@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 using InControl;
 
 public class LevelMenuManager : MonoBehaviour {
 
     public TextMeshProUGUI levelName;
+    public Image levelImage;
 
     public MainMenuManager mainMenu;
     public LevelDefinitionSet levelSet;
@@ -24,7 +26,9 @@ public class LevelMenuManager : MonoBehaviour {
     {
         LoadDefinition(currentLevelIndex);
         device = GameInput.GetPlayerDevice(0);
-        
+        LoadLevelImage();
+
+
     }
 
     private void Update()
@@ -85,6 +89,21 @@ public class LevelMenuManager : MonoBehaviour {
     {
         activeDefinition = levelSet.GetDefinition(levelIndex);
         levelName.text = activeDefinition.levelName;
+        
+    }
+
+    public void LoadLevelImage()
+    {
+        if (activeDefinition.levelImage)
+        {
+            levelImage.enabled = true;
+            levelImage.sprite = activeDefinition.levelImage;
+            levelImage.preserveAspect = true;
+        }
+        else
+        {
+            levelImage.enabled = false;
+        }
     }
 
 

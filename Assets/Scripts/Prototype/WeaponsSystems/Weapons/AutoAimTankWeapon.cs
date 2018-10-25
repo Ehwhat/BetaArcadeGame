@@ -20,7 +20,7 @@ public class AutoAimTankWeapon : TankWeapon {
     public float autoAimDegreesPerSecond = 720;
     [Range(0, 1)]
     public float autoAimOffsetMagnitude = 0.675f;
-    public float autoAimPredictedProjectileSpeed;
+    public float autoAimPredictedProjectileSpeed = 10;
 
     [Header("0 is for distance, 1 is for angle")]
     [Range(0, 1)]
@@ -35,13 +35,13 @@ public class AutoAimTankWeapon : TankWeapon {
     private List<Collider2D> lastValidTargets = new List<Collider2D>();
     private Collider2D lastTarget = new Collider2D();
 
-    public override bool FireProjectile(Vector2 position, Vector2 direction, float lastFiredTime, TankProjectileData firingData = null)
+    public override bool FireProjectile(Vector2 position, Vector2 direction, TankProjectileData firingData = null)
     {
         Vector2 autoAimedDirection = AutoAimAtTargets(position, direction);
         lastPosition = position;
         lastInputDirection = direction;
         lastDirection = autoAimedDirection;
-        return base.FireProjectile(position, autoAimedDirection, lastFiredTime, firingData);
+        return base.FireProjectile(position, autoAimedDirection, firingData);
     }
 
     private Vector2 AutoAimAtTargets(Vector2 position,Vector2 vector)
