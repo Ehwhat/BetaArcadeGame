@@ -80,7 +80,10 @@ public class TankWeaponHolder : MonoBehaviour {
             data.ownerWeaponHolder = this;
             if (weapon.FireProjectile(transform.position, direction, lastFired, data))
             {
-                activeParticleSystem.Play();
+                if (activeParticleSystem)
+                {
+                    activeParticleSystem.Play();
+                }
                 if (weapon.onFiredClip)
                 {
                     audioPlayer.PlayOneShot(weapon.onFiredClip);

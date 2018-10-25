@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4426641b6650df428f2f9e4b2c400ba, type: 3}
+  m_Name: RzorBladeProjectile
+  m_EditorClassIdentifier: 
+  damage: 0
+  damageType: 0
+  explosiveRange: 1
+  projectileLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  damageableLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  projectileRepresentation: {fileID: 114046558725670220, guid: 46af86ac18952ea44af415fe9745a5d2,
+    type: 2}
+  projectileSpeed: 10
+  reflectionLimit: 1

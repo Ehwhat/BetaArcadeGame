@@ -16,7 +16,7 @@ public abstract class Pickup : MonoBehaviour {
             if (tank)
             {
                 OnPickup(tank);
-                RespawnWait();
+                StartCoroutine(RespawnWait());
             }
         }
     }
@@ -26,8 +26,11 @@ public abstract class Pickup : MonoBehaviour {
         isEnabled = false;
         yield return new WaitForSeconds(respawnDelay);
         isEnabled = true;
+        OnRespawn();
     }
 
     public abstract void OnPickup(TankManager tank);
+
+    public virtual void OnRespawn() { }
 
 }

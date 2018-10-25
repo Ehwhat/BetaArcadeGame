@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcb395adf56722642b98d43764a5023f, type: 3}
+  m_Name: Catapult Weapon
+  m_EditorClassIdentifier: 
+  displayName: CAT-a-pult
+  projectile: {fileID: 11400000, guid: 0752b4663e3d2a54c8e29b56c25bd9c1, type: 2}
+  weaponFiringOffsets:
+  - {x: 0, y: -0.3}
+  firingDelay: 0.5
+  useDuribility: 0
+  maxDurability: 10
+  perShotDuribilityCost: 1
+  rarity: 0.507
+  weaponVisualisation: {fileID: 114263362851301884, guid: 9932b75bce16e724ea658cf5b43c7605,
+    type: 2}
+  onFiredClip: {fileID: 8300000, guid: 316aca8698481974d96d3828f80b3273, type: 3}
+  onHitClip: {fileID: 0}
+  onFiredParticleSystem: {fileID: 198171685806453848, guid: 31e8602136db7a34db0e8ac2279e70fe,
+    type: 2}
+  autoAimType: 2
+  autoAimRange: 40
+  autoAimArcAngle: 60
+  autoAimDegreesPerSecond: 1e+14
+  autoAimOffsetMagnitude: 0.269
+  autoAimPredictedProjectileSpeed: 10
+  autoAimPriorityMix: 0.78
+  autoAimLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  autoAimBlockingLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295

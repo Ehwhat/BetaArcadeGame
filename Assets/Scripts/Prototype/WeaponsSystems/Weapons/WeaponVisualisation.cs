@@ -5,5 +5,6 @@ using UnityEngine;
 public class WeaponVisualisation : MonoBehaviour {
 
     public Animator animatior;
+    public Sprite representedSprite;
 	
 }
