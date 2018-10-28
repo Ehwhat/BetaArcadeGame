@@ -4135,7 +4135,7 @@ MonoBehaviour:
   deathParticles: {fileID: 198736854203294978}
   coreCollider: {fileID: 60570432000322012}
   armourManager: {fileID: 114812756721051206}
-  pickupMananger: {fileID: 0}
+  pickupMananger: {fileID: 114318162260320168}
   maxHealth: 100
   health: 100
   isDead: 0
