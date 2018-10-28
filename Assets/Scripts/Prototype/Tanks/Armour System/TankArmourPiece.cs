@@ -18,6 +18,7 @@ public class TankArmourPiece : MonoBehaviour, IRequiredPiece, IRequiresPieces {
         private set { gameObject.SetActive(value); }
     }
     public float maxHealth = 20f;
+    public TankArmourPickup pickupPrefab;
 
     public List<TankArmourPiece> requiredPiecesToBeActive = new List<TankArmourPiece>();
     public List<TankArmourPiece> piecesRequiriedBy = new List<TankArmourPiece>();
@@ -45,23 +46,66 @@ public class TankArmourPiece : MonoBehaviour, IRequiredPiece, IRequiresPieces {
         return false;
     }
 
-    public void DisablePiece()
+    public bool DisablePiece(out TankArmourPickup pickup,bool spawnPickup = true)
     {
-        SetActive(false);
+        pickup = null;
+        if (isActive)
+        {
+            SetActive(false);
+            if (spawnPickup)
+                pickup = Instantiate(pickupPrefab, transform.position, Quaternion.identity);
+            return true;
+        }
+        return false;
     }
 
-    public void ReevaluateExistance()
+
+    public List<TankArmourPickup> ReevaluateExistance()
     {
-        SetActive(IsRequirementSatisfied());
-        ReevaulateChildren();
+        List<TankArmourPickup> droppedPickups = new List<TankArmourPickup>();
+        if (!IsRequirementSatisfied())
+        {
+            TankArmourPickup pickup;
+            if (DisablePiece(out pickup))
+            {
+                droppedPickups.Add(pickup);
+            }
+        }
+        ReevaulateChildren(droppedPickups);
+        return droppedPickups;
     }
 
-    public void ReevaulateChildren()
+    public List<TankArmourPickup> ReevaluateExistance(List<TankArmourPickup> droppedPickups)
+    {
+        if (!IsRequirementSatisfied())
+        {
+            TankArmourPickup pickup;
+            if (DisablePiece(out pickup))
+            {
+                droppedPickups.Add(pickup);
+            }
+        }
+        ReevaulateChildren(droppedPickups);
+        return droppedPickups;
+    }
+
+    public List<TankArmourPickup> ReevaulateChildren()
+    {
+        List<TankArmourPickup> droppedPickups = new List<TankArmourPickup>();
+        for (int i = 0; i < piecesRequiriedBy.Count; i++)
+        {
+            piecesRequiriedBy[i].ReevaluateExistance(droppedPickups);
+        }
+        return droppedPickups;
+    }
+
+    public List<TankArmourPickup> ReevaulateChildren(List<TankArmourPickup> droppedPickups)
     {
         for (int i = 0; i < piecesRequiriedBy.Count; i++)
         {
-            piecesRequiriedBy[i].ReevaluateExistance();
+            droppedPickups.AddRange(piecesRequiriedBy[i].ReevaluateExistance());
         }
+        return droppedPickups;
     }
 
     public bool IsActive()

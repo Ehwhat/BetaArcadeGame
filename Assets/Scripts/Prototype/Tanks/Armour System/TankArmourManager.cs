@@ -22,19 +22,43 @@ public class TankArmourManager : MonoBehaviour {
         }
     }
 
-    public void RemovePieceNear(Vector2 point)
+    public List<TankArmourPickup> RemovePieceNear(Vector2 point)
     {
         TankArmourPiece bestPiece = FindBestPieceAtPoint(point, SearchFlags.FullOnly, true);
         if (bestPiece != null)
         {
-            bestPiece.DisablePiece();
-            bestPiece.ReevaulateChildren();
+            List<TankArmourPickup> pickups = new List<TankArmourPickup>();
+
+            TankArmourPickup pickup;
+            if (bestPiece.DisablePiece(out pickup))
+            {
+                pickups.Add(pickup);
+            }
+
+            pickups = bestPiece.ReevaulateChildren(pickups);
+            return pickups;
         }
+        return null;
+
     }
 
-    public TankArmourPiece ReservePieceToward(Vector2 direction)
+    public List<TankArmourPickup> RemoveAll()
     {
-        return FindBestPieceTowards(direction, SearchFlags.EmptyOnly);
+        List<TankArmourPickup> pickups = new List<TankArmourPickup>();
+        for (int i = 0; i < armourPieces.Length; i++)
+        {
+            TankArmourPickup pickup;
+            if (armourPieces[i].DisablePiece(out pickup))
+            {
+                pickups.Add(pickup);
+            }
+        }
+        return pickups;
+    }
+
+    public TankArmourPiece ReservePieceToward(Vector2 direction, bool wrapAround)
+    {
+        return FindBestPieceTowards(direction, SearchFlags.EmptyOnly, wrapAround);
     }
 
 
@@ -46,10 +70,15 @@ public class TankArmourManager : MonoBehaviour {
             Debug.LogWarning("Something weird happened, I got damaged without finding a best");
         }
         piece.maxHealth -= hit.damage;
-        if(piece.maxHealth <= 0)
+        List<TankArmourPickup> pickups = new List<TankArmourPickup>();
+        if (piece.maxHealth <= 0)
         {
-            piece.DisablePiece();
-            piece.ReevaulateChildren();
+            TankArmourPickup pickup;
+            if (piece.DisablePiece(out pickup))
+            {
+                pickups.Add(pickup);
+            }
+            pickups = piece.ReevaulateChildren(pickups);
         }
 
     }
@@ -81,12 +110,12 @@ public class TankArmourManager : MonoBehaviour {
         return bestPiece;
     }
 
-    private TankArmourPiece FindBestPieceTowards(Vector2 direction, SearchFlags flag = SearchFlags.Any, bool ignoreRequirements = false, bool ignoreReservations = false)
+    private TankArmourPiece FindBestPieceTowards(Vector2 direction, SearchFlags flag = SearchFlags.Any, bool wrapAround = false, bool ignoreRequirements = false, bool ignoreReservations = false)
     {
         if (armourPieces.Length < 1)
             return null;
         TankArmourPiece bestPiece = null;
-        float bestScore = 0;
+        float bestScore = wrapAround ? float.NegativeInfinity : 0;
 
         for (int i = 0; i < armourPieces.Length; i++)
         {

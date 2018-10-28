@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class TankArmourPickupManager : MonoBehaviour {
 
-
+    public TankArmourPickup pickupPrefab;
     public TankArmourManager manager;
     public float pickupRadius = 4;
     public float minSpeed = 1f;
     public float maxSpeed = 8f;
+
+    public void Start()
+    {
+    }
 
     public void Update()
     {
@@ -16,6 +20,11 @@ public class TankArmourPickupManager : MonoBehaviour {
         {
             Debug.Log("test");
             AttractArmourPickups();
+        }
+        if (GameInput.GetPlayerDevice(0).LeftBumper.WasPressed)
+        {
+            Debug.Log("test");
+            EjectArmourPickups();
         }
     }
 
@@ -28,7 +37,7 @@ public class TankArmourPickupManager : MonoBehaviour {
         for (int i = 0; i < pickupsDetected.Count; i++)
         {
             Vector2 direction = (pickupsDetected[i].transform.position - transform.position).normalized;
-            TankArmourPiece piece = manager.ReservePieceToward(direction);
+            TankArmourPiece piece = manager.ReservePieceToward(direction, true);
             piecesReserved.Add(piece);
 
             float distance = Vector2.Distance(pickupsDetected[i].transform.position, piece.transform.position);
@@ -40,7 +49,7 @@ public class TankArmourPickupManager : MonoBehaviour {
                 piece.TryEnablePiece();
                 continue;
             }
-            pickupsDetected[i].transform.position = Vector2.MoveTowards(pickupsDetected[i].transform.position, piece.transform.position, speed);
+            pickupsDetected[i].GetComponent<Rigidbody2D>().MovePosition(Vector2.MoveTowards(pickupsDetected[i].transform.position, piece.transform.position, speed));
             
         }
         for (int i = 0; i < piecesReserved.Count; i++)
@@ -48,6 +57,24 @@ public class TankArmourPickupManager : MonoBehaviour {
             piecesReserved[i].reserved = false;
         }
 
+    }
+
+    public void EjectArmourPickups()
+    {
+        List<TankArmourPickup> pickups = manager.RemoveAll();
+
+        for (int i = 0; i < pickups.Count; i++)
+        {
+            Vector2 direction = (pickups[i].transform.position - transform.position).normalized;
+            pickups[i].GetComponent<Rigidbody2D>().AddForce(direction * 10, ForceMode2D.Impulse);
+        }
+        
+    }
+
+
+    private TankArmourPickup CreateArmourPickupFromPiece(TankArmourPiece piece)
+    {
+        return Instantiate(pickupPrefab, piece.transform.position, Quaternion.identity);
     }
 
     private List<TankArmourPickup> DetectArmourPickups()

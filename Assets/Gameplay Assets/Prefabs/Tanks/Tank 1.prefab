@@ -523,6 +523,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &1350545968050094
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4561809699322982}
+  - component: {fileID: 212337942355488658}
+  m_Layer: 8
+  m_Name: New Sprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &1376394196917554
 GameObject:
   m_ObjectHideFlags: 1
@@ -1455,7 +1471,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1967612529336506}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.54262, y: -13.714842, z: 0}
+  m_LocalPosition: {x: -12.559689, y: -14.1481, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4286493281717272}
@@ -1991,6 +2007,7 @@ Transform:
   m_Children:
   - {fileID: 4944434767803014}
   - {fileID: 4706450378406628}
+  - {fileID: 4561809699322982}
   m_Father: {fileID: 4286493281717272}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2100,6 +2117,19 @@ Transform:
   - {fileID: 4341095671370336}
   m_Father: {fileID: 4601059311021160}
   m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4561809699322982
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1350545968050094}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4497854136988516}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4575424051964610
 Transform:
@@ -3859,6 +3889,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114382860358076382}
   - {fileID: 114744739442743288}
@@ -3879,6 +3911,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114841645140988564}
   piecesRequiriedBy: []
@@ -3896,6 +3930,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive: []
   piecesRequiriedBy:
   - {fileID: 114002583027201976}
@@ -3914,6 +3950,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114225822549172212}
   piecesRequiriedBy: []
@@ -3931,6 +3969,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive: []
   piecesRequiriedBy:
   - {fileID: 114293429004693594}
@@ -3948,6 +3988,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive: []
   piecesRequiriedBy:
   - {fileID: 114835378949550076}
@@ -3966,6 +4008,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114255262842278312}
   piecesRequiriedBy: []
@@ -3983,6 +4027,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114418427267177762}
   piecesRequiriedBy: []
@@ -4000,6 +4046,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive: []
   piecesRequiriedBy:
   - {fileID: 114941669864650086}
@@ -4018,6 +4066,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114002583027201976}
   piecesRequiriedBy:
@@ -4055,6 +4105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive: []
   piecesRequiriedBy:
   - {fileID: 114293429004693594}
@@ -4083,6 +4135,7 @@ MonoBehaviour:
   deathParticles: {fileID: 198736854203294978}
   coreCollider: {fileID: 60570432000322012}
   armourManager: {fileID: 114812756721051206}
+  pickupMananger: {fileID: 0}
   maxHealth: 100
   health: 100
   isDead: 0
@@ -4099,6 +4152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114875774739387506}
   - {fileID: 114299019318425754}
@@ -4118,6 +4173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114970689398147840}
   piecesRequiriedBy: []
@@ -4135,6 +4192,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114780647585017146}
   - {fileID: 114109447697348734}
@@ -4155,6 +4214,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive: []
   piecesRequiriedBy:
   - {fileID: 114875774739387506}
@@ -4187,8 +4248,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12464f1a83dc7604688e0249a0bc3488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   manager: {fileID: 114812756721051206}
   pickupRadius: 4
+  minSpeed: 1
+  maxSpeed: 8
 --- !u!114 &114327419855476560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4201,6 +4266,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114694594070825942}
   piecesRequiriedBy: []
@@ -4218,6 +4285,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114532270229350080}
   piecesRequiriedBy: []
@@ -4235,6 +4304,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114609910678668466}
   piecesRequiriedBy:
@@ -4254,6 +4325,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114113648863926188}
   - {fileID: 114835378949550076}
@@ -4273,6 +4346,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive: []
   piecesRequiriedBy:
   - {fileID: 114532270229350080}
@@ -4290,8 +4365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48857eb1356830c4fb7f2fec68197532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultWeapon: {fileID: 11400000, guid: c101fa64e6c30374d998f9f9c82dfb03, type: 2}
-  weapon: {fileID: 11400000, guid: c101fa64e6c30374d998f9f9c82dfb03, type: 2}
+  defaultWeapon: {fileID: 11400000, guid: ae3da34f228ada144b4e3af8b79fb3f0, type: 2}
+  weapon: {fileID: 11400000, guid: ae3da34f228ada144b4e3af8b79fb3f0, type: 2}
   particleSystemHolder: {fileID: 4070816338397416}
   visualisationHolder: {fileID: 4671110479026164}
   audioPlayer: {fileID: 82313572546428302}
@@ -4309,6 +4384,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive: []
   piecesRequiriedBy:
   - {fileID: 114780647585017146}
@@ -4326,6 +4403,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114445038293805046}
   piecesRequiriedBy:
@@ -4344,6 +4423,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114780647585017146}
   - {fileID: 114382860358076382}
@@ -4363,6 +4444,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114242557961917592}
   piecesRequiriedBy: []
@@ -4380,6 +4463,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive: []
   piecesRequiriedBy:
   - {fileID: 114382860358076382}
@@ -4397,6 +4482,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114051223235202568}
   piecesRequiriedBy:
@@ -4415,6 +4502,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive: []
   piecesRequiriedBy:
   - {fileID: 114002583027201976}
@@ -4432,6 +4521,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114488319232832746}
   piecesRequiriedBy:
@@ -4497,6 +4588,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114225355428785482}
   - {fileID: 114113648863926188}
@@ -4516,6 +4609,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114293429004693594}
   piecesRequiriedBy:
@@ -4534,6 +4629,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114941669864650086}
   piecesRequiriedBy: []
@@ -4551,6 +4648,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114299019318425754}
   - {fileID: 114445038293805046}
@@ -4570,6 +4669,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114225355428785482}
   piecesRequiriedBy:
@@ -4588,6 +4689,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+    type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114591495318838750}
   piecesRequiriedBy:
@@ -12010,6 +12113,50 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!212 &212337942355488658
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1350545968050094}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 320623e789955fe4383b2f04a1755ea0, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
 --- !u!212 &212389444879123722
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -12616,7 +12763,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: b9c5e7e0a7b8b4b4cbec97b326944ee2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 12c874e3afb686c45a1b8ced08feae54, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -12836,7 +12983,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -6
-  m_Sprite: {fileID: 21300000, guid: 12c874e3afb686c45a1b8ced08feae54, type: 3}
+  m_Sprite: {fileID: 21300000, guid: afc59c815c847e7418cd67c91b9183c0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

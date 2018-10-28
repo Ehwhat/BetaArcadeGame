@@ -14,6 +14,7 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
 
     public Collider2D coreCollider;
     public TankArmourManager armourManager;
+    public TankArmourPickupManager pickupMananger;
 
     public float maxHealth = 100;
     [SerializeField]
@@ -56,6 +57,7 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
                 if (health <= 0)
                 {
                     isDead = true;
+                    pickupMananger.EjectArmourPickups();
                     onDeath(this, hit);
                     deathParticles.Play();
                 }
