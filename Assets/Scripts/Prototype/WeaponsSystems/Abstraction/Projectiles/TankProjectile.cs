@@ -65,8 +65,16 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
         Explosive
     }
 
+    public enum ExplosiveDamageFalloff
+    {
+        Fixed,
+        Linear,
+        InverseSquared
+    }
+
     public float damage;
     public DamageType damageType = DamageType.Singular;
+    public ExplosiveDamageFalloff explosiveFalloff = ExplosiveDamageFalloff.InverseSquared;
     public float explosiveRange = 1;
 
     public LayerMask projectileLayerMask;
@@ -121,12 +129,15 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
         }
     }
 
-    private void AttemptToDamageExplosive(Collider2D collider, RaycastHit2D hit, ProjectileHit hitData)
+    private void AttemptToDamageExplosive(Collider2D collider, RaycastHit2D sourceHit, ProjectileHit hitData)
     {
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(hit.point, explosiveRange, damageableLayerMask);
+        float sourceDamage = hitData.damage;
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(sourceHit.point, explosiveRange, damageableLayerMask);
         for (int i = 0; i < hitColliders.Length; i++)
         {
-            AttemptToDamageSingular(hitColliders[i], hit, hitData);
+            float distance = Vector2.Distance(sourceHit.point, hitColliders[i].transform.position);
+            hitData.damage = CalulateExplosiveDamage(sourceDamage, distance);
+            AttemptToDamageSingular(hitColliders[i], sourceHit, hitData);
         }
     }
 
@@ -140,5 +151,19 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
                 hitDamageables[i].OnHit(hitData);
             }
         }
+    }
+
+    private float CalulateExplosiveDamage(float sourceDamage, float distance)
+    {
+        switch (explosiveFalloff)
+        {
+            case ExplosiveDamageFalloff.Fixed:
+                return sourceDamage;
+            case ExplosiveDamageFalloff.Linear:
+                return sourceDamage / (distance + 1);
+            case ExplosiveDamageFalloff.InverseSquared:
+                return sourceDamage / ((distance * distance) + 1);
+        }
+        return sourceDamage;
     }
 }

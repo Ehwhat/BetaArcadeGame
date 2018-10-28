@@ -12,6 +12,9 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
     public TurretController[] turrets;
     public ParticleSystem deathParticles;
 
+    public Collider2D coreCollider;
+    public TankArmourManager armourManager;
+
     public float maxHealth = 100;
     [SerializeField]
     public float health;
@@ -47,12 +50,19 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
         Debug.Log("wasHit");
         if (!isDead)
         {
-            health -= hit.damage;
-            if (health <= 0)
+            if (hit.hitData.collider == coreCollider)
             {
-                isDead = true;
-                onDeath(this, hit);
-                deathParticles.Play();
+                health -= hit.damage;
+                if (health <= 0)
+                {
+                    isDead = true;
+                    onDeath(this, hit);
+                    deathParticles.Play();
+                }
+            }
+            else
+            {
+                armourManager.ProcessDamage(hit);
             }
         }
     }

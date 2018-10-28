@@ -25,8 +25,9 @@ public class BasicTankProjectile : RepresentedTankProjectile<BasicTankProjectile
     public override void UpdateProjectile(float deltaTime, BasicTankProjectileInstance instance)
     {
         RaycastHit2D hit = Physics2D.Raycast(instance.position, instance.direction, projectileSpeed * deltaTime, projectileLayerMask);
-        if (hit)
+        if (hit && hit.collider.transform.root != instance.data.ownerWeaponHolder.transform.root)
         {
+
             instance.position = hit.point;
             instance.representation.transform.position = instance.position;
 
