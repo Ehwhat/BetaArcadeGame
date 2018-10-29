@@ -68,6 +68,7 @@ public class TankArmourManager : MonoBehaviour {
         if(piece == null)
         {
             Debug.LogWarning("Something weird happened, I got damaged without finding a best");
+            return;
         }
         piece.maxHealth -= hit.damage;
         List<TankArmourPickup> pickups = new List<TankArmourPickup>();
@@ -79,6 +80,10 @@ public class TankArmourManager : MonoBehaviour {
                 pickups.Add(pickup);
             }
             pickups = piece.ReevaulateChildren(pickups);
+        }
+        for (int i = 0; i < pickups.Count; i++)
+        {
+
         }
 
     }

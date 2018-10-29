@@ -31,6 +31,15 @@ public class TankArmourManagerEditor : Editor {
         {
             manager.armourPieces = manager.GetComponentsInChildren<TankArmourPiece>();
         }
+
+        EditorGUILayout.HelpBox(
+            "Controls:\n\n" +
+            "Hold CTRL to interact with armour system\n\n" +
+            "Dragging and clicking creates a dependecy to another armour node\n\n" +
+            "Holding CTRL+ALT and clicking dependency lines deletes the dependency\n\n" +
+            "Holding CTRL+SHIFT and clicking activates the nearest piece of armour\n\n" +
+            "Holding CTRL+ALT+SHIFT and clicking deactivates the nearest piece of armour" 
+            , MessageType.Info, true);
         
 
     }

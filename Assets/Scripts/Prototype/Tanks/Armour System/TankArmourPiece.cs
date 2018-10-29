@@ -24,10 +24,42 @@ public class TankArmourPiece : MonoBehaviour, IRequiredPiece, IRequiresPieces {
     public List<TankArmourPiece> piecesRequiriedBy = new List<TankArmourPiece>();
     public RequirementType requirementType = RequirementType.And;
     public bool reserved = false;
+    public float phaseTime = 0.4f;
+    public Material phaseMaterial;
+    public SpriteRenderer renderer;
 
     public void Start()
     {
         gameObject.SetActive(isActive);
+    }
+
+    
+
+    public void OnPickup()
+    {
+        StartCoroutine(OnPickupRoutine());
+    }
+
+    private IEnumerator OnPickupRoutine()
+    {
+        MaterialPropertyBlock props = new MaterialPropertyBlock();
+        Vector4 pos = transform.position;
+        props.SetVector("_WorldPos", pos);
+        props.SetFloat("_Amount", 0);
+        renderer.SetPropertyBlock(props);
+        
+        float elapsedTime = 0;
+        while (elapsedTime < phaseTime)
+        {
+            props.SetVector("_WorldPos", pos);
+            props.SetFloat("_Amount", elapsedTime / phaseTime);
+            renderer.SetPropertyBlock(props);
+            yield return new WaitForEndOfFrame();
+            elapsedTime += Time.deltaTime;
+        }
+        props.SetVector("_WorldPos", pos);
+        props.SetFloat("_Amount", 1);
+        renderer.SetPropertyBlock(props);
     }
 
     private void SetActive(bool active)
@@ -40,7 +72,11 @@ public class TankArmourPiece : MonoBehaviour, IRequiredPiece, IRequiresPieces {
     {
         if (IsRequirementSatisfied())
         {
-            SetActive(true);
+            if (!isActive)
+            {
+                SetActive(true);
+                OnPickup();
+            }
             return true;
         }
         return false;
