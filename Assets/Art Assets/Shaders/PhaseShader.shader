@@ -3,7 +3,7 @@
 	Properties
 	{
 		[PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
-		_Color("Tint", Color) = (1,1,1,1)
+		[PerRendererData] _Color("Tint", Color) = (1,1,1,1)
 		_EdgeColour("Edge Colour", Color) = (1,0,0,1)
 		[MaterialToggle] PixelSnap("Pixel snap", Float) = 0
 		[HideInInspector] _RendererColor("RendererColor", Color) = (1,1,1,1)
@@ -172,7 +172,7 @@
 					edgeModifer = 0;
 
 				fixed4 c = SampleSpriteTexture(i.texcoord) * i.color;
-				c.a = 1-noiseModifer;
+				c.a *= 1-noiseModifer;
 				c.rgb = lerp(c.rgb, _EdgeColour, edgeModifer);
 				c.rgb *= c.a;
 				

@@ -43,6 +43,7 @@ public class TankArmourPiece : MonoBehaviour, IRequiredPiece, IRequiresPieces {
     private IEnumerator OnPickupRoutine()
     {
         MaterialPropertyBlock props = new MaterialPropertyBlock();
+        renderer.GetPropertyBlock(props);
         Vector4 pos = transform.position;
         props.SetVector("_WorldPos", pos);
         props.SetFloat("_Amount", 0);
