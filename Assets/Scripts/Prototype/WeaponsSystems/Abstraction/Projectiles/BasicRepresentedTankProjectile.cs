@@ -37,7 +37,7 @@ public abstract class BasicRepresentedTankProjectile<ProjectileInstance> : Repre
         instance.position = hit.point;
         instance.representation.transform.position = instance.position;
 
-        AttemptToDamage(hit.collider, hit);
+        AttemptToDamage(hit.collider, hit, instance);
 
         instance.representation.transform.rotation = Quaternion.FromToRotation(Vector2.up, instance.direction);
         instance.representation.Destroy();

@@ -59,7 +59,7 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
         return WinResult.None;
     }
 
-    public void OnPlayerDeath(TankManager tank, ProjectileHit hit)
+    public void OnPlayerDeath(TankManager tank, DamageData hit)
     {
         PlayerTankManager playerTank = (PlayerTankManager)tank;
         //if (hit.holder.owningRigidbody)
