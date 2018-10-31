@@ -11,18 +11,27 @@ public class BarrelAimingIndicator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        RaycastHit2D hit;
-        hit = Physics2D.Raycast(barrelLineRendeer.transform.position, barrelLineRendeer.transform.up,float.MaxValue, aimLayer);
-
-        if (hit)
+        RaycastHit2D[] hits;
+        hits = Physics2D.RaycastAll(barrelLineRendeer.transform.position, barrelLineRendeer.transform.up,float.MaxValue, aimLayer);
+        float distance = float.PositiveInfinity;
+        float biggestDistance = 0;
+        for (int i = 0; i < hits.Length; i++)
         {
-            barrelLineRendeer.positionCount = 2;
-            barrelLineRendeer.SetPosition(1, Vector2.up * Mathf.Min(hit.distance, solidLength));
-            if (hit.distance > solidLength)
+            if(hits[i].collider.transform.root != transform.root)
             {
-                barrelLineRendeer.positionCount = 3;
-                barrelLineRendeer.SetPosition(2, Vector2.up * Mathf.Min(hit.distance, fullLineLength));
+                if(hits[i].distance > biggestDistance)
+                {
+                    biggestDistance = hits[i].distance;
+                    distance = biggestDistance;
+                }
             }
         }
-	}
+        barrelLineRendeer.positionCount = 2;
+        barrelLineRendeer.SetPosition(1, Vector2.up * Mathf.Min(distance, solidLength));
+        if (distance > solidLength)
+        {
+            barrelLineRendeer.positionCount = 3;
+            barrelLineRendeer.SetPosition(2, Vector2.up * Mathf.Min(distance, fullLineLength));
+        }
+    }
 }

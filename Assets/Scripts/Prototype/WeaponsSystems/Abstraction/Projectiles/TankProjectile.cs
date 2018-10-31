@@ -118,12 +118,15 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
         }
     }
 
-    private void AttemptToDamageExplosive(Collider2D collider, RaycastHit2D hit, DamageData hitData)
+    private void AttemptToDamageExplosive(Collider2D collider, RaycastHit2D sourceHit, DamageData hitData)
     {
-        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(hit.point, explosiveRange, damageableLayerMask);
+        float sourceDamage = hitData.damage;
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(sourceHit.point, explosiveRange, damageableLayerMask);
         for (int i = 0; i < hitColliders.Length; i++)
         {
-            AttemptToDamageSingular(hitColliders[i], hit, hitData);
+            float distance = Vector2.Distance(sourceHit.point, hitColliders[i].transform.position);
+            hitData.damage = CalulateExplosiveDamage(sourceDamage, distance);
+            AttemptToDamageSingular(hitColliders[i], sourceHit, hitData);
         }
     }
 
