@@ -104,14 +104,9 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
 
     public abstract void UpdateProjectile(float deltaTime);
 
-    public void AttemptToDamage(Collider2D collider, RaycastHit2D hit)
+    public void AttemptToDamage(Collider2D collider, RaycastHit2D hit, TankProjectileInstance instance)
     {
-        ProjectileHit hitData = new ProjectileHit()
-        {
-            hitData = hit,
-            projectile = this,
-            damage = damage
-        };
+        TankProjectileDamageData hitData = new TankProjectileDamageData(damage, hit, this, instance);
         switch (damageType)
         {
             case DamageType.Singular:
@@ -123,7 +118,7 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
         }
     }
 
-    private void AttemptToDamageExplosive(Collider2D collider, RaycastHit2D hit, ProjectileHit hitData)
+    private void AttemptToDamageExplosive(Collider2D collider, RaycastHit2D hit, DamageData hitData)
     {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(hit.point, explosiveRange, damageableLayerMask);
         for (int i = 0; i < hitColliders.Length; i++)
@@ -132,7 +127,7 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
         }
     }
 
-    private void AttemptToDamageSingular(Collider2D collider, RaycastHit2D hit, ProjectileHit hitData)
+    private void AttemptToDamageSingular(Collider2D collider, RaycastHit2D hit, DamageData hitData)
     {
         if (damageableLayerMask == (damageableLayerMask | (1 << collider.gameObject.layer)))
         {

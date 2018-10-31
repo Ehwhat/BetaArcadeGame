@@ -35,13 +35,7 @@ public class BasicTankProjectileWobbly : RepresentedTankProjectile<BasicTankBuil
             IDamageable hitDamageable = hit.collider.transform.root.GetComponent<IDamageable>();
             if (hitDamageable != null)
             {
-                ProjectileHit hitData = new ProjectileHit()
-                {
-                    hitData = hit,
-                    projectile = this,
-                    holder = instance.weaponData.holder,
-                    damage = damage
-                };
+                TankProjectileDamageData hitData = new TankProjectileDamageData(damage, hit, this, instance);
                 hitDamageable.OnHit(hitData);
             }
 

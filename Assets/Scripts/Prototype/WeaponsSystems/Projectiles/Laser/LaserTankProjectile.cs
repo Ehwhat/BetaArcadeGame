@@ -37,7 +37,7 @@ public class LaserTankProjectile : RepresentedTankProjectile<LaserTankProjectile
         {
             instance.representation.transform.position = hit.point;
 
-            AttemptToDamage(hit.collider, hit);
+            AttemptToDamage(hit.collider, hit, instance);
         }
         else
         {
