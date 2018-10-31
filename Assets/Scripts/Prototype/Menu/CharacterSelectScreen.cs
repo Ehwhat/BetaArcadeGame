@@ -164,7 +164,6 @@ public class CharacterSelectScreen : MonoBehaviour {
 
     public void LoadActiveDefinitionPrefab()
     {
-        Debug.Log("test");
         if (currentTankPrefab)
         {
             Destroy(currentTankPrefab);

@@ -17,6 +17,8 @@ public struct WeaponFiringPoint
 
 public class TankWeaponHolder : MonoBehaviour {
 
+    public TankManager ownerTank;
+
     public TankWeapon defaultWeapon;
 
     public TankWeapon weapon;

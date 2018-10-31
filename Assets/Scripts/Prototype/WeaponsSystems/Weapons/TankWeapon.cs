@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WeaponData
 {
+    public TankManager ownerTank;
     public TankWeapon weapon;
     public TankWeaponHolder holder;
 }
@@ -39,7 +40,7 @@ public class TankWeapon : Weapon
         for (int i = 0; i < weaponFiringOffsets.Length; i++)
         {
             Vector2 offset = holder.transform.rotation * weaponFiringOffsets[i];
-            projectile.OnFired(position+ offset, direction, new WeaponData() { weapon = this, holder = holder });
+            projectile.OnFired(position+ offset, direction, new WeaponData() { ownerTank = holder.ownerTank,weapon = this, holder = holder });
             return true;
         }
         return false;

@@ -6,7 +6,10 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
 
     public System.Action<TankManager, DamageData> onDeath = (tank, weaponHit) => { };
 
+    public int tankID;
+
     public TankController controller;
+    public Rigidbody2D tankRigidbody;
     public TankMovement tankMovement;
     public TrailRenderer[] trails;
     public TurretController[] turrets;
@@ -22,6 +25,7 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
     private void Start()
     {
         Respawn();
+        SetTurretOwners();
     }
 
     private void Update()
@@ -53,6 +57,14 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
                 onDeath(this, hit);
                 deathParticles.Play();
             }
+        }
+    }
+
+    public void SetTurretOwners()
+    {
+        for (int i = 0; i < turrets.Length; i++)
+        {
+            turrets[i].SetWeaponHolderOwner(this);
         }
     }
 

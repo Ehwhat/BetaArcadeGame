@@ -953,6 +953,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 11400000, guid: 63931495802e85444be382b49fcbb1a3, type: 2}
+  tankRigidbody: {fileID: 50956625332643918}
   tankMovement: {fileID: 114232114287654356}
   trails:
   - {fileID: 96093198591232570}
@@ -991,6 +992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48857eb1356830c4fb7f2fec68197532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ownerTank: {fileID: 0}
   defaultWeapon: {fileID: 11400000, guid: ae3da34f228ada144b4e3af8b79fb3f0, type: 2}
   weapon: {fileID: 11400000, guid: ae3da34f228ada144b4e3af8b79fb3f0, type: 2}
   particleSystemHolder: {fileID: 4070816338397416}

@@ -10,8 +10,10 @@ public class GameManager : MonoBehaviour {
     public GameUIManager uiManager;
 
     public PlayerTankManager[] players = new PlayerTankManager[4];
+    public List<TankManager> currentTanks = new List<TankManager>();
 
     private GamemodeDefinition gameMode;
+    private int latestTankId = 0;
 
 	void Start () {
         CreatePlayers();
@@ -65,9 +67,10 @@ public class GameManager : MonoBehaviour {
 
     private void CreatePlayer(int player, CharacterDefinition definiton)
     {
-         players[player] = Instantiate(definiton.tankPrefab);
+        players[player] = CreateTank(definiton.tankPrefab);
         players[player].gameObject.SetActive(false);
         players[player].OnCreated(definiton, player);
+        
         uiManager.SetupHealthUIMananger(player, players[player]);
     }
 
@@ -77,6 +80,14 @@ public class GameManager : MonoBehaviour {
         manager.transform.position = position;
         manager.gameObject.SetActive(true);
         manager.ClearTrails();
+    }
+
+    public T CreateTank<T>(T tankPrefab) where T : TankManager
+    {
+        T tank = Instantiate(tankPrefab);
+        currentTanks.Add(tank);
+        tank.tankID = latestTankId++;
+        return tank;
     }
 
     public void RespawnPlayer(int player)

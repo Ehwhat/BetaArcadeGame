@@ -28,6 +28,11 @@ public class TurretController : MonoBehaviour {
         RotateToVector(targetVector);
     }
 
+    public void SetWeaponHolderOwner(TankManager owner)
+    {
+        weaponHolder.ownerTank = owner;
+    }
+
     public void Fire()
     {
         weaponHolder.FireWeapon();
