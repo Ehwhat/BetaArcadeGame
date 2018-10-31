@@ -18,7 +18,7 @@ public class PUC : MonoBehaviour {
     {
         if (other.CompareTag("Ave"))
         {
-            other.gameObject.GetComponent<ArmourScript>().AddTile();
+            other.gameObject.GetComponent<ArmourPart>().AttachPart();
 
             Destroy(gameObject);
         }

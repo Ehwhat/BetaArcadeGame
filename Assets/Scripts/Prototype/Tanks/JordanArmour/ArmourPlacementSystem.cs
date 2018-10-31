@@ -15,7 +15,8 @@ public class ArmourPlacementSystem : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        LoadPro();
+        //LoadPro();
+        CheckAll();
     }
 	
 	// Update is called once per frame
@@ -59,6 +60,14 @@ public class ArmourPlacementSystem : MonoBehaviour {
             //armourStats[0].posY = 0;
             //armourStats[0].scaX = 10;
             //armourStats[0].scaY = 10;
+        }
+    }
+
+     public void CheckAll()
+    {
+        foreach (Transform child in transform)
+        {
+            child.GetComponent<ArmourPart>().DepCheck();
         }
     }
 }
