@@ -66,7 +66,7 @@ public class AutoAimTankWeapon : TankWeapon {
         Vector2 direction = (targetPoint - position).normalized;
 
         Vector2 calculatedVector = direction;
-        calculatedVector = (calculatedVector + (vector * autoAimOffsetMagnitude)).normalized;
+        calculatedVector = Vector2.Lerp(calculatedVector, vector, autoAimOffsetMagnitude);
 
         return calculatedVector;
     }
@@ -159,7 +159,7 @@ public class AutoAimTankWeapon : TankWeapon {
     }
     public override void OnDrawGizmos()
     {
-        if (autoAimType != AutoAimType.None)
+        if (autoAimType != AutoAimType.None && false)
         {
             Vector2 direction = lastDirection;
 

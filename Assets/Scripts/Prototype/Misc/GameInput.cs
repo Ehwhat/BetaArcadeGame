@@ -11,6 +11,7 @@ public class GameInput : ScriptableObject {
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Init()
     {
+        Debug.Log("Init Controller Manager");
         InputManager.OnDeviceAttached += OnDeviceAttached;
         InputManager.OnDeviceDetached += OnDeviceDetached;
         gameDevices = new InputDevice[4];

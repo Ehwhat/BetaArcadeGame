@@ -12,7 +12,7 @@ public class PlayerTankManager : TankManager {
         this.playerIndex = playerIndex;
         controllerState = new PlayerTankControllerState()
         {
-            player = (XInputDotNetPure.PlayerIndex)playerIndex
+            player = playerIndex
         };
     }
 

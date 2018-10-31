@@ -30,7 +30,7 @@ MonoBehaviour:
   autoAimRange: 40
   autoAimArcAngle: 90
   autoAimDegreesPerSecond: 1e+14
-  autoAimOffsetMagnitude: 0.223
+  autoAimOffsetMagnitude: 0.057
   autoAimCycles: 1
   autoAimPredictedProjectileSpeed: 60
   autoAimPriorityMix: 0.78

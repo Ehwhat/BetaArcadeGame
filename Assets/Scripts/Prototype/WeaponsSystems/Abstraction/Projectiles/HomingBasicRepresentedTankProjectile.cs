@@ -23,7 +23,6 @@ public abstract class HomingBasicRepresentedTankProjectile<ProjectileInstance> :
 
     public override void OnFired(Vector3 firedPosition, Vector3 firedDirection, ProjectileInstance instance, WeaponData data)
     {
-        Debug.Log(data);
 
         if (data.weapon is AutoAimTankWeapon)
         {
