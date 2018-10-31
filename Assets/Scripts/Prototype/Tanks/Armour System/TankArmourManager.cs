@@ -62,9 +62,9 @@ public class TankArmourManager : MonoBehaviour {
     }
 
 
-    public void ProcessDamage(ProjectileHit hit)
+    public void ProcessDamage(DamageData hit)
     {
-        TankArmourPiece piece = FindBestPieceAtPoint(hit.hitData.point, SearchFlags.FullOnly, true);
+        TankArmourPiece piece = FindBestPieceAtPoint(hit.point, SearchFlags.FullOnly, true);
         if(piece == null)
         {
             Debug.LogWarning("Something weird happened, I got damaged without finding a best");

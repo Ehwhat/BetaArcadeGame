@@ -35,7 +35,7 @@ public class ReflectingTankProjectile : RepresentedTankProjectile<ReflectingTank
 
             if (instance.reflectionCount > reflectionLimit)
             {
-                AttemptToDamage(hit.collider, hit);
+                AttemptToDamage(hit.collider, hit, instance);
 
                 instance.representation.transform.rotation = Quaternion.FromToRotation(Vector2.up, instance.direction);
                 instance.representation.Destroy();
