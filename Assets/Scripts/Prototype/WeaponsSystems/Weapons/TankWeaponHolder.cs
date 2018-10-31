@@ -85,11 +85,9 @@ public class TankWeaponHolder : MonoBehaviour {
     {
         if (weapon != null)
         {
-            TankProjectileData data = new TankProjectileData();
-            data.ownerWeaponHolder = this;
             if (lastFired + weapon.firingDelay < Time.time)
             {
-                if (weapon.FireProjectile(transform.position, direction, data))
+                if (weapon.FireProjectile(transform.position, direction, this))
                 {
                     if (activeParticleSystem)
                     {
