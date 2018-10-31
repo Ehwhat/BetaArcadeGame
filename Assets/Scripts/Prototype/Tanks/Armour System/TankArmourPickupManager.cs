@@ -18,12 +18,10 @@ public class TankArmourPickupManager : MonoBehaviour {
     {
         if (GameInput.GetPlayerDevice(0).RightBumper.IsPressed)
         {
-            Debug.Log("test");
             AttractArmourPickups();
         }
         if (GameInput.GetPlayerDevice(0).LeftBumper.WasPressed)
         {
-            Debug.Log("test");
             EjectArmourPickups();
         }
     }
@@ -38,6 +36,12 @@ public class TankArmourPickupManager : MonoBehaviour {
         {
             Vector2 direction = (pickupsDetected[i].transform.position - transform.position).normalized;
             TankArmourPiece piece = manager.ReservePieceToward(direction, true);
+
+            if(piece == null)
+            {
+                return;
+            }
+
             piecesReserved.Add(piece);
 
             float distance = Vector2.Distance(pickupsDetected[i].transform.position, piece.transform.position);

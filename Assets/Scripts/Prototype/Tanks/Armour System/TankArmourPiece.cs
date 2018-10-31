@@ -107,8 +107,9 @@ public class TankArmourPiece : MonoBehaviour, IRequiredPiece, IRequiresPieces {
             {
                 droppedPickups.Add(pickup);
             }
+            ReevaulateChildren(droppedPickups);
         }
-        ReevaulateChildren(droppedPickups);
+        
         return droppedPickups;
     }
 
@@ -121,8 +122,9 @@ public class TankArmourPiece : MonoBehaviour, IRequiredPiece, IRequiresPieces {
             {
                 droppedPickups.Add(pickup);
             }
+            ReevaulateChildren(droppedPickups);
         }
-        ReevaulateChildren(droppedPickups);
+        
         return droppedPickups;
     }
 

@@ -21,6 +21,7 @@ public class TankArmourManagerEditor : Editor {
     {
         
         manager = (TankArmourManager)target;
+        manager.armourPieces = manager.GetComponentsInChildren<TankArmourPiece>(true);
     }
 
     public override void OnInspectorGUI()
@@ -29,7 +30,30 @@ public class TankArmourManagerEditor : Editor {
 
         if(GUILayout.Button("Find All Pieces"))
         {
-            manager.armourPieces = manager.GetComponentsInChildren<TankArmourPiece>();
+            manager.armourPieces = manager.GetComponentsInChildren<TankArmourPiece>(true);
+        }
+
+        if(GUILayout.Button("Remove All Null Requirements"))
+        {
+            for (int i = 0; i < manager.armourPieces.Length; i++)
+            {
+                TankArmourPiece piece = manager.armourPieces[i];
+                for (int j = piece.piecesRequiriedBy.Count-1; j > -1; j--)
+                {
+                    if(!piece.piecesRequiriedBy[j])
+                    {
+                        Debug.Log("found null piece");
+                        piece.piecesRequiriedBy.RemoveAt(j);
+                    }
+                }
+                for (int j = piece.requiredPiecesToBeActive.Count - 1; j > -1; j--)
+                {
+                    if (!piece.requiredPiecesToBeActive[j])
+                    {
+                        piece.requiredPiecesToBeActive.RemoveAt(j);
+                    }
+                }
+            }
         }
 
         EditorGUILayout.HelpBox(
@@ -40,7 +64,8 @@ public class TankArmourManagerEditor : Editor {
             "Holding CTRL+SHIFT and clicking activates the nearest piece of armour\n\n" +
             "Holding CTRL+ALT+SHIFT and clicking deactivates the nearest piece of armour" 
             , MessageType.Info, true);
-        
+
+        DrawDefaultInspector();
 
     }
 

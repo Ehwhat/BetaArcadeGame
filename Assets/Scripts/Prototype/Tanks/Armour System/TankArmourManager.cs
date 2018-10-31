@@ -78,8 +78,9 @@ public class TankArmourManager : MonoBehaviour {
             if (piece.DisablePiece(out pickup))
             {
                 pickups.Add(pickup);
+                pickups = piece.ReevaulateChildren(pickups);
             }
-            pickups = piece.ReevaulateChildren(pickups);
+            
         }
         for (int i = 0; i < pickups.Count; i++)
         {

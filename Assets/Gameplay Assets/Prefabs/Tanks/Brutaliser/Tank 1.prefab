@@ -1963,9 +1963,7 @@ MonoBehaviour:
     type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114693511123234672}
-  piecesRequiriedBy:
-  - {fileID: 0}
-  - {fileID: 0}
+  piecesRequiriedBy: []
   requirementType: 0
   reserved: 0
   phaseTime: 0.6
@@ -2065,8 +2063,6 @@ MonoBehaviour:
     type: 2}
   requiredPiecesToBeActive: []
   piecesRequiriedBy:
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 114693511123234672}
   requirementType: 0
   reserved: 0
@@ -2106,9 +2102,7 @@ MonoBehaviour:
   pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
     type: 2}
   requiredPiecesToBeActive: []
-  piecesRequiriedBy:
-  - {fileID: 0}
-  - {fileID: 0}
+  piecesRequiriedBy: []
   requirementType: 0
   reserved: 0
   phaseTime: 0.6
@@ -2130,8 +2124,6 @@ MonoBehaviour:
     type: 2}
   requiredPiecesToBeActive: []
   piecesRequiriedBy:
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 114873795623463270}
   requirementType: 0
   reserved: 0
@@ -2153,9 +2145,7 @@ MonoBehaviour:
   pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
     type: 2}
   requiredPiecesToBeActive: []
-  piecesRequiriedBy:
-  - {fileID: 0}
-  - {fileID: 0}
+  piecesRequiriedBy: []
   requirementType: 0
   reserved: 0
   phaseTime: 0.6
@@ -2178,8 +2168,6 @@ MonoBehaviour:
   requiredPiecesToBeActive:
   - {fileID: 114338878448967278}
   piecesRequiriedBy:
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 114961257337316644}
   - {fileID: 114080157931824450}
   requirementType: 0
@@ -2203,8 +2191,6 @@ MonoBehaviour:
     type: 2}
   requiredPiecesToBeActive: []
   piecesRequiriedBy:
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 114961257337316644}
   requirementType: 0
   reserved: 0
@@ -2249,9 +2235,7 @@ MonoBehaviour:
   pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
     type: 2}
   requiredPiecesToBeActive: []
-  piecesRequiriedBy:
-  - {fileID: 0}
-  - {fileID: 0}
+  piecesRequiriedBy: []
   requirementType: 0
   reserved: 0
   phaseTime: 0.6
@@ -2274,9 +2258,7 @@ MonoBehaviour:
   requiredPiecesToBeActive:
   - {fileID: 114952553453143702}
   - {fileID: 114503742234951216}
-  piecesRequiriedBy:
-  - {fileID: 0}
-  - {fileID: 0}
+  piecesRequiriedBy: []
   requirementType: 0
   reserved: 0
   phaseTime: 0.6
@@ -2298,8 +2280,6 @@ MonoBehaviour:
     type: 2}
   requiredPiecesToBeActive: []
   piecesRequiriedBy:
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 114873795623463270}
   requirementType: 0
   reserved: 0
@@ -2322,9 +2302,7 @@ MonoBehaviour:
     type: 2}
   requiredPiecesToBeActive:
   - {fileID: 114780981400704914}
-  piecesRequiriedBy:
-  - {fileID: 0}
-  - {fileID: 0}
+  piecesRequiriedBy: []
   requirementType: 0
   reserved: 0
   phaseTime: 0.6

@@ -2,12 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TankProjectileData
-{
-    public Weapon ownerWeapon;
-    public TankWeaponHolder ownerWeaponHolder;
-}
-
 public class TankProjectileInstance
 {
     public virtual bool doesUpdate
@@ -18,11 +12,12 @@ public class TankProjectileInstance
     public System.Action finishedCallback = ()  => { };
     public Vector3 position = new Vector3();
     public Vector3 direction = new Vector3();
+    public WeaponData weaponData;
 
     public TankProjectileInstance() { }
 }
 
-public abstract class TankProjectile<ProjectileInstance,ProjectileFiredDataType>:TankProjectile where ProjectileFiredDataType : TankProjectileData where ProjectileInstance : TankProjectileInstance, new() {
+public abstract class TankProjectile<ProjectileInstance>:TankProjectile where ProjectileInstance : TankProjectileInstance, new() {
 
     private List<ProjectileInstance> projectiles = new List<ProjectileInstance>();
 
@@ -32,18 +27,19 @@ public abstract class TankProjectile<ProjectileInstance,ProjectileFiredDataType>
         projectiles = new List<ProjectileInstance>();
     }
 
-    public override void OnFired(Vector3 firedPosition, Vector3 firedDirection, object firedData = null)
+    public override void OnFired(Vector3 firedPosition, Vector3 firedDirection, WeaponData weaponData)
     {
         ProjectileInstance newInstance = new ProjectileInstance();
+        newInstance.weaponData = weaponData;
         if (newInstance.doesUpdate)
         {
             newInstance.finishedCallback = () => { projectiles.Remove(newInstance); };
             projectiles.Add(newInstance);
         }
-        OnFired(firedPosition, firedDirection, newInstance, (ProjectileFiredDataType)firedData);
+        OnFired(firedPosition, firedDirection, newInstance, weaponData);
     }
 
-    public abstract void OnFired(Vector3 firedPosition, Vector3 firedDirection, ProjectileInstance instance, ProjectileFiredDataType data);
+    public abstract void OnFired(Vector3 firedPosition, Vector3 firedDirection, ProjectileInstance instance, WeaponData weaponData);
 
     public override void UpdateProjectile(float deltaTime){
         for (int i = 0; i < projectiles.Count; i++)
@@ -53,7 +49,6 @@ public abstract class TankProjectile<ProjectileInstance,ProjectileFiredDataType>
     }
 
     public abstract void UpdateProjectile(float deltaTime, ProjectileInstance instance);
-
 
 }
 
@@ -106,7 +101,7 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
         }
     }
 
-    public abstract void OnFired(Vector3 firedPosition, Vector3 firedDirection, object firedData = null);
+    public abstract void OnFired(Vector3 firedPosition, Vector3 firedDirection, WeaponData weaponData);
 
     public abstract void UpdateProjectile(float deltaTime);
 
@@ -166,4 +161,6 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
         }
         return sourceDamage;
     }
+
+    
 }
