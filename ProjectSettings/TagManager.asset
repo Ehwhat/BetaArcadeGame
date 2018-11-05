@@ -7,6 +7,8 @@ TagManager:
   - Collect
   - Ave
   - Full
+  - AveW
+  - FulW
   layers:
   - Default
   - TransparentFX

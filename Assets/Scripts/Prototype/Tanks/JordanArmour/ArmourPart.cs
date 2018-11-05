@@ -18,8 +18,10 @@ public class ArmourPart : MonoBehaviour
     }
 
     public float health = 100;
+    public int weapon = 0;
     public ArmourPart[] dependancesPrime;
     public ArmourPart[] dependancesSecond;
+    public Transform gun1;
 
     public ArmourPart()
     {
@@ -77,6 +79,55 @@ public class ArmourPart : MonoBehaviour
             }
             
         }
+        else if (tag == "AveW")
+        {
+            int all = dependancesPrime.Length;
+            foreach (ArmourPart part in dependancesPrime)
+            {
+                if (part.tag == "Full")
+                {
+                    all--;
+                }
+            }
+            if (all == 0)
+            {
+                GetComponent<Collider2D>().enabled = true;
+            }
+            else
+            {
+                GetComponent<Collider2D>().enabled = false;
+            }
+        }
+        else if (tag == "FulW")
+        {
+            bool connected = false;
+            if (dependancesPrime.Length > 0)
+            {
+                foreach (ArmourPart part in dependancesPrime)
+                {
+                    if (part.tag == "Full")
+                    {
+                        connected = true;
+                    }
+                }
+                foreach (ArmourPart part in dependancesSecond)
+                {
+                    if (part.tag == "Full")
+                    {
+                        connected = true;
+                    }
+                }
+            }
+            else
+            {
+                connected = true;
+            }
+            if (connected == false)
+            {
+                DropPart();
+            }
+
+        }
     }
 
     public void DestroyPart()
@@ -94,9 +145,18 @@ public class ArmourPart : MonoBehaviour
         print("Part dropped");
     }
 
-    public void AttachPart()
+    public void AttachPart(int type)
     {
-        tag = "Full";
+        if (type == 0)
+        {
+            tag = "Full";
+        }
+        else
+        {
+            tag = "FulW";
+            weapon = type;
+            Transform temp = Instantiate(gun1, transform);
+        }
         //GetComponent<Collider2D>().enabled = false;
         GetComponent<Renderer>().enabled = true;
         GetComponentInParent<ArmourPlacementSystem>().CheckAll();

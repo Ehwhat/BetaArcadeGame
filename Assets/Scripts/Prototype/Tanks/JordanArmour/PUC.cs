@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PUC : MonoBehaviour {
 
+    public int type = 0;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -16,9 +18,15 @@ public class PUC : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Ave"))
+        if (other.CompareTag("Ave") && type == 0)
         {
-            other.gameObject.GetComponent<ArmourPart>().AttachPart();
+            other.gameObject.GetComponent<ArmourPart>().AttachPart(type);
+
+            Destroy(gameObject);
+        }
+        else if (other.CompareTag("AveW") && type != 0)
+        {
+            other.gameObject.GetComponent<ArmourPart>().AttachPart(type);
 
             Destroy(gameObject);
         }
