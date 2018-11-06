@@ -119,7 +119,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14c3e45ea68d5f14194adad6eab95999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounds: {x: 60, y: 30}
+  camera: {fileID: 20809864756766310}
+  initalBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 60, y: 30, z: 0}
+  offset: {x: 26, y: 20}
+  moveSpeed: 20
+  zoomSpeed: 40
   gameManager: {fileID: 0}
 --- !u!114 &114823078222917608
 MonoBehaviour:
