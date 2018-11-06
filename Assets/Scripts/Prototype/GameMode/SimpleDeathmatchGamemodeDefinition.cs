@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
 {
     [System.Serializable]
-    public class DeathmatchPlayerData
+    public class DeathmatchTankData
     {
         public bool isDead = false;
         public float currentDeadTime = 0;
@@ -16,45 +16,75 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
         public int currentKills = 0;
     }
 
+    public bool useTimer = false;
+    public float timerMinutes = 2;
     public float respawnTime = 2;
     public int killsToWin;
 
+    private float timeElapsed;
+
     [SerializeField]
-    private Dictionary<int, DeathmatchPlayerData> deathmatchPlayerData = new Dictionary<int, DeathmatchPlayerData>();
+    private Dictionary<int, DeathmatchTankData> deathmatchPlayerData = new Dictionary<int, DeathmatchTankData>();
 
     public override void OnGameStart(GameManager gameManager)
     {
         foreach (TankManager tank in gameManager.currentTanks)
         {
             tank.onDeath += OnPlayerDeath;
-            deathmatchPlayerData.Add(tank.tankID, new DeathmatchPlayerData());
+            deathmatchPlayerData.Add(tank.tankID, new DeathmatchTankData());
         }
+        timeElapsed = 0;
     }
 
     public override WinResult VerifyWin(GameManager gameManager, float deltaTime)
     {
-        for (int i = 0; i < 4; i++)
+        WinResult win = new WinResult() { finished = false };
+
+        List<int> bestPlayers = new List<int>();
+        int bestScore = 0;
+
+        for (int i = 0; i < deathmatchPlayerData.Count; i++)
         {
-            if (gameManager.IsPlayerValid(i))
+            if(deathmatchPlayerData[i].currentKills > bestScore)
             {
-                if (deathmatchPlayerData[i].currentKills >= killsToWin)
+                bestPlayers = new List<int>() { i };
+                bestScore = deathmatchPlayerData[i].currentKills;
+            }else if (deathmatchPlayerData[i].currentKills == bestScore)
+            {
+                bestPlayers.Add(i);
+            }
+
+            if (deathmatchPlayerData[i].currentKills >= killsToWin)
+            {
+                win.winners.Add(i);
+                win.finished = true;
+            }
+            if (deathmatchPlayerData[i].isDead)
+            {
+                deathmatchPlayerData[i].currentDeadTime += deltaTime;
+                if (deathmatchPlayerData[i].currentDeadTime > respawnTime)
                 {
-                    return (WinResult)i;
-                }
-                if (deathmatchPlayerData[i].isDead)
-                {
-                    deathmatchPlayerData[i].currentDeadTime += deltaTime;
-                    if (deathmatchPlayerData[i].currentDeadTime > respawnTime)
-                    {
-                        Debug.Log("Respawn");
-                        gameManager.RespawnPlayer(i);
-                        deathmatchPlayerData[i].currentDeadTime = 0;
-                        deathmatchPlayerData[i].isDead = false;
-                    }
+                    Debug.Log("Respawn");
+                    gameManager.RespawnPlayer(i);
+                    deathmatchPlayerData[i].currentDeadTime = 0;
+                    deathmatchPlayerData[i].isDead = false;
                 }
             }
         }
-        return WinResult.None;
+
+        if (timeElapsed > System.TimeSpan.FromMinutes(timerMinutes).TotalSeconds)
+        {
+            win.finished = true;
+            win.winners = bestPlayers;
+        }
+        else
+        {
+            timeElapsed += deltaTime;
+        }
+
+        Josh.EventSystem.EventResponder.TriggerEvent("TimerUpdate", (float)(System.TimeSpan.FromMinutes(timerMinutes).TotalSeconds - timeElapsed));
+
+        return win;
     }
 
     public void OnPlayerDeath(TankManager tank, DamageData hit)
@@ -70,7 +100,7 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
                 int killerIndex = killer.tankID;
                 Debug.Log(killerIndex);
                 deathmatchPlayerData[killerIndex].currentKills++;
-                Josh.EventSystem.EventResponder.TriggerEvent("DisplayText", "PLAYER " + playerTank.tankID + " WAS KILLED BY PLAYER " + killer.tankID);
+                Josh.EventSystem.EventResponder.TriggerEvent("DisplayText", playerTank.tankDisplayName.ToUpper() + " WAS KILLED BY " + killer.tankDisplayName.ToUpper());
             }
         }
         int playerIndex = playerTank.tankID;

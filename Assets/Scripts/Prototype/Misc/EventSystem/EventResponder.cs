@@ -68,7 +68,6 @@ namespace Josh.EventSystem {
 
         private void RecieveEvent(string eventName, object arguements = null)
         {
-            Debug.Log(eventName);
             if (eventDefinitons.ContainsKey(eventName))
             {
                 eventDefinitons[eventName].Invoke(arguements);

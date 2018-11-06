@@ -7,6 +7,7 @@ public class GameDataDefinition : ScriptableObject {
 
     public GamemodeDefinition gamemode;
 
+    public PlayerTankData[] playersData = new PlayerTankData[4];
     public CharacterDefinition[] characters = new CharacterDefinition[4];
     public bool[] playersJoined = new bool[4];
     

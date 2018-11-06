@@ -25,9 +25,8 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 
         GamemodeDefinition.WinResult winResult = gameMode.VerifyWin(this, Time.deltaTime);
-        if(winResult != GamemodeDefinition.WinResult.None)
+        if(winResult.finished)
         {
-            uiManager.ShowWin((int)winResult);
             Debug.Log(winResult);
             StartCoroutine(GoBackToMainMenu());
             
@@ -69,7 +68,8 @@ public class GameManager : MonoBehaviour {
     {
         players[player] = CreateTank(definiton.tankPrefab);
         players[player].gameObject.SetActive(false);
-        players[player].OnCreated(definiton, player);
+        players[player].tankDisplayName = "Player " + (player + 1);
+        players[player].OnCreated(definiton, gameData.playersData[player], player);
         
         uiManager.SetupHealthUIMananger(player, players[player]);
     }

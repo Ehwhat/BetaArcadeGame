@@ -10,13 +10,13 @@ public class GameUIManager : MonoBehaviour {
 
     public void SetupHealthUIMananger(int index, TankManager tank)
     {
-        healthManagers[index].tank = tank;
+        //healthManagers[index].tank = tank;
     }
 
     public void ShowWin(int player)
     {
-        text.gameObject.SetActive(true);
-        text.text = "Player " + (player+1) + " Wins!";
+        //text.gameObject.SetActive(true);
+        //text.text = "Player " + (player+1) + " Wins!";
     }
 	
 }

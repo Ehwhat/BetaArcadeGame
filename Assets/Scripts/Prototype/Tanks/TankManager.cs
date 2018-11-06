@@ -7,6 +7,7 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
     public System.Action<TankManager, DamageData> onDeath = (tank, weaponHit) => { };
 
     public int tankID;
+    public string tankDisplayName;
 
     public TankController controller;
     public Rigidbody2D tankRigidbody;

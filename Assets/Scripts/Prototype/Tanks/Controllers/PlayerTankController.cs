@@ -17,6 +17,11 @@ public class PlayerTankController : TankController {
 
         InputDevice inputDevice = GameInput.GetPlayerDevice(convertedState.player);
 
+        if(inputDevice == null)
+        {
+            return convertedState;
+        }
+
         Vector2 leftStickInput = inputDevice.LeftStick.Vector;
         Vector2 rightStickInput = inputDevice.RightStick.Vector;
 

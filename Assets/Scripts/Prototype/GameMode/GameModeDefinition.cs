@@ -4,15 +4,12 @@ using UnityEngine;
 
 public abstract class GamemodeDefinition : ScriptableObject {
 
-    public enum WinResult
+    public class WinResult
     {
-        Player1,
-        Player2,
-        Player3,
-        Player4,
-        None,
-        Loss,
-        All
+        public bool finished;
+        public List<int> winners = new List<int>();
+        public List<int> losers = new List<int>();
+        public bool globalLoss;
     }
 
     public virtual void OnGameStart(GameManager gameManager) { }
