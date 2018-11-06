@@ -113,17 +113,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
-  pickupPrefab: {fileID: 114589021289746360, guid: f004fde76e9c11843b8246a95f575b21,
+  pickupPrefab: {fileID: 114371398720495210, guid: 5f9ee3cd76b46914793d3749f35a737d,
     type: 2}
+  renderer: {fileID: 212041228275368268}
+  phaseTime: 0.6
   requiredPiecesToBeActive: []
   piecesRequiriedBy:
   - {fileID: 0}
   - {fileID: 0}
   requirementType: 0
   reserved: 0
-  phaseTime: 0.6
-  phaseMaterial: {fileID: 2100000, guid: a6fea10150b86e042aeef52ea8bfc317, type: 2}
-  renderer: {fileID: 212041228275368268}
 --- !u!212 &212041228275368268
 SpriteRenderer:
   m_ObjectHideFlags: 1
