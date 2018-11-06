@@ -12,6 +12,12 @@ public class GameInput : ScriptableObject {
     private static void Init()
     {
         Debug.Log("Init Controller Manager");
+        //InputManager.Reset();
+        //InControlManager incontrol = new GameObject("InputManager").AddComponent<InControl.InControlManager>();
+        //incontrol.enableXInput = true;
+        //incontrol.dontDestroyOnLoad = true;
+        //incontrol.OnEnable();
+
         InputManager.OnDeviceAttached += OnDeviceAttached;
         InputManager.OnDeviceDetached += OnDeviceDetached;
         gameDevices = new InputDevice[4];

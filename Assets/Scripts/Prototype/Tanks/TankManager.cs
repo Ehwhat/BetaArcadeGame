@@ -56,9 +56,17 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
             {
                 isDead = true;
                 onDeath(this, hit);
-                deathParticles.Play();
+                gameObject.SetActive(false);
+                SpawnDeathParticles();
             }
         }
+    }
+
+    private void SpawnDeathParticles()
+    {
+        ParticleSystem spawnedParticles =  Instantiate(deathParticles, transform.position, deathParticles.transform.rotation);
+        spawnedParticles.Play();
+        Destroy(spawnedParticles.gameObject, spawnedParticles.main.duration + 1);
     }
 
     public void SetTurretOwners()
@@ -71,6 +79,7 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
 
     public void Respawn()
     {
+        gameObject.SetActive(true);
         health = maxHealth;
         isDead = false;
     }

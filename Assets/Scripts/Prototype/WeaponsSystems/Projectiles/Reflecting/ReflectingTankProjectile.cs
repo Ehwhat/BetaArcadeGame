@@ -13,6 +13,7 @@ public class ReflectingTankProjectile : RepresentedTankProjectile<ReflectingTank
 {
     public float projectileSpeed = 10;
     public int reflectionLimit = 1;
+    public bool destroyOnDamagableHit = true;
 
     public override void OnFired(Vector3 firedPosition, Vector3 firedDirection, ReflectingTankProjectileInstance instance, WeaponData data)
     {
@@ -33,10 +34,8 @@ public class ReflectingTankProjectile : RepresentedTankProjectile<ReflectingTank
 
             instance.reflectionCount++;
 
-            if (instance.reflectionCount > reflectionLimit)
+            if (instance.reflectionCount > reflectionLimit || (AttemptToDamage(hit.collider, hit, instance) && destroyOnDamagableHit))
             {
-                AttemptToDamage(hit.collider, hit, instance);
-
                 instance.representation.transform.rotation = Quaternion.FromToRotation(Vector2.up, instance.direction);
                 instance.representation.Destroy();
                 instance.finishedCallback();

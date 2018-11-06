@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: New Auto Aimed Tank Weapon
   m_EditorClassIdentifier: 
   displayName: 
-  projectile: {fileID: 11400000, guid: 4d989e206e52a9c4583d21c2243230a4, type: 2}
+  projectile: {fileID: 11400000, guid: 36a40b01c7dd77b47bb00dbe3c3d771e, type: 2}
   weaponFiringOffsets:
   - {x: 0, y: 0.9}
   firingDelay: 0.5
@@ -30,7 +30,7 @@ MonoBehaviour:
   autoAimRange: 40
   autoAimArcAngle: 90
   autoAimDegreesPerSecond: 1e+14
-  autoAimOffsetMagnitude: 0.057
+  autoAimOffsetMagnitude: 0.223
   autoAimCycles: 1
   autoAimPredictedProjectileSpeed: 60
   autoAimPriorityMix: 0.78

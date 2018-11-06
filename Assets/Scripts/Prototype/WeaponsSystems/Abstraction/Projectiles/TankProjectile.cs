@@ -104,33 +104,35 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
 
     public abstract void UpdateProjectile(float deltaTime);
 
-    public void AttemptToDamage(Collider2D collider, RaycastHit2D hit, TankProjectileInstance instance)
+    public bool AttemptToDamage(Collider2D collider, RaycastHit2D hit, TankProjectileInstance instance)
     {
         TankProjectileDamageData hitData = new TankProjectileDamageData(damage, hit, this, instance);
         switch (damageType)
         {
             case DamageType.Singular:
-                AttemptToDamageSingular(collider, hit, hitData);
-                break;
+                return AttemptToDamageSingular(collider, hit, hitData);
             case DamageType.Explosive:
-                AttemptToDamageExplosive(collider, hit, hitData);
-                break;
+                return AttemptToDamageExplosive(collider, hit, hitData);
         }
+        return false;
     }
 
-    private void AttemptToDamageExplosive(Collider2D collider, RaycastHit2D sourceHit, DamageData hitData)
+    private bool AttemptToDamageExplosive(Collider2D collider, RaycastHit2D sourceHit, DamageData hitData)
     {
         float sourceDamage = hitData.damage;
+        bool hitSomething = false;
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(sourceHit.point, explosiveRange, damageableLayerMask);
         for (int i = 0; i < hitColliders.Length; i++)
         {
             float distance = Vector2.Distance(sourceHit.point, hitColliders[i].transform.position);
             hitData.damage = CalulateExplosiveDamage(sourceDamage, distance);
             AttemptToDamageSingular(hitColliders[i], sourceHit, hitData);
+            hitSomething = true;
         }
+        return hitSomething;
     }
 
-    private void AttemptToDamageSingular(Collider2D collider, RaycastHit2D hit, DamageData hitData)
+    private bool AttemptToDamageSingular(Collider2D collider, RaycastHit2D hit, DamageData hitData)
     {
         if (damageableLayerMask == (damageableLayerMask | (1 << collider.gameObject.layer)))
         {
@@ -139,7 +141,9 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
             {
                 hitDamageables[i].OnHit(hitData);
             }
+            return true;
         }
+        return false;
     }
 
     private float CalulateExplosiveDamage(float sourceDamage, float distance)
