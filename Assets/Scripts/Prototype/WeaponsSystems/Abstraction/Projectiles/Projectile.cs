@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IProjectile {
 
-    void OnFired(Vector3 firedPosition, Vector3 firedDirection, object firedData = null);
+    void OnFired(Vector3 firedPosition, Vector3 firedDirection, WeaponData weaponData);
 
 }

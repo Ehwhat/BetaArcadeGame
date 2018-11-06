@@ -2,12 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TankProjectileData
-{
-    public Weapon ownerWeapon;
-    public TankWeaponHolder ownerWeaponHolder;
-}
-
 public class TankProjectileInstance
 {
     public virtual bool doesUpdate
@@ -18,11 +12,12 @@ public class TankProjectileInstance
     public System.Action finishedCallback = ()  => { };
     public Vector3 position = new Vector3();
     public Vector3 direction = new Vector3();
+    public WeaponData weaponData;
 
     public TankProjectileInstance() { }
 }
 
-public abstract class TankProjectile<ProjectileInstance,ProjectileFiredDataType>:TankProjectile where ProjectileFiredDataType : TankProjectileData where ProjectileInstance : TankProjectileInstance, new() {
+public abstract class TankProjectile<ProjectileInstance>:TankProjectile where ProjectileInstance : TankProjectileInstance, new() {
 
     private List<ProjectileInstance> projectiles = new List<ProjectileInstance>();
 
@@ -32,18 +27,19 @@ public abstract class TankProjectile<ProjectileInstance,ProjectileFiredDataType>
         projectiles = new List<ProjectileInstance>();
     }
 
-    public override void OnFired(Vector3 firedPosition, Vector3 firedDirection, object firedData = null)
+    public override void OnFired(Vector3 firedPosition, Vector3 firedDirection, WeaponData weaponData)
     {
         ProjectileInstance newInstance = new ProjectileInstance();
+        newInstance.weaponData = weaponData;
         if (newInstance.doesUpdate)
         {
             newInstance.finishedCallback = () => { projectiles.Remove(newInstance); };
             projectiles.Add(newInstance);
         }
-        OnFired(firedPosition, firedDirection, newInstance, (ProjectileFiredDataType)firedData);
+        OnFired(firedPosition, firedDirection, newInstance, weaponData);
     }
 
-    public abstract void OnFired(Vector3 firedPosition, Vector3 firedDirection, ProjectileInstance instance, ProjectileFiredDataType data);
+    public abstract void OnFired(Vector3 firedPosition, Vector3 firedDirection, ProjectileInstance instance, WeaponData weaponData);
 
     public override void UpdateProjectile(float deltaTime){
         for (int i = 0; i < projectiles.Count; i++)
@@ -54,7 +50,6 @@ public abstract class TankProjectile<ProjectileInstance,ProjectileFiredDataType>
 
     public abstract void UpdateProjectile(float deltaTime, ProjectileInstance instance);
 
-
 }
 
 public abstract class TankProjectile : ScriptableObject, IProjectile
@@ -64,7 +59,6 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
         Singular,
         Explosive
     }
-
     public enum ExplosiveDamageFalloff
     {
         Fixed,
@@ -106,18 +100,13 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
         }
     }
 
-    public abstract void OnFired(Vector3 firedPosition, Vector3 firedDirection, object firedData = null);
+    public abstract void OnFired(Vector3 firedPosition, Vector3 firedDirection, WeaponData weaponData);
 
     public abstract void UpdateProjectile(float deltaTime);
 
-    public void AttemptToDamage(Collider2D collider, RaycastHit2D hit)
+    public void AttemptToDamage(Collider2D collider, RaycastHit2D hit, TankProjectileInstance instance)
     {
-        ProjectileHit hitData = new ProjectileHit()
-        {
-            hitData = hit,
-            projectile = this,
-            damage = damage
-        };
+        TankProjectileDamageData hitData = new TankProjectileDamageData(damage, hit, this, instance);
         switch (damageType)
         {
             case DamageType.Singular:
@@ -129,7 +118,7 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
         }
     }
 
-    private void AttemptToDamageExplosive(Collider2D collider, RaycastHit2D sourceHit, ProjectileHit hitData)
+    private void AttemptToDamageExplosive(Collider2D collider, RaycastHit2D sourceHit, DamageData hitData)
     {
         float sourceDamage = hitData.damage;
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(sourceHit.point, explosiveRange, damageableLayerMask);
@@ -141,7 +130,7 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
         }
     }
 
-    private void AttemptToDamageSingular(Collider2D collider, RaycastHit2D hit, ProjectileHit hitData)
+    private void AttemptToDamageSingular(Collider2D collider, RaycastHit2D hit, DamageData hitData)
     {
         if (damageableLayerMask == (damageableLayerMask | (1 << collider.gameObject.layer)))
         {
@@ -166,4 +155,6 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
         }
         return sourceDamage;
     }
+
+    
 }

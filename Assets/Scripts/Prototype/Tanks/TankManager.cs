@@ -1,20 +1,16 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class TankManager : MonoBehaviour, IDamageable {
 
-    public System.Action<TankManager, ProjectileHit> onDeath = (tank, weaponHit) => { };
+    public System.Action<TankManager, DamageData> onDeath = (tank, weaponHit) => { };
 
     public TankController controller;
     public TankMovement tankMovement;
     public TrailRenderer[] trails;
     public TurretController[] turrets;
     public ParticleSystem deathParticles;
-
-    public Collider2D coreCollider;
-    public TankArmourManager armourManager;
-    public TankArmourPickupManager pickupMananger;
 
     public float maxHealth = 100;
     [SerializeField]
@@ -46,25 +42,16 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
         }
     }
 
-    public void OnHit(ProjectileHit hit)
+    public void OnHit(DamageData hit)
     {
-        Debug.Log("wasHit");
         if (!isDead)
         {
-            if (hit.hitData.collider == coreCollider)
+            health -= hit.damage;
+            if (health <= 0)
             {
-                health -= hit.damage;
-                if (health <= 0)
-                {
-                    isDead = true;
-                    pickupMananger.EjectArmourPickups();
-                    onDeath(this, hit);
-                    deathParticles.Play();
-                }
-            }
-            else
-            {
-                armourManager.ProcessDamage(hit);
+                isDead = true;
+                onDeath(this, hit);
+                deathParticles.Play();
             }
         }
     }
