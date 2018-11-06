@@ -6,6 +6,7 @@ using XInputDotNetPure;
 
 public class PlayerTankControllerState
 {
-    public int player;
+    public GamePadState lastState;
+    public PlayerIndex player;
 }
 

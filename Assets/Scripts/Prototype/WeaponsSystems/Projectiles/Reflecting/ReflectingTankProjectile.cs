@@ -9,15 +9,16 @@ public class ReflectingTankProjectileInstance : BasicTankProjectileInstance
 }
 
 [CreateAssetMenu(menuName = "Tanks/Projectiles/New Reflecting Tank Projectile", fileName = "New Reflecting Tank Projectile")]
-public class ReflectingTankProjectile : RepresentedTankProjectile<ReflectingTankProjectileInstance>
+public class ReflectingTankProjectile : RepresentedTankProjectile<ReflectingTankProjectileInstance, TankProjectileData>
 {
     public float projectileSpeed = 10;
     public int reflectionLimit = 1;
 
-    public override void OnFired(Vector3 firedPosition, Vector3 firedDirection, ReflectingTankProjectileInstance instance, WeaponData data)
+    public override void OnFired(Vector3 firedPosition, Vector3 firedDirection, ReflectingTankProjectileInstance instance, TankProjectileData data)
     {
         instance.position = firedPosition;
         instance.direction = firedDirection;
+        instance.data = data;
         instance.representation = Instantiate(projectileRepresentation, firedPosition, Quaternion.identity);
         instance.representation.OnSpawn(firedPosition, firedDirection);
     }
@@ -35,7 +36,7 @@ public class ReflectingTankProjectile : RepresentedTankProjectile<ReflectingTank
 
             if (instance.reflectionCount > reflectionLimit)
             {
-                AttemptToDamage(hit.collider, hit, instance);
+                AttemptToDamage(hit.collider, hit);
 
                 instance.representation.transform.rotation = Quaternion.FromToRotation(Vector2.up, instance.direction);
                 instance.representation.Destroy();

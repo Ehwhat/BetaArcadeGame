@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class ArmourPart : MonoBehaviour
+public class ArmourPart : MonoBehaviour, IDamageable
 {
     public enum DependecyType
     {
@@ -18,7 +18,7 @@ public class ArmourPart : MonoBehaviour
     }
 
     public float health = 100;
-    public int weapon = 0;
+    public TankWeapon weapon;
     public ArmourPart[] dependancesPrime;
     public ArmourPart[] dependancesSecond;
     public Transform gun1;
@@ -154,11 +154,22 @@ public class ArmourPart : MonoBehaviour
         else
         {
             tag = "FulW";
-            weapon = type;
-            Transform temp = Instantiate(gun1, transform);
+            //weapon = type;
+            //Transform temp = Instantiate(gun1, transform);
+            GetComponent<TankWeaponHolder>().SetWeapon(weapon);
         }
         //GetComponent<Collider2D>().enabled = false;
         GetComponent<Renderer>().enabled = true;
         GetComponentInParent<ArmourPlacementSystem>().CheckAll();
+    }
+
+    public void OnHit(DamageData damage)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnHit(ProjectileHit hit)
+    {
+        throw new System.NotImplementedException();
     }
 }

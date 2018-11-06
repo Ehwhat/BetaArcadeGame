@@ -1,10 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class TankManager : MonoBehaviour, IDamageable {
 
-    public System.Action<TankManager, DamageData> onDeath = (tank, weaponHit) => { };
+    public System.Action<TankManager, ProjectileHit> onDeath = (tank, weaponHit) => { };
 
     public TankController controller;
     public TankMovement tankMovement;
@@ -42,8 +42,9 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
         }
     }
 
-    public void OnHit(DamageData hit)
+    public void OnHit(ProjectileHit hit)
     {
+        Debug.Log("wasHit");
         if (!isDead)
         {
             health -= hit.damage;

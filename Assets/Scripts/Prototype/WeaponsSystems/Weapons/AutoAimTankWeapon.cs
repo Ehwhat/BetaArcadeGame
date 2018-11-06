@@ -20,8 +20,6 @@ public class AutoAimTankWeapon : TankWeapon {
     public float autoAimDegreesPerSecond = 720;
     [Range(0, 1)]
     public float autoAimOffsetMagnitude = 0.675f;
-    [Range(1,10)]
-    public int autoAimCycles = 3;
     public float autoAimPredictedProjectileSpeed = 10;
 
     [Header("0 is for distance, 1 is for angle")]
@@ -36,15 +34,14 @@ public class AutoAimTankWeapon : TankWeapon {
     private Vector2 lastPosition = Vector2.up;
     private List<Collider2D> lastValidTargets = new List<Collider2D>();
     private Collider2D lastTarget = new Collider2D();
-    private Vector2 lastVelocity;
 
-    public override bool FireProjectile(Vector2 position, Vector2 direction, TankWeaponHolder holder)
+    public override bool FireProjectile(Vector2 position, Vector2 direction, TankProjectileData firingData = null)
     {
         Vector2 autoAimedDirection = AutoAimAtTargets(position, direction);
         lastPosition = position;
         lastInputDirection = direction;
         lastDirection = autoAimedDirection;
-        return base.FireProjectile(position, autoAimedDirection, holder);
+        return base.FireProjectile(position, autoAimedDirection, firingData);
     }
 
     private Vector2 AutoAimAtTargets(Vector2 position,Vector2 vector)
@@ -66,38 +63,25 @@ public class AutoAimTankWeapon : TankWeapon {
         Vector2 direction = (targetPoint - position).normalized;
 
         Vector2 calculatedVector = direction;
-        calculatedVector = Vector2.Lerp(calculatedVector, vector, autoAimOffsetMagnitude);
+        calculatedVector = (calculatedVector + (vector * autoAimOffsetMagnitude)).normalized;
 
         return calculatedVector;
     }
 
-    private Vector2 GetTarget(Vector2 position, Vector2 bulletDirection, Collider2D target, int autoAimCycles = 1)
+    private Vector2 GetTarget(Vector2 position, Vector2 bulletDirection, Collider2D target)
     {
         Rigidbody2D rb = target.attachedRigidbody;
-
-        
-
         if(autoAimType == AutoAimType.Positional || rb == null)
         {
             return target.transform.position;
         }
         Vector2 direction = (Vector2)target.transform.position - position;
-        Vector2 acceleration = (rb == lastTarget) ? rb.velocity - lastVelocity / Time.deltaTime : Vector2.zero;
-        if (rb == lastTarget)
-        {
+        float relativeBulletSpeed = Vector2.Dot(bulletDirection, direction.normalized) * autoAimPredictedProjectileSpeed;
+        float distance = Vector2.Distance(position, target.transform.position);
 
-        }
+        float timeToTravel = distance / relativeBulletSpeed;
 
-        float time = direction.magnitude / autoAimPredictedProjectileSpeed;
-        Vector2 predictedPoint = (Vector2)target.transform.position + rb.velocity * time + 0.5f * acceleration * (time * time);
-
-        for (int i = 1; i < autoAimCycles; i++)
-        {
-            direction = predictedPoint - position;
-            time = direction.magnitude / autoAimPredictedProjectileSpeed;
-            predictedPoint = (Vector2)target.transform.position + rb.velocity * time + 0.5f * acceleration * (time * time);
-        }
-
+        Vector2 predictedPoint = (Vector2)target.transform.position + (rb.velocity * timeToTravel);
         return predictedPoint;
 
     }
@@ -152,14 +136,9 @@ public class AutoAimTankWeapon : TankWeapon {
         return ((distanceScore * (1 - autoAimPriorityMix)) + (directionScore * autoAimPriorityMix));
 
     }
-
-    public Collider2D GetLastTarget()
-    {
-        return lastTarget;
-    }
     public override void OnDrawGizmos()
     {
-        if (autoAimType != AutoAimType.None && false)
+        if (autoAimType != AutoAimType.None)
         {
             Vector2 direction = lastDirection;
 
