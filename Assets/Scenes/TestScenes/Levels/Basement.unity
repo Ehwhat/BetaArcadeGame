@@ -17431,7 +17431,7 @@ MonoBehaviour:
   quipHolder: {fileID: 1425777493}
   animator: {fileID: 2089309352}
   text: {fileID: 207659028}
-  lettersPerSecond: 10
+  lettersPerSecond: 500
   quipExitDelay: 0.6
 --- !u!95 &2089309352
 Animator:
