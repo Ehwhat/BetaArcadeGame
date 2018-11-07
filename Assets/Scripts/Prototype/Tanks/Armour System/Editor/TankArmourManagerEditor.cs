@@ -25,7 +25,7 @@ public class TankArmourManagerEditor : Editor {
 
     public override void OnInspectorGUI()
     {
-        
+        DrawDefaultInspector();
 
         if(GUILayout.Button("Find All Pieces"))
         {

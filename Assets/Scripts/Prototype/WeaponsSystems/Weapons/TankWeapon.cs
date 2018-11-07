@@ -9,6 +9,19 @@ public class WeaponData
     public TankWeaponHolder holder;
 }
 
+[System.Serializable]
+public struct WeaponFiringOffset
+{
+    public Vector2 position;
+    public float angle;
+    public WeaponFiringOffset(Vector2 position, float angle)
+    {
+        this.position = position;
+        this.angle = angle;
+    }
+}
+
+
 [CreateAssetMenu(menuName = "Tanks/Weapons/New Tank Weapon", fileName = "New Tank Weapon")]
 public class TankWeapon : Weapon
 {
@@ -19,7 +32,7 @@ public class TankWeapon : Weapon
 
     [Space(10)]
     [Header("Weapon Firing Settings")]
-    public Vector2[] weaponFiringOffsets = new Vector2[] { Vector2.zero };
+    public WeaponFiringOffset[] weaponFiringOffsets = new WeaponFiringOffset[] { new WeaponFiringOffset(Vector3.zero,0) };
 
     public float firingDelay;
     public bool useDuribility = true;
@@ -37,13 +50,16 @@ public class TankWeapon : Weapon
 
     public virtual bool FireProjectile(Vector2 position, Vector2 direction, TankWeaponHolder holder)
     {
+        bool wasFired = false;
         for (int i = 0; i < weaponFiringOffsets.Length; i++)
         {
-            Vector2 offset = holder.transform.rotation * weaponFiringOffsets[i];
-            projectile.OnFired(position+ offset, direction, new WeaponData() { ownerTank = holder.ownerTank,weapon = this, holder = holder });
-            return true;
+            Quaternion rotation = holder.transform.rotation;
+            Vector2 offsetPosition = position + (Vector2)(rotation * weaponFiringOffsets[i].position);
+            Vector2 offsetDirection = Quaternion.Euler(0, 0, weaponFiringOffsets[i].angle) * direction;
+            projectile.OnFired(offsetPosition, offsetDirection, new WeaponData() { ownerTank = holder.ownerTank,weapon = this, holder = holder });
+            wasFired = true;
         }
-        return false;
+        return wasFired;
     }
 
     public float GetRateOfFire()
@@ -53,7 +69,9 @@ public class TankWeapon : Weapon
 
     public float CalculateWeaponCoefficent()
     {
-        return ((projectile.damage * (GetRateOfFire()*60) * (maxDurability/perShotDuribilityCost)) / ((1-rarity)*100))/100;
+        if(projectile)
+            return ((projectile.damage * (GetRateOfFire()*60) * (maxDurability/perShotDuribilityCost)) / ((1-rarity)*100))/100;
+        return 0;
     }
 
 }

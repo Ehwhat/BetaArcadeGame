@@ -82,7 +82,7 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
             timeElapsed += deltaTime;
         }
 
-        Josh.EventSystem.EventResponder.TriggerEvent("TimerUpdate", (float)(System.TimeSpan.FromMinutes(timerMinutes).TotalSeconds - timeElapsed));
+        Josh.EventSystem.EventResponder.TriggerEvent("TimerUpdate", Mathf.Max((float)(System.TimeSpan.FromMinutes(timerMinutes).TotalSeconds - timeElapsed),0));
 
         return win;
     }

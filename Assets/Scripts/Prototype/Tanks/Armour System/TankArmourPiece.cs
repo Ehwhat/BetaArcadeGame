@@ -17,11 +17,16 @@ public class TankArmourPiece : MonoBehaviour, IRequiredPiece, IRequiresPieces {
         get { return gameObject.activeSelf; }
         private set { gameObject.SetActive(value); }
     }
+
     public float maxHealth = 20f;
     public TankArmourPickup pickupPrefab;
 
     public SpriteRenderer renderer;
     public float phaseTime = 1;
+
+    public bool isTurretHolder = false;
+    public TurretController turret;
+    public bool equiptDefaultWeaponOnAttach;
 
     public List<TankArmourPiece> requiredPiecesToBeActive = new List<TankArmourPiece>();
     public List<TankArmourPiece> piecesRequiriedBy = new List<TankArmourPiece>();
@@ -35,10 +40,13 @@ public class TankArmourPiece : MonoBehaviour, IRequiredPiece, IRequiresPieces {
 
     
 
-    public void OnPickup()
+    public virtual void OnPickup()
     {
-        Debug.Log("was picked up");
         StartCoroutine(OnPickupRoutine());
+        if(isTurretHolder && equiptDefaultWeaponOnAttach)
+        {
+            turret.weaponHolder.EquipDefaultWeapon();
+        }
     }
 
     private IEnumerator OnPickupRoutine()
@@ -53,8 +61,7 @@ public class TankArmourPiece : MonoBehaviour, IRequiredPiece, IRequiresPieces {
         float elapsedTime = 0;
         while (elapsedTime < phaseTime)
         {
-            props.SetVector("_WorldPos", pos);
-            Debug.Log("isLerps");
+            props.SetVector("_WorldPos", pos); 
             props.SetFloat("_Amount", elapsedTime / phaseTime);
             renderer.SetPropertyBlock(props);
             yield return new WaitForEndOfFrame();

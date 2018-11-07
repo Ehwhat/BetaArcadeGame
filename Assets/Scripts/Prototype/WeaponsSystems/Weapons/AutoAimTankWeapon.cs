@@ -40,20 +40,20 @@ public class AutoAimTankWeapon : TankWeapon {
 
     public override bool FireProjectile(Vector2 position, Vector2 direction, TankWeaponHolder holder)
     {
-        Vector2 autoAimedDirection = AutoAimAtTargets(position, direction);
+        Vector2 autoAimedDirection = AutoAimAtTargets(position, direction, holder);
         lastPosition = position;
         lastInputDirection = direction;
         lastDirection = autoAimedDirection;
         return base.FireProjectile(position, autoAimedDirection, holder);
     }
 
-    private Vector2 AutoAimAtTargets(Vector2 position,Vector2 vector)
+    private Vector2 AutoAimAtTargets(Vector2 position,Vector2 vector, TankWeaponHolder holder)
     {
         if(autoAimType == AutoAimType.None)
         {
             return vector;
         }
-        List<Collider2D> validTargets = FindAutoAimTargets(position,vector);
+        List<Collider2D> validTargets = FindAutoAimTargets(position,vector, holder);
         lastValidTargets = validTargets;
         if (validTargets.Count <= 0)
         {
@@ -102,18 +102,21 @@ public class AutoAimTankWeapon : TankWeapon {
 
     }
 
-    private List<Collider2D> FindAutoAimTargets(Vector2 position,Vector2 vector)
+    private List<Collider2D> FindAutoAimTargets(Vector2 position,Vector2 vector,TankWeaponHolder holder)
     {
         List<Collider2D> validTargets = new List<Collider2D>();
         Collider2D[] targets = Physics2D.OverlapCircleAll(position, autoAimRange, autoAimLayer);
         for (int i = 0; i < targets.Length; i++)
         {
-            
+            if(targets[i].transform.root == holder.transform.root)
+            {
+                continue;
+            }
             Vector2 direction = ((Vector2)targets[i].transform.position - position).normalized;
-                if (Vector2.Angle(direction, vector) <= autoAimArcAngle / 2)
-                {
-                    validTargets.Add(targets[i]);
-                }
+            if (Vector2.Angle(direction, vector) <= autoAimArcAngle / 2)
+            {
+                validTargets.Add(targets[i]);
+            }
         }
         return validTargets;
 

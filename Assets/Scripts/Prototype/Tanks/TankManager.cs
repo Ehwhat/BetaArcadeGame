@@ -14,7 +14,7 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
     public Rigidbody2D tankRigidbody;
     public TankMovement tankMovement;
     public TrailRenderer[] trails;
-    public TurretController[] turrets;
+    public List<TurretController> turrets = new List<TurretController>();
     public ParticleSystem deathParticles;
     public TankArmourManager armourManager;
 
@@ -80,7 +80,7 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
 
     public void SetTurretOwners()
     {
-        for (int i = 0; i < turrets.Length; i++)
+        for (int i = 0; i < turrets.Count; i++)
         {
             turrets[i].SetWeaponHolderOwner(this);
         }
@@ -95,13 +95,13 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
 
     public void GiveWeapon(TankWeapon weapon)
     {
-        TurretController randomTurret = turrets[Random.Range(0, turrets.Length)];
+        TurretController randomTurret = turrets[Random.Range(0, turrets.Count)];
         randomTurret.GiveWeapon(weapon);
     }
 
     public void AimTurrets(Vector2 direction)
     {
-        for (int i = 0; i < turrets.Length; i++)
+        for (int i = 0; i < turrets.Count; i++)
         {
             turrets[i].targetVector = direction;
         }
@@ -109,9 +109,20 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
 
     public void FireTurrets()
     {
-        for (int i = 0; i < turrets.Length; i++)
+        for (int i = 0; i < turrets.Count; i++)
         {
             turrets[i].Fire();
         }
+    }
+
+    public void AddTurret(TurretController controller)
+    {
+        turrets.Add(controller);
+        controller.SetWeaponHolderOwner(this);
+    }
+
+    public void RemoveTurret(TurretController controller)
+    {
+        turrets.Remove(controller);
     }
 }

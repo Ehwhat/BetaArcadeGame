@@ -14,7 +14,8 @@ MonoBehaviour:
   displayName: 
   projectile: {fileID: 11400000, guid: 7a929eb44430910408dfe12bb3d8fb5e, type: 2}
   weaponFiringOffsets:
-  - {x: 0, y: 0.9}
+  - position: {x: 0, y: 0.9}
+    angle: 0
   firingDelay: 0.5
   useDuribility: 1
   maxDurability: 10
@@ -30,6 +31,7 @@ MonoBehaviour:
   autoAimArcAngle: 60
   autoAimDegreesPerSecond: 720
   autoAimOffsetMagnitude: 0.71
+  autoAimCycles: 3
   autoAimPredictedProjectileSpeed: 10
   autoAimPriorityMix: 0.78
   autoAimLayer:

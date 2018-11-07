@@ -14,7 +14,8 @@ MonoBehaviour:
   displayName: 
   projectile: {fileID: 11400000, guid: 36a40b01c7dd77b47bb00dbe3c3d771e, type: 2}
   weaponFiringOffsets:
-  - {x: 0, y: 0.9}
+  - position: {x: 0, y: 0.9}
+    angle: 0
   firingDelay: 0.5
   useDuribility: 1
   maxDurability: 10

@@ -12,7 +12,6 @@ public class TurretController : MonoBehaviour {
     }
 
     public float degreesPerSecond = 270;
-    public TankMovement movement;
     public TankWeaponHolder weaponHolder;
     [SerializeField]
     public Vector2 targetVector = new Vector2();

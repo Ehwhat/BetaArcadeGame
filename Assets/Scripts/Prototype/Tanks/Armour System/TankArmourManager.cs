@@ -11,6 +11,7 @@ public class TankArmourManager : MonoBehaviour {
         FullOnly
     }
 
+    public TankManager tankManager;
     public TankArmourPiece[] armourPieces;
 
     public void AddPieceNear(Vector2 point)
@@ -18,8 +19,22 @@ public class TankArmourManager : MonoBehaviour {
         TankArmourPiece bestPiece = FindBestPieceAtPoint(point, SearchFlags.EmptyOnly);
         if(bestPiece != null)
         {
-            bestPiece.TryEnablePiece();
+            TryEnablePiece(bestPiece);
         }
+    }
+
+    public bool TryEnablePiece(TankArmourPiece piece)
+    {
+        if (piece.TryEnablePiece())
+        {
+
+            if (piece.isTurretHolder)
+            {
+                tankManager.AddTurret(piece.turret);
+            }
+            return true;
+        }
+        return false;
     }
 
     public List<TankArmourPickup> RemovePieceNear(Vector2 point)

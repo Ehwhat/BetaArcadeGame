@@ -31,7 +31,6 @@ public class TankArmourPickupManager : MonoBehaviour {
         List<TankArmourPiece> piecesReserved = new List<TankArmourPiece>();
 
         List<TankArmourPickup> pickupsDetected = DetectArmourPickups();
-        Debug.Log(pickupsDetected.Count);
         for (int i = 0; i < pickupsDetected.Count; i++)
         {
             Vector2 direction = (pickupsDetected[i].transform.position - transform.position).normalized;
@@ -44,7 +43,7 @@ public class TankArmourPickupManager : MonoBehaviour {
             if (distance < 0.5f)
             {
                 Destroy(pickupsDetected[i].gameObject);
-                piece.TryEnablePiece();
+                manager.TryEnablePiece(piece);
                 continue;
             }
             pickupsDetected[i].GetComponent<Rigidbody2D>().MovePosition(Vector2.MoveTowards(pickupsDetected[i].transform.position, piece.transform.position, speed));

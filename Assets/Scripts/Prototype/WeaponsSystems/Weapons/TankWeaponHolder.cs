@@ -4,16 +4,6 @@ using UnityEngine;
 using System;
 
 
-public struct WeaponFiringPoint
-{
-    public Vector2 position;
-    public Vector2 direction;
-    public WeaponFiringPoint(Vector2 position, Vector2 direction)
-    {
-        this.position = position;
-        this.direction = direction;
-    }
-}
 
 public class TankWeaponHolder : MonoBehaviour {
 
@@ -31,12 +21,13 @@ public class TankWeaponHolder : MonoBehaviour {
 
     public float lastFired = 0;
     public float currentDurability = 0;
+    public bool equiptOnStart;
 
     public void Start()
     {
-        if(weapon != null)
+        if(defaultWeapon != null && equiptOnStart)
         {
-            SetWeapon(weapon);
+            EquipDefaultWeapon();
         }
     }
 
@@ -100,9 +91,10 @@ public class TankWeaponHolder : MonoBehaviour {
                         audioPlayer.PlayOneShot(weapon.onFiredClip);
                     }
                     lastFired = Time.time;
-                    currentDurability -= weapon.perShotDuribilityCost;
+                    if(weapon.useDuribility)
+                        currentDurability -= weapon.perShotDuribilityCost;
                 }
-                if (currentDurability <= 0)
+                if (currentDurability <= 0 && weapon.useDuribility)
                 {
                     SetWeapon(defaultWeapon);
                 }
