@@ -33,6 +33,10 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
             tank.onDeath += OnPlayerDeath;
             deathmatchPlayerData.Add(tank.tankID, new DeathmatchTankData());
         }
+        for (int i = 0; i < 3; i++)
+        {
+            PlayerScoreSystem.SetScore(i, 0);
+        }
         timeElapsed = 0;
     }
 
@@ -52,12 +56,6 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
             }else if (deathmatchPlayerData[i].currentKills == bestScore)
             {
                 bestPlayers.Add(i);
-            }
-
-            if (deathmatchPlayerData[i].currentKills >= killsToWin)
-            {
-                win.winners.Add(i);
-                win.finished = true;
             }
             if (deathmatchPlayerData[i].isDead)
             {
@@ -100,6 +98,8 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
                 int killerIndex = killer.tankID;
                 Debug.Log(killerIndex);
                 deathmatchPlayerData[killerIndex].currentKills++;
+                PlayerScoreSystem.SetScore(killerIndex, deathmatchPlayerData[killerIndex].currentKills);
+                QuipManager.SayQuip(killerIndex, "Ha! Suck it, " + playerTank.tankDisplayName+"!");
                 Josh.EventSystem.EventResponder.TriggerEvent("DisplayText", playerTank.tankDisplayName.ToUpper() + " WAS KILLED BY " + killer.tankDisplayName.ToUpper());
             }
         }

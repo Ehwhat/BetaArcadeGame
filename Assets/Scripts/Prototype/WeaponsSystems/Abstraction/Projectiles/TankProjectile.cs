@@ -70,6 +70,7 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
     public DamageType damageType = DamageType.Singular;
     public ExplosiveDamageFalloff explosiveFalloff = ExplosiveDamageFalloff.InverseSquared;
     public float explosiveRange = 1;
+    public bool hitOwnTank = false;
 
     public LayerMask projectileLayerMask;
     public LayerMask damageableLayerMask;
@@ -110,14 +111,14 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
         switch (damageType)
         {
             case DamageType.Singular:
-                return AttemptToDamageSingular(collider, hit, hitData);
+                return AttemptToDamageSingular(collider, hit, hitData, instance);
             case DamageType.Explosive:
-                return AttemptToDamageExplosive(collider, hit, hitData);
+                return AttemptToDamageExplosive(collider, hit, hitData, instance);
         }
         return false;
     }
 
-    private bool AttemptToDamageExplosive(Collider2D collider, RaycastHit2D sourceHit, DamageData hitData)
+    private bool AttemptToDamageExplosive(Collider2D collider, RaycastHit2D sourceHit, DamageData hitData, TankProjectileInstance instance)
     {
         float sourceDamage = hitData.damage;
         bool hitSomething = false;
@@ -126,17 +127,22 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
         {
             float distance = Vector2.Distance(sourceHit.point, hitColliders[i].transform.position);
             hitData.damage = CalulateExplosiveDamage(sourceDamage, distance);
-            AttemptToDamageSingular(hitColliders[i], sourceHit, hitData);
+            AttemptToDamageSingular(hitColliders[i], sourceHit, hitData, instance);
             hitSomething = true;
         }
         return hitSomething;
     }
 
-    private bool AttemptToDamageSingular(Collider2D collider, RaycastHit2D hit, DamageData hitData)
+    private bool AttemptToDamageSingular(Collider2D collider, RaycastHit2D hit, DamageData hitData, TankProjectileInstance instance)
     {
         if (damageableLayerMask == (damageableLayerMask | (1 << collider.gameObject.layer)))
         {
             IDamageable[] hitDamageables = collider.transform.root.GetComponentsInChildren<IDamageable>();
+            if(collider.transform.root == instance.weaponData.ownerTank.transform.root && !hitOwnTank)
+            {
+                return false;
+            }
+
             for (int i = 0; i < hitDamageables.Length; i++)
             {
                 hitDamageables[i].OnHit(hitData);

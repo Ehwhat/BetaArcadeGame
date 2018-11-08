@@ -49,6 +49,14 @@ public class TankArmourPiece : MonoBehaviour, IRequiredPiece, IRequiresPieces {
         }
     }
 
+    public virtual void OnDrop()
+    {
+        if (isTurretHolder)
+        {
+            turret.weaponHolder.RemoveCurrentWeapon();
+        }
+    }
+
     private IEnumerator OnPickupRoutine()
     {
         MaterialPropertyBlock props = new MaterialPropertyBlock();
@@ -95,6 +103,7 @@ public class TankArmourPiece : MonoBehaviour, IRequiredPiece, IRequiresPieces {
         if (isActive)
         {
             SetActive(false);
+            OnDrop();
             if (spawnPickup)
                 pickup = Instantiate(pickupPrefab, transform.position, Quaternion.identity);
             return true;

@@ -18,12 +18,38 @@ public class PlayerTankManager : TankManager {
         {
             player = playerIndex
         };
+
+        Color colour = data.playerColour;
+        Color colourEnd = new Color(colour.r, colour.g, colour.b, 0);
+
     }
 
     public override void Process()
     {
         controllerState = (PlayerTankControllerState)controller.Process(this, controllerState);
         data.SetHealthPercentage(health / maxHealth);
+    }
+
+    public override void OnHit(DamageData hit)
+    {
+        base.OnHit(hit);
+        if (isDead)
+        {
+            QuipManager.SayQuip(playerIndex, "AHH @&%-");
+        }
+        else
+        {
+            QuipManager.SayQuip(playerIndex, "Ouch!");
+        }
+    }
+
+
+    public override void GiveWeapon(TankWeapon weapon)
+    {
+        base.GiveWeapon(weapon);
+        QuipManager.SayQuip(playerIndex, "I just got the " + weapon.displayName+"!");
+        
+        
     }
 
 }

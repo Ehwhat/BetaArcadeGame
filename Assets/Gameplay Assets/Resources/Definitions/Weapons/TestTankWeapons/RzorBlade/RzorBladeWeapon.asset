@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcb395adf56722642b98d43764a5023f, type: 3}
   m_Name: RzorBladeWeapon
   m_EditorClassIdentifier: 
-  displayName: 
+  displayName: Rzor-blade
   projectile: {fileID: 11400000, guid: 7a929eb44430910408dfe12bb3d8fb5e, type: 2}
   weaponFiringOffsets:
   - position: {x: 0, y: 0.9}
@@ -21,6 +21,7 @@ MonoBehaviour:
   maxDurability: 10
   perShotDuribilityCost: 1
   rarity: 0.6
+  shakeAmount: 1
   weaponVisualisation: {fileID: 114300704509053406, guid: 64821efa7d94f774295428886c6e4c4d,
     type: 2}
   onFiredClip: {fileID: 0}

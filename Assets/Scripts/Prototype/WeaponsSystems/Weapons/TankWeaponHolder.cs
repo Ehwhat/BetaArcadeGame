@@ -49,6 +49,18 @@ public class TankWeaponHolder : MonoBehaviour {
         }
         lastFired = -weapon.firingDelay;
         currentDurability = weapon.maxDurability;
+
+        if (ownerTank is PlayerTankManager) {
+            PlayerTankData data = (ownerTank as PlayerTankManager).data;
+            Color colour = data.playerColour;
+            Color colourEnd = new Color(colour.r, colour.g, colour.b, 0);
+            BarrelAimingIndicator barrelAimingIndicator = currentVisualisation.GetComponentInChildren<BarrelAimingIndicator>();
+            if (barrelAimingIndicator)
+            {
+                barrelAimingIndicator.barrelLineRendeer.startColor = colour;
+                barrelAimingIndicator.barrelLineRendeer.endColor = colourEnd;
+            }
+        }
     }
 
     public void RemoveCurrentWeapon()
@@ -76,7 +88,7 @@ public class TankWeaponHolder : MonoBehaviour {
 
     public virtual void FireWeapon(Vector2 direction)
     {
-        if (weapon != null)
+        if (weapon != null && gameObject.activeInHierarchy)
         {
             if (lastFired + weapon.firingDelay < Time.time)
             {

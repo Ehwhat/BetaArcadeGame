@@ -30,12 +30,23 @@ public class PlayerTankController : TankController {
             manager.tankMovement.targetVector = leftStickInput;
             manager.tankMovement.targetSpeed = leftStickInput.magnitude;
             manager.AimTurrets(rightStickInput);
+
+            if (inputDevice.RightBumper.IsPressed && !inputDevice.RightTrigger.IsPressed)
+            {
+                manager.armourPickupManager.AttractArmourPickups();
+            }
+            if (inputDevice.LeftBumper.WasPressed)
+            {
+                manager.armourPickupManager.EjectArmourPickups();
+            }
+
+            if (inputDevice.RightTrigger.IsPressed && !inputDevice.RightBumper.IsPressed)
+            {
+                manager.FireTurrets();
+            }
         }
 
-        if(inputDevice.RightTrigger.IsPressed)
-        {
-            manager.FireTurrets();
-        }
+        
 
         return convertedState;
     }

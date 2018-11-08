@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Camera))]
 public class CameraManager : MonoBehaviour {
 
     public Camera camera;
@@ -50,7 +49,7 @@ public class CameraManager : MonoBehaviour {
             camera.orthographicSize = bounds.size.y / 2 * differenceInSize;
         }
 
-        transform.position = new Vector3(bounds.center.x, bounds.center.y, -20f);
+        transform.localPosition = new Vector3(bounds.center.x, bounds.center.y, -20f);
     }
 
     public void OnDrawGizmosSelected()

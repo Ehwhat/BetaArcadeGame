@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fcd3c37046a46dc449d4f77c34d30bd9, type: 3}
-  m_Name: BasicTankProjectile
+  m_Name: UziProjectile
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 2
   damageType: 0
   explosiveFalloff: 2
   explosiveRange: 1

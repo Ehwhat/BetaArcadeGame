@@ -12,18 +12,12 @@ public class TankArmourPickupManager : MonoBehaviour {
 
     public void Start()
     {
+        
     }
 
     public void Update()
     {
-        if (GameInput.GetPlayerDevice(0).RightBumper.IsPressed)
-        {
-            AttractArmourPickups();
-        }
-        if (GameInput.GetPlayerDevice(0).LeftBumper.WasPressed)
-        {
-            EjectArmourPickups();
-        }
+       
     }
 
     public void AttractArmourPickups()

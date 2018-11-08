@@ -40,6 +40,7 @@ public class TankWeapon : Weapon
     public float perShotDuribilityCost = 10;
     [Range(0,1)]
     public float rarity = 0.5f;
+    public float shakeAmount = 1;
 
     public WeaponVisualisation weaponVisualisation;
 
@@ -57,6 +58,7 @@ public class TankWeapon : Weapon
             Vector2 offsetPosition = position + (Vector2)(rotation * weaponFiringOffsets[i].position);
             Vector2 offsetDirection = Quaternion.Euler(0, 0, weaponFiringOffsets[i].angle) * direction;
             projectile.OnFired(offsetPosition, offsetDirection, new WeaponData() { ownerTank = holder.ownerTank,weapon = this, holder = holder });
+            CameraShake.AddShake(shakeAmount);
             wasFired = true;
         }
         return wasFired;
@@ -70,7 +72,7 @@ public class TankWeapon : Weapon
     public float CalculateWeaponCoefficent()
     {
         if(projectile)
-            return ((projectile.damage * (GetRateOfFire()*60) * (maxDurability/perShotDuribilityCost)) / ((1-rarity)*100))/100;
+            return (((projectile.damage * weaponFiringOffsets.Length) * (GetRateOfFire()*60) * (maxDurability/perShotDuribilityCost)) / ((1-rarity)*100))/100;
         return 0;
     }
 

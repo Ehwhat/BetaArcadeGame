@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d3813b30a47f70439b38aaf89d8e615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathDelay: 0
+  deathDelay: 0.1
   onHitParticles: {fileID: 198829706085263818, guid: 8a5d79419c9170647b634aa26f1838ae,
     type: 2}
   spawnParticles: 1

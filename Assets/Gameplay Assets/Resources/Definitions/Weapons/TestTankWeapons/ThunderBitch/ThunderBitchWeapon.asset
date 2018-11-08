@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f29b40333a1dd9047a56e530fe040670, type: 3}
   m_Name: ThunderBitchWeapon
   m_EditorClassIdentifier: 
-  displayName: 
+  displayName: ThunderBitch
   projectile: {fileID: 11400000, guid: 0d2dc14ef4b07aa4e8a14cc277f16918, type: 2}
   weaponFiringOffsets:
   - position: {x: 0, y: 0.9}
@@ -21,6 +21,7 @@ MonoBehaviour:
   maxDurability: 1
   perShotDuribilityCost: 1
   rarity: 0.1
+  shakeAmount: 1
   weaponVisualisation: {fileID: 114300704509053406, guid: 64821efa7d94f774295428886c6e4c4d,
     type: 2}
   onFiredClip: {fileID: 0}

@@ -35,6 +35,7 @@ public class PlayerQuipDisplayer : MonoBehaviour {
 
     public void SayQuip(string quip, bool deactivateWhenDone = false)
     {
+        Activate();
         StopAllCoroutines();
         StartCoroutine(QuipEnumerator(quip, deactivateWhenDone));
     }

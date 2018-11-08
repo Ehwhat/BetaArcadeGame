@@ -17,6 +17,7 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
     public List<TurretController> turrets = new List<TurretController>();
     public ParticleSystem deathParticles;
     public TankArmourManager armourManager;
+    public TankArmourPickupManager armourPickupManager;
 
     public float maxHealth = 100;
     [SerializeField]
@@ -49,7 +50,7 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
         }
     }
 
-    public void OnHit(DamageData hit)
+    public virtual void OnHit(DamageData hit)
     {
         if (!isDead)
         {
@@ -62,6 +63,7 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
                     onDeath(this, hit);
                     gameObject.SetActive(false);
                     SpawnDeathParticles();
+                    armourPickupManager.EjectArmourPickups();
                 }
             }
             else
@@ -93,9 +95,19 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
         isDead = false;
     }
 
-    public void GiveWeapon(TankWeapon weapon)
+    public virtual void GiveWeapon(TankWeapon weapon)
     {
-        TurretController randomTurret = turrets[Random.Range(0, turrets.Count)];
+        int activeTurrets = 1;
+        for (int i = 1; i < turrets.Count; i++)
+        {
+            if(turrets[i].gameObject.activeInHierarchy && turrets[i].weaponHolder.weapon == null)
+            {
+                activeTurrets++;
+                turrets[i].GiveWeapon(weapon);
+                return;
+            }
+        }
+        TurretController randomTurret = turrets[Random.Range(0, activeTurrets)];
         randomTurret.GiveWeapon(weapon);
     }
 

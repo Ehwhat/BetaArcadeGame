@@ -22,9 +22,8 @@ GameObject:
   - component: {fileID: 20809864756766310}
   - component: {fileID: 124526570198916508}
   - component: {fileID: 81493639226054180}
-  - component: {fileID: 114143773265926480}
   - component: {fileID: 114823078222917608}
-  - component: {fileID: 114426431640855808}
+  - component: {fileID: 114224821913500242}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -39,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1334297904134494}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -21.35}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -88,27 +87,7 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1334297904134494}
   m_Enabled: 1
---- !u!114 &114143773265926480
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1334297904134494}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b2423b6f53ffd14eb6b50e5476ab409, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  camera: {fileID: 20809864756766310}
-  moveSpeed: 20
-  zoomSpeed: 20
-  sizeMax: 22
-  sizeMin: 10.4
-  sizeOffset: 0.5
-  sizeMultiplier: 0.8
-  zOffset: -20
-  gameManager: {fileID: 0}
---- !u!114 &114426431640855808
+--- !u!114 &114224821913500242
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -116,17 +95,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1334297904134494}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14c3e45ea68d5f14194adad6eab95999, type: 3}
+  m_Script: {fileID: 11500000, guid: 7aa17728a6f305840ba3ca291a4aaeac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 20809864756766310}
-  initalBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 60, y: 30, z: 0}
-  offset: {x: 26, y: 20}
-  moveSpeed: 20
-  zoomSpeed: 40
-  gameManager: {fileID: 0}
+  shakeModifer: 0.04
+  shakeVectorModifers: {x: 1, y: 1}
+  shakeDrain: 15
 --- !u!114 &114823078222917608
 MonoBehaviour:
   m_ObjectHideFlags: 1

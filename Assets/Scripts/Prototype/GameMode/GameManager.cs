@@ -16,6 +16,12 @@ public class GameManager : MonoBehaviour {
     private int latestTankId = 0;
 
 	void Start () {
+
+        for (int i = 0; i < gameData.playersData.Length; i++)
+        {
+            gameData.playersData[i].SetIsInGame(false);
+        }
+
         CreatePlayers();
         SpawnPlayers();
         gameMode = gameData.gamemode;
@@ -27,8 +33,7 @@ public class GameManager : MonoBehaviour {
         GamemodeDefinition.WinResult winResult = gameMode.VerifyWin(this, Time.deltaTime);
         if(winResult.finished)
         {
-            Debug.Log(winResult);
-            StartCoroutine(GoBackToMainMenu());
+            //StartCoroutine(GoBackToMainMenu());
             
         }
     }

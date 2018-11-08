@@ -10,6 +10,7 @@ public class PlayerUIManager : MonoBehaviour {
 
     public void Start()
     {
+        
         data.onChangedEvent += OnDataChanged;
         OnDataChanged();
     }
