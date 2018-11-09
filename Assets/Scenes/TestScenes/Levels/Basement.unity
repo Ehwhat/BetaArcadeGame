@@ -18335,6 +18335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1854068761}
   - component: {fileID: 1854068762}
+  - component: {fileID: 1854068763}
   m_Layer: 5
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -18379,6 +18380,23 @@ MonoBehaviour:
   player2: {fileID: 1871303991}
   player3: {fileID: 95683571}
   player4: {fileID: 1230406332}
+--- !u!95 &1854068763
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1854068760}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a8c4275b09359d24989ee3b3a2abf664, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1858256619
 GameObject:
   m_ObjectHideFlags: 0

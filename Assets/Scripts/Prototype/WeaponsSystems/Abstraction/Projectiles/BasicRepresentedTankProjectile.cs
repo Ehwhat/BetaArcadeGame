@@ -17,6 +17,11 @@ public abstract class BasicRepresentedTankProjectile<ProjectileInstance> : Repre
         instance.direction = firedDirection;
         instance.representation = Instantiate(projectileRepresentation, firedPosition, Quaternion.identity);
         instance.representation.OnSpawn(firedPosition, firedDirection);
+        if (weaponData.useCustomColour)
+        {
+            instance.representation.SetColour(weaponData.shotCustomColour);
+        }
+
     }
 
     public override void UpdateProjectile(float deltaTime, ProjectileInstance instance)

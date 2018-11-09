@@ -11,7 +11,7 @@ public class CameraShake : MonoBehaviour {
 
 	void Update () {
 
-        float actualShakeAmount = ((shakeAmount * shakeModifer) * (shakeAmount * shakeModifer));
+        float actualShakeAmount = ((shakeAmount * shakeModifer) * (shakeAmount * shakeModifer) * (shakeAmount * shakeModifer));
         float shakeX = shakeVectorModifers.x * actualShakeAmount * (Mathf.PerlinNoise(Time.time, 0)*2)-1;
         float shakeY = shakeVectorModifers.y * actualShakeAmount * (Mathf.PerlinNoise(0, Time.time)*2)-1;
 

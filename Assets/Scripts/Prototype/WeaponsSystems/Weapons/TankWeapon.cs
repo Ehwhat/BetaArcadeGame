@@ -7,6 +7,8 @@ public class WeaponData
     public TankManager ownerTank;
     public TankWeapon weapon;
     public TankWeaponHolder holder;
+    public Color shotCustomColour;
+    public bool useCustomColour = false;
 }
 
 [System.Serializable]
@@ -57,7 +59,15 @@ public class TankWeapon : Weapon
             Quaternion rotation = holder.transform.rotation;
             Vector2 offsetPosition = position + (Vector2)(rotation * weaponFiringOffsets[i].position);
             Vector2 offsetDirection = Quaternion.Euler(0, 0, weaponFiringOffsets[i].angle) * direction;
-            projectile.OnFired(offsetPosition, offsetDirection, new WeaponData() { ownerTank = holder.ownerTank,weapon = this, holder = holder });
+
+            WeaponData weaponData = new WeaponData() { ownerTank = holder.ownerTank, weapon = this, holder = holder };
+            if(holder.ownerTank is PlayerTankManager)
+            {
+                weaponData.useCustomColour = true;
+                weaponData.shotCustomColour = (holder.ownerTank as PlayerTankManager).data.playerColour;
+            }
+
+            projectile.OnFired(offsetPosition, offsetDirection, weaponData);
             CameraShake.AddShake(shakeAmount);
             wasFired = true;
         }

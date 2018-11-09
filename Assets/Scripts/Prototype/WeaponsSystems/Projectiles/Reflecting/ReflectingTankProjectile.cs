@@ -9,19 +9,10 @@ public class ReflectingTankProjectileInstance : BasicTankProjectileInstance
 }
 
 [CreateAssetMenu(menuName = "Tanks/Projectiles/New Reflecting Tank Projectile", fileName = "New Reflecting Tank Projectile")]
-public class ReflectingTankProjectile : RepresentedTankProjectile<ReflectingTankProjectileInstance>
+public class ReflectingTankProjectile : BasicRepresentedTankProjectile<ReflectingTankProjectileInstance>
 {
-    public float projectileSpeed = 10;
     public int reflectionLimit = 1;
     public bool destroyOnDamagableHit = true;
-
-    public override void OnFired(Vector3 firedPosition, Vector3 firedDirection, ReflectingTankProjectileInstance instance, WeaponData data)
-    {
-        instance.position = firedPosition;
-        instance.direction = firedDirection;
-        instance.representation = Instantiate(projectileRepresentation, firedPosition, Quaternion.identity);
-        instance.representation.OnSpawn(firedPosition, firedDirection);
-    }
 
     public override void UpdateProjectile(float deltaTime, ReflectingTankProjectileInstance instance)
     {
@@ -45,6 +36,20 @@ public class ReflectingTankProjectile : RepresentedTankProjectile<ReflectingTank
         {
             instance.position += instance.direction * projectileSpeed * deltaTime;
             instance.representation.transform.position = instance.position;
+        }
+    }
+
+    protected override void OnProjectileHit(ReflectingTankProjectileInstance instance, float deltaTime, RaycastHit2D hit)
+    {
+        instance.position = hit.point;
+        instance.representation.transform.position = instance.position;
+        instance.direction = Vector2.Reflect(instance.direction, hit.normal);
+
+        instance.reflectionCount++;
+
+        if (instance.reflectionCount > reflectionLimit || damageableLayerMask == (damageableLayerMask | (1 << hit.collider.gameObject.layer)) && destroyOnDamagableHit)
+        {
+            base.OnProjectileHit(instance, deltaTime, hit);
         }
     }
 
