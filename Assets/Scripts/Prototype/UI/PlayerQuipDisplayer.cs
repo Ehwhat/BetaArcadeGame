@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerQuipDisplayer : MonoBehaviour {
 
     public RectTransform quipHolder;
+    public Image quipTextBox;
     public Animator animator;
     public TMPro.TextMeshProUGUI text;
     public float lettersPerSecond = 10f;
@@ -21,6 +22,11 @@ public class PlayerQuipDisplayer : MonoBehaviour {
         Activate();
         SayQuip("How dare you!",true);
         
+    }
+
+    public void ChangeColour(Color c)
+    {
+        quipTextBox.color = c;
     }
 
     public void Activate()

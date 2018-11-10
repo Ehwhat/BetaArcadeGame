@@ -14,14 +14,16 @@ public class QuipManager : MonoBehaviour {
 
     public static QuipManager manager;
 
-    public PlayerQuipDisplayer player1;
-    public PlayerQuipDisplayer player2;
-    public PlayerQuipDisplayer player3;
-    public PlayerQuipDisplayer player4;
+    public PlayerQuipDisplayer[] playerQuipDisplayers = new PlayerQuipDisplayer[4];
 
-    public void Start()
+    public void Awake()
     {
         manager = this;
+    }
+
+    public static void SetColour(int player, Color c) 
+    {
+        manager.playerQuipDisplayers[player].ChangeColour(c);
     }
 
     public static void SayQuip(int player, string quip)
@@ -36,16 +38,16 @@ public class QuipManager : MonoBehaviour {
             switch (player)
             {
                 case Player.One:
-                    manager.player1.SayQuip(quip, true);
+                    manager.playerQuipDisplayers[0].SayQuip(quip, true);
                     break;
                 case Player.Two:
-                    manager.player2.SayQuip(quip, true);
+                    manager.playerQuipDisplayers[1].SayQuip(quip, true);
                     break;
                 case Player.Three:
-                    manager.player3.SayQuip(quip, true);
+                    manager.playerQuipDisplayers[2].SayQuip(quip, true);
                     break;
                 case Player.Four:
-                    manager.player4.SayQuip(quip, true);
+                    manager.playerQuipDisplayers[3].SayQuip(quip, true);
                     break;
                 default:
                     break;

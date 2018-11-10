@@ -22,6 +22,14 @@ public class PlayerTankManager : TankManager {
         Color colour = data.playerColour;
         Color colourEnd = new Color(colour.r, colour.g, colour.b, 0);
 
+        for (int i = 0; i < trails.Length; i++)
+        {
+            trails[i].startColor = colour;
+            trails[i].endColor = colourEnd;
+        }
+
+        QuipManager.SetColour(playerIndex, colour);
+
     }
 
     public override void Process()

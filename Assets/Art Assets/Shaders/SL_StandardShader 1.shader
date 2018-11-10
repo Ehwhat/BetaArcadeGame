@@ -10,7 +10,7 @@
 // Note: Finn is responsible for spelling 'colour' with a U throughout this shader. Find/replace if you must.
 
 
-Shader "SpriteLamp/Standard"
+Shader "SpriteLamp/StandardSprite"
 {
     Properties
     {
@@ -51,7 +51,7 @@ Shader "SpriteLamp/Standard"
 		Lighting Off
 		ZWrite Off
 		Fog { Mode Off }
-		Blend SrcAlpha OneMinusSrcAlpha
+		Blend SrcAlpha One
 		ColorMask RGB
 		
         Pass
@@ -127,7 +127,7 @@ Shader "SpriteLamp/Standard"
 
             float4 frag(VertexOutput input) : COLOR
             {
-                float4 diffuseColour = tex2D(_MainTex, input.uv) * _TintColor *  input.color;
+                float4 diffuseColour = tex2D(_MainTex, input.uv) * _TintColor;
                 float4 normalDepth = tex2D(_NormalDepth, input.uv);
                 float ambientOcclusion = tex2D(_AmbientOcclusion, input.uv).r;
                 float3 emissiveColour = tex2D(_EmissiveColour, input.uv).rgb;		
@@ -239,9 +239,9 @@ Shader "SpriteLamp/Standard"
                 float3 diffuseReflection = diffuseColour.xyz * input.color.xyz * _LightColor0.xyz * diffuseLevel;
                 float3 specularReflection = _LightColor0.xyz * input.color.xyz * specularLevel * specGlossValues.rgb * _SpecStrength;
                 
-                float4 finalColour = float4(diffuseReflection + specularReflection, diffuseColour.a * input.color.a) + ambientResult;
+                float4 finalColour = float4(diffuseReflection + specularReflection, diffuseColour.a) + ambientResult;
                 
-				return finalColour;
+                return finalColour * _TintColor.a * input.color.a;
                 
 
             }
@@ -316,7 +316,7 @@ Shader "SpriteLamp/Standard"
             float4 frag(VertexOutput input) : COLOR
             {
             	//Do texture reads first, because in theory that's a bit quicker...
-                float4 diffuseColour = tex2D(_MainTex, input.uv) * _TintColor * input.color;
+                float4 diffuseColour = tex2D(_MainTex, input.uv) * _TintColor;
 				float4 normalDepth = tex2D(_NormalDepth, input.uv);				
 				float4 specGlossValues = tex2D(_SpecGloss, input.uv);
 				
@@ -405,10 +405,10 @@ Shader "SpriteLamp/Standard"
                 }
 
 				//The easy bits - assemble the final values based on light and map colours and combine.
-                float3 diffuseReflection = diffuseColour.xyz * input.color.xyz * _LightColor0.xyz * diffuseLevel;
-                float3 specularReflection = _LightColor0.xyz * input.color.xyz * specularLevel * specGlossValues.rgb * _SpecStrength;
+                float3 diffuseReflection = diffuseColour.xyz * input.color * _LightColor0.xyz * diffuseLevel;
+                float3 specularReflection = _LightColor0.xyz * input.color * specularLevel * specGlossValues.rgb * _SpecStrength;
                 
-                float4 finalColour = float4((diffuseReflection + specularReflection) * diffuseColour.a * input.color.a, 0);
+                float4 finalColour = float4((diffuseReflection + specularReflection) * diffuseColour.a, 0);
                 return finalColour;
                 
              }

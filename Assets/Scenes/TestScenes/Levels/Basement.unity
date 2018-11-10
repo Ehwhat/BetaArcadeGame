@@ -1036,6 +1036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quipHolder: {fileID: 1475366305}
+  quipTextBox: {fileID: 1475366306}
   animator: {fileID: 95683572}
   text: {fileID: 638505056}
   lettersPerSecond: 500
@@ -1441,7 +1442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.27450982, b: 0.27450982, a: 1}
+  m_Color: {r: 1, g: 0.003921569, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -4533,7 +4534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2745098, g: 1, b: 0.27951312, a: 1}
+  m_Color: {r: 0.37647063, g: 1, b: 0.058823533, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -8747,6 +8748,16 @@ Prefab:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 20809864756766310, guid: 575702f1bd81e0840a89a3255d6818aa,
+        type: 2}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4294967263
+      objectReference: {fileID: 0}
+    - target: {fileID: 20809864756766310, guid: 575702f1bd81e0840a89a3255d6818aa,
+        type: 2}
+      propertyPath: m_Depth
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 575702f1bd81e0840a89a3255d6818aa, type: 2}
   m_IsPrefabParent: 0
@@ -9410,7 +9421,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2745098, g: 0.30953333, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.8196079, b: 0.003921569, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -9985,6 +9996,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 82994268}
+  - {fileID: 2015887400}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10717,7 +10729,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 600, y: 160}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1041300359
@@ -13086,6 +13098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quipHolder: {fileID: 1606531838}
+  quipTextBox: {fileID: 1606531839}
   animator: {fileID: 1230406333}
   text: {fileID: 595218107}
   lettersPerSecond: 500
@@ -13293,15 +13306,15 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Material: {fileID: 2100000, guid: 2b440b8d8b77e9b41a96ed8d75395b09, type: 2}
+  m_Color: {r: 0.5588235, g: 0.5588235, b: 0.5588235, a: 0.378}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 3723eaceafac62843ba6a0c54ec3d67f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 320623e789955fe4383b2f04a1755ea0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13368,7 +13381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2745098, g: 0.30953333, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.8196079, b: 0.003921569, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -13680,7 +13693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.27450982, b: 0.27450982, a: 1}
+  m_Color: {r: 1, g: 0.003921569, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -15605,6 +15618,7 @@ GameObject:
   - component: {fileID: 1549289451}
   - component: {fileID: 1549289450}
   - component: {fileID: 1549289448}
+  - component: {fileID: 1549289453}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -15701,18 +15715,35 @@ Canvas:
   m_GameObject: {fileID: 1549289447}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 2015887396}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1379077709
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!95 &1549289453
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1549289447}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fcb202940b364b3408e4fa6bfb2648ee, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!4 &1551110776 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4019445150740406, guid: 5f9ee3cd76b46914793d3749f35a737d,
@@ -18271,7 +18302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9799865, b: 0.2745098, a: 1}
+  m_Color: {r: 0.003921569, g: 0.74509805, b: 0.9960785, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -18335,7 +18366,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1854068761}
   - component: {fileID: 1854068762}
-  - component: {fileID: 1854068763}
   m_Layer: 5
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -18376,27 +18406,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b259aa547adf45479de37d5054cb632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1: {fileID: 2089309351}
-  player2: {fileID: 1871303991}
-  player3: {fileID: 95683571}
-  player4: {fileID: 1230406332}
---- !u!95 &1854068763
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1854068760}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a8c4275b09359d24989ee3b3a2abf664, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  playerQuipDisplayers:
+  - {fileID: 2089309351}
+  - {fileID: 1871303991}
+  - {fileID: 95683571}
+  - {fileID: 1230406332}
 --- !u!1 &1858256619
 GameObject:
   m_ObjectHideFlags: 0
@@ -18630,6 +18644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quipHolder: {fileID: 58673437}
+  quipTextBox: {fileID: 58673438}
   animator: {fileID: 1871303992}
   text: {fileID: 1205723381}
   lettersPerSecond: 500
@@ -19204,7 +19219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2745098, g: 1, b: 0.27951312, a: 1}
+  m_Color: {r: 0.37647063, g: 1, b: 0.058823533, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -23219,6 +23234,111 @@ RectTransform:
   m_AnchoredPosition: {x: 49, y: -83}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2015887395
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2015887400}
+  - component: {fileID: 2015887396}
+  - component: {fileID: 2015887399}
+  - component: {fileID: 2015887397}
+  - component: {fileID: 2015887401}
+  m_Layer: 0
+  m_Name: UICamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!20 &2015887396
+Camera:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2015887395}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 3
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 1
+  orthographic size: 22
+  m_Depth: 1.58
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 32
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 0
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!114 &2015887397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2015887395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6351f0f25087746bcdbaa3b0b53fe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 17420e03cebe89a47afe1b375589875e, type: 2}
+  amount: 0
+--- !u!124 &2015887399
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2015887395}
+  m_Enabled: 1
+--- !u!4 &2015887400
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2015887395}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 999175384}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &2015887401
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2015887395}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 341be58b78227494a9da2aeffa4f013d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!4 &2032900257 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4019445150740406, guid: 5f9ee3cd76b46914793d3749f35a737d,
@@ -23631,6 +23751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   quipHolder: {fileID: 1425777493}
+  quipTextBox: {fileID: 1425777494}
   animator: {fileID: 2089309352}
   text: {fileID: 207659028}
   lettersPerSecond: 500
@@ -23850,7 +23971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9799865, b: 0.2745098, a: 1}
+  m_Color: {r: 0.003921569, g: 0.74509805, b: 0.9960785, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
