@@ -26,7 +26,6 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
         {
             if (gameManager.IsPlayerValid(i))
             {
-                Debug.Log(gameManager.players[i]);
                 gameManager.players[i].onDeath += OnPlayerDeath;
                 deathmatchPlayerData[i] = new DeathmatchPlayerData();
             }
@@ -59,7 +58,7 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
         return WinResult.None;
     }
 
-    public void OnPlayerDeath(TankManager tank, ProjectileHit hit)
+    public void OnPlayerDeath(TankManager tank, DamageData hit)
     {
         PlayerTankManager playerTank = (PlayerTankManager)tank;
         //if (hit.holder.owningRigidbody)

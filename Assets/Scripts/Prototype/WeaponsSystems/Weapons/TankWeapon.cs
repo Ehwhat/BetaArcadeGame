@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class WeaponData
+{
+    public TankWeapon weapon;
+    public TankWeaponHolder holder;
+}
+
 [CreateAssetMenu(menuName = "Tanks/Weapons/New Tank Weapon", fileName = "New Tank Weapon")]
 public class TankWeapon : Weapon
 {
@@ -28,20 +34,16 @@ public class TankWeapon : Weapon
 
     public ParticleSystem onFiredParticleSystem;
 
-
-    public virtual bool FireProjectile(Vector2 position, Vector2 direction, TankProjectileData firingData = null)
+    public virtual bool FireProjectile(Vector2 position, Vector2 direction, TankWeaponHolder holder)
     {
         for (int i = 0; i < weaponFiringOffsets.Length; i++)
         {
-            firingData.ownerWeapon = this;
-            Vector2 offset = firingData.ownerWeaponHolder.transform.rotation * weaponFiringOffsets[i];
-            projectile.OnFired(position+ offset, direction, firingData);
+            Vector2 offset = holder.transform.rotation * weaponFiringOffsets[i];
+            projectile.OnFired(position+ offset, direction, new WeaponData() { weapon = this, holder = holder });
             return true;
         }
         return false;
     }
-
-    
 
     public float GetRateOfFire()
     {
