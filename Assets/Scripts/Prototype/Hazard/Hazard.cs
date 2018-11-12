@@ -12,7 +12,7 @@ public class Hazard : MonoBehaviour
         if (tank != null)
         {
             Vector2 direction = (gameObject.transform.position - tank.transform.position).normalized;
-            DamageData data = new DamageData(damage, direction, tank.transform.position);
+            DamageData data = new DamageData(damage, direction, tank.transform.position, collision);
             tank.OnHit(data);
             OnTankHit(tank);
         }
