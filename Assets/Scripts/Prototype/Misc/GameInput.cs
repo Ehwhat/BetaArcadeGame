@@ -11,7 +11,6 @@ public class GameInput : ScriptableObject {
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Init()
     {
-        Debug.Log("Init Controller Manager");
         InputManager.OnDeviceAttached += OnDeviceAttached;
         InputManager.OnDeviceDetached += OnDeviceDetached;
         gameDevices = new InputDevice[4];
@@ -19,6 +18,7 @@ public class GameInput : ScriptableObject {
 
     private static void OnDeviceDetached(InputDevice obj)
     {
+        Debug.Log("Controller " + obj.Name + " Removed");
         for (int i = 0; i < 4; i++)
         {
             if(obj == gameDevices[i])
@@ -31,6 +31,7 @@ public class GameInput : ScriptableObject {
 
     private static void OnDeviceAttached(InputDevice obj)
     {
+        Debug.Log("Controller " + obj.Name + " Detected");
         for (int i = 0; i < 4; i++)
         {
             InputDevice currentDevice = gameDevices[i];

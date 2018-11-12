@@ -17,6 +17,7 @@ public struct WeaponFiringPoint
 
 public class TankWeaponHolder : MonoBehaviour {
 
+    public bool attachDefaultAtStart = false;
     public TankWeapon defaultWeapon;
 
     public TankWeapon weapon;
@@ -32,9 +33,9 @@ public class TankWeaponHolder : MonoBehaviour {
 
     public void Start()
     {
-        if(weapon != null)
+        if(defaultWeapon != null && attachDefaultAtStart)
         {
-            SetWeapon(weapon);
+            SetWeapon(defaultWeapon);
         }
     }
 
@@ -85,9 +86,11 @@ public class TankWeaponHolder : MonoBehaviour {
     {
         if (weapon != null)
         {
+            TankProjectileData data = new TankProjectileData();
+            data.ownerWeaponHolder = this;
             if (lastFired + weapon.firingDelay < Time.time)
             {
-                if (weapon.FireProjectile(transform.position, direction, this))
+                if (weapon.FireProjectile(transform.position, direction, data))
                 {
                     if (activeParticleSystem)
                     {

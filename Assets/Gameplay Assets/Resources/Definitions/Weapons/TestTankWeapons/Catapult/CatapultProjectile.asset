@@ -13,11 +13,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 40
   damageType: 1
-  explosiveFalloff: 2
   explosiveRange: 1
   projectileLayerMask:
     serializedVersion: 2
-    m_Bits: 4294966783
+    m_Bits: 4294967295
   damageableLayerMask:
     serializedVersion: 2
     m_Bits: 256

@@ -9,17 +9,18 @@ public class BasicTankBuildupProjectileInstance : BasicTankProjectileInstance
 }
 
 [CreateAssetMenu(menuName = "Tanks/Projectiles/New Basic Tank Projectile Wobbly", fileName = "New Basic Tank Projectile Wobbly")]
-public class BasicTankProjectileWobbly : RepresentedTankProjectile<BasicTankBuildupProjectileInstance> {
+public class BasicTankProjectileWobbly : RepresentedTankProjectile<BasicTankBuildupProjectileInstance, TankProjectileData> {
 
     public float startSpeed = 10;
     public float maxVelocity = 100;
     public float acceration = 50;
 
-    public override void OnFired(Vector3 firedPosition, Vector3 firedDirection, BasicTankBuildupProjectileInstance instance, WeaponData data)
+    public override void OnFired(Vector3 firedPosition, Vector3 firedDirection, BasicTankBuildupProjectileInstance instance, TankProjectileData data)
     {
         instance.position = firedPosition;
         instance.direction = firedDirection;
         instance.velocity = startSpeed;
+        instance.data = data;
         instance.representation = Instantiate(projectileRepresentation, firedPosition, Quaternion.identity);
     }
 
@@ -35,7 +36,13 @@ public class BasicTankProjectileWobbly : RepresentedTankProjectile<BasicTankBuil
             IDamageable hitDamageable = hit.collider.transform.root.GetComponent<IDamageable>();
             if (hitDamageable != null)
             {
-                TankProjectileDamageData hitData = new TankProjectileDamageData(damage, hit, this, instance);
+                ProjectileHit hitData = new ProjectileHit()
+                {
+                    hitData = hit,
+                    projectile = this,
+                    holder = instance.data.ownerWeaponHolder,
+                    damage = damage
+                };
                 hitDamageable.OnHit(hitData);
             }
 
