@@ -6,47 +6,38 @@ public class Hazard : MonoBehaviour
 {
     public float damage = 10;
 
-    public void Update()
-    {
-        Collider2D[] hits = new Collider2D[30];
-        ContactFilter2D filter = new ContactFilter2D();
-        filter.layerMask = LayerMask.NameToLayer("Tank");
-        int hitCount = Physics2D.OverlapCollider(GetComponent<Collider2D>(), filter, hits);
-        if(hitCount > 0)
-        {
-            TankManager bestHit = null;
-            Collider2D bestCollider = null;
-            float bestDistance = float.PositiveInfinity;
-            for (int i = 0; i < hitCount; i++)
-            {
-                if (hits[i].transform.root.GetComponent<TankManager>() != null)
-                {
-                    float distance = Vector2.Distance(transform.position, hits[i].transform.position);
-                    if (distance < bestDistance)
-                    {
-                        bestDistance = distance;
-                        bestCollider = hits[i];
-                        bestHit = hits[i].transform.root.GetComponent<TankManager>();
-                    }
-                }
-            }
-            if(bestHit != null)
-            {
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, (transform.position - bestHit.transform.position).normalized);
-                if (hit && hit.collider == bestHit)
-                {
-                    OnTankHit(bestHit, bestCollider, hit.point);
-                }
-            }
-        }
+        //if(hitCollider.Length != 0)
+        //{
+        //    for (int i = 0; i < hitCollider.Length; i++)
+        //    {
+                
+        //    }
+        //}
     }
 
-    public virtual void OnTankHit(TankManager tank, Collider2D collider, Vector3 point) {
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        TankManager tank = collision.transform.root.GetComponent<TankManager>();
         if (tank != null)
         {
-            Vector2 direction = (gameObject.transform.position - tank.transform.position).normalized;
-            DamageData data = new DamageData(damage, direction, tank.transform.position, collider);
+            Vector2 direction = (hazard.transform.position - tank.transform.position).normalized;
+            DamageData data = new DamageData(damage, direction, tank.transform.position);
             tank.OnHit(data);
         }
     }
+
+    public virtual void OnTankHit(TankManager tank) { }
+
+    private void Update()
+    {
+        HazardDetection();
+    }
 }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        TankManager tank = collision.transform.root.GetComponent<TankManager>();
+            Vector2 direction = (gameObject.transform.position - tank.transform.position).normalized;
+            DamageData data = new DamageData(damage, direction, tank.transform.position);
+
+    public virtual void OnTankHit(TankManager tank) { }
