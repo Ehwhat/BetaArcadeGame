@@ -17,7 +17,7 @@ public class TankArmourPickupManager : MonoBehaviour {
 
     public void Update()
     {
-       
+        AttractArmourPickups();
     }
 
     public void AttractArmourPickups()
@@ -27,6 +27,7 @@ public class TankArmourPickupManager : MonoBehaviour {
         List<TankArmourPickup> pickupsDetected = DetectArmourPickups();
         for (int i = 0; i < pickupsDetected.Count; i++)
         {
+
             Vector2 direction = (pickupsDetected[i].transform.position - transform.position).normalized;
             TankArmourPiece piece = manager.ReservePieceToward(direction, true);
             piecesReserved.Add(piece);
@@ -75,7 +76,7 @@ public class TankArmourPickupManager : MonoBehaviour {
         for (int i = 0; i < colliders.Length; i++)
         {
             TankArmourPickup pickup = colliders[i].GetComponent<TankArmourPickup>();
-            if (pickup)
+            if (pickup && pickup.isPickupValid())
             {
                 
                 pickupsDetected.Add(pickup);

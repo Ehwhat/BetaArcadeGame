@@ -31,16 +31,12 @@ public class PlayerTankController : TankController {
             manager.tankMovement.targetSpeed = leftStickInput.magnitude;
             manager.AimTurrets(rightStickInput);
 
-            if (inputDevice.RightBumper.IsPressed && !inputDevice.RightTrigger.IsPressed)
-            {
-                manager.armourPickupManager.AttractArmourPickups();
-            }
             if (inputDevice.LeftBumper.WasPressed)
             {
                 manager.armourPickupManager.EjectArmourPickups();
             }
 
-            if (inputDevice.RightTrigger.IsPressed && !inputDevice.RightBumper.IsPressed)
+            if (inputDevice.RightTrigger.IsPressed)
             {
                 manager.FireTurrets();
             }

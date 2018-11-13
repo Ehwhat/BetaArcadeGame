@@ -37,6 +37,16 @@ public class TankArmourManager : MonoBehaviour {
         return false;
     }
 
+    public void TryRemovePiece(TankArmourPiece piece, ref List<TankArmourPickup> pickups)
+    {
+        TankArmourPickup pickup;
+        if (piece.DisablePiece(out pickup))
+        {
+            pickup.OnDrop();
+            pickups.Add(pickup);
+        }
+    }
+
     public List<TankArmourPickup> RemovePieceNear(Vector2 point)
     {
         TankArmourPiece bestPiece = FindBestPieceAtPoint(point, SearchFlags.FullOnly, true);
@@ -44,11 +54,7 @@ public class TankArmourManager : MonoBehaviour {
         {
             List<TankArmourPickup> pickups = new List<TankArmourPickup>();
 
-            TankArmourPickup pickup;
-            if (bestPiece.DisablePiece(out pickup))
-            {
-                pickups.Add(pickup);
-            }
+            TryRemovePiece(bestPiece, ref pickups);
 
             pickups = bestPiece.ReevaulateChildren(pickups);
             return pickups;
@@ -62,11 +68,7 @@ public class TankArmourManager : MonoBehaviour {
         List<TankArmourPickup> pickups = new List<TankArmourPickup>();
         for (int i = 0; i < armourPieces.Length; i++)
         {
-            TankArmourPickup pickup;
-            if (armourPieces[i].DisablePiece(out pickup))
-            {
-                pickups.Add(pickup);
-            }
+            TryRemovePiece(armourPieces[i], ref pickups);
         }
         return pickups;
     }
@@ -88,11 +90,7 @@ public class TankArmourManager : MonoBehaviour {
         List<TankArmourPickup> pickups = new List<TankArmourPickup>();
         if (piece.maxHealth <= 0)
         {
-            TankArmourPickup pickup;
-            if (piece.DisablePiece(out pickup))
-            {
-                pickups.Add(pickup);
-            }
+            TryRemovePiece(piece, ref pickups);
             pickups = piece.ReevaulateChildren(pickups);
         }
 

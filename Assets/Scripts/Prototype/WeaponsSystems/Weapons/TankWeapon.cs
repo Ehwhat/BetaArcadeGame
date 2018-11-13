@@ -77,9 +77,10 @@ public class TankWeapon : Weapon
             }
 
             projectile.OnFired(offsetPosition, offsetDirection, weaponData);
-            CameraShake.AddShake(shakeAmount);
+            
             
         }
+        CameraShake.AddShake(shakeAmount);
         return wasFired;
     }
 

@@ -1579,7 +1579,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1967612529336506}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.192192, y: -5.503961, z: 0}
+  m_LocalPosition: {x: -7.3258886, y: -3.3909857, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4286493281717272}
@@ -4389,7 +4389,7 @@ MonoBehaviour:
   isDead: 0
   playerIndex: 0
   data: {fileID: 0}
-  quipSystem: {fileID: 11400000, guid: 60de160192107aa459400b7b3868dde7, type: 2}
+  quipSystem: {fileID: 0}
 --- !u!114 &114264492241811320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4587,7 +4587,7 @@ MonoBehaviour:
   pickupPrefab: {fileID: 114371398720495210, guid: 5f9ee3cd76b46914793d3749f35a737d,
     type: 2}
   manager: {fileID: 114506005980111024}
-  pickupRadius: 4
+  pickupRadius: 2
   minSpeed: 1
   maxSpeed: 8
 --- !u!114 &114454770467765528
