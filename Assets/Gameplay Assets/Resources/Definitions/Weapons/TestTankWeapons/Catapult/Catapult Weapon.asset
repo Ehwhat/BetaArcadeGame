@@ -14,12 +14,17 @@ MonoBehaviour:
   displayName: CAT-a-pult
   projectile: {fileID: 11400000, guid: 0752b4663e3d2a54c8e29b56c25bd9c1, type: 2}
   weaponFiringOffsets:
-  - {x: 0, y: -0.3}
+  - position: {x: 0, y: 0}
+    angle: 0
   firingDelay: 1
   useDuribility: 1
   maxDurability: 10
   perShotDuribilityCost: 1
   rarity: 0.6
+  shakeAmount: 1
+  CollideOnSpawnLayermask:
+    serializedVersion: 2
+    m_Bits: 4294966527
   weaponVisualisation: {fileID: 114263362851301884, guid: 9932b75bce16e724ea658cf5b43c7605,
     type: 2}
   onFiredClip: {fileID: 8300000, guid: 316aca8698481974d96d3828f80b3273, type: 3}
@@ -31,6 +36,7 @@ MonoBehaviour:
   autoAimArcAngle: 60
   autoAimDegreesPerSecond: 1e+14
   autoAimOffsetMagnitude: 0.269
+  autoAimCycles: 3
   autoAimPredictedProjectileSpeed: 10
   autoAimPriorityMix: 0.78
   autoAimLayer:

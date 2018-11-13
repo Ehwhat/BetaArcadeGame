@@ -22,21 +22,21 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
     public int killsToWin;
 
     private float timeElapsed;
+    private SimpleDeathmatchUI ui;
 
     [SerializeField]
     private Dictionary<int, DeathmatchTankData> deathmatchPlayerData = new Dictionary<int, DeathmatchTankData>();
 
     public override void OnGameStart(GameManager gameManager)
     {
+        base.OnGameStart(gameManager);
+        ui = gamemodeUIGameobject.GetComponent<SimpleDeathmatchUI>();
         foreach (TankManager tank in gameManager.currentTanks)
         {
             tank.onDeath += OnPlayerDeath;
             deathmatchPlayerData.Add(tank.tankID, new DeathmatchTankData());
         }
-        for (int i = 0; i < 3; i++)
-        {
-            PlayerScoreSystem.SetScore(i, 0);
-        }
+        ui.playerScoreUIDisplay.Reset();
         timeElapsed = 0;
     }
 
@@ -80,7 +80,7 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
             timeElapsed += deltaTime;
         }
 
-        Josh.EventSystem.EventResponder.TriggerEvent("TimerUpdate", Mathf.Max((float)(System.TimeSpan.FromMinutes(timerMinutes).TotalSeconds - timeElapsed),0));
+        ui.timerUIDisplay.SetTimer(Mathf.Max((float)(System.TimeSpan.FromMinutes(timerMinutes).TotalSeconds - timeElapsed), 0));
 
         return win;
     }
@@ -103,7 +103,7 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
                 PlayerTankManager killerPlayerTank = (PlayerTankManager)killer;
 
                 if (killerPlayerTank) {
-                    PlayerScoreSystem.SetScore(killerIndex, deathmatchPlayerData[killerIndex].currentKills);
+                    ui.playerScoreUIDisplay.SetScore(killerIndex,deathmatchPlayerData[killerIndex].currentKills);
                     killerPlayerTank.quipSystem.SayQuip("Ha! Suck it, " + playerTank.tankDisplayName + "!");
                 }
                 

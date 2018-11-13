@@ -44,6 +44,8 @@ public class TankWeapon : Weapon
     public float rarity = 0.5f;
     public float shakeAmount = 1;
 
+    public LayerMask CollideOnSpawnLayermask;
+
     public WeaponVisualisation weaponVisualisation;
 
     public AudioClip onFiredClip;
@@ -60,6 +62,13 @@ public class TankWeapon : Weapon
             Vector2 offsetPosition = position + (Vector2)(rotation * weaponFiringOffsets[i].position);
             Vector2 offsetDirection = Quaternion.Euler(0, 0, weaponFiringOffsets[i].angle) * direction;
 
+            wasFired = true;
+
+            Collider2D overlapCollider = Physics2D.OverlapPoint(offsetPosition, CollideOnSpawnLayermask);
+            if (overlapCollider)
+                continue;
+            
+
             WeaponData weaponData = new WeaponData() { ownerTank = holder.ownerTank, weapon = this, holder = holder };
             if(holder.ownerTank is PlayerTankManager)
             {
@@ -69,7 +78,7 @@ public class TankWeapon : Weapon
 
             projectile.OnFired(offsetPosition, offsetDirection, weaponData);
             CameraShake.AddShake(shakeAmount);
-            wasFired = true;
+            
         }
         return wasFired;
     }

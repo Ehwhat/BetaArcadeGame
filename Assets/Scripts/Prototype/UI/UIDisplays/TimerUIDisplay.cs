@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class UITimer : MonoBehaviour {
+public class TimerUIDisplay : MonoBehaviour {
 
     public TMPro.TextMeshProUGUI text;
 

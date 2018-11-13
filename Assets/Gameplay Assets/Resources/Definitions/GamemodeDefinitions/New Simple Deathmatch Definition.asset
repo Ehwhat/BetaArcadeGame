@@ -11,5 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aad9d3b79d5a7d479ecb8608f36e886, type: 3}
   m_Name: New Simple Deathmatch Definition
   m_EditorClassIdentifier: 
+  gamemodeUIPrefab: {fileID: 1584096404534912, guid: 31183f3e41db89246977bc403b48744f,
+    type: 2}
+  useTimer: 0
+  timerMinutes: 2
   respawnTime: 2
   killsToWin: 3

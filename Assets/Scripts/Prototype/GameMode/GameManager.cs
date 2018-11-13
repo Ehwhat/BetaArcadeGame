@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     public GameDataDefinition gameData;
     public LevelManager levelManager;
-    public GameUIManager uiManager;
+    public GameUI uiManager;
 
     public PlayerTankManager[] players = new PlayerTankManager[4];
     public List<TankManager> currentTanks = new List<TankManager>();
@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour {
         GamemodeDefinition.WinResult winResult = gameMode.VerifyWin(this, Time.deltaTime);
         if(winResult.finished)
         {
+            gameMode.OnGameEnd(this);
             //StartCoroutine(GoBackToMainMenu());
             
         }
@@ -76,7 +77,6 @@ public class GameManager : MonoBehaviour {
         players[player].tankDisplayName = "Player " + (player + 1);
         players[player].OnCreated(definiton, gameData.playersData[player], player);
         
-        uiManager.SetupHealthUIMananger(player, players[player]);
     }
 
     private void SpawnPlayer(int player, Vector3 position)

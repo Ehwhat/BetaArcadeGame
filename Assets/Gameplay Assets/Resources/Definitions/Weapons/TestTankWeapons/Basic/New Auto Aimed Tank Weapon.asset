@@ -22,6 +22,9 @@ MonoBehaviour:
   perShotDuribilityCost: 1
   rarity: 0.507
   shakeAmount: 1
+  CollideOnSpawnLayermask:
+    serializedVersion: 2
+    m_Bits: 4294966527
   weaponVisualisation: {fileID: 114300704509053406, guid: 64821efa7d94f774295428886c6e4c4d,
     type: 2}
   onFiredClip: {fileID: 8300000, guid: 316aca8698481974d96d3828f80b3273, type: 3}

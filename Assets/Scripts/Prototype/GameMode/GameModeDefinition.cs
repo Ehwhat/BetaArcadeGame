@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class GamemodeDefinition : ScriptableObject {
 
+    public GameObject gamemodeUIPrefab;
+    protected GameObject gamemodeUIGameobject;
+
     public class WinResult
     {
         public bool finished;
@@ -12,11 +15,18 @@ public abstract class GamemodeDefinition : ScriptableObject {
         public bool globalLoss;
     }
 
-    public virtual void OnGameStart(GameManager gameManager) { }
+    public virtual void OnGameStart(GameManager gameManager) {
+        if (gamemodeUIPrefab)
+        {
+            gamemodeUIGameobject = gameManager.uiManager.SpawnGamemodeUI(gamemodeUIPrefab);
+        }
+    }
 
     public abstract WinResult VerifyWin(GameManager gameManager, float deltaTime);
 
-    public virtual void OnGameEnd(GameManager gameManager) { }
+    public virtual void OnGameEnd(GameManager gameManager) {
+
+    }
 
 
 	

@@ -44,7 +44,7 @@ public abstract class BasicRepresentedTankProjectile<ProjectileInstance> : Repre
 
         AttemptToDamage(hit.collider, hit, instance);
 
-        instance.representation.transform.rotation = Quaternion.FromToRotation(Vector2.up, instance.direction);
+        instance.representation.transform.rotation = Quaternion.FromToRotation(Vector2.up, -hit.normal);
         instance.representation.Destroy();
         instance.finishedCallback();
     }

@@ -15,5 +15,7 @@ public class BulletChangeColour : MonoBehaviour {
     {
         GetComponent<TrailRenderer>().startColor = obj;
         GetComponent<TrailRenderer>().endColor = new Color(obj.r, obj.g, obj.b, 0);
+        var main = GetComponent<ParticleSystem>().main;
+        main.startColor = obj;
     }
 }
