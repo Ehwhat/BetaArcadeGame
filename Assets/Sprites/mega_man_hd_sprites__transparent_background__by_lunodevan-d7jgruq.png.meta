@@ -1,0 +1,415 @@
+fileFormatVersion: 2
+guid: 8bed426da1218f047b784acedd3a36e7
+timeCreated: 1510406035
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_0
+    21300002: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_1
+    21300004: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_2
+    21300006: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_3
+    21300008: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_4
+    21300010: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_5
+    21300012: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_6
+    21300014: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_7
+    21300016: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_8
+    21300018: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_9
+    21300020: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_10
+    21300022: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_11
+    21300024: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_12
+    21300026: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_13
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 25
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_0
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 272
+        width: 88
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_1
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 273
+        width: 88
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_2
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 274
+        width: 135
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_3
+      rect:
+        serializedVersion: 2
+        x: 514
+        y: 303
+        width: 105
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_4
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 161
+        width: 101
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_5
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 156
+        width: 66
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_6
+      rect:
+        serializedVersion: 2
+        x: 249
+        y: 153
+        width: 86
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_7
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 140
+        width: 101
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_8
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 189
+        width: 99
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 58
+        width: 118
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_10
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 45
+        width: 103
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_11
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 40
+        width: 122
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_12
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 0
+        width: 116
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: mega_man_hd_sprites__transparent_background__by_lunodevan-d7jgruq_13
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 60
+        width: 36
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline:
+    - - {x: 161, y: -77.5}
+      - {x: 73, y: -77.5}
+      - {x: 73, y: -131.5}
+      - {x: 95, y: -206.5}
+      - {x: 185, y: -206.5}
+      - {x: 193, y: -189.5}
+      - {x: 193, y: -96.5}
+    - - {x: -31, y: -71.5}
+      - {x: -79, y: -120.5}
+      - {x: -79, y: -164.5}
+      - {x: -74, y: -168.5}
+      - {x: 22, y: -168.5}
+      - {x: 47, y: -151.5}
+      - {x: 47, y: -94.5}
+      - {x: 14, y: -71.5}
+    - - {x: -195, y: -60.5}
+      - {x: -195, y: -163.5}
+      - {x: -119, y: -163.5}
+      - {x: -88, y: -137.5}
+      - {x: -88, y: -63.5}
+      - {x: -98, y: -60.5}
+    - - {x: -279, y: -53.5}
+      - {x: -324, y: -86.5}
+      - {x: -324, y: -142.5}
+      - {x: -310, y: -150.5}
+      - {x: -220, y: -150.5}
+      - {x: -204, y: -136.5}
+      - {x: -204, y: -84.5}
+      - {x: -242, y: -53.5}
+    - - {x: 297, y: -113.5}
+      - {x: 292, y: -114.5}
+      - {x: 286, y: -121.5}
+      - {x: 286, y: -135.5}
+      - {x: 289, y: -145.5}
+      - {x: 294, y: -148.5}
+      - {x: 322, y: -148.5}
+      - {x: 324, y: -142.5}
+      - {x: 324, y: -119.5}
+      - {x: 317, y: -113.5}
+    - - {x: 58, y: 64.5}
+      - {x: 58, y: 30.5}
+      - {x: 88, y: -62.5}
+      - {x: 95, y: -68.5}
+      - {x: 156, y: -68.5}
+      - {x: 163, y: -53.5}
+      - {x: 163, y: 64.5}
+    - - {x: -40, y: 41.5}
+      - {x: -76, y: 22.5}
+      - {x: -77, y: 17.5}
+      - {x: -77, y: -53.5}
+      - {x: -67, y: -55.5}
+      - {x: 7, y: -55.5}
+      - {x: 13, y: -53.5}
+      - {x: 13, y: 28.5}
+      - {x: -6, y: 41.5}
+    - - {x: -186, y: 51.5}
+      - {x: -187, y: 45.5}
+      - {x: -187, y: -52.5}
+      - {x: -124, y: -52.5}
+      - {x: -117, y: -41.5}
+      - {x: -117, y: 41.5}
+      - {x: -120, y: 51.5}
+    - - {x: -289, y: 49.5}
+      - {x: -322, y: 38.5}
+      - {x: -322, y: -47.5}
+      - {x: -222, y: -47.5}
+      - {x: -217, y: -44.5}
+      - {x: -217, y: 14.5}
+      - {x: -246, y: 49.5}
+    - - {x: 291, y: 67.5}
+      - {x: 282, y: 72.5}
+      - {x: 204, y: 72.5}
+      - {x: 197, y: 70.5}
+      - {x: 197, y: -18.5}
+      - {x: 201, y: -19.5}
+      - {x: 292, y: -19.5}
+      - {x: 296, y: -16.5}
+      - {x: 300, y: -1.5}
+      - {x: 300, y: 42.5}
+    - - {x: -281, y: 166.5}
+      - {x: -309, y: 137.5}
+      - {x: -309, y: 63.5}
+      - {x: -217, y: 63.5}
+      - {x: -217, y: 166.5}
+    - - {x: -126, y: 167.5}
+      - {x: -156, y: 167.5}
+      - {x: -175, y: 141.5}
+      - {x: -185, y: 114.5}
+      - {x: -187, y: 102.5}
+      - {x: -187, y: 64.5}
+      - {x: -102, y: 64.5}
+      - {x: -95, y: 66.5}
+      - {x: -95, y: 114.5}
+      - {x: -101, y: 149.5}
+    - - {x: 11, y: 171.5}
+      - {x: -32, y: 127.5}
+      - {x: -42, y: 101.5}
+      - {x: -42, y: 65.5}
+      - {x: 71, y: 65.5}
+      - {x: 97, y: 80.5}
+      - {x: 97, y: 136.5}
+      - {x: 41, y: 171.5}
+    - - {x: 276, y: 150.5}
+      - {x: 271, y: 150.5}
+      - {x: 270, y: 154.5}
+      - {x: 281, y: 146.5}
+      - {x: 286, y: 146.5}
+      - {x: 297, y: 152.5}
+      - {x: 297, y: 169.5}
+      - {x: 265, y: 206.5}
+      - {x: 213, y: 206.5}
+      - {x: 188, y: 168.5}
+      - {x: 188, y: 147.5}
+      - {x: 196, y: 144.5}
+      - {x: 206, y: 145.5}
+      - {x: 213, y: 94.5}
+      - {x: 260, y: 94.5}
+      - {x: 297, y: 114.5}
+      - {x: 297, y: 117.5}
+      - {x: 283, y: 140.5}
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

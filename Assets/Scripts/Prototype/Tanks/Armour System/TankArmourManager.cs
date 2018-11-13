@@ -42,7 +42,7 @@ public class TankArmourManager : MonoBehaviour {
         TankArmourPickup pickup;
         if (piece.DisablePiece(out pickup))
         {
-            pickup.OnDrop();
+            pickup.OnDrop(this);
             pickups.Add(pickup);
         }
     }

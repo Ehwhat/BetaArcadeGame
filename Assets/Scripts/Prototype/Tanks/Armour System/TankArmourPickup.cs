@@ -8,16 +8,18 @@ public class TankArmourPickup : MonoBehaviour {
 
     private bool useCooldown = false;
     private float whenDropped;
+    private TankArmourManager droppedManager;
 
-    public void OnDrop()
+    public void OnDrop(TankArmourManager manager)
     {
         useCooldown = true;
         whenDropped = Time.time;
+        droppedManager = manager;
     }
 
-    public bool isPickupValid()
+    public bool IsPickupValid(TankArmourManager manager)
     {
-        return (!useCooldown || Time.time > whenDropped + cooldownTime);
+        return (!useCooldown || manager != droppedManager || (Time.time > whenDropped + cooldownTime));
     }
 
 }

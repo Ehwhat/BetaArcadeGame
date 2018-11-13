@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerTankManager : TankManager {
 
+    public SpriteRenderer tankSprite;
     public int playerIndex;
     public PlayerTankData data;
     public QuipSystemDefinition quipSystem;
@@ -24,6 +25,14 @@ public class PlayerTankManager : TankManager {
 
         Color colour = data.playerColour;
         Color colourEnd = new Color(colour.r, colour.g, colour.b, 0);
+
+
+        MaterialPropertyBlock props = new MaterialPropertyBlock();
+        tankSprite.GetPropertyBlock(props);
+        props.SetColor("_TintColour", colour);
+        tankSprite.SetPropertyBlock(props);
+
+
 
         for (int i = 0; i < trails.Length; i++)
         {

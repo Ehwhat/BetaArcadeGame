@@ -76,7 +76,7 @@ public class TankArmourPickupManager : MonoBehaviour {
         for (int i = 0; i < colliders.Length; i++)
         {
             TankArmourPickup pickup = colliders[i].GetComponent<TankArmourPickup>();
-            if (pickup && pickup.isPickupValid())
+            if (pickup && pickup.IsPickupValid(manager))
             {
                 
                 pickupsDetected.Add(pickup);

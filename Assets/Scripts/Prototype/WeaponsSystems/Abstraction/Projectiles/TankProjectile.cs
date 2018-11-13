@@ -70,7 +70,6 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
     public DamageType damageType = DamageType.Singular;
     public ExplosiveDamageFalloff explosiveFalloff = ExplosiveDamageFalloff.InverseSquared;
     public float explosiveRange = 1;
-    public bool hitOwnTank = false;
 
     public LayerMask projectileLayerMask;
     public LayerMask damageableLayerMask;
@@ -138,10 +137,6 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
         if (damageableLayerMask == (damageableLayerMask | (1 << collider.gameObject.layer)))
         {
             IDamageable[] hitDamageables = collider.transform.root.GetComponentsInChildren<IDamageable>();
-            if(collider.transform.root == instance.weaponData.ownerTank.transform.root && !hitOwnTank)
-            {
-                return false;
-            }
 
             for (int i = 0; i < hitDamageables.Length; i++)
             {
