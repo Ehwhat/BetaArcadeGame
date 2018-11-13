@@ -22,6 +22,6 @@ MonoBehaviour:
   damageableLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  projectileRepresentation: {fileID: 114046558725670220, guid: 46af86ac18952ea44af415fe9745a5d2,
+  projectileRepresentation: {fileID: 114046558725670220, guid: aa7f7cb8b3031a3499c0286a839e7703,
     type: 2}
   projectileSpeed: 60

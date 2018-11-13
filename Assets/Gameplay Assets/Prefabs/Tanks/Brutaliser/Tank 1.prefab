@@ -4389,6 +4389,7 @@ MonoBehaviour:
   isDead: 0
   playerIndex: 0
   data: {fileID: 0}
+  quipSystem: {fileID: 11400000, guid: 60de160192107aa459400b7b3868dde7, type: 2}
 --- !u!114 &114264492241811320
 MonoBehaviour:
   m_ObjectHideFlags: 1

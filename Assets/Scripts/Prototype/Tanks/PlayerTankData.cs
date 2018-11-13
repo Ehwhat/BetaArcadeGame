@@ -10,6 +10,7 @@ public class PlayerTankData : ScriptableObject {
     public System.Action onChangedEvent = () => { };
 
     public Color playerColour;
+    public QuipSystemDefinition quipSystem;
     public bool isInGame { get; private set; }
     public float currentHealthPercentage { get; private set; }
     public List<float> currentTurretConditions { get; private set; }

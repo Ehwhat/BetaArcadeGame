@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Name: PlayerOneData
   m_EditorClassIdentifier: 
   playerColour: {r: 1, g: 0.003921569, b: 1, a: 1}
+  quipSystem: {fileID: 11400000, guid: 4b77b0cb92754d64f9a8781337be5fbe, type: 2}

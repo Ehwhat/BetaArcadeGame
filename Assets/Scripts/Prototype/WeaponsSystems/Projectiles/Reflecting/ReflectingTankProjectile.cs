@@ -16,27 +16,7 @@ public class ReflectingTankProjectile : BasicRepresentedTankProjectile<Reflectin
 
     public override void UpdateProjectile(float deltaTime, ReflectingTankProjectileInstance instance)
     {
-        RaycastHit2D hit = Physics2D.Raycast(instance.position, instance.direction, projectileSpeed * deltaTime, projectileLayerMask);
-        if (hit)
-        {
-            instance.position = hit.point;
-            instance.representation.transform.position = instance.position;
-            instance.direction = Vector2.Reflect(instance.direction, hit.normal);
-
-            instance.reflectionCount++;
-
-            if (instance.reflectionCount > reflectionLimit || (AttemptToDamage(hit.collider, hit, instance) && destroyOnDamagableHit))
-            {
-                instance.representation.transform.rotation = Quaternion.FromToRotation(Vector2.up, instance.direction);
-                instance.representation.Destroy();
-                instance.finishedCallback();
-            }
-        }
-        else
-        {
-            instance.position += instance.direction * projectileSpeed * deltaTime;
-            instance.representation.transform.position = instance.position;
-        }
+        base.UpdateProjectile(deltaTime, instance);
     }
 
     protected override void OnProjectileHit(ReflectingTankProjectileInstance instance, float deltaTime, RaycastHit2D hit)

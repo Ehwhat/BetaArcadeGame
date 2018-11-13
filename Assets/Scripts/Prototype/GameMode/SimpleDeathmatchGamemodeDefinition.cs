@@ -98,9 +98,15 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
                 int killerIndex = killer.tankID;
                 Debug.Log(killerIndex);
                 deathmatchPlayerData[killerIndex].currentKills++;
-                PlayerScoreSystem.SetScore(killerIndex, deathmatchPlayerData[killerIndex].currentKills);
-                QuipManager.SayQuip(killerIndex, "Ha! Suck it, " + playerTank.tankDisplayName+"!");
                 Josh.EventSystem.EventResponder.TriggerEvent("DisplayText", playerTank.tankDisplayName.ToUpper() + " WAS KILLED BY " + killer.tankDisplayName.ToUpper());
+
+                PlayerTankManager killerPlayerTank = (PlayerTankManager)killer;
+
+                if (killerPlayerTank) {
+                    PlayerScoreSystem.SetScore(killerIndex, deathmatchPlayerData[killerIndex].currentKills);
+                    killerPlayerTank.quipSystem.SayQuip("Ha! Suck it, " + playerTank.tankDisplayName + "!");
+                }
+                
             }
         }
         int playerIndex = playerTank.tankID;

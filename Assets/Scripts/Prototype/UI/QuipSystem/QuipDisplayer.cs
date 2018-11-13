@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerQuipDisplayer : MonoBehaviour {
+public class QuipDisplayer : MonoBehaviour {
 
     public RectTransform quipHolder;
     public Image quipTextBox;
@@ -11,6 +11,17 @@ public class PlayerQuipDisplayer : MonoBehaviour {
     public TMPro.TextMeshProUGUI text;
     public float lettersPerSecond = 10f;
     public float quipExitDelay = 0.6f;
+    public int id;
+    public QuipSystemDefinition quipSystem;
+
+
+    public void Awake()
+    {
+        if (quipSystem)
+        {
+            quipSystem.RegisterQuipDisplayer(this);
+        }
+    }
 
     private void Update()
     {

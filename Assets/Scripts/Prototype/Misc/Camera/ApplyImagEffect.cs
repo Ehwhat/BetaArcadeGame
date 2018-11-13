@@ -10,6 +10,7 @@ public class ApplyImagEffect : MonoBehaviour {
     public Material material;
     [Range(0,1)]
     public float amount = 0;
+    public AnimationCurve amountCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
     void Start()
     {
@@ -23,7 +24,7 @@ public class ApplyImagEffect : MonoBehaviour {
 
     void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
-        material.SetFloat("_Amount", amount);
+        material.SetFloat("_Amount", amountCurve.Evaluate(amount));
         Graphics.Blit(source, destination, material);
     }
 }

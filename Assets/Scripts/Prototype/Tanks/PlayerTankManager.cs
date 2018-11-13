@@ -6,6 +6,7 @@ public class PlayerTankManager : TankManager {
 
     public int playerIndex;
     public PlayerTankData data;
+    public QuipSystemDefinition quipSystem;
     PlayerTankControllerState controllerState;
 
     public void OnCreated(CharacterDefinition definition, PlayerTankData playerData, int playerIndex)
@@ -14,6 +15,8 @@ public class PlayerTankManager : TankManager {
         data = playerData;
         data.SetIsInGame(true);
         data.SetHealthPercentage(health / maxHealth);
+        quipSystem = data.quipSystem;
+
         controllerState = new PlayerTankControllerState()
         {
             player = playerIndex
@@ -28,7 +31,7 @@ public class PlayerTankManager : TankManager {
             trails[i].endColor = colourEnd;
         }
 
-        QuipManager.SetColour(playerIndex, colour);
+        quipSystem.SetColour(colour);
 
     }
 
@@ -43,11 +46,11 @@ public class PlayerTankManager : TankManager {
         base.OnHit(hit);
         if (isDead)
         {
-            QuipManager.SayQuip(playerIndex, "AHH @&%-");
+            quipSystem.SayQuip("AHH @&%-");
         }
         else
         {
-            QuipManager.SayQuip(playerIndex, "Ouch!");
+            quipSystem.SayQuip("Ouch!");
         }
     }
 
@@ -55,7 +58,7 @@ public class PlayerTankManager : TankManager {
     public override void GiveWeapon(TankWeapon weapon)
     {
         base.GiveWeapon(weapon);
-        QuipManager.SayQuip(playerIndex, "I just got the " + weapon.displayName+"!");
+        quipSystem.SayQuip("I just got the " + weapon.displayName+"!");
         
         
     }
