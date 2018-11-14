@@ -13,6 +13,38 @@ public class TankArmourManager : MonoBehaviour {
 
     public TankManager tankManager;
     public TankArmourPiece[] armourPieces;
+    private bool hasSpawnedArmour = false;
+
+    private void Start()
+    {
+        SpawnArmour();
+    }
+
+    public void SetColour(Color colour)
+    {
+        SpawnArmour();
+        for (int i = 0; i < armourPieces.Length; i++)
+        {
+            OutlineColourChanger outline = armourPieces[i].GetComponentInChildren<OutlineColourChanger>();
+            if (outline)
+            {
+                outline.SetColour(colour);
+            }
+        }
+    }
+
+    private void SpawnArmour()
+    {
+        if (!hasSpawnedArmour)
+        {
+            for (int i = 0; i < armourPieces.Length; i++)
+            {
+                armourPieces[i].CreateRepresentation();
+
+            }
+            hasSpawnedArmour = true;
+        }
+    }
 
     public void AddPieceNear(Vector2 point)
     {

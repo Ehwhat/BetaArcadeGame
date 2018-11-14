@@ -77,6 +77,9 @@ public class TankArmourManagerEditor : Editor {
 
         for (int i = 0; i < pieces.Length; i++)
         {
+            if (pieces[i] == null)
+                continue;
+
             Handles.color = Color.yellow;
             Handles.CircleHandleCap(0, pieces[i].transform.position, Quaternion.identity, pieceRadius/2, EventType.Repaint);
 

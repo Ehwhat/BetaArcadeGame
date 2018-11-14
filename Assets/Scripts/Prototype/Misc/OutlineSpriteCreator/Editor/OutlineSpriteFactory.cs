@@ -19,8 +19,6 @@ public class OutlineSpriteFactory {
         {
             Color32 fillColour = outlineGradient.Evaluate((1f / (float)outlineWidth) * i);
 
-            Debug.Log(fillColour);
-
             for (int x = 1; x < powerOfTwoTexture.width - 1; x++)
             {
                 for (int y = 1; y < powerOfTwoTexture.height - 1; y++)

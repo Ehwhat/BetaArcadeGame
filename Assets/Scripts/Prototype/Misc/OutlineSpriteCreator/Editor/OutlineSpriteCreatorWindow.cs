@@ -108,7 +108,7 @@ public class OutlineSpriteCreatorWindow : EditorWindow {
                     EditorUtility.DisplayProgressBar("Sprite Outline Creation", "", 0);
                     for (int i = 0; i < sprites.Length; i++)
                     {
-                        Texture2D newTexture = factory.CreateSpriteOutline(currentSprite, outlineWidth, outlineGradient);
+                        Texture2D newTexture = factory.CreateSpriteOutline(sprites[i], outlineWidth, outlineGradient);
                         newTexture.SaveTexture(spriteFolderPath + "/Outlines/" + sprites[i].name + "_Outline.png");
                         EditorUtility.DisplayProgressBar("Sprite Outline Creation", "", (float)(i+1)/sprites.Length);
                     }

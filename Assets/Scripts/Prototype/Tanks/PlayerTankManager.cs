@@ -9,6 +9,7 @@ public class PlayerTankManager : TankManager {
     public PlayerTankData data;
     public QuipSystemDefinition quipSystem;
     PlayerTankControllerState controllerState;
+    public SpriteRenderer tankOutline;
 
     public void OnCreated(CharacterDefinition definition, PlayerTankData playerData, int playerIndex)
     {
@@ -41,6 +42,8 @@ public class PlayerTankManager : TankManager {
         }
 
         quipSystem.SetColour(colour);
+        armourManager.SetColour(colour);
+        tankOutline.color = colour;
 
     }
 
