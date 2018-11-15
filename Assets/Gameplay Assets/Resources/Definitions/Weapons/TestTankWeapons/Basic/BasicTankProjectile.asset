@@ -13,13 +13,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 25
   damageType: 0
+  explosiveFalloff: 2
   explosiveRange: 1
   projectileLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4294966783
   damageableLayerMask:
     serializedVersion: 2
     m_Bits: 256
   projectileRepresentation: {fileID: 114046558725670220, guid: 46af86ac18952ea44af415fe9745a5d2,
     type: 2}
-  projectileSpeed: 10
+  projectileSpeed: 60

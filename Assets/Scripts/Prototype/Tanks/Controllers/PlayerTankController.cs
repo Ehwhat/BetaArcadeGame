@@ -14,10 +14,8 @@ public class PlayerTankController : TankController {
         {
             convertedState = new PlayerTankControllerState();
         }
-        GamePadState lastState = convertedState.lastState;
-        GamePadState currentState = GamePad.GetState(convertedState.player);
 
-        InputDevice inputDevice = InputManager.Devices[(int)convertedState.player];
+        InputDevice inputDevice = GameInput.GetPlayerDevice(convertedState.player);
 
         Vector2 leftStickInput = inputDevice.LeftStick.Vector;
         Vector2 rightStickInput = inputDevice.RightStick.Vector;
@@ -34,7 +32,6 @@ public class PlayerTankController : TankController {
             manager.FireTurrets();
         }
 
-        convertedState.lastState = currentState;
         return convertedState;
     }
 

@@ -5,20 +5,18 @@ using UnityEngine;
 
 public class LaserTankProjectileInstance : TankProjectileInstance
 {
-    public TankProjectileData data;
     public LaserProjectileRepresentation representation;
 }
 
 [CreateAssetMenu(menuName = "Tanks/Projectiles/New Laser Tank Projectile", fileName = "New Laser Tank Projectile")]
-public class LaserTankProjectile : RepresentedTankProjectile<LaserTankProjectileInstance, TankProjectileData>
+public class LaserTankProjectile : RepresentedTankProjectile<LaserTankProjectileInstance>
 {
     public float projectileRange = 100;
 
-    public override void OnFired(Vector3 firedPosition, Vector3 firedDirection, LaserTankProjectileInstance instance, TankProjectileData data)
+    public override void OnFired(Vector3 firedPosition, Vector3 firedDirection, LaserTankProjectileInstance instance, WeaponData data)
     {
         instance.position = firedPosition;
         instance.direction = firedDirection;
-        instance.data = data;
         instance.representation = Instantiate((LaserProjectileRepresentation)projectileRepresentation, firedPosition, Quaternion.identity);
         instance.representation.OnSpawn(firedPosition, firedDirection);
 
@@ -39,7 +37,7 @@ public class LaserTankProjectile : RepresentedTankProjectile<LaserTankProjectile
         {
             instance.representation.transform.position = hit.point;
 
-            AttemptToDamage(hit.collider, hit);
+            AttemptToDamage(hit.collider, hit, instance);
         }
         else
         {
