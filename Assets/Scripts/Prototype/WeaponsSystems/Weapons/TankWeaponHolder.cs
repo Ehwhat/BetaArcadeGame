@@ -81,53 +81,43 @@ public class TankWeaponHolder : MonoBehaviour {
         SetWeapon(defaultWeapon);
     }
 
-    public virtual void OnFiringDown()
+    public virtual void OnFiringDown(Vector2 direction)
     {
-
+        if(weapon != null && gameObject.activeInHierarchy)
+            weapon.OnFiringDown(transform.position, direction, this);
     }
 
-    public virtual void OnFiringHold()
-    {
-
-    }
-
-    public virtual void OnFiringUp()
-    {
-
-    }
-
-    public virtual void FireWeapon(Vector2 direction)
+    public virtual void OnFiring(Vector2 direction)
     {
         if (weapon != null && gameObject.activeInHierarchy)
-        {
-            if (lastFired + weapon.firingDelay < Time.time)
-            {
-                if (weapon.FireProjectile(transform.position, direction, this))
-                {
-                    if (activeParticleSystem)
-                    {
-                        activeParticleSystem.Play();
-                    }
-                    if (weapon.onFiredClip)
-                    {
-                        audioPlayer.PlayOneShot(weapon.onFiredClip);
-                    }
-                    lastFired = Time.time;
-                    if(weapon.useDuribility)
-                        currentDurability -= weapon.perShotDuribilityCost;
-                }
-                if (currentDurability <= 0 && weapon.useDuribility)
-                {
-                    SetWeapon(defaultWeapon);
-                }
-            }
-        }
-
+            weapon.OnFiringHold(transform.position, direction, this);
     }
 
-    public void PlayFiredEffects()
+    public virtual void OnFiringUp(Vector2 direction)
     {
+        if (weapon != null && gameObject.activeInHierarchy)
+            weapon.OnFiringUp(transform.position, direction, this);
+    }
 
+    public void OnWeaponFired()
+    {
+        if (activeParticleSystem)
+        {
+            activeParticleSystem.Play();
+        }
+        if (weapon.onFiredClip)
+        {
+            audioPlayer.PlayOneShot(weapon.onFiredClip);
+        }
+        lastFired = Time.time;
+        if (weapon.useDuribility)
+        {
+            currentDurability -= weapon.perShotDuribilityCost;
+            if (currentDurability <= 0)
+            {
+                SetWeapon(defaultWeapon);
+            }
+        }
     }
 
     public void OnDrawGizmos()

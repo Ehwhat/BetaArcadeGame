@@ -36,9 +36,16 @@ public class PlayerTankController : TankController {
                 manager.armourPickupManager.EjectArmourPickups();
             }
 
+            if (inputDevice.RightTrigger.WasPressed)
+            {
+                manager.FireTurrets(TankManager.FiringInputType.Down);
+            }else if (inputDevice.RightTrigger.WasReleased)
+            {
+                manager.FireTurrets(TankManager.FiringInputType.Up);
+            }
             if (inputDevice.RightTrigger.IsPressed)
             {
-                manager.FireTurrets();
+                manager.FireTurrets(TankManager.FiringInputType.Held);
             }
         }
 

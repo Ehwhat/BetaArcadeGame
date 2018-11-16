@@ -5,6 +5,13 @@ using UnityEngine;
 
 public abstract class TankManager : MonoBehaviour, IDamageable {
 
+    public enum FiringInputType
+    {
+        Down,
+        Held,
+        Up
+    }
+
     public System.Action<TankManager, DamageData> onDeath = (tank, weaponHit) => { };
 
     public int tankID;
@@ -129,11 +136,24 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
         }
     }
 
-    public void FireTurrets()
+    public void FireTurrets(FiringInputType inputType = FiringInputType.Held)
     {
         for (int i = 0; i < turrets.Count; i++)
         {
-            turrets[i].Fire();
+            switch (inputType)
+            {
+                case FiringInputType.Down:
+                    turrets[i].FireDown();
+                    break;
+                case FiringInputType.Held:
+                    turrets[i].Fire();
+                    break;
+                case FiringInputType.Up:
+                    turrets[i].FireUp();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 

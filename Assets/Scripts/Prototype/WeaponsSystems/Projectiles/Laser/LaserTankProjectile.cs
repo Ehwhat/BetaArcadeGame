@@ -13,6 +13,12 @@ public class LaserTankProjectile : RepresentedTankProjectile<LaserTankProjectile
 {
     public float projectileRange = 100;
 
+    public override void OnCharge(Vector3 firedPosition, Vector3 firedDirection, WeaponData weaponData, float chargeAmount)
+    {
+        instance.position = firedPosition;
+        instance.direction = firedDirection;
+    }
+
     public override void OnFired(Vector3 firedPosition, Vector3 firedDirection, LaserTankProjectileInstance instance, WeaponData data)
     {
         instance.position = firedPosition;

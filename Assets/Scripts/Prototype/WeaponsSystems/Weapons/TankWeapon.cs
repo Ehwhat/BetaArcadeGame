@@ -55,7 +55,56 @@ public class TankWeapon : Weapon
     public ParticleSystem onFiredParticleSystem;
     private float chargeUpElapsedTime;
 
-    public virtual bool FireProjectile(Vector2 position, Vector2 direction, TankWeaponHolder holder)
+    public virtual void OnFiringDown(Vector2 position, Vector2 direction, TankWeaponHolder holder)
+    {
+        chargeUpElapsedTime = 0;
+    }
+
+    public virtual void OnFiringHold(Vector2 position, Vector2 direction, TankWeaponHolder holder)
+    {
+        if (holder.lastFired + firingDelay < Time.time)
+        {
+            if (chargeUpElapsedTime < chargeUpDelay)
+            {
+                OnCharge(position, direction, holder, chargeUpElapsedTime / chargeUpDelay);
+                chargeUpElapsedTime += Time.deltaTime;
+            }
+            else
+            {
+                FireProjectile(position, direction, holder);
+                holder.OnWeaponFired();
+                chargeUpElapsedTime = 0;
+            }
+        }
+        
+    }
+
+    public virtual void OnFiringUp(Vector2 position, Vector2 direction, TankWeaponHolder holder)
+    {
+
+    }
+
+    protected virtual bool OnCharge(Vector2 position, Vector2 direction, TankWeaponHolder holder, float chargeAmount)
+    {
+        bool canCharge = false;
+        for (int i = 0; i < weaponFiringOffsets.Length; i++)
+        {
+            Quaternion rotation = holder.transform.rotation;
+            Vector2 offsetPosition = position + (Vector2)(rotation * weaponFiringOffsets[i].position);
+            Vector2 offsetDirection = Quaternion.Euler(0, 0, weaponFiringOffsets[i].angle) * direction;
+
+            Collider2D overlapCollider = Physics2D.OverlapPoint(offsetPosition, CollideOnSpawnLayermask);
+            if (overlapCollider)
+                continue;
+
+            WeaponData weaponData = new WeaponData() { ownerTank = holder.ownerTank, weapon = this, holder = holder };
+            projectile.OnCharge(position, direction, weaponData, chargeAmount);
+            canCharge = true;
+        }
+        return canCharge;
+    }
+
+    protected virtual bool FireProjectile(Vector2 position, Vector2 direction, TankWeaponHolder holder)
     {
         bool wasFired = false;
         for (int i = 0; i < weaponFiringOffsets.Length; i++)

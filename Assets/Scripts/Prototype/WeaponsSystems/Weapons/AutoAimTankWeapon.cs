@@ -38,7 +38,7 @@ public class AutoAimTankWeapon : TankWeapon {
     private Collider2D lastTarget = new Collider2D();
     private Vector2 lastVelocity;
 
-    public override bool FireProjectile(Vector2 position, Vector2 direction, TankWeaponHolder holder)
+    protected override bool FireProjectile(Vector2 position, Vector2 direction, TankWeaponHolder holder)
     {
         Vector2 autoAimedDirection = AutoAimAtTargets(position, direction, holder);
         lastPosition = position;

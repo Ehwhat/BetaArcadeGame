@@ -39,7 +39,17 @@ public abstract class TankProjectile<ProjectileInstance>:TankProjectile where Pr
         OnFired(firedPosition, firedDirection, newInstance, weaponData);
     }
 
+    public override void OnCharge(Vector3 firedPosition, Vector3 firedDirection, WeaponData weaponData, float chargeAmount)
+    {
+        base.OnCharge(firedPosition, firedDirection, weaponData, chargeAmount);
+    }
+
     public abstract void OnFired(Vector3 firedPosition, Vector3 firedDirection, ProjectileInstance instance, WeaponData weaponData);
+
+    public virtual void OnCharge(Vector3 firedPosition, Vector3 firedDirection, ProjectileInstance instance, WeaponData weaponData, float chargeAmount)
+    {
+
+    }
 
     public override void UpdateProjectile(float deltaTime){
         for (int i = 0; i < projectiles.Count; i++)
@@ -98,6 +108,10 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
             projectile.UpdateProjectile(Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    public virtual void OnCharge(Vector3 firedPosition, Vector3 firedDirection, WeaponData weaponData, float chargeAmount) {
+        Debug.Log("On Charge " + chargeAmount);
     }
 
     public abstract void OnFired(Vector3 firedPosition, Vector3 firedDirection, WeaponData weaponData);
