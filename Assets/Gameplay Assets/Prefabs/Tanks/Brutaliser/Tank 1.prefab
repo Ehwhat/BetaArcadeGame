@@ -2620,7 +2620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetVector: {x: 0, y: 0}
   targetSpeed: 0
-  speedModifer: 130
+  topSpeed: 155
   rotationSpeed: 270
   sideDragFactor: 6
   frontDragFactor: 16
@@ -2655,6 +2655,7 @@ MonoBehaviour:
   maxHealth: 100
   health: 100
   isDead: 0
+  armourMinSpeedModifer: 0.35
   tankSprite: {fileID: 212530659348252866}
   playerIndex: 0
   data: {fileID: 0}

@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour {
     public PlayerTankManager[] players = new PlayerTankManager[4];
     public List<TankManager> currentTanks = new List<TankManager>();
 
+    public QuipSystemDefinition announcerQuipSystem;
+
     private GamemodeDefinition gameMode;
     private int latestTankId = 0;
 
@@ -26,7 +28,9 @@ public class GameManager : MonoBehaviour {
         SpawnPlayers();
         gameMode = gameData.gamemode;
         gameMode.OnGameStart(this);
-	}
+        announcerQuipSystem.SayQuip("Hello Audience!");
+
+    }
 	
 	void Update () {
 
@@ -110,5 +114,18 @@ public class GameManager : MonoBehaviour {
             return gameData.IsPlayerJoined(player);
         }
         return false;
+    }
+
+    public int GetPlayerCount()
+    {
+        int playerCount = 0;
+        for (int i = 0; i < 4; i++)
+        {
+            if (gameData.IsPlayerJoined(i))
+            {
+                playerCount++;
+            }
+        }
+        return playerCount;
     }
 }

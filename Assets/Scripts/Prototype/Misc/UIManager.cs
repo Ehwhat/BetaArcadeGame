@@ -37,8 +37,8 @@ public class UIManager : MonoBehaviour {
 
     private void UpdateDisplays()
     {
-        speedInput.text = move.speedModifer.ToString("0.0");
-        speedSlider.value = move.speedModifer;
+        speedInput.text = move.topSpeed.ToString("0.0");
+        speedSlider.value = move.topSpeed;
 
         rotationInput.text = move.rotationSpeed.ToString("0.0");
         rotationSlider.value = move.rotationSpeed;
@@ -68,7 +68,7 @@ public class UIManager : MonoBehaviour {
 
     public void ChangeSpeed(float value)
     {
-        move.speedModifer = value;
+        move.topSpeed = value;
         UpdateDisplays();
     }
 
@@ -98,7 +98,7 @@ public class UIManager : MonoBehaviour {
 
     public void ChangeSpeed(string value)
     {
-        move.speedModifer = float.Parse(value);
+        move.topSpeed = float.Parse(value);
         UpdateDisplays();
     }
 

@@ -13,6 +13,7 @@ public class PlayerTankManager : TankManager {
 
     public void OnCreated(CharacterDefinition definition, PlayerTankData playerData, int playerIndex)
     {
+        
         this.playerIndex = playerIndex;
         data = playerData;
         data.SetIsInGame(true);

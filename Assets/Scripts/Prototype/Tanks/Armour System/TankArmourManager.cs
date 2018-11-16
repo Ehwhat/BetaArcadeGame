@@ -11,9 +11,13 @@ public class TankArmourManager : MonoBehaviour {
         FullOnly
     }
 
+    public System.Action<TankArmourPiece, float> OnPieceAdded = (TankArmourPiece p, float f) => { };
+    public System.Action<TankArmourPiece, float> OnPieceRemoved = (TankArmourPiece p, float f) => { };
+
     public TankManager tankManager;
     public TankArmourPiece[] armourPieces;
     private bool hasSpawnedArmour = false;
+    private int armourCount = 0;
 
     private void Start()
     {
@@ -40,7 +44,10 @@ public class TankArmourManager : MonoBehaviour {
             for (int i = 0; i < armourPieces.Length; i++)
             {
                 armourPieces[i].CreateRepresentation();
-
+                if (armourPieces[i].isActive)
+                {
+                    armourCount++;
+                }
             }
             hasSpawnedArmour = true;
         }
@@ -64,6 +71,8 @@ public class TankArmourManager : MonoBehaviour {
             {
                 tankManager.AddTurret(piece.turret);
             }
+            armourCount++;
+            OnPieceAdded(piece, (float)armourCount / armourPieces.Length);
             return true;
         }
         return false;
@@ -76,6 +85,8 @@ public class TankArmourManager : MonoBehaviour {
         {
             pickup.OnDrop(this);
             pickups.Add(pickup);
+            armourCount--;
+            OnPieceAdded(piece, (float)armourCount / armourPieces.Length);
         }
     }
 

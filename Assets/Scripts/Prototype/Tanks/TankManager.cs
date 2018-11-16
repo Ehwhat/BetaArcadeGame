@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,8 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
     [SerializeField]
     public float health;
     public bool isDead = false;
+    public float armourMinSpeedModifer = 0.3f;
+
 
     private TankController _internalController;
 
@@ -30,6 +33,13 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
     {
         Respawn();
         SetTurretOwners();
+        armourManager.OnPieceAdded += ChangeArmourSpeedModifer;
+        armourManager.OnPieceRemoved += ChangeArmourSpeedModifer;
+    }
+
+    private void ChangeArmourSpeedModifer(TankArmourPiece piece, float percent)
+    {
+        tankMovement.SetSpeedModifer(Mathf.SmoothStep(1, armourMinSpeedModifer, percent));
     }
 
     private void Update()
@@ -107,7 +117,7 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
                 return;
             }
         }
-        TurretController randomTurret = turrets[Random.Range(0, activeTurrets)];
+        TurretController randomTurret = turrets[UnityEngine.Random.Range(0, activeTurrets)];
         randomTurret.GiveWeapon(weapon);
     }
 

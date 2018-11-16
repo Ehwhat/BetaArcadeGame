@@ -43,6 +43,7 @@ public class TankWeapon : Weapon
     [Range(0,1)]
     public float rarity = 0.5f;
     public float shakeAmount = 1;
+    public float chargeUpDelay = 1;
 
     public LayerMask CollideOnSpawnLayermask;
 
@@ -52,6 +53,7 @@ public class TankWeapon : Weapon
     public AudioClip onHitClip;
 
     public ParticleSystem onFiredParticleSystem;
+    private float chargeUpElapsedTime;
 
     public virtual bool FireProjectile(Vector2 position, Vector2 direction, TankWeaponHolder holder)
     {

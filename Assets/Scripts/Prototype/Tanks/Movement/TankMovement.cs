@@ -8,7 +8,7 @@ public class TankMovement : MonoBehaviour {
     public Vector2 targetVector = Vector2.up;
     public float targetSpeed = 0;
 
-    public float speedModifer = 100;
+    public float topSpeed = 100;
     public float rotationSpeed = 270;
     public float sideDragFactor = 20;
     public float frontDragFactor = 16;
@@ -19,6 +19,8 @@ public class TankMovement : MonoBehaviour {
 
     private Vector2 lastVelocityDirection;
     private bool boosting;
+
+    private float speedModifer = 1;
 
     void Start () {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -33,7 +35,7 @@ public class TankMovement : MonoBehaviour {
         }
 
         float dotModifer = Mathf.SmoothStep(reverseFactor, forwardFactor, (Vector2.Dot(transform.up, targetVector) + 1) * 0.5f);
-        rigidbody.AddForce(transform.up * targetSpeed * speedModifer * dotModifer);
+        rigidbody.AddForce(transform.up * targetSpeed * topSpeed * speedModifer * dotModifer);
 
         ApplyForwardDrag();
         ApplySideDrag();
@@ -66,6 +68,11 @@ public class TankMovement : MonoBehaviour {
             boosting = true;
             StartCoroutine(BoostRoutine(multiplier, length));
         }
+    }
+
+    public void SetSpeedModifer(float mod)
+    {
+        speedModifer = mod;
     }
 
     IEnumerator BoostRoutine(float multiplier, float length)

@@ -81,9 +81,19 @@ public class TankWeaponHolder : MonoBehaviour {
         SetWeapon(defaultWeapon);
     }
 
-    public virtual void FireWeapon()
+    public virtual void OnFiringDown()
     {
-        FireWeapon(transform.up);
+
+    }
+
+    public virtual void OnFiringHold()
+    {
+
+    }
+
+    public virtual void OnFiringUp()
+    {
+
     }
 
     public virtual void FireWeapon(Vector2 direction)
@@ -112,6 +122,11 @@ public class TankWeaponHolder : MonoBehaviour {
                 }
             }
         }
+
+    }
+
+    public void PlayFiredEffects()
+    {
 
     }
 
