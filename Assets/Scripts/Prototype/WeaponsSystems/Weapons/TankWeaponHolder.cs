@@ -18,6 +18,9 @@ public class TankWeaponHolder : MonoBehaviour {
 
     private ParticleSystem activeParticleSystem;
     private WeaponVisualisation currentVisualisation;
+    private WeaponChargingVisualisation weaponChargingVisualisation;
+
+    private TankWeapon lastWeapon;
 
     public float lastFired = 0;
     public float currentDurability = 0;
@@ -31,9 +34,19 @@ public class TankWeaponHolder : MonoBehaviour {
         }
     }
 
+    private void Update()
+    {
+        if(weapon != lastWeapon)
+        {
+            SetWeapon(weapon);
+        }
+    }
+
     public void SetWeapon(TankWeapon newWeapon)
     {
         RemoveCurrentWeapon();
+        if (!newWeapon)
+            return;
         weapon = newWeapon;
         if (activeParticleSystem)
         {
@@ -61,10 +74,21 @@ public class TankWeaponHolder : MonoBehaviour {
                 barrelAimingIndicator.barrelLineRendeer.endColor = colourEnd;
             }
         }
+        lastWeapon = weapon;
+        weapon.OnWeaponEquipted(this);
+    }
+
+    public WeaponVisualisation GetCurrentWeaponVisualisation()
+    {
+        return currentVisualisation;
     }
 
     public void RemoveCurrentWeapon()
     {
+        if (weapon)
+        {
+            weapon.OnWeaponUnequipted(this);
+        }
         weapon = null;
         if (activeParticleSystem)
         {

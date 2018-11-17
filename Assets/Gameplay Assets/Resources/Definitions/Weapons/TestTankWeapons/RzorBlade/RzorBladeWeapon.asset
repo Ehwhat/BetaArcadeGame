@@ -22,11 +22,13 @@ MonoBehaviour:
   perShotDuribilityCost: 1
   rarity: 0.6
   shakeAmount: 1
+  chargeUpDelay: 0
   CollideOnSpawnLayermask:
     serializedVersion: 2
     m_Bits: 4294966527
   weaponVisualisation: {fileID: 114300704509053406, guid: 64821efa7d94f774295428886c6e4c4d,
     type: 2}
+  weaponChargingVisualisation: {fileID: 0}
   onFiredClip: {fileID: 0}
   onHitClip: {fileID: 0}
   onFiredParticleSystem: {fileID: 0}

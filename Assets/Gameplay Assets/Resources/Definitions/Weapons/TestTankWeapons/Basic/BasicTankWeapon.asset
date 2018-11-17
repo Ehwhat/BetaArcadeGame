@@ -21,8 +21,14 @@ MonoBehaviour:
   maxDurability: 100
   perShotDuribilityCost: 10
   rarity: 0.5
+  shakeAmount: 1
+  chargeUpDelay: 0
+  CollideOnSpawnLayermask:
+    serializedVersion: 2
+    m_Bits: 0
   weaponVisualisation: {fileID: 114300704509053406, guid: 64821efa7d94f774295428886c6e4c4d,
     type: 2}
+  weaponChargingVisualisation: {fileID: 0}
   onFiredClip: {fileID: 8300000, guid: 316aca8698481974d96d3828f80b3273, type: 3}
   onHitClip: {fileID: 0}
   onFiredParticleSystem: {fileID: 198171685806453848, guid: 31e8602136db7a34db0e8ac2279e70fe,

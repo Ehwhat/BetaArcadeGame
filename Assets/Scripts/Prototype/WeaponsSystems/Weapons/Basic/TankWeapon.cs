@@ -48,6 +48,7 @@ public class TankWeapon : Weapon
     public LayerMask CollideOnSpawnLayermask;
 
     public WeaponVisualisation weaponVisualisation;
+    public WeaponChargingVisualisation weaponChargingVisualisation;
 
     public AudioClip onFiredClip;
     public AudioClip onHitClip;
@@ -79,9 +80,12 @@ public class TankWeapon : Weapon
         
     }
 
+    public virtual void OnWeaponEquipted(TankWeaponHolder holder) { }
+    public virtual void OnWeaponUnequipted(TankWeaponHolder holder) { }
+
     public virtual void OnFiringUp(Vector2 position, Vector2 direction, TankWeaponHolder holder)
     {
-
+        chargeUpElapsedTime = 0;
     }
 
     protected virtual bool OnCharge(Vector2 position, Vector2 direction, TankWeaponHolder holder, float chargeAmount)
