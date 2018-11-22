@@ -1421,6 +1421,11 @@ Prefab:
       propertyPath: amountCurve.m_Curve.Array.data[1].outSlope
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114514372440751254, guid: 7ed180144c8834043bc8f8dc88df307c,
+        type: 2}
+      propertyPath: changeToNew
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7ed180144c8834043bc8f8dc88df307c, type: 2}
   m_IsPrefabParent: 0
