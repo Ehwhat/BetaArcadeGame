@@ -11,8 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b0652827ab80f4ebaec8935d6cbeb0, type: 3}
   m_Name: BasicShotSound
   m_EditorClassIdentifier: 
-  pitchMin: 0.5
-  pitchMax: 2
-  volumeMin: 0.6
-  volumeMax: 0.8
+  pitchMin: 0.8
+  pitchMax: 1.4
+  volumeMin: 1
+  volumeMax: 1
   clip: {fileID: 8300000, guid: 316aca8698481974d96d3828f80b3273, type: 3}

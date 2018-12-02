@@ -15,6 +15,11 @@ public class PlayerTankController : TankController {
             convertedState = new PlayerTankControllerState();
         }
 
+        if (manager.isDead)
+        {
+            return convertedState;
+        }
+
         InputDevice inputDevice = GameInput.GetPlayerDevice(convertedState.player);
 
         if(inputDevice == null)

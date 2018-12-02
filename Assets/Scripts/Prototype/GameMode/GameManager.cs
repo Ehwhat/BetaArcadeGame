@@ -19,8 +19,13 @@ public class GameManager : MonoBehaviour {
     private GamemodeDefinition gameMode;
     private int latestTankId = 0;
 
-	void Start () {
+    public float RespawnTime
+    {
+        get { return gameMode.respawnTime; }
+    }
 
+	void Start () {
+        gameMode = gameData.gamemode;
         for (int i = 0; i < gameData.playersData.Length; i++)
         {
             gameData.playersData[i].SetIsInGame(false);
@@ -28,7 +33,6 @@ public class GameManager : MonoBehaviour {
 
         CreatePlayers();
         SpawnPlayers();
-        gameMode = gameData.gamemode;
         gameMode.OnGameStart(this);
         announcerQuipSystem.SayQuip("Hello Audience!");
 
@@ -113,6 +117,7 @@ public class GameManager : MonoBehaviour {
         PlayerTankManager manager = players[player];
         manager.transform.position = position;
         manager.gameObject.SetActive(true);
+        manager.SetRespawnParameters(gameMode.respawnTime, GetRespawnLocation);
         manager.ClearTrails();
     }
 
@@ -124,12 +129,32 @@ public class GameManager : MonoBehaviour {
         return tank;
     }
 
-    public void RespawnPlayer(int player)
+    private Vector3 GetRespawnLocation()
     {
-        List<Transform> playerSpawners = levelManager.GetSpawnPositions();
-        int random = Random.Range(0, playerSpawners.Count);
-        SpawnPlayer(player, playerSpawners[random].position);
-        players[player].Respawn();
+        var spawnLocations = levelManager.spawnPoints;
+
+        Vector3 bestPosition = spawnLocations[0].position;
+        float bestScore = 0;
+        for (int j = 0; j < currentTanks.Count; j++)
+        {
+            bestScore += (currentTanks[j].transform.position - bestPosition).sqrMagnitude;
+        }
+
+        for (int i = 0; i < spawnLocations.Length; i++)
+        {
+            Vector3 point = spawnLocations[i].position;
+            float score = 0;
+            for (int j = 0; j < currentTanks.Count; j++)
+            {
+                score += (currentTanks[j].transform.position - point).sqrMagnitude;
+            }
+            if(score > bestScore)
+            {
+                bestPosition = point;
+                bestScore = score;
+            }
+        }
+        return bestPosition;
     }
 
     public bool IsPlayerValid(int player)

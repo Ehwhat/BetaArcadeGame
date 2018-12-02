@@ -29,7 +29,7 @@ MonoBehaviour:
   weaponVisualisation: {fileID: 114300704509053406, guid: 64821efa7d94f774295428886c6e4c4d,
     type: 2}
   weaponChargingVisualisation: {fileID: 0}
-  onFiredClip: {fileID: 11400000, guid: c338f43ec598a034982632c5d65b0c9a, type: 2}
+  onFiredClip: {fileID: 11400000, guid: 8dc9a4e022ad5b447a0f91f7d270496e, type: 2}
   onHitClip: {fileID: 0}
   onFiredParticleSystem: {fileID: 198171685806453848, guid: 31e8602136db7a34db0e8ac2279e70fe,
     type: 2}

@@ -1,4 +1,4 @@
-﻿Shader "Unlit/PhaseShader"
+﻿Shader "Unlit/TankShader"
 {
 	Properties
 	{
@@ -10,17 +10,7 @@
 		[HideInInspector] _Flip("Flip", Vector) = (1,1,1,1)
 		[PerRendererData] _AlphaTex("External Alpha", 2D) = "white" {}
 		[PerRendererData] _EnableExternalAlpha("Enable External Alpha", Float) = 0
-		_Noise("Noise Texture", 2D) = "white" {}
-		_NoiseShiftTex("Noise Shift Texture", 2D) = "white"{}
-		_NoiseShift("Noise Shift Amount", Range(-1,1)) = 0
-		_WorldScaling("Noise World Scaling", Float) = 1
 		_Amount("Amount", Range(0,1)) = 0
-		_AmountMin("Amount Minimum", Float) = 0
-		_AmountMax("Amount Maximum", Float) = 1
-		_Leway("Leway", Range(0,1)) = 0.05
-		_EdgeLeway("Edge Leway", Range(0,1)) = 0.07
-		_EdgeShift("Edge Shift", Range(0,1)) = 0
-		_WorldPos("World Pos", Vector) = (0,0,0,0)
 	}
 	SubShader
 	{
@@ -89,7 +79,7 @@
 			float4 vertex   : SV_POSITION;
 			fixed4 color : COLOR;
 			float2 texcoord : TEXCOORD0;
-			float2 worldPos : TEXCOORD1;
+			float3 worldPos : TEXCOORD1;
 			UNITY_VERTEX_INPUT_INSTANCE_ID
 		};
 
@@ -100,7 +90,6 @@
 
 		UNITY_INSTANCING_BUFFER_START(Props)
 			UNITY_DEFINE_INSTANCED_PROP(float, _Amount)
-			UNITY_DEFINE_INSTANCED_PROP(float2, _WorldPos)
 			UNITY_INSTANCING_BUFFER_END(Props)
 
 		v2f SpriteVert(appdata_t IN)
@@ -115,13 +104,11 @@
 			OUT.vertex = UnityObjectToClipPos(OUT.vertex);
 			OUT.texcoord = IN.texcoord;
 			OUT.color = IN.color * _Color * _RendererColor;
+			OUT.worldPos = mul(unity_ObjectToWorld, IN.vertex);
 
 			#ifdef PIXELSNAP_ON
 			OUT.vertex = UnityPixelSnap(OUT.vertex);
 			#endif
-
-			float2 pos = UNITY_ACCESS_INSTANCED_PROP(Props, _WorldPos);
-			OUT.worldPos = pos.xy + IN.vertex.xy;
 
 			return OUT;
 		}
@@ -142,38 +129,29 @@
 		}
 
 			float4 _EdgeColour;
-			sampler2D _Noise;
-			sampler2D _NoiseShiftTex;
-			float4 _NoiseShiftTex_ST;
-			float4 _Noise_ST;
 
-			float _AmountMin;
-			float _AmountMax;
-			float _NoiseShift;
-			float _WorldScaling;
-			float _Leway;
-			float _EdgeLeway;
-			float _EdgeShift;
-
-			
+		float SinWave(float x,float amplitude, float length, float speed){
+			return sin(((x+ (_Time.x * speed)) * length))*amplitude;
+		}
 
 		fixed4 CustomFrag(v2f i) : SV_Target
 		{
 			UNITY_SETUP_INSTANCE_ID(i);
-			// sample the texture
-			float amount = smoothstep(_AmountMin, _AmountMax, UNITY_ACCESS_INSTANCED_PROP(Props, _Amount));
-			float noise = 1-lerp(tex2D(_NoiseShiftTex, i.texcoord.xy).r, tex2D(_Noise, i.worldPos.xy * _WorldScaling).r, _NoiseShift);
 
-			float noiseModifer = smoothstep(amount -_Leway, amount +_Leway, noise -_Leway);
-			float edgeAmount = min(amount - _EdgeShift, amount);
-			float edgeModifer = smoothstep(edgeAmount - _EdgeLeway, edgeAmount + _EdgeLeway, noise - _EdgeLeway);
+			float2 coord = i.worldPos.xy*5;
+			float2 grid = abs(frac(coord - 0.5) - 0.5) / fwidth(coord*2);
+			float l = min(grid.x, grid.y);
+			float p = 1.0 - min(l, 1.0);
+			float4 gridColour = p * _EdgeColour;
 
-			if (UNITY_ACCESS_INSTANCED_PROP(Props, _Amount) >= 1)
-				edgeModifer = 0;
+		float sinWave = (SinWave(i.texcoord.x + 6, 0.1, 15, 4) + SinWave(i.texcoord.x + 32, 0.06, 2, 20) + SinWave(i.texcoord.x + 9, 0.02, 1, 40))/3;
+		float sinWave2 = (SinWave(i.texcoord.x + 12, 0.1, 15, 4) + SinWave(i.texcoord.x + 2, 0.06, 2, 20) + SinWave(i.texcoord.x +18, 0.02, 1, 40)) / 3;
+			float gridValue = step(_Amount, i.texcoord.y - 0.2 + sinWave2);
+			float edgeValue = step(_Amount, i.texcoord.y + 0.01 + sinWave);
+			float value = step(_Amount, i.texcoord.y - 0.01 + sinWave);
 
 			fixed4 c = SampleSpriteTexture(i.texcoord) * i.color;
-			c.a *= 1-noiseModifer;
-			c.rgb = lerp(c.rgb, _EdgeColour, edgeModifer);
+			c = lerp(lerp(lerp(c, _EdgeColour, edgeValue), gridColour*c.a, value), 0, gridValue);
 			c.rgb *= c.a;
 				
 			return c;
