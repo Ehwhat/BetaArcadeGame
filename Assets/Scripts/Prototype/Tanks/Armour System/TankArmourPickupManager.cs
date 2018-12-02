@@ -30,18 +30,21 @@ public class TankArmourPickupManager : MonoBehaviour {
 
             Vector2 direction = (pickupsDetected[i].transform.position - transform.position).normalized;
             TankArmourPiece piece = manager.ReservePieceToward(direction, true);
-            piecesReserved.Add(piece);
-
-            float distance = Vector2.Distance(pickupsDetected[i].transform.position, piece.transform.position);
-            float speed = Mathf.SmoothStep(maxSpeed, minSpeed, (distance / pickupRadius)* (distance / pickupRadius))*Time.deltaTime;
-
-            if (distance < 0.5f)
+            if (piece != null)
             {
-                Destroy(pickupsDetected[i].gameObject);
-                manager.TryEnablePiece(piece);
-                continue;
+                piecesReserved.Add(piece);
+
+                float distance = Vector2.Distance(pickupsDetected[i].transform.position, piece.transform.position);
+                float speed = Mathf.SmoothStep(maxSpeed, minSpeed, (distance / pickupRadius) * (distance / pickupRadius)) * Time.deltaTime;
+
+                if (distance < 0.5f)
+                {
+                    Destroy(pickupsDetected[i].gameObject);
+                    manager.TryEnablePiece(piece);
+                    continue;
+                }
+                pickupsDetected[i].GetComponent<Rigidbody2D>().MovePosition(Vector2.MoveTowards(pickupsDetected[i].transform.position, piece.transform.position, speed));
             }
-            pickupsDetected[i].GetComponent<Rigidbody2D>().MovePosition(Vector2.MoveTowards(pickupsDetected[i].transform.position, piece.transform.position, speed));
             
         }
         for (int i = 0; i < piecesReserved.Count; i++)

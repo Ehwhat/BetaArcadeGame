@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour {
     public LevelManager levelManager;
     public GameUI uiManager;
 
+    public TMPro.TextMeshProUGUI winUI;
+
     public PlayerTankManager[] players = new PlayerTankManager[4];
     public List<TankManager> currentTanks = new List<TankManager>();
 
@@ -38,14 +40,37 @@ public class GameManager : MonoBehaviour {
         if(winResult.finished)
         {
             gameMode.OnGameEnd(this);
-            //StartCoroutine(GoBackToMainMenu());
-            
+            winUI.gameObject.SetActive(true);
+            if (winResult.winners.Count > 1)
+            {
+                winUI.SetText("EVERYONE'S A WINNER!");
+            }
+            else
+            {
+                winUI.SetText(players[winResult.winners[0]].tankDisplayName + " Wins!");
+            }
+            StartCoroutine(GoBackToMainMenu());
+
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            winUI.gameObject.SetActive(true);
+            if (winResult.winners.Count > 1)
+            {
+                winUI.SetText("EVERYONE'S A WINNER!");
+            }
+            else
+            {
+                winUI.SetText(players[winResult.winners[0]].tankDisplayName + " Wins!");
+            }
+            StartCoroutine(GoBackToMainMenu());
         }
     }
 
     IEnumerator GoBackToMainMenu()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 

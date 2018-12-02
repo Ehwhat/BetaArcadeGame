@@ -16,6 +16,7 @@ public class TankArmourManager : MonoBehaviour {
 
     public TankManager tankManager;
     public TankArmourPiece[] armourPieces;
+   
     private bool hasSpawnedArmour = false;
     private int armourCount = 0;
 

@@ -17,9 +17,9 @@ MonoBehaviour:
   - position: {x: 0, y: 0.9}
     angle: 0
   firingDelay: 1
-  useDuribility: 0
+  useDuribility: 1
   maxDurability: 1
-  perShotDuribilityCost: 0
+  perShotDuribilityCost: 1
   rarity: 0.1
   shakeAmount: 1
   chargeUpDelay: 1
@@ -29,6 +29,20 @@ MonoBehaviour:
   weaponVisualisation: {fileID: 114046718853980232, guid: 92d2c75fd59c1b84da2bc474ef771983,
     type: 2}
   weaponChargingVisualisation: {fileID: 0}
-  onFiredClip: {fileID: 0}
+  onFiredClip: {fileID: 11400000, guid: ed94354f5088ab14dbe27568bc7bf039, type: 2}
   onHitClip: {fileID: 0}
   onFiredParticleSystem: {fileID: 0}
+  autoAimType: 2
+  autoAimRange: 40
+  autoAimArcAngle: 10
+  autoAimDegreesPerSecond: 1e+15
+  autoAimOffsetMagnitude: 0
+  autoAimCycles: 3
+  autoAimPredictedProjectileSpeed: 9999
+  autoAimPriorityMix: 0.78
+  autoAimLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  autoAimBlockingLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295

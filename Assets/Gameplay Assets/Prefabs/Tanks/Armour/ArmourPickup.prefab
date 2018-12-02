@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84065168c52c61040803b473353e61ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownTime: 8
 --- !u!212 &212805590304960502
 SpriteRenderer:
   m_ObjectHideFlags: 1

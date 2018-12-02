@@ -20,7 +20,7 @@ public class TankMovement : MonoBehaviour {
     private Vector2 lastVelocityDirection;
     private bool boosting;
 
-    private float speedModifer = 1;
+    public float speedModifer = 1;
 
     void Start () {
         rigidbody = GetComponent<Rigidbody2D>();

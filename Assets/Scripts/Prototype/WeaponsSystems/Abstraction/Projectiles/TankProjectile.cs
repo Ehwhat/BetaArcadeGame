@@ -101,7 +101,6 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
     }
 
     public virtual void OnCharge(Vector3 firedPosition, Vector3 firedDirection, WeaponData weaponData, float chargeAmount) {
-        Debug.Log("On Charge " + chargeAmount);
     }
 
     public abstract void OnFired(Vector3 firedPosition, Vector3 firedDirection, WeaponData weaponData);
@@ -110,7 +109,12 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
 
     public bool AttemptToDamage(Collider2D collider, RaycastHit2D hit, TankProjectileInstance instance)
     {
-        TankProjectileDamageData hitData = new TankProjectileDamageData(damage, hit, this, instance);
+        return AttemptToDamage(collider, hit, instance, damage);
+    }
+
+    public bool AttemptToDamage(Collider2D collider, RaycastHit2D hit, TankProjectileInstance instance, float customDamage)
+    {
+        TankProjectileDamageData hitData = new TankProjectileDamageData(customDamage, hit, this, instance);
         switch (damageType)
         {
             case DamageType.Singular:

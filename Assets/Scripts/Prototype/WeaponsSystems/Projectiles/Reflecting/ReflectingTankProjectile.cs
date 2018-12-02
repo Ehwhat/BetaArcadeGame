@@ -14,6 +14,7 @@ public class ReflectingTankProjectile : BasicRepresentedTankProjectile<Reflectin
     public int reflectionLimit = 1;
     public bool destroyOnDamagableHit = true;
     public float radius = 0.5f;
+    public AudioObject onReflectClip;
 
     public override void UpdateProjectile(float deltaTime, ReflectingTankProjectileInstance instance)
     {
@@ -36,6 +37,8 @@ public class ReflectingTankProjectile : BasicRepresentedTankProjectile<Reflectin
         }
 
         instance.direction = Vector2.Reflect(instance.direction, hit.normal);
+
+        AudioPlayer.PlayOneOff(onReflectClip);
 
         instance.reflectionCount++;
         instance.canHitSelf = true;

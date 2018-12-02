@@ -15,7 +15,6 @@ MonoBehaviour:
   damageType: 0
   explosiveFalloff: 2
   explosiveRange: 1
-  hitOwnTank: 0
   projectileLayerMask:
     serializedVersion: 2
     m_Bits: 4294966783
@@ -27,3 +26,5 @@ MonoBehaviour:
   projectileSpeed: 20
   reflectionLimit: 4
   destroyOnDamagableHit: 1
+  radius: 0.5
+  onReflectClip: {fileID: 11400000, guid: 6d3deffd7910153469c570b5ca29a63f, type: 2}

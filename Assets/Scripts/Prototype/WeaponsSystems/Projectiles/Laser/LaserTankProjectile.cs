@@ -11,7 +11,9 @@ public class LaserTankProjectileInstance : TankProjectileInstance
 [CreateAssetMenu(menuName = "Tanks/Projectiles/New Laser Tank Projectile", fileName = "New Laser Tank Projectile")]
 public class LaserTankProjectile : RepresentedTankProjectile<LaserTankProjectileInstance>
 {
+    public float radius = 0.2f;
     public float projectileRange = 100;
+    public float damageReduction = 5f;
 
     public override void OnCharge(Vector3 firedPosition, Vector3 firedDirection, WeaponData weaponData, float chargeAmount)
     {
@@ -40,14 +42,21 @@ public class LaserTankProjectile : RepresentedTankProjectile<LaserTankProjectile
 
     private void Fire(LaserTankProjectileInstance instance)
     {
-        RaycastHit2D[] hits = Physics2D.RaycastAll(instance.position, instance.direction, projectileRange, projectileLayerMask);
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(instance.position, radius, instance.direction, projectileRange, projectileLayerMask);
         if (hits.Length > 0)
         {
+            float tempDamage = damage;
             foreach (RaycastHit2D hit in hits)
             {
                 if (hit.collider.transform.root == instance.weaponData.holder.transform.root)
                     continue;
-                AttemptToDamage(hit.collider, hit, instance);
+                AttemptToDamage(hit.collider, hit, instance, tempDamage);
+                tempDamage -= damageReduction;
+                if(tempDamage <= 0)
+                {
+                    break;
+                }
+                
             }
         }
         instance.representation.Destroy();

@@ -53,6 +53,11 @@ public class TurretController : MonoBehaviour {
         weaponHolder.SetWeapon(weapon);
     }
 
+    public void ResetWeapon()
+    {
+        weaponHolder.EquipDefaultWeapon();
+    }
+
     private void RotateToVector(Vector2 vector)
     {
         if(vector.sqrMagnitude <= 0.05f)

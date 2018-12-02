@@ -50,31 +50,30 @@ public class TankWeapon : Weapon
     public WeaponVisualisation weaponVisualisation;
     public WeaponChargingVisualisation weaponChargingVisualisation;
 
-    public AudioClip onFiredClip;
+    public AudioObject onFiredClip;
     public AudioClip onHitClip;
 
     public ParticleSystem onFiredParticleSystem;
-    private float chargeUpElapsedTime;
 
     public virtual void OnFiringDown(Vector2 position, Vector2 direction, TankWeaponHolder holder)
     {
-        chargeUpElapsedTime = 0;
+        holder.chargeUpElapsedTime = 0;
     }
 
     public virtual void OnFiringHold(Vector2 position, Vector2 direction, TankWeaponHolder holder)
     {
         if (holder.lastFired + firingDelay < Time.time)
         {
-            if (chargeUpElapsedTime < chargeUpDelay)
+            if (holder.chargeUpElapsedTime < chargeUpDelay)
             {
-                OnCharge(position, direction, holder, chargeUpElapsedTime / chargeUpDelay);
-                chargeUpElapsedTime += Time.deltaTime;
+                OnCharge(position, direction, holder, holder.chargeUpElapsedTime / chargeUpDelay);
+                holder.chargeUpElapsedTime += Time.deltaTime;
             }
             else
             {
                 FireProjectile(position, direction, holder);
                 holder.OnWeaponFired();
-                chargeUpElapsedTime = 0;
+                holder.chargeUpElapsedTime = 0;
             }
         }
         
@@ -85,7 +84,8 @@ public class TankWeapon : Weapon
 
     public virtual void OnFiringUp(Vector2 position, Vector2 direction, TankWeaponHolder holder)
     {
-        chargeUpElapsedTime = 0;
+        holder.chargeUpElapsedTime = 0;
+        OnCharge(position, direction, holder, holder.chargeUpElapsedTime / chargeUpDelay);
     }
 
     protected virtual bool OnCharge(Vector2 position, Vector2 direction, TankWeaponHolder holder, float chargeAmount)

@@ -54,6 +54,22 @@ public class TankArmourManagerEditor : Editor {
             }
         }
 
+        if (GUILayout.Button("Spawn Prefab Pieces"))
+        {
+            for (int i = 0; i < manager.armourPieces.Length; i++)
+            {
+                manager.armourPieces[i].CreateRepresentation(); 
+            }
+        }
+
+        if (GUILayout.Button("Delete Prefab Pieces"))
+        {
+            for (int i = 0; i < manager.armourPieces.Length; i++)
+            {
+                DestroyImmediate(manager.armourPieces[i].tankPieceRepresentation);
+            }
+        }
+
         EditorGUILayout.HelpBox(
             "Controls:\n\n" +
             "Hold CTRL to interact with armour system\n\n" +

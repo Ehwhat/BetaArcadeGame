@@ -24,6 +24,7 @@ public class TankWeaponHolder : MonoBehaviour {
 
     public float lastFired = 0;
     public float currentDurability = 0;
+    public float chargeUpElapsedTime;
     public bool equiptOnStart;
 
     public void Start()
@@ -61,6 +62,7 @@ public class TankWeaponHolder : MonoBehaviour {
             currentVisualisation = Instantiate(weapon.weaponVisualisation, visualisationHolder);
         }
         lastFired = -weapon.firingDelay;
+        chargeUpElapsedTime = 0;
         currentDurability = weapon.maxDurability;
 
         if (ownerTank is PlayerTankManager) {
@@ -98,6 +100,7 @@ public class TankWeaponHolder : MonoBehaviour {
         {
             Destroy(currentVisualisation.gameObject);
         }
+        chargeUpElapsedTime = 0;
     }
 
     public void EquipDefaultWeapon()
@@ -125,13 +128,14 @@ public class TankWeaponHolder : MonoBehaviour {
 
     public void OnWeaponFired()
     {
+        chargeUpElapsedTime = 0;
         if (activeParticleSystem)
         {
             activeParticleSystem.Play();
         }
         if (weapon.onFiredClip)
         {
-            audioPlayer.PlayOneShot(weapon.onFiredClip);
+            AudioPlayer.PlayOneOff(weapon.onFiredClip);
         }
         lastFired = Time.time;
         if (weapon.useDuribility)

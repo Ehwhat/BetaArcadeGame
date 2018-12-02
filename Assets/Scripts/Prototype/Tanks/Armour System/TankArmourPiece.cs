@@ -34,7 +34,7 @@ public class TankArmourPiece : MonoBehaviour, IRequiredPiece, IRequiresPieces {
     public RequirementType requirementType = RequirementType.And;
     public bool reserved = false;
 
-    private GameObject tankPieceRepresentation;
+    public GameObject tankPieceRepresentation;
 
     public void Start()
     {

@@ -70,10 +70,11 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
             }
         }
 
+        win.winners = bestPlayers;
+
         if (timeElapsed > System.TimeSpan.FromMinutes(timerMinutes).TotalSeconds)
         {
             win.finished = true;
-            win.winners = bestPlayers;
         }
         else
         {

@@ -32,6 +32,7 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
     public float health;
     public bool isDead = false;
     public float armourMinSpeedModifer = 0.3f;
+    public AnimationCurve tankSpeedModCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
 
     private TankController _internalController;
@@ -46,7 +47,7 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
 
     private void ChangeArmourSpeedModifer(TankArmourPiece piece, float percent)
     {
-        tankMovement.SetSpeedModifer(Mathf.SmoothStep(1, armourMinSpeedModifer, percent));
+        tankMovement.SetSpeedModifer(Mathf.SmoothStep(1, armourMinSpeedModifer, tankSpeedModCurve.Evaluate(percent)));
     }
 
     private void Update()
@@ -81,6 +82,7 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
                     gameObject.SetActive(false);
                     SpawnDeathParticles();
                     armourPickupManager.EjectArmourPickups();
+                    
                 }
             }
             else
@@ -110,6 +112,11 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
         gameObject.SetActive(true);
         health = maxHealth;
         isDead = false;
+        tankMovement.speedModifer = 1;
+        for (int i = 0; i < turrets.Count; i++)
+        {
+            turrets[i].ResetWeapon();
+        }
     }
 
     public virtual void GiveWeapon(TankWeapon weapon)
