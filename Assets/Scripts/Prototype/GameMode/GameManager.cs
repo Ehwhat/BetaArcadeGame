@@ -36,6 +36,12 @@ public class GameManager : MonoBehaviour {
         gameMode.OnGameStart(this);
         announcerQuipSystem.SayQuip("Hello Audience!");
 
+        Shader.SetGlobalVectorArray("_PlayerColours", new Vector4[] {
+            gameData.playersData[0].playerColour,
+            gameData.playersData[1].playerColour,
+            gameData.playersData[2].playerColour,
+            gameData.playersData[3].playerColour});
+
     }
 	
 	void Update () {
@@ -70,6 +76,21 @@ public class GameManager : MonoBehaviour {
             }
             StartCoroutine(GoBackToMainMenu());
         }
+
+        Vector4[] playerPositions = new Vector4[4];
+        for (int i = 0; i < 4; i++)
+        {
+            if (IsPlayerValid(i))
+            {
+                playerPositions[i] = new Vector4(players[i].transform.position.x, players[i].transform.position.y, players[i].transform.position.z, 1);
+            }
+            else
+            {
+                playerPositions[i] = Vector4.zero;
+            }
+        }
+        Shader.SetGlobalVectorArray("_PlayerPositions", playerPositions);
+
     }
 
     IEnumerator GoBackToMainMenu()

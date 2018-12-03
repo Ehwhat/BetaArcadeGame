@@ -10,6 +10,8 @@ public class TankArmourPickupManager : MonoBehaviour {
     public float minSpeed = 1f;
     public float maxSpeed = 8f;
 
+    public bool refusePickups = false;
+
     public void Start()
     {
         
@@ -17,7 +19,8 @@ public class TankArmourPickupManager : MonoBehaviour {
 
     public void Update()
     {
-        AttractArmourPickups();
+        if(!refusePickups)
+            AttractArmourPickups();
     }
 
     public void AttractArmourPickups()
@@ -56,6 +59,10 @@ public class TankArmourPickupManager : MonoBehaviour {
 
     public void EjectArmourPickups()
     {
+        if(manager.armourCount <= 0)
+        {
+            return;
+        }
         List<TankArmourPickup> pickups = manager.RemoveAll();
 
         for (int i = 0; i < pickups.Count; i++)

@@ -142,16 +142,16 @@
 			float2 grid = abs(frac(coord - 0.5) - 0.5) / fwidth(coord*2);
 			float l = min(grid.x, grid.y);
 			float p = 1.0 - min(l, 1.0);
-			float4 gridColour = p * _EdgeColour;
+			float4 gridColour = float4(_EdgeColour.xyz, p);
 
 		float sinWave = (SinWave(i.texcoord.x + 6, 0.1, 15, 4) + SinWave(i.texcoord.x + 32, 0.06, 2, 20) + SinWave(i.texcoord.x + 9, 0.02, 1, 40))/3;
 		float sinWave2 = (SinWave(i.texcoord.x + 12, 0.1, 15, 4) + SinWave(i.texcoord.x + 2, 0.06, 2, 20) + SinWave(i.texcoord.x +18, 0.02, 1, 40)) / 3;
-			float gridValue = step(_Amount, i.texcoord.y - 0.2 + sinWave2);
-			float edgeValue = step(_Amount, i.texcoord.y + 0.01 + sinWave);
-			float value = step(_Amount, i.texcoord.y - 0.01 + sinWave);
+			float gridValue = smoothstep(_Amount+0.15, _Amount + 0.2, i.texcoord.y + sinWave2);
+			float edgeValue = smoothstep(_Amount-0.02, _Amount-0.01, i.texcoord.y + sinWave);
+			float value = smoothstep(_Amount, _Amount + 0.1, i.texcoord.y + sinWave);
 
 			fixed4 c = SampleSpriteTexture(i.texcoord) * i.color;
-			c = lerp(lerp(lerp(c, _EdgeColour, edgeValue), gridColour*c.a, value), 0, gridValue);
+			c = lerp(lerp(lerp(c, _EdgeColour, edgeValue*c.a), gridColour*c.a, value), float4(_EdgeColour.xyz, 0), gridValue);
 			c.rgb *= c.a;
 				
 			return c;

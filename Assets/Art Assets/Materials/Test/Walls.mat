@@ -90,7 +90,7 @@ Material:
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecExponent: 13.8
-    - _SpecStrength: 1.29
+    - _SpecStrength: 1
     - _SpecularHighlights: 1
     - _SpotlightHardness: 2.67
     - _SrcBlend: 1

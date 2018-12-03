@@ -69,12 +69,13 @@ public class TankWeaponHolder : MonoBehaviour {
             PlayerTankData data = (ownerTank as PlayerTankManager).data;
             Color colour = data.playerColour;
             Color colourEnd = new Color(colour.r, colour.g, colour.b, 0);
-            BarrelAimingIndicator barrelAimingIndicator = currentVisualisation.GetComponentInChildren<BarrelAimingIndicator>();
-            if (barrelAimingIndicator)
+            BarrelAimingIndicator[] barrelAimingIndicators = currentVisualisation.GetComponentsInChildren<BarrelAimingIndicator>();
+            for (int i = 0; i < barrelAimingIndicators.Length; i++)
             {
-                barrelAimingIndicator.barrelLineRendeer.startColor = colour;
-                barrelAimingIndicator.barrelLineRendeer.endColor = colourEnd;
+                barrelAimingIndicators[i].barrelLineRendeer.startColor = colour;
+                barrelAimingIndicators[i].barrelLineRendeer.endColor = colourEnd;
             }
+
         }
         lastWeapon = weapon;
         weapon.OnWeaponEquipted(this);

@@ -28,7 +28,7 @@ MonoBehaviour:
   CollideOnSpawnLayermask:
     serializedVersion: 2
     m_Bits: 4294966527
-  weaponVisualisation: {fileID: 114300704509053406, guid: 64821efa7d94f774295428886c6e4c4d,
+  weaponVisualisation: {fileID: 114300704509053406, guid: f571f2fbc239bf544936545c791d6e2c,
     type: 2}
   weaponChargingVisualisation: {fileID: 0}
   onFiredClip: {fileID: 11400000, guid: 89172178f1fb3b940ae83daa990e5a2d, type: 2}
