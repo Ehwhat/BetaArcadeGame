@@ -13,16 +13,15 @@ public class SoundSystem : MonoBehaviour
     //Random pitch modulation
 
     //might just be a music thingy rather than an int, but as an idea
-    private int Current_Track_ID = 0;
+    private int Current_Track_ID;
     private int Current_Track_Time = 0;
     //Maybe for fade ins or something?
     private int Alt_Track_ID;
     private int Alt_Track_Time = 0;
 
-    private bool Current_Exists = false;
-    private bool Alt_Exists = false;
-    private bool Paused;
-    private bool Switched;
+    private bool Switched = false;
+    private bool Switchable = false;
+    private bool Playing = false;
 
     public AudioSource Playing_Music;
 
@@ -31,60 +30,94 @@ public class SoundSystem : MonoBehaviour
 
     public GameObject soundprefab;
 
+    public void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
+
     public void Start()
     {
-        Play_New_Track(0);
+         Play_New_Track(0);
         // Play_Sound(0);
+        //Play_Dynamic_Tracks(0, 0);
     }
 
     public void Play_Sound(int Sound_ID)
     {
         GameObject x = Instantiate(soundprefab);
         x.GetComponent<SoundDestructionScript>().audioclip_ = Sounds[Sound_ID];
-        //create Sound thing
-        //access Sound and apply it
-        //play Sound
     }
 
-   /* public void Stop_Music()
+    public void Stop_Music()
     {
-        Current_Exists = false;
-        Alt_Exists = false;
-    }*/
+        Playing_Music.Stop();
+    }
 
     public void Play_New_Track(int Track_ID)
     {
         if (Music[Track_ID] != null)
         {
             Playing_Music.clip = Music[Track_ID];
-            Current_Exists = true;
-            Alt_Exists = false;
             Playing_Music.Play();
+            Playing = true;
+            Current_Track_ID = Track_ID;
         }
         else
         {
             Debug.Log("No music found");
+            Playing = false;
+            //Stop Music
         }
     }
-    /*
+
+    
     public void Pause_Track()
     {
-        Paused = true;
+        Playing_Music.Pause();
     }
-
+    
     public void Unpause_Track()
     {
-        Paused = false;
+        Playing_Music.UnPause();
     }
-
-    public void Play_Dynamic_Tracks(int Track_ID, int Alt_Track_ID)
+    
+    public void Play_Dynamic_Tracks(int Track_ID, int Alt_ID)
     {
-        Current_Exists = true;
-        Alt_Exists = true;
+        Play_New_Track(Track_ID);
+        if (Music[Alt_ID] != null && Playing == true)
+        {
+            Alt_Track_ID = Alt_ID;
+            Switchable = true;
+        }
+        else
+        {
+            Debug.Log("No Alternate music found");
+            Switchable = false;
+        }
+        Switched = false;
     }
 
+    //I think this theoretically works?
+    //????????????
+    //Need to use "Play_Dynamic_Tracks" before this one
     public void Switch_Dynamic_Tracks()
     {
-        Switched = !Switched;
-    }*/
+        if (Switchable == true)
+        {
+            float time = Playing_Music.time;
+            if (Switched == true)
+            {
+                Playing_Music.clip = Music[Current_Track_ID];
+                Playing_Music.time = time;
+                Playing_Music.Play();
+            }
+            else
+            {
+                Playing_Music.clip = Music[Alt_Track_ID];
+                Playing_Music.time = time;
+                Playing_Music.Play();
+            }
+            Switched = !Switched;
+        }
+    }
 }

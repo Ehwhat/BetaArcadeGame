@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4096194942154418}
   - component: {fileID: 82070537218591248}
-  - component: {fileID: 114382425962707912}
+  - component: {fileID: 114427837614650972}
   m_Layer: 0
   m_Name: SoundPrefab
   m_TagString: Untagged
@@ -121,7 +121,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114382425962707912
+--- !u!114 &114427837614650972
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1976516574508238}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43c29f1683b261246a1d255d19060cfe, type: 3}
+  m_Script: {fileID: 11500000, guid: 0175cb9ec71e6e740a08b5bb605cd9f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioclip_: {fileID: 0}
