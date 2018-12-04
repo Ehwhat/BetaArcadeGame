@@ -10,17 +10,15 @@
 // Note: Finn is responsible for spelling 'colour' with a U throughout this shader. Find/replace if you must.
 
 
-Shader "SpriteLamp/Standard"
+Shader "SpriteLamp/Standard_PerTexel"
 {
     Properties
     {
-		_TintColor("Tint Color", Color) = (1,1,1,1)
         _MainTex ("Diffuse Texture", 2D) = "white" {}		//Alpha channel is plain old transparency
         _NormalDepth ("Normal Depth", 2D) = "bump" {} 		//Normal information in the colour channels, depth in the alpha channel.
         _SpecGloss ("Specular Gloss", 2D) = "" {}			//Specular colour in the colour channels, and glossiness in the alpha channel.
         _AmbientOcclusion ("Ambient Occlusion", 2D) = "" {} //A greyscale value for precomputed ambient occlusion - not very compact.
         _EmissiveColour ("Emissive colour", 2D) = "" {}		//A colour image that is simply added over the final colour. Might eventually have AO packed into its alpha channel.
-		_TilingFactor ("Tiling Factor", Vector) = (1,1,0,0)
        
         _SpecExponent ("Specular Exponent", Range (1.0,50.0)) = 10.0		//Multiplied by the alpha channel of the spec map to get the specular exponent.
         _SpecStrength ("Specular Strength", Range (0.0,5.0)) = 1.0		//Multiplier that affects the brightness of specular highlights
@@ -33,7 +31,7 @@ Shader "SpriteLamp/Standard"
         _AmbientOcclusionStrength("Ambient Occlusion Strength", Range (0,1.0)) = 0.0	//Determines how strong the effect of the ambient occlusion map is.
         _EmissiveStrength("Emissive strength", Range(0, 1.0)) = 0.0	//Emissive map is multiplied by this.
         _AttenuationMultiplier("Attenuation multiplier", Range(0.1, 5.0)) = 1.0	//Distance is multiplied by this for purposes of calculating attenuation
-		_SpotlightHardness("Spotlight hardness", Range(1.0, 10.0)) = 2.0	//Higher number makes the edge of a spotlight harder.
+        _SpotlightHardness("Spotlight hardness", Range(1.0, 10.0)) = 2.0	//Higher number makes the edge of a spotlight harder.
     }
 
     SubShader
@@ -52,7 +50,7 @@ Shader "SpriteLamp/Standard"
 		ZWrite Off
 		Fog { Mode Off }
 		Blend SrcAlpha OneMinusSrcAlpha
-		ColorMask RGB
+		AlphaTest NotEqual 0.0
 		
         Pass
         {    
@@ -62,6 +60,7 @@ Shader "SpriteLamp/Standard"
 
             #pragma vertex vert  
             #pragma fragment frag 
+            #pragma target 3.0
 			
             #include "UnityCG.cginc"
             #include "AutoLight.cginc"
@@ -71,10 +70,6 @@ Shader "SpriteLamp/Standard"
             uniform sampler2D _SpecGloss;
             uniform sampler2D _AmbientOcclusion;
             uniform sampler2D _EmissiveColour;
-
-			fixed4 _TintColor;
-
-			uniform float4 _TilingFactor;
             uniform float4 _AboveAmbientColour;
             uniform float4 _BelowAmbientColour;
             uniform float _AmbientOcclusionStrength;
@@ -96,7 +91,6 @@ Shader "SpriteLamp/Standard"
                 float4 vertex : POSITION;
                 float4 color : COLOR;
                 float4 uv : TEXCOORD0;
-				UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             struct VertexOutput
@@ -106,20 +100,16 @@ Shader "SpriteLamp/Standard"
                 float2 uv : TEXCOORD0;
                 float4 posWorld : TEXCOORD1;
                 float4 posLight : TEXCOORD2;
-				UNITY_VERTEX_OUTPUT_STEREO
             };
 
             VertexOutput vert(VertexInput input) 
             {                
-				
                 VertexOutput output;
-				UNITY_SETUP_INSTANCE_ID(input);
-				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(output);
 
                 output.pos = UnityObjectToClipPos(input.vertex);
                 output.posWorld = mul(unity_ObjectToWorld, input.vertex);
 
-                output.uv = input.uv.xy * _TilingFactor.xy;
+                output.uv = input.uv.xy;
                 output.color = input.color;
 				output.posLight = mul(unity_WorldToLight, output.posWorld);
                 return output;
@@ -127,7 +117,7 @@ Shader "SpriteLamp/Standard"
 
             float4 frag(VertexOutput input) : COLOR
             {
-                float4 diffuseColour = tex2D(_MainTex, input.uv) * _TintColor *  input.color;
+                float4 diffuseColour = tex2D(_MainTex, input.uv);
                 float4 normalDepth = tex2D(_NormalDepth, input.uv);
                 float ambientOcclusion = tex2D(_AmbientOcclusion, input.uv).r;
                 float3 emissiveColour = tex2D(_EmissiveColour, input.uv).rgb;		
@@ -157,9 +147,48 @@ Shader "SpriteLamp/Standard"
 				
 				
 				
+				
                 float depthColour = normalDepth.a;
                 
-                float3 posWorld = input.posWorld.xyz;
+                
+                ////PER TEXEL STUFF STARTS////
+                //For per-texel lighting, we recreate the world position based on the sprite's UVs...
+                float2 positionOffset = input.uv;
+                float2 roundedUVs = input.uv;
+                
+                //Intervening here to round the UVs to the nearest 1.0/TextureRes to clamp the world position
+                //to the nearest pixel...
+                roundedUVs *= _TextureRes.xy;
+                roundedUVs = floor(roundedUVs) + 0.5;
+                roundedUVs /= _TextureRes.xy;
+                
+                
+                //This is the per-texel stuff! It's a work in progress - that's why it's commented out right now.
+                
+                float2 uvCorrection = input.uv - roundedUVs;
+                
+                //Get tangent and bitangent stuff:
+                float3 p_dx = ddx(input.posWorld.xyz);
+				float3 p_dy = ddy(input.posWorld.xyz);
+				//Rate of change of the texture coords
+				float2 tc_dx = ddx(input.uv.xy);
+				float2 tc_dy = ddy(input.uv.xy);
+				//Initial tangent and bitangent
+				
+				float3 fragTangent = ( tc_dy.y * p_dx - tc_dx.y * p_dy ) / (length(p_dy) * length(p_dy));
+				float3 fragBitangent = ( tc_dy.x * p_dx - tc_dx.x * p_dy ) / (length(p_dx) * length(p_dx));
+				
+				fragTangent /= (length(fragTangent) * length(fragTangent));
+				fragBitangent /= (length(fragBitangent) * length(fragBitangent));
+				
+				//This corrects for nonuniform scales that reverse the handedness of the whole thing.
+				float uvCross = clamp((cross(fragTangent, fragBitangent)).z * -10000000.0, -1.0, 1.0);
+				
+				float3 uVector = -normalize(fragTangent) * length(fragBitangent) * uvCross;
+				float3 vVector = normalize(fragBitangent) * length(fragTangent) * uvCross;
+                
+                float3 posWorld = input.posWorld.xyz + uVector * -uvCorrection.x + vVector * -uvCorrection.y;
+                ///PER TEXEL STUFF ENDS
 
                 posWorld.z -= depthColour * _AmplifyDepth;	//The fragment's Z position is modified based on the depth map value.
                 float3 vertexToLightSource;
@@ -188,7 +217,7 @@ Shader "SpriteLamp/Standard"
                 float3 moveVec = lightDirection.xyz * 0.006 * float3(1.0, aspectRatio, -1.0);
                 float thisHeight = depthColour * _AmplifyDepth;
                
-                float3 tapPos = float3(input.uv, thisHeight + 0.1);
+                float3 tapPos = float3(roundedUVs, thisHeight + 0.1);
                 //This loop traces along the light ray and checks if that ray is inside the depth map at each point.
                 //If it is, darken that pixel a bit.
                 for (int i = 0; i < 8; i++)
@@ -239,9 +268,9 @@ Shader "SpriteLamp/Standard"
                 float3 diffuseReflection = diffuseColour.xyz * input.color.xyz * _LightColor0.xyz * diffuseLevel;
                 float3 specularReflection = _LightColor0.xyz * input.color.xyz * specularLevel * specGlossValues.rgb * _SpecStrength;
                 
-                float4 finalColour = float4(diffuseReflection + specularReflection, diffuseColour.a * input.color.a) + ambientResult;
+                float4 finalColour = float4(diffuseReflection + specularReflection, diffuseColour.a) + ambientResult;
                 
-				return finalColour;
+                return finalColour;
                 
 
             }
@@ -260,7 +289,7 @@ Shader "SpriteLamp/Standard"
             #pragma fragment frag 
 			#pragma target 3.0
 
-            #include "UnityCG.cginc"
+			#include "UnityCG.cginc"
 			#include "AutoLight.cginc"
 			#pragma multi_compile_lightpass
 
@@ -268,10 +297,6 @@ Shader "SpriteLamp/Standard"
             uniform sampler2D _MainTex;
             uniform sampler2D _NormalDepth;
             uniform sampler2D _SpecGloss;
-
-			uniform float4 _TintColor;
-
-			uniform float4 _TilingFactor;
             uniform float4 _LightColor0;
             uniform float _SpecExponent;
             uniform float _AmplifyDepth;
@@ -280,8 +305,9 @@ Shader "SpriteLamp/Standard"
             uniform float _LightWrap;
             uniform float _AttenuationMultiplier;
             uniform float _SpecStrength;
-			uniform float _SpotlightHardness;
             
+			uniform float _SpotlightHardness;
+
             struct VertexInput
             {
                 float4 vertex : POSITION;
@@ -305,10 +331,10 @@ Shader "SpriteLamp/Standard"
                 output.pos = UnityObjectToClipPos(input.vertex);
                 output.posWorld = mul(unity_ObjectToWorld, input.vertex);
 
-                output.uv = input.uv.xy * _TilingFactor.xy;
+                output.uv = input.uv.xy;
                 output.color = input.color;
 #ifndef DIRECTIONAL
-				output.posLight = mul(unity_WorldToLight, output.posWorld);
+					output.posLight = mul(unity_WorldToLight, output.posWorld);
 #endif
                 return output;
             }
@@ -316,7 +342,7 @@ Shader "SpriteLamp/Standard"
             float4 frag(VertexOutput input) : COLOR
             {
             	//Do texture reads first, because in theory that's a bit quicker...
-                float4 diffuseColour = tex2D(_MainTex, input.uv) * _TintColor * input.color;
+                float4 diffuseColour = tex2D(_MainTex, input.uv);
 				float4 normalDepth = tex2D(_NormalDepth, input.uv);				
 				float4 specGlossValues = tex2D(_SpecGloss, input.uv);
 				
@@ -328,27 +354,66 @@ Shader "SpriteLamp/Standard"
 				
                 float depthColour = normalDepth.a;
                 
-                float3 posWorld = input.posWorld.xyz;
+                ////PER TEXEL STUFF STARTS////
+                //For per-texel lighting, we recreate the world position based on the sprite's UVs...
+                float2 positionOffset = input.uv;
+                float2 roundedUVs = input.uv;
+                
+                //Intervening here to round the UVs to the nearest 1.0/TextureRes to clamp the world position
+                //to the nearest pixel...
+                roundedUVs *= _TextureRes.xy;
+                roundedUVs = floor(roundedUVs) + 0.5;
+                roundedUVs /= _TextureRes.xy;
+                
+                
+                //This is the per-texel stuff! It's a work in progress - that's why it's commented out right now.
+                
+                float2 uvCorrection = input.uv - roundedUVs;
+                
+                //Get tangent and bitangent stuff:
+                float3 p_dx = ddx(input.posWorld.xyz);
+				float3 p_dy = ddy(input.posWorld.xyz);
+				//Rate of change of the texture coords
+				float2 tc_dx = ddx(input.uv.xy);
+				float2 tc_dy = ddy(input.uv.xy);
+				//Initial tangent and bitangent
+				
+				float3 fragTangent = ( tc_dy.y * p_dx - tc_dx.y * p_dy ) / (length(p_dy) * length(p_dy));
+				float3 fragBitangent = ( tc_dy.x * p_dx - tc_dx.x * p_dy ) / (length(p_dx) * length(p_dx));
+				
+				fragTangent /= (length(fragTangent) * length(fragTangent));
+				fragBitangent /= (length(fragBitangent) * length(fragBitangent));
+				
+				//This corrects for nonuniform scales that reverse the handedness of the whole thing.
+				float uvCross = clamp((cross(fragTangent, fragBitangent)).z * -10000000.0, -1.0, 1.0);
+				
+				float3 uVector = -normalize(fragTangent) * length(fragBitangent) * uvCross;
+				float3 vVector = normalize(fragBitangent) * length(fragTangent) * uvCross;
+                
+                
+                
+                float3 posWorld = input.posWorld.xyz + uVector * -uvCorrection.x + vVector * -uvCorrection.y;
+                ///PER TEXEL STUFF ENDS
 
                 posWorld.z -= depthColour * _AmplifyDepth;	//The fragment's Z position is modified based on the depth map value.
                 float3 vertexToLightSource;
                 float3 lightDirection;
                 float attenuation;
-				
-                if (0.0 == _WorldSpaceLightPos0.w) // directional light?
-	            {
-	            	//This handles directional lights
-                	lightDirection = float3(mul(float4(_WorldSpaceLightPos0.xyz, 1.0), unity_ObjectToWorld).xyz);
-	              	lightDirection = normalize(lightDirection);
-	            } 
-	            else
-	            {
-                	vertexToLightSource = float3(_WorldSpaceLightPos0.xyz) - posWorld;
-                	lightDirection = float3(mul(float4(vertexToLightSource, 1.0), unity_ObjectToWorld).xyz);
-                	lightDirection = normalize(lightDirection);
-	            }
+				if (0.0 == _WorldSpaceLightPos0.w) // directional light?
+				{
+					//This handles directional lights
+					lightDirection = float3(mul(float4(_WorldSpaceLightPos0.xyz, 1.0), unity_ObjectToWorld).xyz);
+					lightDirection = normalize(lightDirection);
+				}
+				else
+				{
+					vertexToLightSource = float3(_WorldSpaceLightPos0.xyz) - posWorld;
+					lightDirection = float3(mul(float4(vertexToLightSource, 1.0), unity_ObjectToWorld).xyz);
+					lightDirection = normalize(lightDirection);
+				}
 				UNITY_LIGHT_ATTENUATION(attenVal, input, posWorld);
 				attenuation = attenVal;
+                                
                 
                 float aspectRatio = _TextureRes.x / _TextureRes.y;
                 
@@ -357,7 +422,7 @@ Shader "SpriteLamp/Standard"
                 float3 moveVec = lightDirection.xyz * 0.006 * float3(1.0, aspectRatio, -1.0);
                 float thisHeight = depthColour * _AmplifyDepth;
                
-                float3 tapPos = float3(input.uv, thisHeight + 0.1);
+                float3 tapPos = float3(roundedUVs, thisHeight + 0.1);
                 //This loop traces along the light ray and checks if that ray is inside the depth map at each point.
                 //If it is, darken that pixel a bit.
                 for (int i = 0; i < 8; i++)
@@ -405,11 +470,10 @@ Shader "SpriteLamp/Standard"
                 }
 
 				//The easy bits - assemble the final values based on light and map colours and combine.
-                float3 diffuseReflection = diffuseColour.xyz * input.color.xyz * _LightColor0.xyz * diffuseLevel;
-                float3 specularReflection = _LightColor0.xyz * input.color.xyz * specularLevel * specGlossValues.rgb * _SpecStrength;
-
+                float3 diffuseReflection = diffuseColour.xyz * input.color * _LightColor0.xyz * diffuseLevel;
+                float3 specularReflection = _LightColor0.xyz * input.color * specularLevel * specGlossValues.rgb * _SpecStrength;
                 
-                float4 finalColour = float4((diffuseReflection + specularReflection) * diffuseColour.a * input.color.a, 1);
+                float4 finalColour = float4((diffuseReflection + specularReflection) * diffuseColour.a, 0.0);
                 return finalColour;
                 
              }
@@ -417,4 +481,7 @@ Shader "SpriteLamp/Standard"
              ENDCG
         }
     }
+    // The definition of a fallback shader should be commented out 
+    // during development:
+    Fallback "Transparent/Diffuse"
 }

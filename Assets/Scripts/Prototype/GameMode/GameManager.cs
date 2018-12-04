@@ -46,6 +46,11 @@ public class GameManager : MonoBehaviour {
 	
 	void Update () {
 
+        if (Input.GetKey(KeyCode.K))
+        {
+            StageSpotlight.FollowTransform(players[0].transform);
+        }
+
         GamemodeDefinition.WinResult winResult = gameMode.VerifyWin(this, Time.deltaTime);
         if(winResult.finished)
         {

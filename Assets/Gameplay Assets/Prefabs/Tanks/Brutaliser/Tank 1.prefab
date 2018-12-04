@@ -628,7 +628,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1828523262845500
 GameObject:
   m_ObjectHideFlags: 1
@@ -949,7 +949,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1967612529336506}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.492891, y: 3.8587773, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4662669770416578}
@@ -3079,6 +3079,7 @@ MonoBehaviour:
   pickupRadius: 2
   minSpeed: 1
   maxSpeed: 8
+  refusePickups: 0
 --- !u!114 &114454770467765528
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3168,6 +3169,7 @@ MonoBehaviour:
   - {fileID: 114026475918125362}
   - {fileID: 114198237858427320}
   - {fileID: 114518223515716220}
+  armourCount: 0
 --- !u!114 &114507587069209108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14165,7 +14167,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 999
-  m_Sprite: {fileID: 21300000, guid: adcab62f7fa022348bf328b02765b29e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e2e76a95de55c042bad4fc35e918090, type: 3}
   m_Color: {r: 0, g: 0.95862055, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
