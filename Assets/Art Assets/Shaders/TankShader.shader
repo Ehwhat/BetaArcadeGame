@@ -90,6 +90,7 @@
 
 		UNITY_INSTANCING_BUFFER_START(Props)
 			UNITY_DEFINE_INSTANCED_PROP(float, _Amount)
+			UNITY_DEFINE_INSTANCED_PROP(float4, _EdgeColour)
 			UNITY_INSTANCING_BUFFER_END(Props)
 
 		v2f SpriteVert(appdata_t IN)
@@ -127,8 +128,6 @@
 
 			return color;
 		}
-
-			float4 _EdgeColour;
 
 		float SinWave(float x,float amplitude, float length, float speed){
 			return sin(((x+ (_Time.x * speed)) * length))*amplitude;

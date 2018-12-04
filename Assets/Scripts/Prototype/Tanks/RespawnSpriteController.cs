@@ -16,6 +16,11 @@ public class RespawnSpriteController : MonoBehaviour {
         outline.color = colour;
         colour.a = alphaLevel;
         center.color = colour;
+
+        MaterialPropertyBlock block = new MaterialPropertyBlock();
+        outline.GetPropertyBlock(block);
+        block.SetColor("_EdgeColour", colour);
+        outline.SetPropertyBlock(block);
     }
 	
 }

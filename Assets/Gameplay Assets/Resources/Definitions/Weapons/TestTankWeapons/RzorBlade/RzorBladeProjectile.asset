@@ -23,7 +23,7 @@ MonoBehaviour:
     m_Bits: 256
   projectileRepresentation: {fileID: 114761239099113436, guid: 92fc8376416e96541b9cbbe4c53ddd73,
     type: 2}
-  projectileSpeed: 20
+  projectileSpeed: 40
   reflectionLimit: 4
   destroyOnDamagableHit: 1
   radius: 0.5
