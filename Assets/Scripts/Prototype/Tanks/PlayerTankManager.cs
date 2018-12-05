@@ -6,6 +6,8 @@ public class PlayerTankManager : TankManager {
     public int playerIndex;
     public PlayerTankData data;
     public QuipSystemDefinition quipSystem;
+    public CharacterDefinition currentCharacter;
+    public CharacterDialogSystem dialogSystem;
     PlayerTankControllerState controllerState;
 
     public void OnCreated(CharacterDefinition definition, PlayerTankData playerData, int playerIndex)
@@ -59,11 +61,11 @@ public class PlayerTankManager : TankManager {
         base.OnHit(hit);
         if (isDead)
         {
-            quipSystem.SayQuip("AHH @&%-");
+            
         }
         else
         {
-            quipSystem.SayQuip("Ouch!");
+            dialogSystem.SayDialogFor(playerIndex, currentCharacter, DialogContext.TakingDamage);
         }
     }
 
@@ -71,9 +73,9 @@ public class PlayerTankManager : TankManager {
     public override void GiveWeapon(TankWeapon weapon)
     {
         base.GiveWeapon(weapon);
-        quipSystem.SayQuip("I just got the " + weapon.displayName+"!");
-        
-        
+        dialogSystem.SayDialogFor(playerIndex, currentCharacter, DialogContext.WeaponPickup, weapon.displayName);
+
+
     }
 
 }

@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour {
     }
 
 	void Start () {
+        TankProjectile.InitBulletSystem();
         gameMode = gameData.gamemode;
         for (int i = 0; i < gameData.playersData.Length; i++)
         {
@@ -144,6 +145,7 @@ public class GameManager : MonoBehaviour {
         manager.transform.position = position;
         manager.gameObject.SetActive(true);
         manager.SetRespawnParameters(gameMode.respawnTime, GetRespawnLocation);
+        manager.currentCharacter = gameData.GetCharacter(player);
         manager.ClearTrails();
     }
 

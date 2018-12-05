@@ -9,7 +9,7 @@ public class BasicTankBuildupProjectileInstance : BasicTankProjectileInstance
 }
 
 [CreateAssetMenu(menuName = "Tanks/Projectiles/New Basic Tank Projectile Wobbly", fileName = "New Basic Tank Projectile Wobbly")]
-public class BasicTankProjectileWobbly : RepresentedTankProjectile<BasicTankBuildupProjectileInstance> {
+public class BasicTankProjectileWobbly : BasicRepresentedTankProjectile<BasicTankBuildupProjectileInstance> {
 
     public float startSpeed = 10;
     public float maxVelocity = 100;
@@ -20,7 +20,7 @@ public class BasicTankProjectileWobbly : RepresentedTankProjectile<BasicTankBuil
         instance.position = firedPosition;
         instance.direction = firedDirection;
         instance.velocity = startSpeed;
-        instance.representation = Instantiate(projectileRepresentation, firedPosition, Quaternion.identity);
+        instance.representation = GetRepresentationInstance(firedPosition);
     }
 
     public override void UpdateProjectile(float deltaTime, BasicTankBuildupProjectileInstance instance)
@@ -40,7 +40,7 @@ public class BasicTankProjectileWobbly : RepresentedTankProjectile<BasicTankBuil
             }
 
             instance.representation.transform.rotation = Quaternion.FromToRotation(Vector2.up, instance.direction);
-            instance.representation.Destroy();
+            instance.representation.Destroy(() => StoreRepresentationInstance(instance.representation));
             instance.finishedCallback();
         }
         else

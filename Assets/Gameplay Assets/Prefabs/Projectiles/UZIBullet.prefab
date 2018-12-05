@@ -150,8 +150,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathDelay: 2
   onHitParticles: {fileID: 198330932921298234}
+  trailRenderer: {fileID: 96344868464687472}
   spawnParticles: 0
   customColour: {r: 0, g: 0, b: 0, a: 0}
+  next: {fileID: 0}
 --- !u!114 &114094033503312760
 MonoBehaviour:
   m_ObjectHideFlags: 1

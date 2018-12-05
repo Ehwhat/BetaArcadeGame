@@ -12,10 +12,14 @@ public class NewsFeedSystem : ScriptableObject {
     private List<string> fillerCycle = new List<string>();
     private int fillerIndex = 0;
 
+    [RuntimeInitializeOnLoadMethod]
     public void CreateNewFillerCycle()
     {
+        
         List<string> filler = new List<string>(fillerDefiniton.newFiller);
-        while(filler.Count > 0)
+        fillerCycle.Clear();
+        Debug.Log(filler.Count);
+        while (filler.Count > 0)
         {
             int index = Random.Range(0, filler.Count);
             fillerCycle.Add(filler[index]);

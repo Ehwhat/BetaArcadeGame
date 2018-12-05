@@ -88,10 +88,7 @@
 			return float4(pos.xy * flip, pos.z, 1.0);
 		}
 
-		UNITY_INSTANCING_BUFFER_START(Props)
-			UNITY_DEFINE_INSTANCED_PROP(float, _Amount)
-			UNITY_DEFINE_INSTANCED_PROP(float4, _EdgeColour)
-			UNITY_INSTANCING_BUFFER_END(Props)
+		
 
 		v2f SpriteVert(appdata_t IN)
 		{
@@ -132,6 +129,11 @@
 		float SinWave(float x,float amplitude, float length, float speed){
 			return sin(((x+ (_Time.x * speed)) * length))*amplitude;
 		}
+
+		UNITY_INSTANCING_BUFFER_START(Props)
+			UNITY_DEFINE_INSTANCED_PROP(float, _Amount);
+		UNITY_DEFINE_INSTANCED_PROP(float4, _EdgeColour);
+			UNITY_INSTANCING_BUFFER_END(Props)
 
 		fixed4 CustomFrag(v2f i) : SV_Target
 		{

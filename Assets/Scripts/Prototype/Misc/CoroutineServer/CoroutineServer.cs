@@ -20,23 +20,26 @@ public class CoroutineServer : ScriptableObject {
         runningCoroutines = new List<IEnumerator>();
     }
 
-    public static void StartCoroutine(IEnumerator routine)
+    public static Coroutine StartCoroutine(IEnumerator routine)
     {
         
-        coroutineRunner.StartCoroutine(routine);
-        runningCoroutines.Add(routine);
+        Coroutine coroutine = coroutineRunner.StartCoroutine(routine);
+        return coroutine;
     }
 
     public static void StopCoroutine(IEnumerator routine)
     {
         coroutineRunner.StopCoroutine(routine);
-        runningCoroutines.Remove(routine);
+    }
+
+    public static void StopCoroutine(Coroutine coroutine)
+    {
+        coroutineRunner.StopCoroutine(coroutine);
     }
 
     public static void StopAllCoroutines()
     {
         coroutineRunner.StopAllCoroutines();
-        runningCoroutines.Clear();
     }
 
 }

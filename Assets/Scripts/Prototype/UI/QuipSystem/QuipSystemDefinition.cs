@@ -18,10 +18,11 @@ public class QuipSystemDefinition : ScriptableObject {
             displayer.ChangeColour(c);
     }
 
-    public void SayQuip(string quip)
+    public float SayQuip(string quip)
     {
         if(displayer)
-            displayer.SayQuip(quip, true);
+            return displayer.SayQuip(quip, true);
+        return 0;
     }
 
     

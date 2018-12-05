@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: RzorBladeWeapon
   m_EditorClassIdentifier: 
   displayName: Rzor-blade
-  projectile: {fileID: 11400000, guid: 7a929eb44430910408dfe12bb3d8fb5e, type: 2}
+  projectile: {fileID: 11400000, guid: 34bc0fc9be9a85449a907123f4cbd4c8, type: 2}
   weaponFiringOffsets:
   - position: {x: 0, y: 0.9}
     angle: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
     type: 2}
   weaponChargingVisualisation: {fileID: 0}
   onFiredClip: {fileID: 11400000, guid: 9faccd9364c60d146843215ef4377446, type: 2}
-  onHitClip: {fileID: 0}
+  onHitClip: {fileID: 8300000, guid: b2034da4c4dfa9c4285a2e500018326e, type: 3}
   onFiredParticleSystem: {fileID: 0}
   autoAimType: 2
   autoAimRange: 10

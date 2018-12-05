@@ -9,21 +9,22 @@ public class ReflectingTankProjectileInstance : BasicTankProjectileInstance
 }
 
 [CreateAssetMenu(menuName = "Tanks/Projectiles/New Reflecting Tank Projectile", fileName = "New Reflecting Tank Projectile")]
-public class ReflectingTankProjectile : BasicRepresentedTankProjectile<ReflectingTankProjectileInstance>
+public class ReflectingTankProjectile : ReflectingTankProjectile<ReflectingTankProjectileInstance> { }
+
+public class ReflectingTankProjectile<Instance> : BasicRepresentedTankProjectile<Instance> where Instance: ReflectingTankProjectileInstance, new()
 {
     public int reflectionLimit = 1;
     public bool destroyOnDamagableHit = true;
-    public float radius = 0.5f;
     public AudioObject onReflectClip;
 
-    public override void UpdateProjectile(float deltaTime, ReflectingTankProjectileInstance instance)
+    public override void UpdateProjectile(float deltaTime, Instance instance)
     {
         base.UpdateProjectile(deltaTime, instance);
     }
 
-    protected override void OnProjectileHit(ReflectingTankProjectileInstance instance, float deltaTime, RaycastHit2D hit)
+    protected override void OnProjectileHit(Instance instance, float deltaTime, RaycastHit2D hit)
     {
-        instance.position += instance.direction * radius;
+        instance.position += instance.direction;
         instance.representation.transform.position = instance.position;
 
         if (instance.reflectionCount > reflectionLimit || damageableLayerMask == (damageableLayerMask | (1 << hit.collider.gameObject.layer)) && destroyOnDamagableHit)
@@ -31,7 +32,7 @@ public class ReflectingTankProjectile : BasicRepresentedTankProjectile<Reflectin
             AttemptToDamage(hit.collider, hit, instance);
 
             instance.representation.transform.rotation = Quaternion.FromToRotation(Vector2.up, -hit.normal);
-            instance.representation.Destroy();
+            instance.representation.Destroy(() => StoreRepresentationInstance(instance.representation));
             instance.finishedCallback();
             return;
         }
@@ -46,10 +47,5 @@ public class ReflectingTankProjectile : BasicRepresentedTankProjectile<Reflectin
         
     }
 
-    protected override bool DoHitTest(ReflectingTankProjectileInstance instance, float deltaTime, out RaycastHit2D hit)
-    {
-        hit = Physics2D.CircleCast(instance.position, radius, instance.direction, projectileSpeed * deltaTime, projectileLayerMask);
-        return hit && IsColliderWeaponHolder(hit.collider, instance);
-    }
 
 }

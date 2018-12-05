@@ -5,27 +5,40 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Tanks/Weapons/New Laser Weapon", fileName = "New Laser Weapon")]
 public class LaserWeapon : AutoAimTankWeapon {
 
-    private LaserChargingVisualisation chargingVisualisation;
+    private LaserChargingVisualisation[] chargingVisualisations;
 
     public override void OnWeaponEquipted(TankWeaponHolder holder)
     {
-        chargingVisualisation = holder.GetCurrentWeaponVisualisation().GetComponentInChildren<LaserChargingVisualisation>();
+        chargingVisualisations = holder.GetCurrentWeaponVisualisation().GetComponentsInChildren<LaserChargingVisualisation>();
         if (holder.ownerTank is PlayerTankManager)
         {
-            chargingVisualisation.SetColour((holder.ownerTank as PlayerTankManager).data.playerColour);
+            for (int i = 0; i < chargingVisualisations.Length; i++)
+            {
+                chargingVisualisations[i].SetColour((holder.ownerTank as PlayerTankManager).data.playerColour);
+                chargingVisualisations[i].OnCharge(0);
+            }
+            
         }
-        chargingVisualisation.OnCharge(0);
+        
     }
 
     protected override bool OnCharge(Vector2 position, Vector2 direction, TankWeaponHolder holder, float chargeAmount)
     {
-        holder.GetCurrentWeaponVisualisation().GetComponentInChildren<LaserChargingVisualisation>().OnCharge(chargeAmount);
+        chargingVisualisations = holder.GetCurrentWeaponVisualisation().GetComponentsInChildren<LaserChargingVisualisation>();
+        for (int i = 0; i < chargingVisualisations.Length; i++)
+        {
+            chargingVisualisations[i].OnCharge(chargeAmount);
+        }
         return base.OnCharge(position, direction, holder, chargeAmount);
     }
 
     protected override bool FireProjectile(Vector2 position, Vector2 direction, TankWeaponHolder holder)
     {
-        holder.GetCurrentWeaponVisualisation().GetComponentInChildren<LaserChargingVisualisation>().OnCharge(0);
+        chargingVisualisations = holder.GetCurrentWeaponVisualisation().GetComponentsInChildren<LaserChargingVisualisation>();
+        for (int i = 0; i < chargingVisualisations.Length; i++)
+        {
+            chargingVisualisations[i].OnCharge(0);
+        }
         return base.FireProjectile(position, direction, holder);
     }
 

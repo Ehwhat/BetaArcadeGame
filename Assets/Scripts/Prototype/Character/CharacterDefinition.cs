@@ -10,4 +10,6 @@ public class CharacterDefinition : ScriptableObject {
     public PlayerTankManager tankPrefab;
     public GameObject tankDisplayPrefab;
     public Sprite portrait;
+
+    public CharacterDialogDefinition dialogDefinition;
 }

@@ -17,6 +17,7 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
     public int tankID;
     public string tankDisplayName;
 
+
     public Collider2D coreCollider;
     public TankController controller;
     public Rigidbody2D tankRigidbody;
@@ -24,6 +25,7 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
     public TrailRenderer[] trails;
     public List<TurretController> turrets = new List<TurretController>();
     public ParticleSystem deathParticles;
+    public ParticleSystem onHitParticleSystem;
     public TankArmourManager armourManager;
     public TankArmourPickupManager armourPickupManager;
     public SpriteRenderer tankSprite;
@@ -103,6 +105,7 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
         {
             if (hit.collider == coreCollider)
             {
+                onHitParticleSystem.Emit(1);
                 health -= hit.damage;
                 if (health <= 0)
                 {
