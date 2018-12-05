@@ -19,9 +19,10 @@ public class TankArmourPiece : MonoBehaviour, IRequiredPiece, IRequiresPieces {
     }
 
     public float maxHealth = 20f;
+    public GameObject tankPieceRepresentationPrefab;
     public TankArmourPickup pickupPrefab;
 
-    public SpriteRenderer renderer;
+    public SpriteRenderer[] renderers;
     public float phaseTime = 1;
 
     public bool isTurretHolder = false;
@@ -33,16 +34,33 @@ public class TankArmourPiece : MonoBehaviour, IRequiredPiece, IRequiresPieces {
     public RequirementType requirementType = RequirementType.And;
     public bool reserved = false;
 
+    public GameObject tankPieceRepresentation;
+
     public void Start()
     {
+        
         gameObject.SetActive(isActive);
+
+    }
+
+    public void CreateRepresentation()
+    {
+        if (!tankPieceRepresentation)
+        {
+            tankPieceRepresentation = Instantiate(tankPieceRepresentationPrefab, transform);
+            renderers = tankPieceRepresentation.GetComponentsInChildren<SpriteRenderer>();
+        }
     }
 
     
 
     public virtual void OnPickup()
     {
-        StartCoroutine(OnPickupRoutine());
+        foreach (var renderer in renderers)
+        {
+            StartCoroutine(OnPickupRoutine(renderer));
+        }
+        
         if(isTurretHolder && equiptDefaultWeaponOnAttach)
         {
             turret.weaponHolder.EquipDefaultWeapon();
@@ -57,7 +75,7 @@ public class TankArmourPiece : MonoBehaviour, IRequiredPiece, IRequiresPieces {
         }
     }
 
-    private IEnumerator OnPickupRoutine()
+    private IEnumerator OnPickupRoutine(Renderer renderer)
     {
         MaterialPropertyBlock props = new MaterialPropertyBlock();
         renderer.GetPropertyBlock(props);
@@ -209,5 +227,9 @@ public class TankArmourPiece : MonoBehaviour, IRequiredPiece, IRequiresPieces {
             }
         }
         return requirementType == RequirementType.And;
+    }
+
+    public void OnDrawGizmos()
+    {
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TurretController : MonoBehaviour {
 
+
     public enum AutoAimType
     {
         None,
@@ -32,14 +33,29 @@ public class TurretController : MonoBehaviour {
         weaponHolder.ownerTank = owner;
     }
 
+    public void FireDown()
+    {
+        weaponHolder.OnFiringDown(transform.up);
+    }
+
     public void Fire()
     {
-        weaponHolder.FireWeapon();
+        weaponHolder.OnFiring(transform.up);
+    }
+
+    public void FireUp()
+    {
+        weaponHolder.OnFiringUp(transform.up);
     }
 
     public void GiveWeapon(TankWeapon weapon)
     {
         weaponHolder.SetWeapon(weapon);
+    }
+
+    public void ResetWeapon()
+    {
+        weaponHolder.EquipDefaultWeapon();
     }
 
     private void RotateToVector(Vector2 vector)

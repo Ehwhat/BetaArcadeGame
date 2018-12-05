@@ -11,7 +11,14 @@ public class LaserTankProjectileInstance : TankProjectileInstance
 [CreateAssetMenu(menuName = "Tanks/Projectiles/New Laser Tank Projectile", fileName = "New Laser Tank Projectile")]
 public class LaserTankProjectile : RepresentedTankProjectile<LaserTankProjectileInstance>
 {
+    public float radius = 0.2f;
     public float projectileRange = 100;
+    public float damageReduction = 5f;
+
+    public override void OnCharge(Vector3 firedPosition, Vector3 firedDirection, WeaponData weaponData, float chargeAmount)
+    {
+        
+    }
 
     public override void OnFired(Vector3 firedPosition, Vector3 firedDirection, LaserTankProjectileInstance instance, WeaponData data)
     {
@@ -19,7 +26,10 @@ public class LaserTankProjectile : RepresentedTankProjectile<LaserTankProjectile
         instance.direction = firedDirection;
         instance.representation = Instantiate((LaserProjectileRepresentation)projectileRepresentation, firedPosition, Quaternion.identity);
         instance.representation.OnSpawn(firedPosition, firedDirection);
-
+        if (data.useCustomColour)
+        {
+            instance.representation.SetColour(data.shotCustomColour);
+        }
         Fire(instance);
 
     }
@@ -32,16 +42,22 @@ public class LaserTankProjectile : RepresentedTankProjectile<LaserTankProjectile
 
     private void Fire(LaserTankProjectileInstance instance)
     {
-        RaycastHit2D hit = Physics2D.Raycast(instance.position, instance.direction, projectileRange, projectileLayerMask);
-        if (hit)
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(instance.position, radius, instance.direction, projectileRange, projectileLayerMask);
+        if (hits.Length > 0)
         {
-            instance.representation.transform.position = hit.point;
-
-            AttemptToDamage(hit.collider, hit, instance);
-        }
-        else
-        {
-            instance.representation.transform.position = instance.direction * projectileRange;
+            float tempDamage = damage;
+            foreach (RaycastHit2D hit in hits)
+            {
+                if (hit.collider.transform.root == instance.weaponData.holder.transform.root)
+                    continue;
+                AttemptToDamage(hit.collider, hit, instance, tempDamage);
+                tempDamage -= damageReduction;
+                if(tempDamage <= 0)
+                {
+                    break;
+                }
+                
+            }
         }
         instance.representation.Destroy();
         instance.finishedCallback();

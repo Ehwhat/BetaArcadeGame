@@ -154,5 +154,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   degreesPerSecond: 270
-  weaponHolder: {fileID: 0}
+  weaponHolder: {fileID: 114547620812785440}
   targetVector: {x: 0, y: 0}
