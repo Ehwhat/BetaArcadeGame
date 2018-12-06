@@ -15,7 +15,6 @@ MonoBehaviour:
   damageType: 0
   explosiveFalloff: 2
   explosiveRange: 1
-  hitOwnTank: 0
   projectileLayerMask:
     serializedVersion: 2
     m_Bits: 4294966783

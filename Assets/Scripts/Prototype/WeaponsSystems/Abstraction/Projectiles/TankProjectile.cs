@@ -70,7 +70,6 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
     public DamageType damageType = DamageType.Singular;
     public ExplosiveDamageFalloff explosiveFalloff = ExplosiveDamageFalloff.InverseSquared;
     public float explosiveRange = 1;
-    public bool hitOwnTank = false;
 
     public LayerMask projectileLayerMask;
     public LayerMask damageableLayerMask;
@@ -101,13 +100,21 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
         }
     }
 
+    public virtual void OnCharge(Vector3 firedPosition, Vector3 firedDirection, WeaponData weaponData, float chargeAmount) {
+    }
+
     public abstract void OnFired(Vector3 firedPosition, Vector3 firedDirection, WeaponData weaponData);
 
     public abstract void UpdateProjectile(float deltaTime);
 
     public bool AttemptToDamage(Collider2D collider, RaycastHit2D hit, TankProjectileInstance instance)
     {
-        TankProjectileDamageData hitData = new TankProjectileDamageData(damage, hit, this, instance);
+        return AttemptToDamage(collider, hit, instance, damage);
+    }
+
+    public bool AttemptToDamage(Collider2D collider, RaycastHit2D hit, TankProjectileInstance instance, float customDamage)
+    {
+        TankProjectileDamageData hitData = new TankProjectileDamageData(customDamage, hit, this, instance);
         switch (damageType)
         {
             case DamageType.Singular:
@@ -138,10 +145,6 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
         if (damageableLayerMask == (damageableLayerMask | (1 << collider.gameObject.layer)))
         {
             IDamageable[] hitDamageables = collider.transform.root.GetComponentsInChildren<IDamageable>();
-            if(collider.transform.root == instance.weaponData.ownerTank.transform.root && !hitOwnTank)
-            {
-                return false;
-            }
 
             for (int i = 0; i < hitDamageables.Length; i++)
             {

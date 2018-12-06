@@ -9,14 +9,23 @@ public class GameManager : MonoBehaviour {
     public LevelManager levelManager;
     public GameUI uiManager;
 
+    public TMPro.TextMeshProUGUI winUI;
+
     public PlayerTankManager[] players = new PlayerTankManager[4];
     public List<TankManager> currentTanks = new List<TankManager>();
+
+    public QuipSystemDefinition announcerQuipSystem;
 
     private GamemodeDefinition gameMode;
     private int latestTankId = 0;
 
-	void Start () {
+    public float RespawnTime
+    {
+        get { return gameMode.respawnTime; }
+    }
 
+	void Start () {
+        gameMode = gameData.gamemode;
         for (int i = 0; i < gameData.playersData.Length; i++)
         {
             gameData.playersData[i].SetIsInGame(false);
@@ -24,24 +33,74 @@ public class GameManager : MonoBehaviour {
 
         CreatePlayers();
         SpawnPlayers();
-        gameMode = gameData.gamemode;
         gameMode.OnGameStart(this);
-	}
+        announcerQuipSystem.SayQuip("Hello Audience!");
+
+        Shader.SetGlobalVectorArray("_PlayerColours", new Vector4[] {
+            gameData.playersData[0].playerColour,
+            gameData.playersData[1].playerColour,
+            gameData.playersData[2].playerColour,
+            gameData.playersData[3].playerColour});
+
+    }
 	
 	void Update () {
+
+        if (Input.GetKey(KeyCode.K))
+        {
+            StageSpotlight.FollowTransform(players[0].transform);
+        }
 
         GamemodeDefinition.WinResult winResult = gameMode.VerifyWin(this, Time.deltaTime);
         if(winResult.finished)
         {
             gameMode.OnGameEnd(this);
-            //StartCoroutine(GoBackToMainMenu());
-            
+            winUI.gameObject.SetActive(true);
+            if (winResult.winners.Count > 1)
+            {
+                winUI.SetText("EVERYONE'S A WINNER!");
+            }
+            else
+            {
+                winUI.SetText(players[winResult.winners[0]].tankDisplayName + " Wins!");
+            }
+            StartCoroutine(GoBackToMainMenu());
+
         }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            winUI.gameObject.SetActive(true);
+            if (winResult.winners.Count > 1)
+            {
+                winUI.SetText("EVERYONE'S A WINNER!");
+            }
+            else
+            {
+                winUI.SetText(players[winResult.winners[0]].tankDisplayName + " Wins!");
+            }
+            StartCoroutine(GoBackToMainMenu());
+        }
+
+        Vector4[] playerPositions = new Vector4[4];
+        for (int i = 0; i < 4; i++)
+        {
+            if (IsPlayerValid(i))
+            {
+                playerPositions[i] = new Vector4(players[i].transform.position.x, players[i].transform.position.y, players[i].transform.position.z, 1);
+            }
+            else
+            {
+                playerPositions[i] = Vector4.zero;
+            }
+        }
+        Shader.SetGlobalVectorArray("_PlayerPositions", playerPositions);
+
     }
 
     IEnumerator GoBackToMainMenu()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
@@ -84,6 +143,7 @@ public class GameManager : MonoBehaviour {
         PlayerTankManager manager = players[player];
         manager.transform.position = position;
         manager.gameObject.SetActive(true);
+        manager.SetRespawnParameters(gameMode.respawnTime, GetRespawnLocation);
         manager.ClearTrails();
     }
 
@@ -95,12 +155,32 @@ public class GameManager : MonoBehaviour {
         return tank;
     }
 
-    public void RespawnPlayer(int player)
+    private Vector3 GetRespawnLocation()
     {
-        List<Transform> playerSpawners = levelManager.GetSpawnPositions();
-        int random = Random.Range(0, playerSpawners.Count);
-        SpawnPlayer(player, playerSpawners[random].position);
-        players[player].Respawn();
+        var spawnLocations = levelManager.spawnPoints;
+
+        Vector3 bestPosition = spawnLocations[0].position;
+        float bestScore = 0;
+        for (int j = 0; j < currentTanks.Count; j++)
+        {
+            bestScore += (currentTanks[j].transform.position - bestPosition).sqrMagnitude;
+        }
+
+        for (int i = 0; i < spawnLocations.Length; i++)
+        {
+            Vector3 point = spawnLocations[i].position;
+            float score = 0;
+            for (int j = 0; j < currentTanks.Count; j++)
+            {
+                score += (currentTanks[j].transform.position - point).sqrMagnitude;
+            }
+            if(score > bestScore)
+            {
+                bestPosition = point;
+                bestScore = score;
+            }
+        }
+        return bestPosition;
     }
 
     public bool IsPlayerValid(int player)
@@ -110,5 +190,18 @@ public class GameManager : MonoBehaviour {
             return gameData.IsPlayerJoined(player);
         }
         return false;
+    }
+
+    public int GetPlayerCount()
+    {
+        int playerCount = 0;
+        for (int i = 0; i < 4; i++)
+        {
+            if (gameData.IsPlayerJoined(i))
+            {
+                playerCount++;
+            }
+        }
+        return playerCount;
     }
 }

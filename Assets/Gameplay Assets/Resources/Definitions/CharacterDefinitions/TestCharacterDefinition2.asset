@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Test Character 2
   description: 
-  tankPrefab: {fileID: 114700561371930474, guid: b1d24a0bfdb4c904d861c40e6020ec0e,
+  tankPrefab: {fileID: 114246493096669538, guid: 0f880b2b32b2aef4ab81456e23abbbf8,
     type: 2}
   tankDisplayPrefab: {fileID: 1157243013859998, guid: cadb373c445007f4b859a0a8070b9e4b,
     type: 2}

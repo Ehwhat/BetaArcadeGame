@@ -6,6 +6,7 @@ public abstract class GamemodeDefinition : ScriptableObject {
 
     public GameObject gamemodeUIPrefab;
     protected GameObject gamemodeUIGameobject;
+    public float respawnTime = 2;
 
     public class WinResult
     {

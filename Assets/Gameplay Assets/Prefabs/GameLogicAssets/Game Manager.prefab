@@ -3920,7 +3920,6 @@ MonoBehaviour:
   text: {fileID: 114860349274616890}
   lettersPerSecond: 500
   quipExitDelay: 0.6
-  id: 1
   quipSystem: {fileID: 11400000, guid: 8a7ab266bceb6824d94188b5d47e3b91, type: 2}
 --- !u!114 &114087555386911666
 MonoBehaviour:
@@ -4422,7 +4421,6 @@ MonoBehaviour:
   text: {fileID: 114927014629442024}
   lettersPerSecond: 500
   quipExitDelay: 0.6
-  id: 0
   quipSystem: {fileID: 11400000, guid: 4b77b0cb92754d64f9a8781337be5fbe, type: 2}
 --- !u!114 &114202507636927486
 MonoBehaviour:
@@ -4774,7 +4772,6 @@ MonoBehaviour:
   text: {fileID: 114067588846177806}
   lettersPerSecond: 500
   quipExitDelay: 0.6
-  id: 0
   quipSystem: {fileID: 0}
 --- !u!114 &114297182005442918
 MonoBehaviour:
@@ -4816,7 +4813,6 @@ MonoBehaviour:
   text: {fileID: 114148109390540504}
   lettersPerSecond: 500
   quipExitDelay: 0.6
-  id: 2
   quipSystem: {fileID: 11400000, guid: 455371a95d93af24488903e2b19210ba, type: 2}
 --- !u!114 &114308582115449986
 MonoBehaviour:
@@ -4835,7 +4831,6 @@ MonoBehaviour:
   text: {fileID: 114900510465230584}
   lettersPerSecond: 500
   quipExitDelay: 0.6
-  id: 3
   quipSystem: {fileID: 11400000, guid: 3a7e29305ca98f94f8c186744dcbfcf0, type: 2}
 --- !u!114 &114309367397757596
 MonoBehaviour:
@@ -8294,12 +8289,14 @@ MonoBehaviour:
   gameData: {fileID: 11400000, guid: c55cea8bc1793bf4ca13a0d2aad5c914, type: 2}
   levelManager: {fileID: 114512096117326952}
   uiManager: {fileID: 114282049005179144}
+  winUI: {fileID: 0}
   players:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   currentTanks: []
+  announcerQuipSystem: {fileID: 0}
 --- !u!114 &114953811135116016
 MonoBehaviour:
   m_ObjectHideFlags: 1
