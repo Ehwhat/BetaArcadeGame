@@ -18,9 +18,13 @@ public class TankWeaponHolder : MonoBehaviour {
 
     private ParticleSystem activeParticleSystem;
     private WeaponVisualisation currentVisualisation;
+    private WeaponChargingVisualisation weaponChargingVisualisation;
+
+    private TankWeapon lastWeapon;
 
     public float lastFired = 0;
     public float currentDurability = 0;
+    public float chargeUpElapsedTime;
     public bool equiptOnStart;
 
     public void Start()
@@ -31,9 +35,19 @@ public class TankWeaponHolder : MonoBehaviour {
         }
     }
 
+    private void Update()
+    {
+        if(weapon != lastWeapon)
+        {
+            SetWeapon(weapon);
+        }
+    }
+
     public void SetWeapon(TankWeapon newWeapon)
     {
         RemoveCurrentWeapon();
+        if (!newWeapon)
+            return;
         weapon = newWeapon;
         if (activeParticleSystem)
         {
@@ -48,23 +62,36 @@ public class TankWeaponHolder : MonoBehaviour {
             currentVisualisation = Instantiate(weapon.weaponVisualisation, visualisationHolder);
         }
         lastFired = -weapon.firingDelay;
+        chargeUpElapsedTime = 0;
         currentDurability = weapon.maxDurability;
 
         if (ownerTank is PlayerTankManager) {
             PlayerTankData data = (ownerTank as PlayerTankManager).data;
             Color colour = data.playerColour;
             Color colourEnd = new Color(colour.r, colour.g, colour.b, 0);
-            BarrelAimingIndicator barrelAimingIndicator = currentVisualisation.GetComponentInChildren<BarrelAimingIndicator>();
-            if (barrelAimingIndicator)
+            BarrelAimingIndicator[] barrelAimingIndicators = currentVisualisation.GetComponentsInChildren<BarrelAimingIndicator>();
+            for (int i = 0; i < barrelAimingIndicators.Length; i++)
             {
-                barrelAimingIndicator.barrelLineRendeer.startColor = colour;
-                barrelAimingIndicator.barrelLineRendeer.endColor = colourEnd;
+                barrelAimingIndicators[i].barrelLineRendeer.startColor = colour;
+                barrelAimingIndicators[i].barrelLineRendeer.endColor = colourEnd;
             }
+
         }
+        lastWeapon = weapon;
+        weapon.OnWeaponEquipted(this);
+    }
+
+    public WeaponVisualisation GetCurrentWeaponVisualisation()
+    {
+        return currentVisualisation;
     }
 
     public void RemoveCurrentWeapon()
     {
+        if (weapon)
+        {
+            weapon.OnWeaponUnequipted(this);
+        }
         weapon = null;
         if (activeParticleSystem)
         {
@@ -74,6 +101,7 @@ public class TankWeaponHolder : MonoBehaviour {
         {
             Destroy(currentVisualisation.gameObject);
         }
+        chargeUpElapsedTime = 0;
     }
 
     public void EquipDefaultWeapon()
@@ -81,38 +109,44 @@ public class TankWeaponHolder : MonoBehaviour {
         SetWeapon(defaultWeapon);
     }
 
-    public virtual void FireWeapon()
+    public virtual void OnFiringDown(Vector2 direction)
     {
-        FireWeapon(transform.up);
+        if(weapon != null && gameObject.activeInHierarchy)
+            weapon.OnFiringDown(transform.position, direction, this);
     }
 
-    public virtual void FireWeapon(Vector2 direction)
+    public virtual void OnFiring(Vector2 direction)
     {
         if (weapon != null && gameObject.activeInHierarchy)
+            weapon.OnFiringHold(transform.position, direction, this);
+    }
+
+    public virtual void OnFiringUp(Vector2 direction)
+    {
+        if (weapon != null && gameObject.activeInHierarchy)
+            weapon.OnFiringUp(transform.position, direction, this);
+    }
+
+    public void OnWeaponFired()
+    {
+        chargeUpElapsedTime = 0;
+        if (activeParticleSystem)
         {
-            if (lastFired + weapon.firingDelay < Time.time)
+            activeParticleSystem.Play();
+        }
+        if (weapon.onFiredClip)
+        {
+            AudioPlayer.PlayOneOff(weapon.onFiredClip);
+        }
+        lastFired = Time.time;
+        if (weapon.useDuribility)
+        {
+            currentDurability -= weapon.perShotDuribilityCost;
+            if (currentDurability <= 0)
             {
-                if (weapon.FireProjectile(transform.position, direction, this))
-                {
-                    if (activeParticleSystem)
-                    {
-                        activeParticleSystem.Play();
-                    }
-                    if (weapon.onFiredClip)
-                    {
-                        audioPlayer.PlayOneShot(weapon.onFiredClip);
-                    }
-                    lastFired = Time.time;
-                    if(weapon.useDuribility)
-                        currentDurability -= weapon.perShotDuribilityCost;
-                }
-                if (currentDurability <= 0 && weapon.useDuribility)
-                {
-                    SetWeapon(defaultWeapon);
-                }
+                SetWeapon(defaultWeapon);
             }
         }
-
     }
 
     public void OnDrawGizmos()
@@ -120,5 +154,7 @@ public class TankWeaponHolder : MonoBehaviour {
         if(weapon != null)
             weapon.OnDrawGizmos();
     }
+
+
 
 }

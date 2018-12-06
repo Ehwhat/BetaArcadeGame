@@ -10,6 +10,8 @@ public class TankArmourPickupManager : MonoBehaviour {
     public float minSpeed = 1f;
     public float maxSpeed = 8f;
 
+    public bool refusePickups = false;
+
     public void Start()
     {
         
@@ -17,7 +19,8 @@ public class TankArmourPickupManager : MonoBehaviour {
 
     public void Update()
     {
-       
+        if(!refusePickups)
+            AttractArmourPickups();
     }
 
     public void AttractArmourPickups()
@@ -27,20 +30,24 @@ public class TankArmourPickupManager : MonoBehaviour {
         List<TankArmourPickup> pickupsDetected = DetectArmourPickups();
         for (int i = 0; i < pickupsDetected.Count; i++)
         {
+
             Vector2 direction = (pickupsDetected[i].transform.position - transform.position).normalized;
             TankArmourPiece piece = manager.ReservePieceToward(direction, true);
-            piecesReserved.Add(piece);
-
-            float distance = Vector2.Distance(pickupsDetected[i].transform.position, piece.transform.position);
-            float speed = Mathf.SmoothStep(maxSpeed, minSpeed, (distance / pickupRadius)* (distance / pickupRadius))*Time.deltaTime;
-
-            if (distance < 0.5f)
+            if (piece != null)
             {
-                Destroy(pickupsDetected[i].gameObject);
-                manager.TryEnablePiece(piece);
-                continue;
+                piecesReserved.Add(piece);
+
+                float distance = Vector2.Distance(pickupsDetected[i].transform.position, piece.transform.position);
+                float speed = Mathf.SmoothStep(maxSpeed, minSpeed, (distance / pickupRadius) * (distance / pickupRadius)) * Time.deltaTime;
+
+                if (distance < 0.5f)
+                {
+                    Destroy(pickupsDetected[i].gameObject);
+                    manager.TryEnablePiece(piece);
+                    continue;
+                }
+                pickupsDetected[i].GetComponent<Rigidbody2D>().MovePosition(Vector2.MoveTowards(pickupsDetected[i].transform.position, piece.transform.position, speed));
             }
-            pickupsDetected[i].GetComponent<Rigidbody2D>().MovePosition(Vector2.MoveTowards(pickupsDetected[i].transform.position, piece.transform.position, speed));
             
         }
         for (int i = 0; i < piecesReserved.Count; i++)
@@ -52,6 +59,10 @@ public class TankArmourPickupManager : MonoBehaviour {
 
     public void EjectArmourPickups()
     {
+        if(manager.armourCount <= 0)
+        {
+            return;
+        }
         List<TankArmourPickup> pickups = manager.RemoveAll();
 
         for (int i = 0; i < pickups.Count; i++)
@@ -75,7 +86,7 @@ public class TankArmourPickupManager : MonoBehaviour {
         for (int i = 0; i < colliders.Length; i++)
         {
             TankArmourPickup pickup = colliders[i].GetComponent<TankArmourPickup>();
-            if (pickup)
+            if (pickup && pickup.IsPickupValid(manager))
             {
                 
                 pickupsDetected.Add(pickup);

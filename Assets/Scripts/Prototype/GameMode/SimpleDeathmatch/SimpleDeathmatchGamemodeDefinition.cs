@@ -18,7 +18,6 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
 
     public bool useTimer = false;
     public float timerMinutes = 2;
-    public float respawnTime = 2;
     public int killsToWin;
 
     private float timeElapsed;
@@ -57,23 +56,13 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
             {
                 bestPlayers.Add(i);
             }
-            if (deathmatchPlayerData[i].isDead)
-            {
-                deathmatchPlayerData[i].currentDeadTime += deltaTime;
-                if (deathmatchPlayerData[i].currentDeadTime > respawnTime)
-                {
-                    Debug.Log("Respawn");
-                    gameManager.RespawnPlayer(i);
-                    deathmatchPlayerData[i].currentDeadTime = 0;
-                    deathmatchPlayerData[i].isDead = false;
-                }
-            }
         }
+
+        win.winners = bestPlayers;
 
         if (timeElapsed > System.TimeSpan.FromMinutes(timerMinutes).TotalSeconds)
         {
             win.finished = true;
-            win.winners = bestPlayers;
         }
         else
         {

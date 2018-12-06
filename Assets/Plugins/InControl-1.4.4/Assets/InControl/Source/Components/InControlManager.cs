@@ -9,6 +9,8 @@ namespace InControl
 {
 	public class InControlManager : MonoBehaviour
 	{
+        private static InControlManager manager;
+
 		public bool logDebugInfo = false;
 		public bool invertYAxis = false;
 		public bool enableXInput = false;
@@ -19,6 +21,15 @@ namespace InControl
 
 		public void OnEnable()
 		{
+            if (manager)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            else
+            {
+                manager = this;
+            }
 			if (logDebugInfo)
 			{
 				Debug.Log( "InControl (version " + InputManager.Version + ")" );
@@ -50,13 +61,13 @@ namespace InControl
 		}
 
 
-		void OnDisable()
-		{
-			InputManager.ResetInternal();
-		}
+		//void OnDisable()
+		//{
+		//	InputManager.ResetInternal();
+		//}
 
 
-		#if UNITY_ANDROID && INCONTROL_OUYA && !UNITY_EDITOR
+#if UNITY_ANDROID && INCONTROL_OUYA && !UNITY_EDITOR
 		void Start()
 		{
 			StartCoroutine( CheckForOuyaEverywhereSupport() );
@@ -72,10 +83,16 @@ namespace InControl
 
 			OuyaEverywhereDeviceManager.Enable();
 		}
-		#endif
+#endif
 
 
-		void Update()
+        private void Start()
+        {
+            InputManager.SetupInternal();
+
+        }
+
+        void Update()
 		{
 			if (!useFixedUpdate || Mathf.Approximately( Time.timeScale, 0.0f ))
 			{
