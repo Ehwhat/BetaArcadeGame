@@ -107,7 +107,7 @@ public class CharacterSelectScreen : MonoBehaviour {
 
             if (select && isSelected == CharacterSelectStates.Selecting)
             {
-                gameDataDefinition.SetCharacter((int)player, activeDefinition);
+                //gameDataDefinition.SetCharacter((int)player, activeDefinition);
                 gameDataDefinition.SetPlayerJoined((int)player, true);
                 isSelected = CharacterSelectStates.Selected;
                 animationController.SetTrigger("OnAccept");

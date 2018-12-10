@@ -13,3 +13,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerColour: {r: 1, g: 0.003921569, b: 1, a: 1}
   quipSystem: {fileID: 11400000, guid: 4b77b0cb92754d64f9a8781337be5fbe, type: 2}
+  selectedCharacter: {fileID: 11400000, guid: bb9d48f3d3f14ba4098c077f1b681257, type: 2}
+  selectedTank: {fileID: 11400000, guid: 6eb6bf9d8c53df34fb8349e8a9a08174, type: 2}

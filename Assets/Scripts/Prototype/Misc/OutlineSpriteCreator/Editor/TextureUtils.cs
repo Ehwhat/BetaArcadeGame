@@ -30,7 +30,7 @@ namespace JoshExtensions
 
         public static Texture2D CreatePowerOfTwoCopyOfTexture(this Texture2D texture, int sizeOffset = 0)
         {
-            int size = Mathf.NextPowerOfTwo(Mathf.Max(texture.width + sizeOffset, texture.height + sizeOffset));
+            int size = Mathf.ClosestPowerOfTwo(Mathf.Max(texture.width + sizeOffset, texture.height + sizeOffset));
             Vector2Int offset = new Vector2Int(size - texture.width, size - texture.height);
             Texture2D powerOfTwoTexture = new Texture2D(size, size, texture.format, texture.mipmapCount > 1);
 

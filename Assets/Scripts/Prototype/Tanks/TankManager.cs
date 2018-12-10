@@ -16,20 +16,20 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
 
     public int tankID;
     public string tankDisplayName;
-
+    public TankDefinition tankDefinition;
+    public TankController controller;
+    public TankSprite tankSprite;
+    public TankMovement tankMovement;
+    public TankArmourManager armourManager;
+    public TankArmourPickupManager armourPickupManager;
 
     public Collider2D coreCollider;
-    public TankController controller;
     public Rigidbody2D tankRigidbody;
-    public TankMovement tankMovement;
+    
     public TrailRenderer[] trails;
     public List<TurretController> turrets = new List<TurretController>();
     public ParticleSystem deathParticles;
     public ParticleSystem onHitParticleSystem;
-    public TankArmourManager armourManager;
-    public TankArmourPickupManager armourPickupManager;
-    public SpriteRenderer tankSprite;
-    public SpriteRenderer tankOutline;
 
     public GameObject[] disableOnDeath;
     public RespawnSpriteController respawnSpriteController;
@@ -61,6 +61,12 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
     private void ChangeArmourSpeedModifer(TankArmourPiece piece, float percent)
     {
         tankMovement.SetSpeedModifer(Mathf.SmoothStep(1, armourMinSpeedModifer, tankSpeedModCurve.Evaluate(percent)));
+    }
+
+    public void LoadTankDefinition(TankDefinition tankDefinition)
+    {
+        this.tankDefinition = tankDefinition;
+        tankSprite.LoadTankDefinitionSprites(tankDefinition);
     }
 
     private void Update()
@@ -226,15 +232,15 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
 
     private void SetTankGrid(float amount)
     {
-        MaterialPropertyBlock block = new MaterialPropertyBlock();
-        tankSprite.GetPropertyBlock(block);
-        block.SetFloat("_Amount", amount);
-        tankSprite.SetPropertyBlock(block);
+        //MaterialPropertyBlock block = new MaterialPropertyBlock();
+        //tankSprite.GetPropertyBlock(block);
+        //block.SetFloat("_Amount", amount);
+        //tankSprite.SetPropertyBlock(block);
 
-        block = new MaterialPropertyBlock();
-        tankOutline.GetPropertyBlock(block);
-        block.SetFloat("_Amount", amount);
-        tankOutline.SetPropertyBlock(block);
+        //block = new MaterialPropertyBlock();
+        //tankOutline.GetPropertyBlock(block);
+        //block.SetFloat("_Amount", amount);
+        //tankOutline.SetPropertyBlock(block);
 
     }
     public void AddTurret(TurretController controller)

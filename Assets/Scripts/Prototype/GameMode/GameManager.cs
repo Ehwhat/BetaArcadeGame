@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour {
     public LevelManager levelManager;
     public GameUI uiManager;
 
+    public TankManager defaultTank;
+    public PlayerTankController playerDefaultController;
+
     public TMPro.TextMeshProUGUI winUI;
 
     public PlayerTankManager[] players = new PlayerTankManager[4];
@@ -111,7 +114,7 @@ public class GameManager : MonoBehaviour {
         {
             if (gameData.IsPlayerJoined(i))
             {
-                CreatePlayer(i, gameData.GetCharacter(i));
+                CreatePlayer(i, gameData.playersData[i]);
             }
         }
     }
@@ -130,12 +133,12 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    private void CreatePlayer(int player, CharacterDefinition definiton)
+    private void CreatePlayer(int player, PlayerTankData playerData)
     {
-        players[player] = CreateTank(definiton.tankPrefab);
+        players[player] = CreateTank<PlayerTankManager>(playerDefaultController, playerData.selectedTank);
         players[player].gameObject.SetActive(false);
         players[player].tankDisplayName = "Player " + (player + 1);
-        players[player].OnCreated(definiton, gameData.playersData[player], player);
+        players[player].OnCreated(gameData.playersData[player], player);
         
     }
 
@@ -145,13 +148,14 @@ public class GameManager : MonoBehaviour {
         manager.transform.position = position;
         manager.gameObject.SetActive(true);
         manager.SetRespawnParameters(gameMode.respawnTime, GetRespawnLocation);
-        manager.currentCharacter = gameData.GetCharacter(player);
         manager.ClearTrails();
     }
 
-    public T CreateTank<T>(T tankPrefab) where T : TankManager
+    public T CreateTank<T>(TankController controller, TankDefinition definition) where T : TankManager
     {
-        T tank = Instantiate(tankPrefab);
+        T tank = (T)Instantiate(defaultTank);
+        tank.LoadTankDefinition(definition);
+        defaultTank.controller = controller;
         currentTanks.Add(tank);
         tank.tankID = latestTankId++;
         return tank;

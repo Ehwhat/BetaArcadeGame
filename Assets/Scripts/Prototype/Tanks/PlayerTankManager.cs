@@ -6,11 +6,10 @@ public class PlayerTankManager : TankManager {
     public int playerIndex;
     public PlayerTankData data;
     public QuipSystemDefinition quipSystem;
-    public CharacterDefinition currentCharacter;
     public CharacterDialogSystem dialogSystem;
     PlayerTankControllerState controllerState;
 
-    public void OnCreated(CharacterDefinition definition, PlayerTankData playerData, int playerIndex)
+    public void OnCreated(PlayerTankData playerData, int playerIndex)
     {
         
         this.playerIndex = playerIndex;
@@ -28,10 +27,10 @@ public class PlayerTankManager : TankManager {
         Color colourEnd = new Color(colour.r, colour.g, colour.b, 0);
 
 
-        MaterialPropertyBlock props = new MaterialPropertyBlock();
-        tankSprite.GetPropertyBlock(props);
-        props.SetColor("_TintColour", colour);
-        tankSprite.SetPropertyBlock(props);
+        //MaterialPropertyBlock props = new MaterialPropertyBlock();
+        //tankSprite.GetPropertyBlock(props);
+        //props.SetColor("_TintColour", colour);
+        //tankSprite.SetPropertyBlock(props);
 
 
 
@@ -43,7 +42,7 @@ public class PlayerTankManager : TankManager {
 
         quipSystem.SetColour(colour);
         armourManager.SetColour(colour);
-        tankOutline.color = colour;
+        tankSprite.SetColour(colour);
         var main = deathParticles.transform.GetChild(0).GetComponent<ParticleSystem>().main;
         main.startColor = colour;
         respawnSpriteController.SetColour(colour);
@@ -65,7 +64,7 @@ public class PlayerTankManager : TankManager {
         }
         else
         {
-            dialogSystem.SayDialogFor(playerIndex, currentCharacter, DialogContext.TakingDamage);
+            dialogSystem.SayDialogFor(playerIndex, data.selectedCharacter, DialogContext.TakingDamage);
         }
     }
 
@@ -73,7 +72,7 @@ public class PlayerTankManager : TankManager {
     public override void GiveWeapon(TankWeapon weapon)
     {
         base.GiveWeapon(weapon);
-        dialogSystem.SayDialogFor(playerIndex, currentCharacter, DialogContext.WeaponPickup, weapon.displayName);
+        dialogSystem.SayDialogFor(playerIndex, data.selectedCharacter, DialogContext.WeaponPickup, weapon.displayName);
 
 
     }
