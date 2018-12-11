@@ -407,8 +407,9 @@ Shader "SpriteLamp/Standard"
 				//The easy bits - assemble the final values based on light and map colours and combine.
                 float3 diffuseReflection = diffuseColour.xyz * input.color.xyz * _LightColor0.xyz * diffuseLevel;
                 float3 specularReflection = _LightColor0.xyz * input.color.xyz * specularLevel * specGlossValues.rgb * _SpecStrength;
+
                 
-                float4 finalColour = float4((diffuseReflection + specularReflection) * diffuseColour.a * input.color.a, 0);
+                float4 finalColour = float4((diffuseReflection + specularReflection) * diffuseColour.a * input.color.a, 1);
                 return finalColour;
                 
              }

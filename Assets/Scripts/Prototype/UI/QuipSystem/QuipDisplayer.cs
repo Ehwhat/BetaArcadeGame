@@ -11,7 +11,6 @@ public class QuipDisplayer : MonoBehaviour {
     public TMPro.TextMeshProUGUI text;
     public float lettersPerSecond = 10f;
     public float quipExitDelay = 0.6f;
-    public int id;
     public QuipSystemDefinition quipSystem;
 
 
@@ -40,17 +39,17 @@ public class QuipDisplayer : MonoBehaviour {
         quipTextBox.color = c;
     }
 
-    public void Activate()
+    public virtual void Activate()
     {
         animator.SetBool("IsLowered", true);
     }
 
-    public void Deactivate()
+    public virtual void Deactivate()
     {
         animator.SetBool("IsLowered", false);
     }
 
-    public void SayQuip(string quip, bool deactivateWhenDone = false)
+    public virtual void SayQuip(string quip, bool deactivateWhenDone = false)
     {
         Activate();
         StopAllCoroutines();

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerTankManager : TankManager {
-
     public int playerIndex;
     public PlayerTankData data;
     public QuipSystemDefinition quipSystem;
@@ -11,6 +10,7 @@ public class PlayerTankManager : TankManager {
 
     public void OnCreated(CharacterDefinition definition, PlayerTankData playerData, int playerIndex)
     {
+        
         this.playerIndex = playerIndex;
         data = playerData;
         data.SetIsInGame(true);
@@ -25,6 +25,14 @@ public class PlayerTankManager : TankManager {
         Color colour = data.playerColour;
         Color colourEnd = new Color(colour.r, colour.g, colour.b, 0);
 
+
+        MaterialPropertyBlock props = new MaterialPropertyBlock();
+        tankSprite.GetPropertyBlock(props);
+        props.SetColor("_TintColour", colour);
+        tankSprite.SetPropertyBlock(props);
+
+
+
         for (int i = 0; i < trails.Length; i++)
         {
             trails[i].startColor = colour;
@@ -32,6 +40,11 @@ public class PlayerTankManager : TankManager {
         }
 
         quipSystem.SetColour(colour);
+        armourManager.SetColour(colour);
+        tankOutline.color = colour;
+        var main = deathParticles.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+        main.startColor = colour;
+        respawnSpriteController.SetColour(colour);
 
     }
 

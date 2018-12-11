@@ -11,8 +11,58 @@ public class TankArmourManager : MonoBehaviour {
         FullOnly
     }
 
+    public System.Action<TankArmourPiece, float> OnPieceAdded = (TankArmourPiece p, float f) => { };
+    public System.Action<TankArmourPiece, float> OnPieceRemoved = (TankArmourPiece p, float f) => { };
+
     public TankManager tankManager;
     public TankArmourPiece[] armourPieces;
+   
+    private bool hasSpawnedArmour = false;
+    public int armourCount
+    {
+        get {
+            int active = 0;
+            for (int i = 0; i < armourPieces.Length; i++)
+            {
+                active += armourPieces[i].isActive ? 1 : 0;
+            }
+            return active;
+        }
+    }
+
+    private void Start()
+    {
+        SpawnArmour();
+    }
+
+    public void SetColour(Color colour)
+    {
+        SpawnArmour();
+        for (int i = 0; i < armourPieces.Length; i++)
+        {
+            OutlineColourChanger outline = armourPieces[i].GetComponentInChildren<OutlineColourChanger>();
+            if (outline)
+            {
+                outline.SetColour(colour);
+            }
+        }
+    }
+
+    private void SpawnArmour()
+    {
+        if (!hasSpawnedArmour)
+        {
+            for (int i = 0; i < armourPieces.Length; i++)
+            {
+                armourPieces[i].CreateRepresentation();
+                if (armourPieces[i].isActive)
+                {
+                   
+                }
+            }
+            hasSpawnedArmour = true;
+        }
+    }
 
     public void AddPieceNear(Vector2 point)
     {
@@ -32,9 +82,23 @@ public class TankArmourManager : MonoBehaviour {
             {
                 tankManager.AddTurret(piece.turret);
             }
+            
+            OnPieceAdded(piece, (float)armourCount / armourPieces.Length);
             return true;
         }
         return false;
+    }
+
+    public void TryRemovePiece(TankArmourPiece piece, ref List<TankArmourPickup> pickups)
+    {
+        TankArmourPickup pickup;
+        if (piece.DisablePiece(out pickup))
+        {
+            pickup.OnDrop(this);
+            pickups.Add(pickup);
+            
+            OnPieceAdded(piece, (float)armourCount / armourPieces.Length);
+        }
     }
 
     public List<TankArmourPickup> RemovePieceNear(Vector2 point)
@@ -44,11 +108,7 @@ public class TankArmourManager : MonoBehaviour {
         {
             List<TankArmourPickup> pickups = new List<TankArmourPickup>();
 
-            TankArmourPickup pickup;
-            if (bestPiece.DisablePiece(out pickup))
-            {
-                pickups.Add(pickup);
-            }
+            TryRemovePiece(bestPiece, ref pickups);
 
             pickups = bestPiece.ReevaulateChildren(pickups);
             return pickups;
@@ -62,11 +122,7 @@ public class TankArmourManager : MonoBehaviour {
         List<TankArmourPickup> pickups = new List<TankArmourPickup>();
         for (int i = 0; i < armourPieces.Length; i++)
         {
-            TankArmourPickup pickup;
-            if (armourPieces[i].DisablePiece(out pickup))
-            {
-                pickups.Add(pickup);
-            }
+            TryRemovePiece(armourPieces[i], ref pickups);
         }
         return pickups;
     }
@@ -88,11 +144,7 @@ public class TankArmourManager : MonoBehaviour {
         List<TankArmourPickup> pickups = new List<TankArmourPickup>();
         if (piece.maxHealth <= 0)
         {
-            TankArmourPickup pickup;
-            if (piece.DisablePiece(out pickup))
-            {
-                pickups.Add(pickup);
-            }
+            TryRemovePiece(piece, ref pickups);
             pickups = piece.ReevaulateChildren(pickups);
         }
 

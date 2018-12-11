@@ -15,6 +15,11 @@ public class PlayerTankController : TankController {
             convertedState = new PlayerTankControllerState();
         }
 
+        if (manager.isDead)
+        {
+            return convertedState;
+        }
+
         InputDevice inputDevice = GameInput.GetPlayerDevice(convertedState.player);
 
         if(inputDevice == null)
@@ -31,18 +36,26 @@ public class PlayerTankController : TankController {
             manager.tankMovement.targetSpeed = leftStickInput.magnitude;
             manager.AimTurrets(rightStickInput);
 
-            if (inputDevice.RightBumper.IsPressed && !inputDevice.RightTrigger.IsPressed)
-            {
-                manager.armourPickupManager.AttractArmourPickups();
-            }
-            if (inputDevice.LeftBumper.WasPressed)
+            if (inputDevice.LeftBumper.IsPressed)
             {
                 manager.armourPickupManager.EjectArmourPickups();
+                manager.armourPickupManager.refusePickups = true;
+            }
+            else
+            {
+                manager.armourPickupManager.refusePickups = false;
             }
 
-            if (inputDevice.RightTrigger.IsPressed && !inputDevice.RightBumper.IsPressed)
+            if (inputDevice.RightTrigger.WasPressed)
             {
-                manager.FireTurrets();
+                manager.FireTurrets(TankManager.FiringInputType.Down);
+            }else if (inputDevice.RightTrigger.WasReleased)
+            {
+                manager.FireTurrets(TankManager.FiringInputType.Up);
+            }
+            if (inputDevice.RightTrigger.IsPressed)
+            {
+                manager.FireTurrets(TankManager.FiringInputType.Held);
             }
         }
 

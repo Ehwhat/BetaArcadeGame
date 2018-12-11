@@ -5,6 +5,7 @@ using UnityEngine;
 public class BasicTankProjectileInstance : TankProjectileInstance
 {
     public ProjectileRepresentation representation;
+    public bool canHitSelf = false;
 }
 
 public abstract class BasicRepresentedTankProjectile<ProjectileInstance> : RepresentedTankProjectile<ProjectileInstance> where ProjectileInstance : BasicTankProjectileInstance, new()
@@ -58,7 +59,12 @@ public abstract class BasicRepresentedTankProjectile<ProjectileInstance> : Repre
     protected virtual bool DoHitTest(ProjectileInstance instance, float deltaTime, out RaycastHit2D hit)
     {
         hit = Physics2D.Raycast(instance.position, instance.direction, projectileSpeed * deltaTime, projectileLayerMask);
-        return hit && hit.collider.transform.root != instance.weaponData.holder.transform.root;
+        return hit && IsColliderWeaponHolder(hit.collider, instance);
+    }
+
+    protected bool IsColliderWeaponHolder(Collider2D collider, ProjectileInstance instance)
+    {
+        return (collider.transform.root != instance.weaponData.holder.transform.root || instance.canHitSelf);
     }
 
 }

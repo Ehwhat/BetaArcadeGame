@@ -157,28 +157,28 @@
 
 			
 
-			fixed4 CustomFrag(v2f i) : SV_Target
-			{
-				UNITY_SETUP_INSTANCE_ID(i);
-				// sample the texture
-				float amount = smoothstep(_AmountMin, _AmountMax, UNITY_ACCESS_INSTANCED_PROP(Props, _Amount));
-				float noise = 1-lerp(tex2D(_NoiseShiftTex, i.texcoord.xy).r, tex2D(_Noise, i.worldPos.xy * _WorldScaling).r, _NoiseShift);
+		fixed4 CustomFrag(v2f i) : SV_Target
+		{
+			UNITY_SETUP_INSTANCE_ID(i);
+			// sample the texture
+			float amount = smoothstep(_AmountMin, _AmountMax, UNITY_ACCESS_INSTANCED_PROP(Props, _Amount));
+			float noise = 1-lerp(tex2D(_NoiseShiftTex, i.texcoord.xy).r, tex2D(_Noise, i.worldPos.xy * _WorldScaling).r, _NoiseShift);
 
-				float noiseModifer = smoothstep(amount -_Leway, amount +_Leway, noise -_Leway);
-				float edgeAmount = min(amount - _EdgeShift, amount);
-				float edgeModifer = smoothstep(edgeAmount - _EdgeLeway, edgeAmount + _EdgeLeway, noise - _EdgeLeway);
+			float noiseModifer = smoothstep(amount -_Leway, amount +_Leway, noise -_Leway);
+			float edgeAmount = min(amount - _EdgeShift, amount);
+			float edgeModifer = smoothstep(edgeAmount - _EdgeLeway, edgeAmount + _EdgeLeway, noise - _EdgeLeway);
 
-				if (UNITY_ACCESS_INSTANCED_PROP(Props, _Amount) >= 1)
-					edgeModifer = 0;
+			if (UNITY_ACCESS_INSTANCED_PROP(Props, _Amount) >= 1)
+				edgeModifer = 0;
 
-				fixed4 c = SampleSpriteTexture(i.texcoord) * i.color;
-				c.a *= 1-noiseModifer;
-				c.rgb = lerp(c.rgb, _EdgeColour, edgeModifer);
-				c.rgb *= c.a;
+			fixed4 c = SampleSpriteTexture(i.texcoord) * i.color;
+			c.a *= 1-noiseModifer;
+			c.rgb = lerp(c.rgb, _EdgeColour, edgeModifer);
+			c.rgb *= c.a;
 				
-				return c;
-			}
-			ENDCG
+			return c;
+		}
+		ENDCG
 		}
 	}
 }
