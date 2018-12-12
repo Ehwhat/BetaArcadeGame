@@ -21,6 +21,7 @@ public class TankMovement : MonoBehaviour {
     private bool boosting;
 
     public float speedModifer = 1;
+    public float baseWeightModifer = 1;
 
     void Start () {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -35,7 +36,7 @@ public class TankMovement : MonoBehaviour {
         }
 
         float dotModifer = Mathf.SmoothStep(reverseFactor, forwardFactor, (Vector2.Dot(transform.up, targetVector) + 1) * 0.5f);
-        rigidbody.AddForce(transform.up * targetSpeed * topSpeed * speedModifer * dotModifer);
+        rigidbody.AddForce(transform.up * targetSpeed * topSpeed * speedModifer * (1-((baseWeightModifer-1))) * dotModifer);
 
         ApplyForwardDrag();
         ApplySideDrag();

@@ -8,10 +8,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4426641b6650df428f2f9e4b2c400ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 827444e765c545a469381cadb62b6f0d, type: 3}
   m_Name: RzorBladeProjectile
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 30
   damageType: 0
   explosiveFalloff: 2
   explosiveRange: 1
@@ -23,8 +23,8 @@ MonoBehaviour:
     m_Bits: 256
   projectileRepresentation: {fileID: 114761239099113436, guid: 92fc8376416e96541b9cbbe4c53ddd73,
     type: 2}
-  projectileSpeed: 40
-  reflectionLimit: 4
+  projectileSpeed: 30
+  reflectionLimit: 6
   destroyOnDamagableHit: 1
-  radius: 0.5
   onReflectClip: {fileID: 11400000, guid: 6d3deffd7910153469c570b5ca29a63f, type: 2}
+  radius: 0.5

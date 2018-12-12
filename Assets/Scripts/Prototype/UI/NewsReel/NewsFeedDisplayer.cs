@@ -20,6 +20,7 @@ public class NewsFeedDisplayer : MonoBehaviour {
 
     private void Start()
     {
+        Debug.Log("start");
         system.CreateNewFillerCycle();
         InitaliseNewSlide();
     }

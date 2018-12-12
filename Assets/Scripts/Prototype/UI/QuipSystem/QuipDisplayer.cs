@@ -49,11 +49,12 @@ public class QuipDisplayer : MonoBehaviour {
         animator.SetBool("IsLowered", false);
     }
 
-    public virtual void SayQuip(string quip, bool deactivateWhenDone = false)
+    public virtual float SayQuip(string quip, bool deactivateWhenDone = false)
     {
         Activate();
         StopAllCoroutines();
         StartCoroutine(QuipEnumerator(quip, deactivateWhenDone));
+        return (quip.Length / lettersPerSecond) + quipExitDelay;
     }
 
     private IEnumerator QuipEnumerator(string quip, bool deactivateWhenDone = false)

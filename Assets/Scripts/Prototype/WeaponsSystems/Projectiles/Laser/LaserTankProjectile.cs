@@ -24,7 +24,7 @@ public class LaserTankProjectile : RepresentedTankProjectile<LaserTankProjectile
     {
         instance.position = firedPosition;
         instance.direction = firedDirection;
-        instance.representation = Instantiate((LaserProjectileRepresentation)projectileRepresentation, firedPosition, Quaternion.identity);
+        instance.representation = (LaserProjectileRepresentation )GetRepresentationInstance(firedPosition);
         instance.representation.OnSpawn(firedPosition, firedDirection);
         if (data.useCustomColour)
         {
@@ -59,7 +59,7 @@ public class LaserTankProjectile : RepresentedTankProjectile<LaserTankProjectile
                 
             }
         }
-        instance.representation.Destroy();
+        instance.representation.Destroy(() => StoreRepresentationInstance(instance.representation));
         instance.finishedCallback();
     }
 

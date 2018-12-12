@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dbe8bdd373559b4ebf83322d90f9ac7, type: 3}
+  m_Name: BrutaliserTurretDefinition
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 4923e736b71c20b47b18985bc0164f22, type: 3}
+  outlineSprite: {fileID: 21300000, guid: 8889ef03b2e993d4b9f82db1c4944198, type: 3}
+  strength: 1
+  weight: 1
+  rotationSpeed: 1
+  autoAimModifier: 1

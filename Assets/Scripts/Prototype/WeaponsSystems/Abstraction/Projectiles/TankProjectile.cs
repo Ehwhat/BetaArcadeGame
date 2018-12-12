@@ -21,8 +21,7 @@ public abstract class TankProjectile<ProjectileInstance>:TankProjectile where Pr
 
     private List<ProjectileInstance> projectiles = new List<ProjectileInstance>();
 
-    [RuntimeInitializeOnLoadMethod]
-    public void Init()
+    public override void OnInit()
     {
         projectiles = new List<ProjectileInstance>();
     }
@@ -37,6 +36,19 @@ public abstract class TankProjectile<ProjectileInstance>:TankProjectile where Pr
             projectiles.Add(newInstance);
         }
         OnFired(firedPosition, firedDirection, newInstance, weaponData);
+    }
+
+    public ProjectileInstance OnFiredReturnInstance(Vector3 firedPosition, Vector3 firedDirection, WeaponData weaponData)
+    {
+        ProjectileInstance newInstance = new ProjectileInstance();
+        newInstance.weaponData = weaponData;
+        if (newInstance.doesUpdate)
+        {
+            newInstance.finishedCallback = () => { projectiles.Remove(newInstance); };
+            projectiles.Add(newInstance);
+        }
+        OnFired(firedPosition, firedDirection, newInstance, weaponData);
+        return newInstance;
     }
 
     public abstract void OnFired(Vector3 firedPosition, Vector3 firedDirection, ProjectileInstance instance, WeaponData weaponData);
@@ -66,6 +78,8 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
         InverseSquared
     }
 
+    public string name = "Unnamed"; 
+
     public float damage;
     public DamageType damageType = DamageType.Singular;
     public ExplosiveDamageFalloff explosiveFalloff = ExplosiveDamageFalloff.InverseSquared;
@@ -74,21 +88,28 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
     public LayerMask projectileLayerMask;
     public LayerMask damageableLayerMask;
 
+    protected static Transform poolHolder;
     private static bool alreadyRan = false;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-    private static void Init()
+    public static void InitBulletSystem()
     {
         if (!alreadyRan)
         {
+            poolHolder = new GameObject("Projectile Pool Holder").transform;
             TankProjectile[] projectileInstances = Resources.LoadAll<TankProjectile>("");
             for (int i = 0; i < projectileInstances.Length; i++)
             {
+                projectileInstances[i].OnInit();
                 CoroutineServer.StartCoroutine(UpdateProjectileEnumerator(projectileInstances[i]));
             }
             alreadyRan = true;
         }
         
+    }
+
+    public virtual void OnInit()
+    {
+
     }
 
     private static IEnumerator UpdateProjectileEnumerator(TankProjectile projectile)

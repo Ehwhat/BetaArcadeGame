@@ -12,11 +12,13 @@ public abstract class BasicRepresentedTankProjectile<ProjectileInstance> : Repre
 {
     public float projectileSpeed = 10;
 
+    
+
     public override void OnFired(Vector3 firedPosition, Vector3 firedDirection, ProjectileInstance instance, WeaponData weaponData)
     {
         instance.position = firedPosition;
         instance.direction = firedDirection;
-        instance.representation = Instantiate(projectileRepresentation, firedPosition, Quaternion.identity);
+        instance.representation = GetRepresentationInstance(firedPosition);
         instance.representation.OnSpawn(firedPosition, firedDirection);
         if (weaponData.useCustomColour)
         {
@@ -46,7 +48,7 @@ public abstract class BasicRepresentedTankProjectile<ProjectileInstance> : Repre
         AttemptToDamage(hit.collider, hit, instance);
 
         instance.representation.transform.rotation = Quaternion.FromToRotation(Vector2.up, -hit.normal);
-        instance.representation.Destroy();
+        instance.representation.Destroy(() => StoreRepresentationInstance(instance.representation));
         instance.finishedCallback();
     }
 
