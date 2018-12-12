@@ -135,7 +135,7 @@ public class TankWeapon : Weapon
             
             
         }
-        CameraShake.AddShake(shakeAmount, Quaternion.identity); // Sorry jordan, I broke this and I have no idea what the value should be :(
+        CameraShake.AddShake(shakeAmount, Quaternion.FromToRotation(Vector2.up, direction)); // Sorry jordan, I broke this and I have no idea what the value should be :(
         return wasFired;
     }
 
