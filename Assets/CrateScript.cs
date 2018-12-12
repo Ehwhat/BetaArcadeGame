@@ -5,26 +5,20 @@ using UnityEngine;
 
 
 public class CrateScript : MonoBehaviour, IDamageable {
-
-    public GameManager instance;
+    
     public GameObject part;
     public float area = 1.5f;
     public int partsPerPlayer = 3;
-    public int numberOfPlayers = 4;
     public float health = 100;
 
     public void OnHit(DamageData damage)
     {
         health -= damage.damage;
+        print(this.name + " " + health);
         if (health <= 0)
         {
             DestroyCrate();
         }
-    }
-
-    // Use this for initialization
-    void Start () {
-        numberOfPlayers = instance.players.Length;
     }
 	
 	// Update is called once per frame
@@ -39,15 +33,16 @@ public class CrateScript : MonoBehaviour, IDamageable {
         GameObject tempPart = Instantiate(part);
         tempPart.transform.parent = transform;
         tempPart.transform.localPosition = tempPos;
+        tempPart.transform.parent = null;
     }
 
     void DestroyCrate()
     {
-        for (int i = 0; i < partsPerPlayer * numberOfPlayers; i++)
+        for (int i = 0; i < partsPerPlayer * GameManager.numberOfPlayers; i++)
         {
             PlaceArmour();
         }
-        transform.DetachChildren();
+        print(this.name);
         Destroy(gameObject);
     }
 }

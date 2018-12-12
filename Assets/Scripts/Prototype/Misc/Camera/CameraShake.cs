@@ -17,6 +17,7 @@ public class CameraShake : MonoBehaviour {
             if (newShakeAmount.x != 0 || newShakeAmount.y != 0)
             {
                 newShake();
+                
             }
         }
         else
@@ -28,7 +29,6 @@ public class CameraShake : MonoBehaviour {
     public static void AddShake(float amount, Quaternion rotation)
     {
         shakeAmount += amount;
-        amount *= 0.1f; //shake modifier 
         float rot = rotation.eulerAngles.z;
         if (rot > 337.5 || rot <= 22.5)
         {
@@ -123,7 +123,8 @@ public class CameraShake : MonoBehaviour {
         /*float shakeX = newShakeAmount.x + transform.localPosition.x;
         float shakeY = newShakeAmount.y + transform.localPosition.y;
         transform.localPosition = new Vector2(shakeX, shakeY);*/
-        transform.localPosition = newShakeAmount;
+        transform.localPosition = newShakeAmount*shakeModifer;
+        
 
         /*shakeAmount -= shakeDrain * Time.deltaTime;
         shakeAmount = Mathf.Max(0, shakeAmount);*/

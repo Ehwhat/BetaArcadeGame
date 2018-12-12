@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnArmourDrops : MonoBehaviour {
-
-    public GameManager instance;
+    
     public GameObject part;
     public int numberOfPlayers = 4;
     public Vector2 area = new Vector2 (3.0f, 3.0f);
@@ -15,7 +14,7 @@ public class SpawnArmourDrops : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        numberOfPlayers = instance.players.Length;
+        numberOfPlayers = GameManager.numberOfPlayers;
         timerSet /= numberOfPlayers;
         timer = 1;
         for (int i = 0; i < startingPartsPerPlayer * numberOfPlayers; i++)

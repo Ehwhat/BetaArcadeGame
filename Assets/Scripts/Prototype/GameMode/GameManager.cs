@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
+    public static int numberOfPlayers = 0;
+
     [SerializeField]
     public GameDataDefinition gameData;
     public LevelManager levelManager;
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour {
             gameData.playersData[i].SetIsInGame(false);
         }
 
+        numberOfPlayers = GetPlayerCount();
         CreatePlayers();
         SpawnPlayers();
         gameMode.OnGameStart(this);
