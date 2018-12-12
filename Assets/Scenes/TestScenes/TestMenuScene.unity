@@ -4349,6 +4349,8 @@ GameObject:
   - component: {fileID: 904105420}
   - component: {fileID: 904105419}
   - component: {fileID: 904105418}
+  - component: {fileID: 904105422}
+  - component: {fileID: 904105423}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4419,6 +4421,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &904105422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 904105417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6351f0f25087746bcdbaa3b0b53fe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 17420e03cebe89a47afe1b375589875e, type: 2}
+  amount: 0
+  amountCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!111 &904105423
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 904105417}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 8277547daa02e874fa0c524b51305b1f, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 8277547daa02e874fa0c524b51305b1f, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &904887712
 GameObject:
   m_ObjectHideFlags: 0
@@ -5951,6 +5999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelName: {fileID: 1626562423}
   levelImage: {fileID: 1782092882}
+  cameraAnimation: {fileID: 904105423}
   mainMenu: {fileID: 1437574604}
   levelSet: {fileID: 11400000, guid: 959038bf27dad394aa937419a1d08dd4, type: 2}
   animationController: {fileID: 1213337786}
@@ -6743,6 +6792,7 @@ MonoBehaviour:
   animator: {fileID: 1437574605}
   baseMenuScreen: {fileID: 101889853}
   characterSelectScreen: {fileID: 773001153}
+  levelLoader: {fileID: 11400000, guid: 474127fc170a7db4c994fc79e092fa41, type: 2}
 --- !u!95 &1437574605
 Animator:
   serializedVersion: 3

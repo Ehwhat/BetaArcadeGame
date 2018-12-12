@@ -10,6 +10,8 @@ public class LevelMenuManager : MonoBehaviour {
     public TextMeshProUGUI levelName;
     public Image levelImage;
 
+    public Animation cameraAnimation;
+
     public MainMenuManager mainMenu;
     public LevelDefinitionSet levelSet;
     public Animator animationController;
@@ -18,6 +20,7 @@ public class LevelMenuManager : MonoBehaviour {
     private float selectionDelay = 0.3f;
     private float lastSelectionTime = 0;
     int currentLevelIndex = 0;
+    bool starting = false;
 
     LevelDefinition activeDefinition;
     InputDevice device;
@@ -33,32 +36,35 @@ public class LevelMenuManager : MonoBehaviour {
 
     private void Update()
     {
-
-        bool pressingLeft = device.LeftStick.Left.IsPressed || device.DPadLeft.IsPressed;
-        bool pressingRight = device.LeftStick.Right.IsPressed || device.DPadRight.IsPressed;
-        bool select = device.Action1.WasPressed;
-        bool cancel = device.Action2.WasPressed;
-
-        if (lastSelectionTime + selectionDelay < Time.time)
+        if (!starting)
         {
-            if (pressingLeft)
+            bool pressingLeft = device.LeftStick.Left.IsPressed || device.DPadLeft.IsPressed;
+            bool pressingRight = device.LeftStick.Right.IsPressed || device.DPadRight.IsPressed;
+            bool select = device.Action1.WasPressed;
+            bool cancel = device.Action2.WasPressed;
+
+            if (lastSelectionTime + selectionDelay < Time.time)
             {
-                SelectLeft();
-                lastSelectionTime = Time.time;
+                if (pressingLeft)
+                {
+                    SelectLeft();
+                    lastSelectionTime = Time.time;
+                }
+                else if (pressingRight)
+                {
+                    SelectRight();
+                    lastSelectionTime = Time.time;
+                }
             }
-            else if (pressingRight)
-            {
-                SelectRight();
-                lastSelectionTime = Time.time;
-            }
-        }
 
-        if (select)
-        {
-            mainMenu.StartGame(activeDefinition.id);
-        }else if (cancel)
-        {
-            mainMenu.OpenMainMenuScreen();
+            if (select)
+            {
+                StartCoroutine(StartGame(activeDefinition.id));
+            }
+            else if (cancel)
+            {
+                mainMenu.OpenMainMenuScreen();
+            }
         }
 
     }
@@ -104,6 +110,13 @@ public class LevelMenuManager : MonoBehaviour {
         {
             levelImage.enabled = false;
         }
+    }
+
+    private IEnumerator StartGame(int levelIndex)
+    {
+        cameraAnimation.Play();
+        yield return new WaitForSeconds(0.4f);
+        mainMenu.StartGame(levelIndex);
     }
 
 

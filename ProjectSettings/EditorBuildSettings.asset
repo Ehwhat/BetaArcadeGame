@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/TestScenes/Levels/TonksLevel2.unity
     guid: f5edc8a48ab9afe43acf4af5c0ff9b6f
+  - enabled: 1
+    path: Assets/Scenes/TestScenes/LoadingScene.unity
+    guid: 6846d88aedb2c3748a0868dff259d5b9

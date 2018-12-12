@@ -11,6 +11,7 @@ public class MainMenuManager : MonoBehaviour {
 
     public GameObject baseMenuScreen;
     public GameObject characterSelectScreen;
+    public LevelLoader levelLoader;
 
     private GameObject openScreen;
 
@@ -40,7 +41,7 @@ public class MainMenuManager : MonoBehaviour {
 
     public void StartGame(int level)
     {
-        SceneManager.LoadScene(level);
+        levelLoader.ChangeLevel(level);
     }
 
     public void Start()

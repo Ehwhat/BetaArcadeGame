@@ -16,7 +16,8 @@ public class CoroutineServer : ScriptableObject {
             return;
         }
         coroutineRunner = new GameObject("CoroutineRunner").AddComponent<CoroutineRunner>();
-        coroutineRunner.gameObject.hideFlags = HideFlags.HideAndDontSave;
+        Debug.Log("test");
+        DontDestroyOnLoad(coroutineRunner);
         runningCoroutines = new List<IEnumerator>();
     }
 
