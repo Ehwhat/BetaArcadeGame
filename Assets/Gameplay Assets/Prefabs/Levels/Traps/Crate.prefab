@@ -53,10 +53,10 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 1
-  m_Mass: 1
-  m_LinearDrag: 1
-  m_AngularDrag: 1
+  m_UseAutoMass: 0
+  m_Mass: 20
+  m_LinearDrag: 10
+  m_AngularDrag: 10
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   part: {fileID: 1511443405457004, guid: 5f9ee3cd76b46914793d3749f35a737d, type: 2}
   area: 1
-  partsPerPlayer: 3
+  partsPerPlayer: 1
   health: 100
 --- !u!212 &212337691712335436
 SpriteRenderer:
