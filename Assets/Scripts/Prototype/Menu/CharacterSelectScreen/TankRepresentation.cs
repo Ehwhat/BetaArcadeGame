@@ -22,5 +22,12 @@ public class TankRepresentation : MonoBehaviour {
         tankTreadsOutline.sprite = definition.tankTreads.outlineSprite;
         tankTurretOutline.sprite = definition.tankTurret.outlineSprite;
     }
-	
+
+    public void SetColour(Color colour)
+    {
+        tankBaseOutline.color = colour;
+        tankTreadsOutline.color = colour;
+        tankTurretOutline.color = colour;
+    }
+
 }

@@ -168,7 +168,5 @@ public class CharacterSelectScreen : MonoBehaviour {
         {
             Destroy(currentTankPrefab);
         }
-        GameObject tank = Instantiate(activeDefinition.tankDisplayPrefab, tankHolder);
-        currentTankPrefab = tank;
     }
 }

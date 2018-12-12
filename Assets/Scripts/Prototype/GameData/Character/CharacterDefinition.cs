@@ -7,8 +7,7 @@ public class CharacterDefinition : ScriptableObject {
     public string name;
     [TextArea]
     public string description;
-    public PlayerTankManager tankPrefab;
-    public GameObject tankDisplayPrefab;
+    public TankDefinition defaultTankDefinition;
     public Sprite portrait;
 
     public CharacterDialogDefinition dialogDefinition;

@@ -10,6 +10,8 @@ Shader "UI/Noise"
 		_NoiseIntensity("Noise Intensity", Range(0,1)) = 0.02
 		_NoiseScaling("Noise Scaling", Int) = 100
 
+		_LineIntensity("Line Intensity", Float) = 1
+
 		_StencilComp("Stencil Comparison", Float) = 8
 		_Stencil("Stencil ID", Float) = 0
 		_StencilOp("Stencil Operation", Float) = 0
@@ -89,6 +91,8 @@ Shader "UI/Noise"
 				float _NoiseIntensity;
 				int _NoiseScaling;
 
+				float _LineIntensity;
+
 				float rand(float2 co, float time)
 				{
 					return frac((sin(dot(co.xy, float2(12.345 * time, 67.890 * time))) * 12345.67890 + time));
@@ -110,7 +114,7 @@ Shader "UI/Noise"
 
 				float withinRange(float min, float max, float val) {
 					float stepVal = (step(min, val) - step(max, val));
-					return val - 2.0*stepVal*val + stepVal;
+					return 2.0*stepVal*val + stepVal;
 				}
 
 				fixed4 frag(v2f IN) : SV_Target
@@ -119,7 +123,7 @@ Shader "UI/Noise"
 					float distortLine = (_Time.w / 4) % 1;
 					float distortLine2 = (_Time.w / 6) % 1;
 
-					float distort = (0.08 * withinRange(distortLine - 0.03, distortLine + 0.03, alteredTexcoord.y)) + (0.04 * withinRange(distortLine2 - 0.03, distortLine2 + 0.03, alteredTexcoord.y));
+					float distort = ((0.08 * withinRange(distortLine - 0.03, distortLine + 0.03, alteredTexcoord.y)) + (0.04 * withinRange(distortLine2 - 0.03, distortLine2 + 0.03, alteredTexcoord.y))) * _LineIntensity;
 					
 					alteredTexcoord.x += distort;
 
