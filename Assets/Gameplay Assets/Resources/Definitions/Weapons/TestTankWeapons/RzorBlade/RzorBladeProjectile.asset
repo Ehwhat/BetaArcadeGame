@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 827444e765c545a469381cadb62b6f0d, type: 3}
   m_Name: RzorBladeProjectile
   m_EditorClassIdentifier: 
+  name: Unnamed
   damage: 30
   damageType: 0
   explosiveFalloff: 2
@@ -20,9 +21,10 @@ MonoBehaviour:
     m_Bits: 4294966783
   damageableLayerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 2304
   projectileRepresentation: {fileID: 114761239099113436, guid: 92fc8376416e96541b9cbbe4c53ddd73,
     type: 2}
+  representationCount: 1
   projectileSpeed: 30
   reflectionLimit: 6
   destroyOnDamagableHit: 1

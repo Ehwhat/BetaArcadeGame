@@ -53,9 +53,11 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
     private void Start()
     {
         Respawn(transform.position);
-        SetTurretOwners();
+        
         armourManager.OnPieceAdded += ChangeArmourSpeedModifer;
         armourManager.OnPieceRemoved += ChangeArmourSpeedModifer;
+
+        
     }
 
     private void ChangeArmourSpeedModifer(TankArmourPiece piece, float percent)
@@ -67,6 +69,15 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
     {
         this.tankDefinition = tankDefinition;
         tankSprite.LoadTankDefinitionSprites(tankDefinition);
+        respawnSpriteController.SetHull(tankDefinition);
+
+        var renderer = onHitParticleSystem.GetComponent<Renderer>();
+        MaterialPropertyBlock block = new MaterialPropertyBlock();
+        renderer.GetPropertyBlock(block);
+        block.SetTexture("_MainTex", tankDefinition.tankBase.outlineSprite.texture);
+        renderer.SetPropertyBlock(block);
+
+
     }
 
     private void Update()
@@ -155,6 +166,7 @@ public abstract class TankManager : MonoBehaviour, IDamageable {
         {
             turrets[i].SetWeaponHolderOwner(this);
         }
+        turrets[0].ResetWeapon();
     }
 
     public void Respawn()

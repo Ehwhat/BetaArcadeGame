@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d8a377d214c3c64099263b9eb680c33, type: 3}
   m_Name: ThunderBitchProjectile
   m_EditorClassIdentifier: 
+  name: Unnamed
   damage: 65
   damageType: 0
   explosiveFalloff: 2
@@ -20,9 +21,10 @@ MonoBehaviour:
     m_Bits: 4294966783
   damageableLayerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 2304
   projectileRepresentation: {fileID: 114050901236666478, guid: b2d7fc18de8379249815ce1b69ef3299,
     type: 2}
+  representationCount: 5
   radius: 0.2
   projectileRange: 100
   damageReduction: 5

@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa581ae9011fe934dbfaf54cd37f1c46, type: 3}
   m_Name: PlayerOneData
   m_EditorClassIdentifier: 
-  playerColour: {r: 0, g: 0.796067, b: 1, a: 1}
+  playerColour: {r: 1, g: 0, b: 1, a: 1}
   quipSystem: {fileID: 11400000, guid: 4b77b0cb92754d64f9a8781337be5fbe, type: 2}
   selectedCharacter: {fileID: 11400000, guid: f21dac9bccd9a2e43a8ba067a13dcb4f, type: 2}
-  selectedTank: {fileID: 11400000, guid: 9dbb7b0acfb116c4d96aa9680e56077c, type: 2}
+  selectedTank: {fileID: 11400000, guid: 6eb6bf9d8c53df34fb8349e8a9a08174, type: 2}

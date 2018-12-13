@@ -4,13 +4,13 @@
 	{
 		[PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
 		[PerRendererData] _Color("Tint", Color) = (1,1,1,1)
-		_EdgeColour("Edge Colour", Color) = (1,0,0,1)
+		[PerRendererData]_EdgeColour("Edge Colour", Color) = (1,0,0,1)
 		[MaterialToggle] PixelSnap("Pixel snap", Float) = 0
 		[HideInInspector] _RendererColor("RendererColor", Color) = (1,1,1,1)
 		[HideInInspector] _Flip("Flip", Vector) = (1,1,1,1)
 		[PerRendererData] _AlphaTex("External Alpha", 2D) = "white" {}
 		[PerRendererData] _EnableExternalAlpha("Enable External Alpha", Float) = 0
-		_Amount("Amount", Range(0,1)) = 0
+		[PerRendererData]_Amount("Amount", Range(0,1)) = 0
 	}
 	SubShader
 	{
@@ -130,10 +130,8 @@
 			return sin(((x+ (_Time.x * speed)) * length))*amplitude;
 		}
 
-		UNITY_INSTANCING_BUFFER_START(Props)
-			UNITY_DEFINE_INSTANCED_PROP(float, _Amount);
-		UNITY_DEFINE_INSTANCED_PROP(float4, _EdgeColour);
-			UNITY_INSTANCING_BUFFER_END(Props)
+		float _Amount;
+		float4 _EdgeColour;
 
 		fixed4 CustomFrag(v2f i) : SV_Target
 		{

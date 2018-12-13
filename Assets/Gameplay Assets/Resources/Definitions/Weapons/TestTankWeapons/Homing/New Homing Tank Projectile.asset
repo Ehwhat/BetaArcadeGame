@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e86688ddfc96240b6daa239b3f900f, type: 3}
   m_Name: New Homing Tank Projectile
   m_EditorClassIdentifier: 
+  name: Unnamed
   damage: 10
   damageType: 0
   explosiveFalloff: 2
@@ -20,9 +21,10 @@ MonoBehaviour:
     m_Bits: 4294966783
   damageableLayerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 2304
   projectileRepresentation: {fileID: 114046558725670220, guid: 46af86ac18952ea44af415fe9745a5d2,
     type: 2}
+  representationCount: 0
   projectileSpeed: 40
   maxHomingDegreesDelta: 120
   homingTrackingType: 2

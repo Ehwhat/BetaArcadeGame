@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 50136180721399530}
   - component: {fileID: 61344116354084702}
   - component: {fileID: 114220291870971782}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Crate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ MonoBehaviour:
   part: {fileID: 1511443405457004, guid: 5f9ee3cd76b46914793d3749f35a737d, type: 2}
   area: 1
   partsPerPlayer: 1
-  health: 100
+  health: 60
 --- !u!212 &212337691712335436
 SpriteRenderer:
   m_ObjectHideFlags: 1

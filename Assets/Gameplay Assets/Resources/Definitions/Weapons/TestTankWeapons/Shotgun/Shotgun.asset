@@ -29,7 +29,7 @@ MonoBehaviour:
   maxDurability: 10
   perShotDuribilityCost: 1
   rarity: 0.5
-  shakeAmount: 1
+  shakeAmount: 0.2
   chargeUpDelay: 0
   CollideOnSpawnLayermask:
     serializedVersion: 2

@@ -29,10 +29,6 @@ public class TankWeaponHolder : MonoBehaviour {
 
     public void Start()
     {
-        if(defaultWeapon != null && equiptOnStart)
-        {
-            EquipDefaultWeapon();
-        }
     }
 
     private void Update()
@@ -107,6 +103,8 @@ public class TankWeaponHolder : MonoBehaviour {
     public void EquipDefaultWeapon()
     {
         SetWeapon(defaultWeapon);
+        Sprite s = ownerTank.tankDefinition.tankTurret.sprite;
+        currentVisualisation.GetComponentInChildren<SpriteRenderer>().sprite = s;
     }
 
     public virtual void OnFiringDown(Vector2 direction)

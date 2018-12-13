@@ -17,9 +17,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a6589acf7495c2a419d9d9bd3bd20bf4, type: 2}
   - {fileID: 11400000, guid: 2a406df53de5247469aee1722583e917, type: 2}
   - {fileID: 11400000, guid: d35716f570524b444b89e5296cf7e82d, type: 2}
-  characters:
-  - {fileID: 11400000, guid: bb9d48f3d3f14ba4098c077f1b681257, type: 2}
-  - {fileID: 11400000, guid: bb9d48f3d3f14ba4098c077f1b681257, type: 2}
-  - {fileID: 11400000, guid: bb9d48f3d3f14ba4098c077f1b681257, type: 2}
-  - {fileID: 11400000, guid: bb9d48f3d3f14ba4098c077f1b681257, type: 2}
-  playersJoined: 01010000
+  playersJoined: 01010101

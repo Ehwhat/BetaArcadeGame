@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd3c37046a46dc449d4f77c34d30bd9, type: 3}
   m_Name: CatapultProjectile
   m_EditorClassIdentifier: 
+  name: Unnamed
   damage: 40
   damageType: 1
   explosiveFalloff: 2
@@ -20,7 +21,8 @@ MonoBehaviour:
     m_Bits: 4294966783
   damageableLayerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 2304
   projectileRepresentation: {fileID: 114874904349776672, guid: 1af28077b32af3d4a929c782ce054975,
     type: 2}
+  representationCount: 0
   projectileSpeed: 10

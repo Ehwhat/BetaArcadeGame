@@ -27,6 +27,11 @@ public class ConveyItems : MonoBehaviour {
         float beginY = (transform.position.y - ((transform.up * length / 2) * Mathf.Sign(speed)).y);
         for (int i = 0; i < currentConveyedObjects.Count; i++)
         {
+            /* 
+            if(currentConveyedObjects == null){
+                currentConveyedObjects.RemoveAt(i);
+                CreatePrefab(new Vector3(currentConveyedObjects[i].transform.position.x, beginY, currentConveyedObjects[i].transform.position.z))
+            }*/
             currentConveyedObjects[i].transform.position += transform.up * speed * Time.deltaTime;
             if(currentConveyedObjects[i].transform.localPosition.y > length/2)
             {

@@ -22,5 +22,17 @@ public class RespawnSpriteController : MonoBehaviour {
         block.SetColor("_EdgeColour", colour);
         outline.SetPropertyBlock(block);
     }
+
+    public void SetHull(TankDefinition definition){
+
+        center.sprite = definition.tankBase.sprite;
+        outline.sprite = definition.tankBase.outlineSprite;
+
+        var renderer = particles.GetComponent<Renderer>();
+        MaterialPropertyBlock block = new MaterialPropertyBlock();
+        renderer.GetPropertyBlock(block);
+        block.SetTexture("_MainTex", definition.tankBase.outlineSprite.texture);
+        renderer.SetPropertyBlock(block);
+    }
 	
 }

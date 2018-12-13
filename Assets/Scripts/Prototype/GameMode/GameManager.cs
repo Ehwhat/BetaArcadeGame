@@ -142,6 +142,7 @@ public class GameManager : MonoBehaviour {
         players[player].gameObject.SetActive(false);
         players[player].tankDisplayName = "Player " + (player + 1);
         players[player].OnCreated(gameData.playersData[player], player);
+        players[player].SetTurretOwners();
         
     }
 
