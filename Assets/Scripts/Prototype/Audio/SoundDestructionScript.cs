@@ -6,11 +6,13 @@ public class SoundDestructionScript : MonoBehaviour
 {
     AudioSource audiosrc;
     private bool SoundStart = false;
-    public AudioClip audioclip_;
+    private AudioClip audioclip_;
+    private float pitch_ = 1.0f;
 	// Use this for initialization
 	void Start () {
         audiosrc = GetComponent<AudioSource>();
         audiosrc.clip = audioclip_;
+        audiosrc.pitch = pitch_;
         audiosrc.Play();
     }
 	
@@ -27,4 +29,14 @@ public class SoundDestructionScript : MonoBehaviour
             Destroy(gameObject);
         }
 	}
+
+    public void SetAudioClip(AudioClip audioclip)
+    {
+        audioclip_ = audioclip;
+    }
+
+    public void SetPitch(float pitch)
+    {
+        pitch_ = pitch;
+    }
 }

@@ -19,6 +19,9 @@ public class SoundSystem : MonoBehaviour
     private int Alt_Track_ID;
     private int Alt_Track_Time = 0;
 
+    private float Music_Volume = 1.0f;
+    private float Sound_Volume = 1.0f;
+
     private bool Switched = false;
     private bool Switchable = false;
     private bool Playing = false;
@@ -38,14 +41,12 @@ public class SoundSystem : MonoBehaviour
     public void Start()
     {
          Play_New_Track(0);
-        // Play_Sound(0);
-        //Play_Dynamic_Tracks(0, 0);
     }
 
     public void Play_Sound(int Sound_ID)
     {
         GameObject x = Instantiate(soundprefab);
-        x.GetComponent<SoundDestructionScript>().audioclip_ = Sounds[Sound_ID];
+        x.GetComponent<SoundDestructionScript>().SetAudioClip(Sounds[Sound_ID]);
     }
 
     public void Stop_Music()
@@ -66,7 +67,7 @@ public class SoundSystem : MonoBehaviour
         {
             Debug.Log("No music found");
             Playing = false;
-            //Stop Music
+            Playing_Music.Stop();
         }
     }
 
@@ -79,6 +80,36 @@ public class SoundSystem : MonoBehaviour
     public void Unpause_Track()
     {
         Playing_Music.UnPause();
+    }
+
+    //Volume is between 0.0f and 1.0f. Only new sounds have their sound adjusted.
+    private void SetSoundVolume(float NewVolume)
+    {
+        if (NewVolume < 0.0f)
+        {
+            NewVolume = 0.0f;
+        }
+        if (NewVolume > 1.0f)
+        {
+            NewVolume = 1.0f;
+        }
+        Sound_Volume = NewVolume;
+        soundprefab.GetComponent<AudioSource>().volume = NewVolume;
+    }
+
+    //Volume is between 0.0f and 1.0f
+    private void SetMusicVolume(float NewVolume)
+    {
+        if (NewVolume < 0.0f)
+        {
+            NewVolume = 0.0f;
+        }
+        if (NewVolume > 1.0f)
+        {
+            NewVolume = 1.0f;
+        }
+        Music_Volume = NewVolume;
+        Playing_Music.volume = NewVolume;
     }
     
     public void Play_Dynamic_Tracks(int Track_ID, int Alt_ID)
@@ -98,7 +129,6 @@ public class SoundSystem : MonoBehaviour
     }
 
     //I think this theoretically works?
-    //????????????
     //Need to use "Play_Dynamic_Tracks" before this one
     public void Switch_Dynamic_Tracks()
     {
@@ -119,5 +149,23 @@ public class SoundSystem : MonoBehaviour
             }
             Switched = !Switched;
         }
+    }
+
+    //The sound played has a random pitch
+    public void Play_Random_Pitch_Sound(int Sound_ID, float range)
+    {
+        //
+        if (range < 0.0f)
+        {
+            range = 0.0f;
+        }
+        if (range > 6.0f)
+        {
+            range = 6.0f;
+        }
+        GameObject x = Instantiate(soundprefab);
+        x.GetComponent<SoundDestructionScript>().SetAudioClip(Sounds[Sound_ID]);
+        float randx = Random.Range(-3.0f, range - 3.0f);
+        x.GetComponent<SoundDestructionScript>().SetPitch(randx);
     }
 }
