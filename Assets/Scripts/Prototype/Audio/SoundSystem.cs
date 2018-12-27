@@ -29,7 +29,7 @@ public class SoundSystem : MonoBehaviour
     public AudioSource Playing_Music;
 
     public AudioClip[] Music;
-    public AudioClip[] Sounds;
+    //public AudioClip[] Sounds;
 
     public GameObject soundprefab;
 
@@ -43,10 +43,10 @@ public class SoundSystem : MonoBehaviour
          Play_New_Track(0);
     }
 
-    public void Play_Sound(int Sound_ID)
+    public void Play_Sound(AudioObject audio)
     {
         GameObject x = Instantiate(soundprefab);
-        x.GetComponent<SoundDestructionScript>().SetAudioClip(Sounds[Sound_ID]);
+        x.GetComponent<SoundDestructionScript>().SetAudioClip(audio.clip);
     }
 
     public void Stop_Music()
@@ -83,7 +83,7 @@ public class SoundSystem : MonoBehaviour
     }
 
     //Volume is between 0.0f and 1.0f. Only new sounds have their sound adjusted.
-    private void SetSoundVolume(float NewVolume)
+    public void SetSoundVolume(float NewVolume)
     {
         if (NewVolume < 0.0f)
         {
@@ -98,7 +98,7 @@ public class SoundSystem : MonoBehaviour
     }
 
     //Volume is between 0.0f and 1.0f
-    private void SetMusicVolume(float NewVolume)
+    public void SetMusicVolume(float NewVolume)
     {
         if (NewVolume < 0.0f)
         {
@@ -110,6 +110,16 @@ public class SoundSystem : MonoBehaviour
         }
         Music_Volume = NewVolume;
         Playing_Music.volume = NewVolume;
+    }
+
+    public float GetMusicVolume()
+    {
+        return Music_Volume;
+    }
+
+    public float GetSoundVolume()
+    {
+        return Sound_Volume;
     }
     
     public void Play_Dynamic_Tracks(int Track_ID, int Alt_ID)
@@ -152,20 +162,20 @@ public class SoundSystem : MonoBehaviour
     }
 
     //The sound played has a random pitch
-    public void Play_Random_Pitch_Sound(int Sound_ID, float range)
+    public void Play_Random_Pitch_Sound(AudioObject audio, float range)
     {
         //
-        if (range < 0.0f)
+        if (range < 3.0f)
         {
-            range = 0.0f;
+            range = 3.0f;
         }
         if (range > 6.0f)
         {
             range = 6.0f;
         }
         GameObject x = Instantiate(soundprefab);
-        x.GetComponent<SoundDestructionScript>().SetAudioClip(Sounds[Sound_ID]);
-        float randx = Random.Range(-3.0f, range - 3.0f);
+        x.GetComponent<SoundDestructionScript>().SetAudioClip(audio.clip);
+        float randx = Random.Range(0.1f, range - 3.0f);
         x.GetComponent<SoundDestructionScript>().SetPitch(randx);
     }
 }
