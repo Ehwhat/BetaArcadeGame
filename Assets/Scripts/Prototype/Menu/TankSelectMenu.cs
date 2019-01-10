@@ -13,6 +13,7 @@ public class TankSelectMenu : MonoBehaviour {
 
     public SelectStages currentStage = SelectStages.NotSelected;
 
+    public MainMenuManager mainMenuManager;
     public CharacterDefinitionSet characterDefinitionSet;
 
     public PlayerTankData playerData;
@@ -38,7 +39,16 @@ public class TankSelectMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(currentStage != SelectStages.Selected)
+		if(currentStage == SelectStages.Selected)
+        {
+            if (gamepadIndex == 0 && input.Action1.WasPressed)
+            {
+                Debug.Log("test");
+                mainMenuManager.StartLevelSelectScreen();
+            }
+
+        }
+        else
         {
 
             bool left = input.LeftStick.Left.IsPressed;
@@ -69,8 +79,13 @@ public class TankSelectMenu : MonoBehaviour {
             playerData.playerColour = Color.HSVToRGB(currentHue + colourAdjust * Time.deltaTime * 0.3f, 1, 1);
             tankRepresentation.SetColour(playerData.playerColour);
 
+            if (input.Action1.WasPressed)
+            {
+                currentStage = SelectStages.Selected;
+            }
 
         }
+        
 	}
 
 

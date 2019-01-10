@@ -59,7 +59,7 @@ public class LevelMenuManager : MonoBehaviour {
 
             if (select)
             {
-                StartCoroutine(StartGame(activeDefinition.id));
+                mainMenu.StartGame(activeDefinition.id);
             }
             else if (cancel)
             {
