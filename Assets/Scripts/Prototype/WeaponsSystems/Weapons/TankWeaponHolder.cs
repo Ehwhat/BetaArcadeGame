@@ -14,7 +14,9 @@ public class TankWeaponHolder : MonoBehaviour {
     public TankWeapon weapon;
     public Transform particleSystemHolder;
     public Transform visualisationHolder;
-    public AudioSource audioPlayer;
+   // public AudioSource audioPlayer;
+
+    private GameObject soundManager;
 
     private ParticleSystem activeParticleSystem;
     private WeaponVisualisation currentVisualisation;
@@ -29,6 +31,13 @@ public class TankWeaponHolder : MonoBehaviour {
 
     public void Start()
     {
+        //bad practice I know, I apologise
+        soundManager = GameObject.Find("SoundManager");
+
+        if(defaultWeapon != null && equiptOnStart)
+        {
+            EquipDefaultWeapon();
+        }
     }
 
     private void Update()
@@ -133,7 +142,8 @@ public class TankWeaponHolder : MonoBehaviour {
         }
         if (weapon.onFiredClip)
         {
-            AudioPlayer.PlayOneOff(weapon.onFiredClip);
+            //AudioPlayer.PlayOneOff(weapon.onFiredClip);
+            soundManager.GetComponent<SoundSystem>().Play_Random_Pitch_Sound(weapon.onFiredClip, 6.0f);
         }
         lastFired = Time.time;
         if (weapon.useDuribility)

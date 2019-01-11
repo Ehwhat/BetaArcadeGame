@@ -12,11 +12,17 @@ public class MainMenuManager : MonoBehaviour {
     public GameObject baseMenuScreen;
     public GameObject characterSelectScreen;
     public LevelLoader levelLoader;
+    public GameObject optionsScreen;
+    public GameObject Menutest;
+
+    public Button Back;
+    public Button GameStart;
 
     private GameObject openScreen;
 
     private void Update()
     {
+       // Debug.Log(baseMenuScreen.activeSelf);
     }
 
     public void StartCharacterSelectScreen()
@@ -32,6 +38,20 @@ public class MainMenuManager : MonoBehaviour {
     public void StartLevelSelectScreen()
     {
         animator.SetTrigger("OpenLevelSelectMenu");
+    }
+
+    public void LoadOptionsScreen()
+    {
+        Menutest.SetActive(false);
+        optionsScreen.SetActive(true);
+        Back.Select();
+    }
+
+    public void CloseOptionsScreen()
+    {
+        optionsScreen.SetActive(false);
+        Menutest.SetActive(true);
+        GameStart.Select();
     }
 
     public void Quit()
