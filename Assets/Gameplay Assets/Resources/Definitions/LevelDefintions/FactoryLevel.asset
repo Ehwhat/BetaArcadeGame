@@ -9,8 +9,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac6ea4bcc8930364faad80c0cf44f2c4, type: 3}
-  m_Name: TestLevel
+  m_Name: FactoryLevel
   m_EditorClassIdentifier: 
-  levelName: Basement
-  levelImage: {fileID: 0}
-  id: 1
+  levelName: Factory
+  levelImage: {fileID: 21300000, guid: 7bdbe70a65e0a7246a2f10f62bbc2345, type: 3}
+  id: 3

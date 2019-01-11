@@ -11,19 +11,19 @@ MonoBehaviour:
   m_Script: {fileID: -667331979, guid: 89f0137620f6af44b9ba852b4190e64e, type: 3}
   m_Name: slkscrb
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: 1804002644
   material: {fileID: 21521422764054730}
-  materialHashCode: 0
+  materialHashCode: -438830241
   fontAssetType: 2
   m_fontInfo:
     Name: Silkscreen
     PointSize: 73
-    Scale: 0
+    Scale: 1
     CharacterCount: 95
     LineHeight: 73
     Baseline: 0
     Ascender: 56
-    CapHeight: 0
+    CapHeight: 43
     Descender: -18
     CenterLine: 0
     SuperscriptOffset: 56
@@ -33,7 +33,7 @@ MonoBehaviour:
     UnderlineThickness: 1.3904761
     strikethrough: 13.818182
     strikethroughThickness: 1.3904761
-    TabWidth: 0
+    TabWidth: 430
     Padding: 5
     AtlasWidth: 512
     AtlasHeight: 512
@@ -42,10 +42,10 @@ MonoBehaviour:
   - id: 32
     x: 5
     y: 507
-    width: 0
-    height: 0
+    width: 43
+    height: 74
     xOffset: 0
-    yOffset: 0
+    yOffset: 56
     xAdvance: 43
     scale: 1
   - id: 33
