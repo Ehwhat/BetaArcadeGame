@@ -7,39 +7,36 @@ using InControl;
 
 public class LevelMenuManager : MonoBehaviour {
 
-    public TextMeshProUGUI levelName;
-    public Image levelImage;
-
-    public Animation cameraAnimation;
+    public SimpleDeathmatchGamemodeDefinition deathmatchGamemode;
 
     public MainMenuManager mainMenu;
     public LevelDefinitionSet levelSet;
-    public Animator animationController;
-
 
     private float selectionDelay = 0.3f;
     private float lastSelectionTime = 0;
-    int currentLevelIndex = 0;
     bool starting = false;
+
+    public LevelMenuSelector levelMenuSelector;
+    public TimerSelector timerSelector;
+    public MenuSelector currentSelector;
 
     LevelDefinition activeDefinition;
     InputDevice device;
 
     void Start()
     {
-        LoadDefinition(currentLevelIndex);
         device = GameInput.GetPlayerDevice(0);
-        LoadLevelImage();
-
-
+        currentSelector.OnSelected();
     }
 
     private void Update()
     {
         if (!starting)
         {
-            bool pressingLeft = device.LeftStick.Left.IsPressed || device.DPadLeft.IsPressed;
-            bool pressingRight = device.LeftStick.Right.IsPressed || device.DPadRight.IsPressed;
+            bool pressingLeft = device.LeftStick.X < -0.5f || device.DPadLeft.IsPressed;
+            bool pressingRight = device.LeftStick.X > 0.5f || device.DPadRight.IsPressed;
+            bool pressingUp = device.LeftStick.Y < -0.5f || device.DPadUp.IsPressed;
+            bool pressingDown = device.LeftStick.Y > 0.5f || device.DPadDown.IsPressed;
             bool select = device.Action1.WasPressed;
             bool cancel = device.Action2.WasPressed;
 
@@ -54,12 +51,26 @@ public class LevelMenuManager : MonoBehaviour {
                 {
                     SelectRight();
                     lastSelectionTime = Time.time;
+                }else if (pressingDown)
+                {
+                    currentSelector.OnDeselected();
+                    currentSelector = currentSelector.nextSelector;
+                    currentSelector.OnSelected();
+                    lastSelectionTime = Time.time;
+                }
+                else if (pressingUp)
+                {
+                    currentSelector.OnDeselected();
+                    currentSelector = currentSelector.previousSelector;
+                    currentSelector.OnSelected();
+                    lastSelectionTime = Time.time;
                 }
             }
 
             if (select)
             {
-                mainMenu.StartGame(activeDefinition.id);
+                deathmatchGamemode.timerMinutes = timerSelector.GetResult();
+                mainMenu.StartGame(levelMenuSelector.GetResult().id);
             }
             else if (cancel)
             {
@@ -69,54 +80,19 @@ public class LevelMenuManager : MonoBehaviour {
 
     }
 
+    public void LoadLevelImage()
+    {
+        levelMenuSelector.LoadLevelImage();
+    }
+
     public void SelectLeft()
     {
-        currentLevelIndex--;
-        if (currentLevelIndex < 0)
-        {
-            currentLevelIndex = levelSet.Count - 1;
-        }
-        LoadDefinition(currentLevelIndex);
-        animationController.SetTrigger("OnLeft");
+        currentSelector.PreviousOption();
     }
 
     public void SelectRight()
     {
-        currentLevelIndex++;
-        if (currentLevelIndex > levelSet.Count - 1)
-        {
-            currentLevelIndex = 0;
-        }
-        LoadDefinition(currentLevelIndex);
-        animationController.SetTrigger("OnRight");
-    }
-
-    private void LoadDefinition(int levelIndex)
-    {
-        activeDefinition = levelSet.GetDefinition(levelIndex);
-        levelName.text = activeDefinition.levelName;
-        
-    }
-
-    public void LoadLevelImage()
-    {
-        if (activeDefinition.levelImage)
-        {
-            levelImage.enabled = true;
-            levelImage.sprite = activeDefinition.levelImage;
-            levelImage.preserveAspect = true;
-        }
-        else
-        {
-            levelImage.enabled = false;
-        }
-    }
-
-    private IEnumerator StartGame(int levelIndex)
-    {
-        cameraAnimation.Play();
-        yield return new WaitForSeconds(0.4f);
-        mainMenu.StartGame(levelIndex);
+        currentSelector.NextOption();
     }
 
 
