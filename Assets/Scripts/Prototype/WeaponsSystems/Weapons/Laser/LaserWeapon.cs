@@ -14,7 +14,7 @@ public class LaserWeapon : AutoAimTankWeapon {
         {
             for (int i = 0; i < chargingVisualisations.Length; i++)
             {
-                chargingVisualisations[i].SetColour((holder.ownerTank as PlayerTankManager).data.playerColour);
+                chargingVisualisations[i].SetColour((holder.ownerTank as PlayerTankManager).colour);
                 chargingVisualisations[i].OnCharge(0);
             }
             

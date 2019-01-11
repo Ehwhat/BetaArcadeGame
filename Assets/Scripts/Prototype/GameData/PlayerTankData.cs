@@ -10,10 +10,7 @@ public class PlayerTankData : ScriptableObject {
     public System.Action onChangedEvent = () => { };
 
     public Color defaultplayerColour;
-    public Color playerColour;
     public QuipSystemDefinition quipSystem;
-    public CharacterDefinition selectedCharacter;
-    public TankDefinition selectedTank;
 
     public bool isInGame { get; private set; }
     public float currentHealthPercentage { get; private set; }

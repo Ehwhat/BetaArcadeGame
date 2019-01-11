@@ -23,7 +23,7 @@ public class LevelMenuSelector : VisualMenuSelector<LevelDefinition>
     public override LevelDefinition GetResult()
     {
         
-        return set.GetDefinition(0);
+        return set.GetDefinition(currentIndex);
     }
 
     public void LoadLevelImage()

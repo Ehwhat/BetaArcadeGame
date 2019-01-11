@@ -31,10 +31,10 @@ public class GameManager : MonoBehaviour {
 
 	void Start () {
         TankProjectile.InitBulletSystem();
-        gameMode = gameData.gamemode;
-        for (int i = 0; i < gameData.playersData.Length; i++)
+        gameMode = GameDataMonobehaviour.instance.gamemode;
+        for (int i = 0; i < GameDataMonobehaviour.instance.playersData.Length; i++)
         {
-            gameData.playersData[i].SetIsInGame(false);
+            GameDataMonobehaviour.instance.playersData[i].SetIsInGame(false);
         }
 
         numberOfPlayers = GetPlayerCount();
@@ -44,10 +44,10 @@ public class GameManager : MonoBehaviour {
         announcerQuipSystem.SayQuip("Hello Audience!");
 
         Shader.SetGlobalVectorArray("_PlayerColours", new Vector4[] {
-            gameData.playersData[0].playerColour,
-            gameData.playersData[1].playerColour,
-            gameData.playersData[2].playerColour,
-            gameData.playersData[3].playerColour});
+            GameDataMonobehaviour.instance.playerColour[0],
+            GameDataMonobehaviour.instance.playerColour[1],
+            GameDataMonobehaviour.instance.playerColour[2],
+            GameDataMonobehaviour.instance.playerColour[3]});
 
     }
 	
@@ -115,9 +115,9 @@ public class GameManager : MonoBehaviour {
     {
         for (int i = 0; i < 4; i++)
         {
-            if (gameData.IsPlayerJoined(i))
+            if (GameDataMonobehaviour.instance.IsPlayerJoined(i))
             {
-                CreatePlayer(i, gameData.playersData[i]);
+                CreatePlayer(i, GameDataMonobehaviour.instance.playersData[i]);
             }
         }
     }
@@ -127,7 +127,7 @@ public class GameManager : MonoBehaviour {
         List<Transform> playerSpawners = levelManager.GetSpawnPositions();
         for (int i = 0; i < 4; i++)
         {
-            if (gameData.IsPlayerJoined(i))
+            if (GameDataMonobehaviour.instance.IsPlayerJoined(i))
             {
                 int random = Random.Range(0, playerSpawners.Count);
                 SpawnPlayer(i, playerSpawners[random].position);
@@ -138,10 +138,10 @@ public class GameManager : MonoBehaviour {
 
     private void CreatePlayer(int player, PlayerTankData playerData)
     {
-        players[player] = CreateTank<PlayerTankManager>(playerDefaultController, playerData.selectedTank);
+        players[player] = CreateTank<PlayerTankManager>(playerDefaultController, GameDataMonobehaviour.instance.selectedTank[player]);
         players[player].gameObject.SetActive(false);
         players[player].tankDisplayName = "Player " + (player + 1);
-        players[player].OnCreated(gameData.playersData[player], player);
+        players[player].OnCreated(GameDataMonobehaviour.instance.playersData[player], player);
         players[player].SetTurretOwners();
         
     }
@@ -197,7 +197,7 @@ public class GameManager : MonoBehaviour {
     {
         if(player >= 0 && player < 4)
         {
-            return gameData.IsPlayerJoined(player);
+            return GameDataMonobehaviour.instance.IsPlayerJoined(player);
         }
         return false;
     }
@@ -207,7 +207,7 @@ public class GameManager : MonoBehaviour {
         int playerCount = 0;
         for (int i = 0; i < 4; i++)
         {
-            if (gameData.IsPlayerJoined(i))
+            if (GameDataMonobehaviour.instance.IsPlayerJoined(i))
             {
                 playerCount++;
             }

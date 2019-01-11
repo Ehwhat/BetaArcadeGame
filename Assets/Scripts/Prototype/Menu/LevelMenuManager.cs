@@ -69,7 +69,8 @@ public class LevelMenuManager : MonoBehaviour {
 
             if (select)
             {
-                deathmatchGamemode.timerMinutes = timerSelector.GetResult();
+                GameDataMonobehaviour.instance.timer = (int)timerSelector.GetResult();
+                
                 mainMenu.StartGame(levelMenuSelector.GetResult().id);
             }
             else if (cancel)

@@ -128,7 +128,7 @@ public class TankWeapon : Weapon
             if(holder.ownerTank is PlayerTankManager)
             {
                 weaponData.useCustomColour = true;
-                weaponData.shotCustomColour = (holder.ownerTank as PlayerTankManager).data.playerColour;
+                weaponData.shotCustomColour = (holder.ownerTank as PlayerTankManager).colour;
             }
 
             projectile.OnFired(offsetPosition, offsetDirection, weaponData);

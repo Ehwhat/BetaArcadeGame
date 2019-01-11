@@ -40,9 +40,9 @@ public class TankSelectMenu : MonoBehaviour {
 	void Start () {
         Reset();
         ChangeCharacter(0);
-        playerData.playerColour = playerData.defaultplayerColour;
+        GameDataMonobehaviour.instance.playerColour[gamepadIndex] = playerData.defaultplayerColour;
         lastInput = -0.5f;
-        tankRepresentation.SetColour(playerData.playerColour);
+        tankRepresentation.SetColour(GameDataMonobehaviour.instance.playerColour[gamepadIndex]);
     }
 
     private void OnEnable()
@@ -61,7 +61,7 @@ public class TankSelectMenu : MonoBehaviour {
             if (input.Action1.WasPressed)
             {
                 currentStage = SelectStages.NotSelected;
-                gameData.SetPlayerJoined(gamepadIndex, true);
+                GameDataMonobehaviour.instance.SetPlayerJoined(gamepadIndex, true);
                 animator.SetBool("IsJoined", true);
 
             }
@@ -107,24 +107,26 @@ public class TankSelectMenu : MonoBehaviour {
 
             float currentHue = 0;
             float currentS, currentV = 0;
-            Color.RGBToHSV(playerData.playerColour, out currentHue, out currentS, out currentV);
+            Color colour = GameDataMonobehaviour.instance.playerColour[gamepadIndex];
+            Color.RGBToHSV(colour, out currentHue, out currentS, out currentV);
             currentHue = currentHue + colourAdjust * Time.deltaTime * 0.3f;
-            playerData.playerColour = Color.HSVToRGB(currentHue, 1, 1);
+            colour = Color.HSVToRGB(currentHue, 1, 1);
+            GameDataMonobehaviour.instance.playerColour[gamepadIndex] = colour;
             huebar.SetSelector(currentHue%1, Color.HSVToRGB(currentHue, 1, 1));
 
-            tankRepresentation.SetColour(playerData.playerColour);
+            tankRepresentation.SetColour(colour);
 
             if (input.Action1.WasPressed)
             {
                 currentStage = SelectStages.Selected;
-                playerData.selectedCharacter = currentCharacter;
-                playerData.selectedTank = currentTank;
+                GameDataMonobehaviour.instance.selectedCharacter[gamepadIndex] = currentCharacter;
+                GameDataMonobehaviour.instance.selectedTank[gamepadIndex] = currentTank;
                 animator.SetBool("IsDone", true);
                 Debug.Log("yes");
             }else if (input.Action2.WasPressed)
             {
                 currentStage = SelectStages.NotJoined;
-                gameData.SetPlayerJoined(gamepadIndex, false);
+                GameDataMonobehaviour.instance.SetPlayerJoined(gamepadIndex, false);
                 animator.SetBool("IsJoined", false);
             }
 
@@ -136,7 +138,7 @@ public class TankSelectMenu : MonoBehaviour {
     {
         currentStage = SelectStages.NotJoined;
         animator.SetBool("IsDone", false);
-        gameData.SetPlayerJoined(gamepadIndex, false);
+        GameDataMonobehaviour.instance.SetPlayerJoined(gamepadIndex, false);
         animator.SetBool("IsJoined", false);
     }
 

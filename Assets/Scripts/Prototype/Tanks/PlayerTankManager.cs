@@ -8,6 +8,7 @@ public class PlayerTankManager : TankManager {
     public QuipSystemDefinition quipSystem;
     public CharacterDialogSystem dialogSystem;
     PlayerTankControllerState controllerState;
+    public Color colour;
 
     public void OnCreated(PlayerTankData playerData, int playerIndex)
     {
@@ -23,7 +24,7 @@ public class PlayerTankManager : TankManager {
             player = playerIndex
         };
 
-        Color colour = data.playerColour;
+        colour = GameDataMonobehaviour.instance.playerColour[playerIndex];
         Color colourEnd = new Color(colour.r, colour.g, colour.b, 0);
 
 
@@ -64,7 +65,7 @@ public class PlayerTankManager : TankManager {
         }
         else
         {
-            dialogSystem.SayDialogFor(playerIndex, data.selectedCharacter, DialogContext.TakingDamage);
+            dialogSystem.SayDialogFor(playerIndex, GameDataMonobehaviour.instance.selectedCharacter[playerIndex], DialogContext.TakingDamage);
         }
     }
 
@@ -72,7 +73,7 @@ public class PlayerTankManager : TankManager {
     public override void GiveWeapon(TankWeapon weapon)
     {
         base.GiveWeapon(weapon);
-        dialogSystem.SayDialogFor(playerIndex, data.selectedCharacter, DialogContext.WeaponPickup, weapon.displayName);
+        dialogSystem.SayDialogFor(playerIndex, GameDataMonobehaviour.instance.selectedCharacter[playerIndex], DialogContext.WeaponPickup, weapon.displayName);
 
 
     }

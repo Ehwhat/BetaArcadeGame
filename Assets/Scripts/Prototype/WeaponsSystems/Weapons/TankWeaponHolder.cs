@@ -62,8 +62,7 @@ public class TankWeaponHolder : MonoBehaviour {
         currentDurability = weapon.maxDurability;
 
         if (ownerTank is PlayerTankManager) {
-            PlayerTankData data = (ownerTank as PlayerTankManager).data;
-            Color colour = data.playerColour;
+            Color colour = (ownerTank as PlayerTankManager).colour;
             Color colourEnd = new Color(colour.r, colour.g, colour.b, 0);
             BarrelAimingIndicator[] barrelAimingIndicators = currentVisualisation.GetComponentsInChildren<BarrelAimingIndicator>();
             for (int i = 0; i < barrelAimingIndicators.Length; i++)

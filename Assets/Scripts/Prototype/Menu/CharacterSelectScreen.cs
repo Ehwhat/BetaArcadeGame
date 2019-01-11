@@ -50,7 +50,7 @@ public class CharacterSelectScreen : MonoBehaviour {
 
         for (int i = 0; i < 4; i++)
         {
-            gameDataDefinition.SetPlayerJoined(i, false);
+            GameDataMonobehaviour.instance.SetPlayerJoined(i, false);
         }
         
         if (player != 0)
@@ -108,13 +108,13 @@ public class CharacterSelectScreen : MonoBehaviour {
             if (select && isSelected == CharacterSelectStates.Selecting)
             {
                 //gameDataDefinition.SetCharacter((int)player, activeDefinition);
-                gameDataDefinition.SetPlayerJoined((int)player, true);
+                GameDataMonobehaviour.instance.SetPlayerJoined((int)player, true);
                 isSelected = CharacterSelectStates.Selected;
                 animationController.SetTrigger("OnAccept");
             }
             else if (cancel && isSelected == CharacterSelectStates.Selected)
             {
-                gameDataDefinition.SetPlayerJoined((int)player, false);
+                GameDataMonobehaviour.instance.SetPlayerJoined((int)player, false);
                 isSelected = CharacterSelectStates.Selecting;
                 animationController.SetTrigger("OnCancel");
             }

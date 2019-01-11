@@ -18,6 +18,7 @@ public class LevelLoader : ScriptableObject {
     {
         if (!alreadyLoading)
         {
+            
             loadTimeStart = Time.time;
             alreadyLoading = true;
             var op = SceneManager.LoadSceneAsync(loadingSceneIndex);

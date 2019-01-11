@@ -17,7 +17,6 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
     }
 
     public bool useTimer = false;
-    public float timerMinutes = 2;
     public int killsToWin;
 
     private float timeElapsed;
@@ -62,7 +61,7 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
 
         win.winners = bestPlayers;
 
-        if (timeElapsed > System.TimeSpan.FromMinutes(timerMinutes).TotalSeconds)
+        if (timeElapsed > System.TimeSpan.FromMinutes(GameDataMonobehaviour.instance.timer).TotalSeconds)
         {
             win.finished = true;
         }
@@ -71,7 +70,7 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
             timeElapsed += deltaTime;
         }
 
-        ui.timerUIDisplay.SetTimer(Mathf.Max((float)(System.TimeSpan.FromMinutes(timerMinutes).TotalSeconds - timeElapsed), 0));
+        ui.timerUIDisplay.SetTimer(Mathf.Max((float)(System.TimeSpan.FromMinutes(GameDataMonobehaviour.instance.timer).TotalSeconds - timeElapsed), 0));
 
         return win;
     }
