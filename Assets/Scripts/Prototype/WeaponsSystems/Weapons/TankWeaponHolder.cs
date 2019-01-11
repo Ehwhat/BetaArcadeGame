@@ -143,7 +143,7 @@ public class TankWeaponHolder : MonoBehaviour {
         if (weapon.onFiredClip)
         {
             //AudioPlayer.PlayOneOff(weapon.onFiredClip);
-            soundManager.GetComponent<SoundSystem>().Play_Random_Pitch_Sound(weapon.onFiredClip, 6.0f);
+            soundManager.GetComponent<SoundSystem>().Play_Random_Pitch_Sound(weapon.onFiredClip, 3.0f);
         }
         lastFired = Time.time;
         if (weapon.useDuribility)

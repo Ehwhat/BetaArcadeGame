@@ -7,10 +7,14 @@ public class PlayerUIManager : MonoBehaviour {
 
     public PlayerTankData data;
     public Image healthBar;
+    public Image potrait;
+    public Image frame;
+    public int playerIndex = 0;
 
     public void Start()
     {
-        
+        potrait.sprite = GameDataMonobehaviour.instance.selectedCharacter[playerIndex].headPortrait;
+        frame.color = GameDataMonobehaviour.instance.playerColour[playerIndex];
         data.onChangedEvent += OnDataChanged;
         OnDataChanged();
     }
@@ -22,8 +26,8 @@ public class PlayerUIManager : MonoBehaviour {
 
     private void OnDataChanged()
     {
-        gameObject.SetActive(data.isInGame);
-        if (data.isInGame)
+        gameObject.SetActive(GameDataMonobehaviour.instance.playersJoined[playerIndex]);
+        if (GameDataMonobehaviour.instance.playersJoined[playerIndex])
         {
             healthBar.fillAmount = data.currentHealthPercentage;
         }

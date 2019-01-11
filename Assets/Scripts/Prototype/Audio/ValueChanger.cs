@@ -16,7 +16,6 @@ public class ValueChanger : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        soundsystem.SetMusicVolume(musicslider.value);
-        soundsystem.SetSoundVolume(soundslider.value);
+
 	}
 }

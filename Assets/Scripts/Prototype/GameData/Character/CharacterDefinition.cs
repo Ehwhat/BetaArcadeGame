@@ -9,6 +9,7 @@ public class CharacterDefinition : ScriptableObject {
     public string description;
     public TankDefinition defaultTankDefinition;
     public Sprite portrait;
+    public Sprite headPortrait;
 
     public CharacterDialogDefinition dialogDefinition;
 }

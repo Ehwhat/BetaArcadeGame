@@ -66,6 +66,7 @@ public class MainMenuManager : MonoBehaviour {
 
     public void Start()
     {
+        GameStart.Select();
     }
 
 

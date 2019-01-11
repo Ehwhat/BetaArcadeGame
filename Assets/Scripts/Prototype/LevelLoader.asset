@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Name: LevelLoader
   m_EditorClassIdentifier: 
   loadingSceneIndex: 2
-  minLoadingTime: 4
+  minLoadingTime: 1

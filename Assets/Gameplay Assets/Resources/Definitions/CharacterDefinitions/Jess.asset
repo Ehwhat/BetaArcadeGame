@@ -16,4 +16,5 @@ MonoBehaviour:
   defaultTankDefinition: {fileID: 11400000, guid: 635dfe0a3eef09a4596698ad55f67e56,
     type: 2}
   portrait: {fileID: 21300000, guid: a2fb6c27dd4a4104e829e8372d42c121, type: 3}
+  headPortrait: {fileID: 21300000, guid: 3b93da3affb917042a4ef35bf9ff72d2, type: 3}
   dialogDefinition: {fileID: 11400000, guid: 8a6832b2c85b37646ba90c6d1ecadc35, type: 2}
