@@ -38,7 +38,7 @@ public class TankSelectMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        
+        Reset();
         ChangeCharacter(0);
         playerData.playerColour = playerData.defaultplayerColour;
         lastInput = -0.5f;
@@ -61,7 +61,6 @@ public class TankSelectMenu : MonoBehaviour {
             if (input.Action1.WasPressed)
             {
                 currentStage = SelectStages.NotSelected;
-                playerData.SetIsInGame(true);
                 gameData.SetPlayerJoined(gamepadIndex, true);
                 animator.SetBool("IsJoined", true);
 
@@ -125,7 +124,6 @@ public class TankSelectMenu : MonoBehaviour {
             }else if (input.Action2.WasPressed)
             {
                 currentStage = SelectStages.NotJoined;
-                playerData.SetIsInGame(false);
                 gameData.SetPlayerJoined(gamepadIndex, false);
                 animator.SetBool("IsJoined", false);
             }
@@ -138,7 +136,6 @@ public class TankSelectMenu : MonoBehaviour {
     {
         currentStage = SelectStages.NotJoined;
         animator.SetBool("IsDone", false);
-        playerData.SetIsInGame(false);
         gameData.SetPlayerJoined(gamepadIndex, false);
         animator.SetBool("IsJoined", false);
     }

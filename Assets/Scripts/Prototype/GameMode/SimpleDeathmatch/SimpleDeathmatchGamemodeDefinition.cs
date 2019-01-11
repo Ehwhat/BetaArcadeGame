@@ -28,7 +28,9 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
 
     public override void OnGameStart(GameManager gameManager)
     {
+        Debug.Log("Deathmatch Started");
         base.OnGameStart(gameManager);
+        timeElapsed = 0;
         ui = gamemodeUIGameobject.GetComponent<SimpleDeathmatchUI>();
         foreach (TankManager tank in gameManager.currentTanks)
         {
@@ -36,7 +38,7 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
             deathmatchPlayerData.Add(tank.tankID, new DeathmatchTankData());
         }
         ui.playerScoreUIDisplay.Reset();
-        timeElapsed = 0;
+        
     }
 
     public override WinResult VerifyWin(GameManager gameManager, float deltaTime)

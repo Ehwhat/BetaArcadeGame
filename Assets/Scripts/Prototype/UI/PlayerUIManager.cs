@@ -15,6 +15,11 @@ public class PlayerUIManager : MonoBehaviour {
         OnDataChanged();
     }
 
+    public void OnDisable()
+    {
+        data.onChangedEvent -= OnDataChanged;
+    }
+
     private void OnDataChanged()
     {
         gameObject.SetActive(data.isInGame);
