@@ -9,6 +9,7 @@ public class PlayerTankData : ScriptableObject {
 
     public System.Action onChangedEvent = () => { };
 
+    public Color defaultplayerColour;
     public Color playerColour;
     public QuipSystemDefinition quipSystem;
     public CharacterDefinition selectedCharacter;

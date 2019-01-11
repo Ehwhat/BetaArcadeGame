@@ -15,6 +15,7 @@ public class TankSelectMenu : MonoBehaviour {
 
     public MainMenuManager mainMenuManager;
     public CharacterDefinitionSet characterDefinitionSet;
+    public HueBarManager huebar;
 
     public PlayerTankData playerData;
     public int gamepadIndex = 0;
@@ -33,6 +34,7 @@ public class TankSelectMenu : MonoBehaviour {
 	void Start () {
         input = GameInput.GetPlayerDevice(gamepadIndex);
         ChangeCharacter(0);
+        playerData.playerColour = playerData.defaultplayerColour;
         lastInput = -0.5f;
         tankRepresentation.SetColour(playerData.playerColour);
     }
@@ -76,12 +78,17 @@ public class TankSelectMenu : MonoBehaviour {
             float currentHue = 0;
             float currentS, currentV = 0;
             Color.RGBToHSV(playerData.playerColour, out currentHue, out currentS, out currentV);
-            playerData.playerColour = Color.HSVToRGB(currentHue + colourAdjust * Time.deltaTime * 0.3f, 1, 1);
+            currentHue = currentHue + colourAdjust * Time.deltaTime * 0.3f;
+            playerData.playerColour = Color.HSVToRGB(currentHue, 1, 1);
+            huebar.SetSelector(currentHue%1, Color.HSVToRGB(currentHue, 1, 1));
+
             tankRepresentation.SetColour(playerData.playerColour);
 
             if (input.Action1.WasPressed)
             {
                 currentStage = SelectStages.Selected;
+                playerData.selectedCharacter = currentCharacter;
+                playerData.selectedTank = currentTank;
             }
 
         }

@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa581ae9011fe934dbfaf54cd37f1c46, type: 3}
   m_Name: PlayerTwoData
   m_EditorClassIdentifier: 
+  defaultplayerColour: {r: 0.003921569, g: 0.74509805, b: 0.9960785, a: 1}
   playerColour: {r: 0.003921569, g: 0.74509805, b: 0.9960785, a: 1}
   quipSystem: {fileID: 11400000, guid: 8a7ab266bceb6824d94188b5d47e3b91, type: 2}
   selectedCharacter: {fileID: 11400000, guid: f21dac9bccd9a2e43a8ba067a13dcb4f, type: 2}

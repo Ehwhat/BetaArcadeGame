@@ -132,7 +132,8 @@ Shader "UI/Noise"
 
 					half4 color = (tex2D(_MainTex, alteredTexcoord) + _TextureSampleAdd) * IN.color;
 					float noise = ((rand(noiseCoord, time) - 0.5) * 2)+ (_NoiseIntensity * _NoiseIntensity);
-					color = lerp(color, _NoiseColour, ((noise*_NoiseIntensity)-(1- _NoiseIntensity))*_NoiseColour.a);
+					_NoiseColour.a = color.a;
+					color = lerp(color, _NoiseColour * color.a, ((noise*_NoiseIntensity)-(1- _NoiseIntensity))*_NoiseColour.a);
 
 					#ifdef UNITY_UI_CLIP_RECT
 					color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
