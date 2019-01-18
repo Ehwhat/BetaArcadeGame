@@ -65,6 +65,10 @@ public class TankSelectMenu : MonoBehaviour {
                 animator.SetBool("IsJoined", true);
 
             }
+            if(input.Action2.WasPressed && gamepadIndex == 0)
+            {
+                mainMenuManager.OpenMainMenuScreen();
+            }
         }
 		else if(currentStage == SelectStages.Selected)
         {

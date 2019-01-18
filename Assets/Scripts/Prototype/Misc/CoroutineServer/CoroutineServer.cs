@@ -16,7 +16,6 @@ public class CoroutineServer : ScriptableObject {
             return;
         }
         coroutineRunner = new GameObject("CoroutineRunner").AddComponent<CoroutineRunner>();
-        Debug.Log("test");
         DontDestroyOnLoad(coroutineRunner);
         runningCoroutines = new List<IEnumerator>();
     }

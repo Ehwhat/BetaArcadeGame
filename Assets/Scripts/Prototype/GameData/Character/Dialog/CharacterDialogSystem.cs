@@ -22,15 +22,18 @@ public class CharacterDialogSystem : ScriptableObject {
     public void SayDialogFor(int playerID,CharacterDefinition character, DialogContext context, string conditional = "")
     {
         CharacterDialogDefinition dialogDefinition = character.dialogDefinition;
-        List<CharacterDialog> relevantDialog = dialogDefinition.dialogDictionary[context];
+        List<CharacterDialog> allDialog = dialogDefinition.dialogDictionary[context]; 
+        List<CharacterDialog> relevantDialog = new List<CharacterDialog>();
 
-        Debug.Log(relevantDialog.Count);
-
-        for (int i = 0; i < relevantDialog.Count; i++)
+        for (int i = 0; i < allDialog.Count; i++)
         {
-            if (relevantDialog[i].useDialogConditional && relevantDialog[i].dialogConditional.ToLower() != conditional.ToLower()) 
+            if (allDialog[i].useDialogConditional && allDialog[i].dialogConditional.ToLower() == conditional.ToLower()) 
             {
-                relevantDialog.RemoveAt(i);
+                relevantDialog.Add(allDialog[i]);
+            }
+            else if(!allDialog[i].useDialogConditional)
+            {
+                relevantDialog.Add(allDialog[i]);
             }
         }
 

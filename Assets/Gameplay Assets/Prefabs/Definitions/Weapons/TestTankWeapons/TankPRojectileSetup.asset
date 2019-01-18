@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d9c0c9f9b532944e9d8df023927805b, type: 3}
+  m_Name: TankPRojectileSetup
+  m_EditorClassIdentifier: 
+  _tankProjectiles:
+  - {fileID: 11400000, guid: 36a40b01c7dd77b47bb00dbe3c3d771e, type: 2}
+  - {fileID: 11400000, guid: 0752b4663e3d2a54c8e29b56c25bd9c1, type: 2}
+  - {fileID: 11400000, guid: c12d77fbf90c96547a2ece310ffcb1b2, type: 2}
+  - {fileID: 11400000, guid: 4d989e206e52a9c4583d21c2243230a4, type: 2}
+  - {fileID: 11400000, guid: 34bc0fc9be9a85449a907123f4cbd4c8, type: 2}
+  - {fileID: 11400000, guid: c224f4638d0217648aa147e0f56bcfa5, type: 2}
+  - {fileID: 11400000, guid: 0615ee7320af84c468c1ac94bae3e868, type: 2}
+  - {fileID: 11400000, guid: b55252b59b9c59c4788f1f5e5a20d302, type: 2}
+  - {fileID: 11400000, guid: 0d2dc14ef4b07aa4e8a14cc277f16918, type: 2}
+  - {fileID: 11400000, guid: 331dd7f981154464dbda83a15b19d892, type: 2}

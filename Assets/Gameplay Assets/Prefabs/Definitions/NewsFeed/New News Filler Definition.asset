@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 051b278aa87469449a729a74ea3e656f, type: 3}
+  m_Name: New News Filler Definition
+  m_EditorClassIdentifier: 
+  newFiller:
+  - Robbery At The Waffle Bank, Everyone Sticky.
+  - Waffle Mutants Unleashed, More at 7.
+  - Porn star sues over rear end collision!
+  - Utah poison control reminds everyone not to take poison.
+  - City unsure why the sewer smells, Sewer mutants demand answer!
+  - 17 remain dead in morgue shooting spree.
+  - Local child wins gun from fundraiser.
+  - County pays 25000$ to advertise lack of funds.
+  - '''Man faced bear ate my three legged baby!'', Interview at 4!'
+  - "\u2018My husband told me I couldn\u2019t get the new Fenty - so I fed him to
+    our dog\u2019"
+  - It's Josh's birthday today!
+  - Remember that true love isn't real! Anyone saying otherwise is a demon from hell.
+  - Report all local demons to your local authority,

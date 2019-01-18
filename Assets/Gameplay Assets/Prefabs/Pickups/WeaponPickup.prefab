@@ -52,7 +52,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1712499505150708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.45, y: 0.38, z: 0}
+  m_LocalPosition: {x: 0, y: -4, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 4588089083476204}
@@ -117,9 +117,30 @@ MonoBehaviour:
   respawnDelay: 4
   representationRenderer: {fileID: 212445907982039532}
   weapons:
-  - {fileID: 11400000, guid: a21a654841604564faa526a814188a3c, type: 2}
-  - {fileID: 11400000, guid: ce42d93096b9802479b62974f5df747d, type: 2}
-  - {fileID: 11400000, guid: 723b121c78884394bbd60797934d4ded, type: 2}
+  - weapon: {fileID: 11400000, guid: ce42d93096b9802479b62974f5df747d, type: 2}
+    chance: 0.2
+    super: 0
+  - weapon: {fileID: 11400000, guid: 485d60bfcbb9ab4428dfd5c552e0729a, type: 2}
+    chance: 0.3
+    super: 0
+  - weapon: {fileID: 11400000, guid: 723b121c78884394bbd60797934d4ded, type: 2}
+    chance: 0.3
+    super: 0
+  - weapon: {fileID: 11400000, guid: 1820054300b200e4d87bc92389397a62, type: 2}
+    chance: 0.3
+    super: 0
+  - weapon: {fileID: 11400000, guid: 172bd77a0bd4b3545a6abb6c052ba5ef, type: 2}
+    chance: 0.07
+    super: 1
+  - weapon: {fileID: 11400000, guid: 2477fd058952b514482ee82cfda197c7, type: 2}
+    chance: 0.07
+    super: 1
+  - weapon: {fileID: 11400000, guid: 74a4edf5faef2764e81f0972d6429295, type: 2}
+    chance: 0.04
+    super: 1
+  - weapon: {fileID: 11400000, guid: 2477fd058952b514482ee82cfda197c7, type: 2}
+    chance: 0.07
+    super: 1
 --- !u!212 &212445907982039532
 SpriteRenderer:
   m_ObjectHideFlags: 1

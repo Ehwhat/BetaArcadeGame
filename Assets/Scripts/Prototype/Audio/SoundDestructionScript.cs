@@ -20,12 +20,10 @@ public class SoundDestructionScript : MonoBehaviour
 	void Update () {
         if (audiosrc.isPlaying && SoundStart == false)
         {
-            Debug.Log("Sound Started");
             SoundStart = true;
         }
         if (!audiosrc.isPlaying && SoundStart == true)
         {
-            Debug.Log("Sound destroyed");
             Destroy(gameObject);
         }
 	}

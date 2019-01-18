@@ -76,8 +76,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - PixelSnap: 0
-    - _AmbientOcclusionStrength: 1
-    - _AmplifyDepth: 0
+    - _AmbientOcclusionStrength: 0.154
+    - _AmplifyDepth: 0.587
     - _AttenuationMultiplier: 0.71
     - _BlendOp: 0
     - _BumpScale: 1
@@ -112,7 +112,7 @@ Material:
     - _SoftParticlesEnabled: 0
     - _SoftParticlesFarFadeDistance: 1
     - _SoftParticlesNearFadeDistance: 0
-    - _SpecExponent: 11.8
+    - _SpecExponent: 12.8
     - _SpecStrength: 0.62
     - _SpecularHighlights: 1
     - _SpotlightHardness: 3.63
@@ -120,8 +120,8 @@ Material:
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
-    - _AboveAmbientColour: {r: 1, g: 1, b: 1, a: 0.309}
-    - _BelowAmbientColour: {r: 1, g: 1, b: 1, a: 0.172}
+    - _AboveAmbientColour: {r: 1, g: 1, b: 1, a: 1}
+    - _BelowAmbientColour: {r: 1, g: 1, b: 1, a: 1}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 0.378}
     - _ColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}

@@ -88,37 +88,12 @@ public abstract class TankProjectile : ScriptableObject, IProjectile
     public LayerMask projectileLayerMask;
     public LayerMask damageableLayerMask;
 
-    protected static Transform poolHolder;
-    private static bool alreadyRan = false;
+    public static Transform poolHolder;
 
-    public static void InitBulletSystem()
-    {
-        if (!alreadyRan)
-        {
-            poolHolder = new GameObject("Projectile Pool Holder").transform;
-            TankProjectile[] projectileInstances = Resources.LoadAll<TankProjectile>("");
-            for (int i = 0; i < projectileInstances.Length; i++)
-            {
-                projectileInstances[i].OnInit();
-                CoroutineServer.StartCoroutine(UpdateProjectileEnumerator(projectileInstances[i]));
-            }
-            alreadyRan = true;
-        }
-        
-    }
 
     public virtual void OnInit()
     {
 
-    }
-
-    private static IEnumerator UpdateProjectileEnumerator(TankProjectile projectile)
-    {
-        while (true)
-        {
-            projectile.UpdateProjectile(Time.deltaTime);
-            yield return new WaitForEndOfFrame();
-        }
     }
 
     public virtual void OnCharge(Vector3 firedPosition, Vector3 firedDirection, WeaponData weaponData, float chargeAmount) {

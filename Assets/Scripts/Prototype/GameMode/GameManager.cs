@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour {
     public LevelManager levelManager;
     public GameUI uiManager;
 
+    public TankProjectileSetup tankProjectileSetup;
+
     public TankManager defaultTank;
     public PlayerTankController playerDefaultController;
 
@@ -30,7 +32,7 @@ public class GameManager : MonoBehaviour {
     }
 
 	void Start () {
-        TankProjectile.InitBulletSystem();
+        tankProjectileSetup.Setup();
         gameMode = GameDataMonobehaviour.instance.gamemode;
         for (int i = 0; i < GameDataMonobehaviour.instance.playersData.Length; i++)
         {

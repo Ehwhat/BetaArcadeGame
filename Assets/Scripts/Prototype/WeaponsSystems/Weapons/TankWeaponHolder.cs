@@ -65,6 +65,11 @@ public class TankWeaponHolder : MonoBehaviour {
         if (weapon.weaponVisualisation)
         {
             currentVisualisation = Instantiate(weapon.weaponVisualisation, visualisationHolder);
+            if (weapon.useDefaultTankTurret)
+            {
+                Sprite s = ownerTank.tankDefinition.tankTurret.sprite;
+                currentVisualisation.GetComponentInChildren<SpriteRenderer>().sprite = s;
+            }
         }
         lastFired = -weapon.firingDelay;
         chargeUpElapsedTime = 0;
@@ -143,7 +148,7 @@ public class TankWeaponHolder : MonoBehaviour {
         if (weapon.onFiredClip)
         {
             //AudioPlayer.PlayOneOff(weapon.onFiredClip);
-            soundManager.GetComponent<SoundSystem>().Play_Random_Pitch_Sound(weapon.onFiredClip, 3.0f);
+            soundManager.GetComponent<SoundSystem>().Play_Random_Pitch_Sound(weapon.onFiredClip, 0.4f);
         }
         lastFired = Time.time;
         if (weapon.useDuribility)
@@ -151,7 +156,7 @@ public class TankWeaponHolder : MonoBehaviour {
             currentDurability -= weapon.perShotDuribilityCost;
             if (currentDurability <= 0)
             {
-                SetWeapon(defaultWeapon);
+                EquipDefaultWeapon();
             }
         }
     }

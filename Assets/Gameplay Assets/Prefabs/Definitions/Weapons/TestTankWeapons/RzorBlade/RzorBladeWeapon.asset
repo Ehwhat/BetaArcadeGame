@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcb395adf56722642b98d43764a5023f, type: 3}
+  m_Name: RzorBladeWeapon
+  m_EditorClassIdentifier: 
+  displayName: RzorBlade
+  projectile: {fileID: 11400000, guid: 34bc0fc9be9a85449a907123f4cbd4c8, type: 2}
+  weaponFiringOffsets:
+  - position: {x: 0, y: 0.9}
+    angle: 0
+  firingDelay: 0.5
+  useDuribility: 1
+  maxDurability: 10
+  perShotDuribilityCost: 1
+  rarity: 0.6
+  shakeAmount: 0.2
+  chargeUpDelay: 0
+  CollideOnSpawnLayermask:
+    serializedVersion: 2
+    m_Bits: 4294966527
+  weaponVisualisation: {fileID: 114300704509053406, guid: 1449b8c16a02c6f49a421ca748826a7c,
+    type: 2}
+  useDefaultTankTurret: 0
+  weaponChargingVisualisation: {fileID: 0}
+  onFiredClip: {fileID: 11400000, guid: 9faccd9364c60d146843215ef4377446, type: 2}
+  onHitClip: {fileID: 8300000, guid: b2034da4c4dfa9c4285a2e500018326e, type: 3}
+  onFiredParticleSystem: {fileID: 0}
+  autoAimType: 2
+  autoAimRange: 10
+  autoAimArcAngle: 60
+  autoAimDegreesPerSecond: 720
+  autoAimOffsetMagnitude: 0.71
+  autoAimCycles: 3
+  autoAimPredictedProjectileSpeed: 10
+  autoAimPriorityMix: 0.78
+  autoAimLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  autoAimBlockingLayer:
+    serializedVersion: 2
+    m_Bits: 4294967295

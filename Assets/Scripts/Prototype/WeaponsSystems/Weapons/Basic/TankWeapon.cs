@@ -48,6 +48,7 @@ public class TankWeapon : Weapon
     public LayerMask CollideOnSpawnLayermask;
 
     public WeaponVisualisation weaponVisualisation;
+    public bool useDefaultTankTurret = false;
     public WeaponChargingVisualisation weaponChargingVisualisation;
 
     public AudioObject onFiredClip;

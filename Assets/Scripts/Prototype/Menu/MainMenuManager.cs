@@ -44,7 +44,6 @@ public class MainMenuManager : MonoBehaviour {
     {
         Menutest.SetActive(false);
         optionsScreen.SetActive(true);
-        Back.Select();
     }
 
     public void CloseOptionsScreen()

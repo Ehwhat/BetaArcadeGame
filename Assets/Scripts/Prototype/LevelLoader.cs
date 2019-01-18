@@ -40,7 +40,6 @@ public class LevelLoader : ScriptableObject {
         float timeToLoadLevel = Time.time - loadTimeStart;
         Debug.Log("Time taken to Load Level " + timeToLoadLevel);
         float delayTime = Mathf.Max(minLoadingTime - timeToLoadLevel, 0);
-        Debug.Log(delayTime);
         yield return new WaitForSeconds(delayTime);
         levelLoadingOperation.allowSceneActivation = true;
         alreadyLoading = false;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4193659, g: 0.4193659, b: 0.4193659, a: 1}
+  m_IndirectSpecularColor: {r: 0.41929832, g: 0.41929832, b: 0.41929832, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -8079,7 +8079,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -8127,6 +8127,8 @@ MonoBehaviour:
   gameData: {fileID: 11400000, guid: c55cea8bc1793bf4ca13a0d2aad5c914, type: 2}
   levelManager: {fileID: 597338317}
   uiManager: {fileID: 12249000}
+  tankProjectileSetup: {fileID: 11400000, guid: 072d3b0e6f28a2742b5c515985df81b3,
+    type: 2}
   defaultTank: {fileID: 114246493096669538, guid: 0f880b2b32b2aef4ab81456e23abbbf8,
     type: 2}
   playerDefaultController: {fileID: 11400000, guid: 63931495802e85444be382b49fcbb1a3,

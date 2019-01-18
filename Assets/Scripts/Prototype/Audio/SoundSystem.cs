@@ -19,6 +19,9 @@ public class SoundSystem : MonoBehaviour
     private int Alt_Track_ID;
     private int Alt_Track_Time = 0;
 
+    public float PitchMin;
+    public float PitchMax;
+
     private float Music_Volume = 1.0f;
     private float Sound_Volume = 1.0f;
 
@@ -164,18 +167,9 @@ public class SoundSystem : MonoBehaviour
     //The sound played has a random pitch
     public void Play_Random_Pitch_Sound(AudioObject audio, float range)
     {
-        //
-        if (range < 3.0f)
-        {
-            range = 3.0f;
-        }
-        if (range > 6.0f)
-        {
-            range = 6.0f;
-        }
         GameObject x = Instantiate(soundprefab);
         x.GetComponent<SoundDestructionScript>().SetAudioClip(audio.clip);
-        float randx = Random.Range(0.1f, range - 3.0f);
+        float randx = Random.Range(1-range, 1+range);
         x.GetComponent<SoundDestructionScript>().SetPitch(randx);
     }
 }

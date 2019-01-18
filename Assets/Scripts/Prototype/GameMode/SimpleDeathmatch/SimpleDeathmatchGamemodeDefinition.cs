@@ -36,6 +36,19 @@ public class SimpleDeathmatchGamemodeDefinition : GamemodeDefinition
             tank.onDeath += OnPlayerDeath;
             deathmatchPlayerData.Add(tank.tankID, new DeathmatchTankData());
         }
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (gameManager.IsPlayerValid(i))
+            {
+                ui.playerScoreUIDisplay.SetColour(i, gameManager.players[i].colour);
+            }
+            else
+            {
+                ui.playerScoreUIDisplay.SetActive(i, false);
+            }
+        }
+
         ui.playerScoreUIDisplay.Reset();
         
     }
